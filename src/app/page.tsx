@@ -1,11 +1,13 @@
 "use client";
 import { Metadata } from "next";
+import { useRouter } from "next/navigation";
 import BasicQuestion from "src/components/pages/home/BasicQuestion";
 import Filter from "src/components/pages/home/Filter";
 import HomeTitle from "src/components/pages/home/HomeTitle";
 import QfeedFrame from "src/components/pages/home/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { globalValue } from "src/constants/globalValue";
+import { Route } from "src/constants/Route";
 import { styled } from "styled-components";
 
 // export const metadata: Metadata = {
@@ -15,6 +17,11 @@ import { styled } from "styled-components";
 const HomeDatas = [{}, {}, {}];
 
 export default function Page() {
+  const router = useRouter();
+  const handleClickFrame = () => {
+    router.push(Route.Question());
+  };
+
   return (
     <HomeWrapper>
       <HomeTitle />
@@ -27,7 +34,7 @@ export default function Page() {
 
       <FrameWrapper>
         {HomeDatas.map((data: any, idx: number) => {
-          return <QfeedFrame key={idx} />;
+          return <QfeedFrame key={idx} onClick={handleClickFrame} />;
         })}
       </FrameWrapper>
     </HomeWrapper>
@@ -35,8 +42,7 @@ export default function Page() {
 }
 
 const HomeWrapper = styled.div`
-  height: 100vh;
-  // height: calc(100% - ${globalValue.bottomSheetHeight}px);
+  height: calc(100vh - ${globalValue.bottomSheetHeight}px);
   padding: 0 16px;
 `;
 

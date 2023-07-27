@@ -14,6 +14,7 @@ const Image = ({ src, type = "profile", size }: Props) => {
       src={src}
       size={match(type)
         .with("profile", () => 40)
+        .with("friend", () => 35)
         .exhaustive()}
     />
   );
