@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 import { match } from "ts-pattern";
 
 interface Props {
-  type: "primary" | "secondary";
+  type: "primary" | "secondary" | "default";
   children?: any;
 }
 
@@ -29,14 +29,16 @@ const Button = forwardRef(function Button(
   );
 });
 
-const ButtonWrapper = styled.div<{ color: any; backgroundColor: any }>`
+const ButtonWrapper = styled.div<{
+  color: any;
+  backgroundColor: any;
+}>`
   width: 100%;
   height: 47px;
   display: flex;
 
   color: ${({ color }) => color};
   border: 1px solid ${colors.Qwhite};
-  border-radius: 10px;
   background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
