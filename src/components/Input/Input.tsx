@@ -1,26 +1,37 @@
 "use client";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
+import { match } from "ts-pattern";
 
-interface Props {}
+interface Props {
+  type: "question-friend" | "add-question";
+}
 
-const Input = ({}: Props) => {
+const Input = ({ type }: Props) => {
   return (
-    <InputWrapper>
+    <InputWrapper
+      radius={match(type)
+        .with("question-friend", () => 48)
+        .with("add-question", () => 0)
+        .exhaustive()}
+    >
       <InputInner>
         <InputBox placeholder="내 친구의 이름을 검색해보세요." />
-        <div>Hi</div>
+        <div style={{ display: "flex" }}>
+          {type === "add-question" && <div>0/20</div>}
+          <div>Hi</div>
+        </div>
       </InputInner>
     </InputWrapper>
   );
 };
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ radius: number }>`
   width: 100%;
   height: 48px;
 
   display: flex;
-  border-radius: 48px;
+  border-radius: ${({ radius }) => radius}px;
   background-color: ${colors.Gray3};
 `;
 

@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
+import Spacing from "../Spacing";
 
 export default function BackTitle() {
   const router = useRouter();
@@ -10,13 +11,16 @@ export default function BackTitle() {
   };
 
   return (
-    <BackTitleWrapper>
-      <BackTitleInner>
-        <Menu onClick={handleClickBack}>&lt;--</Menu>
-        <Menu>7/10</Menu>
-        <Menu>&lt;--</Menu>
-      </BackTitleInner>
-    </BackTitleWrapper>
+    <>
+      <Spacing size={50} />
+      <BackTitleWrapper>
+        <BackTitleInner>
+          <Menu onClick={handleClickBack}>&lt;--</Menu>
+          <Menu>7/10</Menu>
+          <Menu>&lt;--</Menu>
+        </BackTitleInner>
+      </BackTitleWrapper>
+    </>
   );
 }
 

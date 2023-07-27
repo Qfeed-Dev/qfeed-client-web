@@ -40,7 +40,7 @@ export default function Page() {
         <Question />
         <Spacing size={38} />
 
-        <Input />
+        <Input type="question-friend" />
         <Spacing size={16} />
 
         <FriendWrapper>

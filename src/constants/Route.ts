@@ -1,6 +1,7 @@
 export const Route = {
   HOME: () => "/",
-  QuestionFriend: () => "/question-friend",
+  AddQuestion: () => "/add-question",
   Question: () => "/question",
+  QuestionFriend: () => "/question-friend",
   PickMe: () => "/pick-me",
 };
