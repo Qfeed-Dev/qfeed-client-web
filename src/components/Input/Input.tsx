@@ -7,7 +7,7 @@ interface Props {
   type: "question-friend" | "add-question";
 }
 
-const Input = ({ type }: Props) => {
+const Input = ({ type = "question-friend" }: Props) => {
   return (
     <InputWrapper
       radius={match(type)
