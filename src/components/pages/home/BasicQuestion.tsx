@@ -23,6 +23,7 @@ const BasicQuestion = ({ type = "pick-me" }: Props) => {
         <Menu>
           <MiddleText>아직 9문제 남았어요!</MiddleText>
         </Menu>
+
         {type === "question" && (
           <Menu>
             <BottomButton>계속하기</BottomButton>
