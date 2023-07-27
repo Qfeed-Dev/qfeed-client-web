@@ -18,6 +18,9 @@ const HomeDatas = [{}, {}, {}];
 
 export default function Page() {
   const router = useRouter();
+  const handleClickBasicQuestion = () => {
+    router.push(Route.QuestionFriend());
+  };
   const handleClickFrame = () => {
     router.push(Route.Question());
   };
@@ -26,7 +29,7 @@ export default function Page() {
     <HomeWrapper>
       <HomeTitle />
       <BasicQuestion type="pick-me" />
-      <BasicQuestion type="question" />
+      <BasicQuestion type="question" onClick={handleClickBasicQuestion} />
       <Spacing size={20} />
 
       <Filter />

@@ -6,9 +6,10 @@ import { match } from "ts-pattern";
 
 interface Props {
   type: "pick-me" | "question";
+  onClick?: () => void;
 }
 
-const BasicQuestion = ({ type = "pick-me" }: Props) => {
+const BasicQuestion = ({ type = "pick-me", ...props }: Props) => {
   return (
     <>
       <Spacing size={16} />
@@ -29,7 +30,7 @@ const BasicQuestion = ({ type = "pick-me" }: Props) => {
 
           {type === "question" && (
             <Menu>
-              <BottomButton>계속하기</BottomButton>
+              <BottomButton onClick={props.onClick}>계속하기</BottomButton>
             </Menu>
           )}
         </BasicQuestionInner>
