@@ -7,5 +7,5 @@ export const colors = {
   Qblue: "#0167F7",
 
   Qwhite: "#FFFFFF",
-  QBlack: "#131313",
+  Qblack: "#131313",
 };

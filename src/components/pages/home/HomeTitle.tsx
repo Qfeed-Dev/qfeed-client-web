@@ -7,7 +7,9 @@ const HomeTitle = ({}: {}) => {
   return (
     <HomeTitleWrapper>
       <Menu>
-        <Image type="profile" src="https://i.ibb.co/0Z6FNN7/60pt.png" />
+        <ImageWrapper>
+          <Image type="profile" src="https://i.ibb.co/0Z6FNN7/60pt.png" />
+        </ImageWrapper>
       </Menu>
       <div style={{ display: "flex", gap: "24px" }}>
         <Menu>
@@ -34,7 +36,17 @@ const HomeTitleWrapper = styled.div`
 
 const Menu = styled.div`
   margin: auto 0;
+  display: flex;
   color: ${colors.Qwhite};
+`;
+
+const ImageWrapper = styled.div`
+  width: 46px;
+  height: 46px;
+  display: flex;
+
+  border-radius: 50%;
+  background-color: ${colors.Qwhite};
 `;
 
 export default HomeTitle;
