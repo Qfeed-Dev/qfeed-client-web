@@ -1,9 +1,15 @@
 "use client";
+import { useRouter } from "next/navigation";
 import Image from "src/components/Image";
 import { colors } from "src/constants/colors";
+import { Route } from "src/constants/Route";
 import { styled } from "styled-components";
 
 const HomeTitle = ({}: {}) => {
+  const router = useRouter();
+  const handleClickAlarm = () => {
+    router.push(Route.Alarm());
+  };
   return (
     <HomeTitleWrapper>
       <Menu>
@@ -18,7 +24,7 @@ const HomeTitle = ({}: {}) => {
         <Menu>
           <div>질문추천</div>
         </Menu>
-        <Menu>
+        <Menu onClick={handleClickAlarm}>
           <div>svg</div>
         </Menu>
       </div>
