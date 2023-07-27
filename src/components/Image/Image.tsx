@@ -22,6 +22,7 @@ const Image = ({ src, type = "profile", size }: Props) => {
 const ImageWrapper = styled.img<{ size: number }>`
   width: ${({ size }) => size + "px"};
   height: ${({ size }) => size + "px"};
+  margin: auto;
 
   border-radius: 50%;
 `;
