@@ -1,4 +1,5 @@
 "use client";
+import Spacing from "src/components/Spacing";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
 import { match } from "ts-pattern";
@@ -9,28 +10,31 @@ interface Props {
 
 const BasicQuestion = ({ type = "pick-me" }: Props) => {
   return (
-    <BasicQuestionWrapper
-      color={match(type)
-        .with("pick-me", () => colors.Qwhite)
-        .with("question", () => colors.Qred)
-        .exhaustive()}
-    >
-      <BasicQuestionInner>
-        <Menu>
-          <TopText>가장 더위를 잘 탈거 같은 사람은?</TopText>
-        </Menu>
-
-        <Menu>
-          <MiddleText>아직 9문제 남았어요!</MiddleText>
-        </Menu>
-
-        {type === "question" && (
+    <>
+      <Spacing size={16} />
+      <BasicQuestionWrapper
+        color={match(type)
+          .with("pick-me", () => colors.Qwhite)
+          .with("question", () => colors.Qred)
+          .exhaustive()}
+      >
+        <BasicQuestionInner>
           <Menu>
-            <BottomButton>계속하기</BottomButton>
+            <TopText>가장 더위를 잘 탈거 같은 사람은?</TopText>
           </Menu>
-        )}
-      </BasicQuestionInner>
-    </BasicQuestionWrapper>
+
+          <Menu>
+            <MiddleText>아직 9문제 남았어요!</MiddleText>
+          </Menu>
+
+          {type === "question" && (
+            <Menu>
+              <BottomButton>계속하기</BottomButton>
+            </Menu>
+          )}
+        </BasicQuestionInner>
+      </BasicQuestionWrapper>
+    </>
   );
 };
 
