@@ -8,4 +8,7 @@ export const colors = {
 
   Qwhite: "#FFFFFF",
   Qblack: "#131313",
+
+  Gray2: "##757575",
+  Gray3: "#484848",
 };

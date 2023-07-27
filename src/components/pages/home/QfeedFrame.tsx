@@ -1,16 +1,19 @@
 "use client";
-import Hr from "src/components/Hr";
 import { colors } from "src/constants/colors";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { styled } from "styled-components";
 import { match } from "ts-pattern";
 
-interface Props {}
+interface Props {
+  onClick: () => void;
+}
 
-const QfeedFrame = ({}: Props) => {
+const QfeedFrame = ({ onClick }: Props) => {
   const { width } = useDisplaySize();
   return (
-    <QfeedFrameWrapper width={(width - 16 * 2 - 12) / 2}>Hi</QfeedFrameWrapper>
+    <QfeedFrameWrapper onClick={onClick} width={(width - 16 * 2 - 12) / 2}>
+      Hi
+    </QfeedFrameWrapper>
   );
 };
 
