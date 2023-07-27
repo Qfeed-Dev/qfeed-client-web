@@ -1,12 +1,18 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
 
 export default function BackTitle() {
+  const router = useRouter();
+  const handleClickBack = () => {
+    router.back();
+  };
+
   return (
     <BackTitleWrapper>
       <BackTitleInner>
-        <Menu>&lt;--</Menu>
+        <Menu onClick={handleClickBack}>&lt;--</Menu>
         <Menu>7/10</Menu>
         <Menu>&lt;--</Menu>
       </BackTitleInner>
