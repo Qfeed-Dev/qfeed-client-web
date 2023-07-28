@@ -29,12 +29,12 @@ export default function useBottomSheet({ ...props }: any) {
     isContentAreaTouched: false,
   });
 
-  useEffect(() => {
-    sheet.current!.style.setProperty(
-      "transform",
-      `translateY(${-props.BOTTOMSHEET_HEIGHT}px)`
-    );
-  }, [props.visible]);
+  // useEffect(() => {
+  //   sheet.current!.style.setProperty(
+  //     "transform",
+  //     `translateY(${-props.BOTTOMSHEET_HEIGHT}px)`
+  //   );
+  // }, [props.visible]);
 
   useEffect(() => {
     const BOTTOMSHEET_BACKGROUND =
@@ -72,8 +72,11 @@ export default function useBottomSheet({ ...props }: any) {
       if (isContentAreaTouched && currentTouchMove > 0) {
         e.preventDefault();
         document.body.style.overflowY = "hidden";
-        console.log(currentTouchMove - props.BOTTOMSHEET_HEIGHT);
 
+        props.handleMove(
+          -(currentTouchMove - props.BOTTOMSHEET_HEIGHT) /
+            props.BOTTOMSHEET_HEIGHT
+        );
         sheet.current!.style.setProperty(
           "transform",
           `translateY(${currentTouchMove - props.BOTTOMSHEET_HEIGHT}px)`
@@ -83,11 +86,13 @@ export default function useBottomSheet({ ...props }: any) {
         touchMove.movingDirection === "down"
       ) {
         const move = touchMove.moveTouchY - touchStart.touchY;
-        // console.log(move);
 
         sheet.current!.style.setProperty(
           "transform",
           `translateY(${move - props.BOTTOMSHEET_HEIGHT}px)`
+        );
+        props.handleMove(
+          -(move - props.BOTTOMSHEET_HEIGHT) / props.BOTTOMSHEET_HEIGHT
         );
       }
     };
@@ -101,7 +106,7 @@ export default function useBottomSheet({ ...props }: any) {
         e.preventDefault();
         console.log(currentTouchMove > props.BOTTOMSHEET_HEIGHT * 0.2);
         if (currentTouchMove > props.BOTTOMSHEET_HEIGHT * 0.2) {
-          props.handleClickBackground(0);
+          props.handleClickBackground();
           sheet.current!.style.setProperty("transform", `translateY(0)`);
         } else {
           sheet.current!.style.setProperty(
@@ -113,7 +118,7 @@ export default function useBottomSheet({ ...props }: any) {
         content.current!.scrollTop <= 0 &&
         touchMove.movingDirection === "down"
       ) {
-        props.handleClickBackground(0);
+        props.handleClickBackground();
         sheet.current!.style.setProperty("transform", `translateY(0)`);
       }
 
