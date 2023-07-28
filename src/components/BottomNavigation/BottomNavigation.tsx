@@ -1,17 +1,45 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { colors } from "src/constants/colors";
+import { Route } from "src/constants/Route";
 import { styled } from "styled-components";
 
 interface Props {}
 
 const BottomNavigation = ({}: Props) => {
+  const router = useRouter();
+
   return (
     <BottomNavigationWrapper>
       <BottomNavigationInner>
-        <div>Hi</div>
-        <div>Hi</div>
-        <div>Hi</div>
-        <div>Hi</div>
+        <div
+          onClick={() => {
+            router.push(Route.HOME());
+          }}
+        >
+          Hi
+        </div>
+        <div
+          onClick={() => {
+            router.push(Route.CHAT());
+          }}
+        >
+          Hi
+        </div>
+        <div
+          onClick={() => {
+            router.push(Route.MYPAGE());
+          }}
+        >
+          Hi
+        </div>
+        <div
+          onClick={() => {
+            router.push(Route.FRIEND());
+          }}
+        >
+          Hi
+        </div>
       </BottomNavigationInner>
     </BottomNavigationWrapper>
   );

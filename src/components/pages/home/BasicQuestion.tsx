@@ -14,6 +14,7 @@ const BasicQuestion = ({ type = "pick-me", ...props }: Props) => {
     <>
       <Spacing size={16} />
       <BasicQuestionWrapper
+        onClick={props.onClick}
         color={match(type)
           .with("pick-me", () => colors.Qwhite)
           .with("question", () => colors.Qred)
@@ -30,7 +31,7 @@ const BasicQuestion = ({ type = "pick-me", ...props }: Props) => {
 
           {type === "question" && (
             <Menu>
-              <BottomButton onClick={props.onClick}>계속하기</BottomButton>
+              <BottomButton>계속하기</BottomButton>
             </Menu>
           )}
         </BasicQuestionInner>

@@ -20,21 +20,24 @@ const HomeDatas = [{}, {}, {}];
 
 export default function Page() {
   const router = useRouter();
+  const handleClickPickMe = () => {
+    router.push(Route.PICK_ME());
+  };
   const handleClickBasicQuestion = () => {
-    router.push(Route.QuestionFriend());
+    router.push(Route.QUESTION_FRIEND());
   };
   const handleClickFrame = () => {
-    router.push(Route.Question());
+    router.push(Route.QUESTION());
   };
   const handleClickPlus = () => {
-    router.push(Route.AddQuestion());
+    router.push(Route.ADD_QUESTION());
   };
 
   return (
     <>
       <HomeWrapper>
         <HomeTitle />
-        <BasicQuestion type="pick-me" />
+        <BasicQuestion type="pick-me" onClick={handleClickPickMe} />
         <BasicQuestion type="question" onClick={handleClickBasicQuestion} />
         <Spacing size={20} />
 
