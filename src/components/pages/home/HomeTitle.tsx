@@ -8,7 +8,7 @@ import { styled } from "styled-components";
 const HomeTitle = ({}: {}) => {
   const router = useRouter();
   const handleClickAlarm = () => {
-    router.push(Route.Alarm());
+    router.push(Route.ALARM());
   };
   return (
     <HomeTitleWrapper>
