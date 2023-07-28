@@ -1,6 +1,9 @@
-import StyledComponentsRegistry from "../lib/registry";
-import Layout from "src/components/layout/Layout";
+"use client";
+import { Provider } from "react-redux";
 import "./App.scss";
+import Head from "./head";
+import App from "./App";
+import { store } from "src/store";
 
 export default function RootLayout({
   children,
@@ -9,10 +12,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <Head />
       <body>
-        <StyledComponentsRegistry>
-          <Layout>{children}</Layout>
-        </StyledComponentsRegistry>
+        <Provider store={store}>
+          <App>{children}</App>
+        </Provider>
       </body>
     </html>
   );

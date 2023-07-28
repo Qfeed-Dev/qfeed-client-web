@@ -3,12 +3,28 @@ import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import { colors } from "src/constants/colors";
 import useDisplaySize from "src/hooks/useDisplaySize";
+import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { styled } from "styled-components";
 
 export default function Friend() {
   const { width } = useDisplaySize();
+  const dispatch = useAppDispatch();
+
+  const handleClickFriend = () => {
+    dispatch(
+      changeVisibleType({
+        type: "bottomSheet",
+        value: [1, "friend"],
+      })
+    );
+  };
+
   return (
-    <FriendWrapper width={(width - 16 * 2 - 12 * 3) / 4}>
+    <FriendWrapper
+      width={(width - 16 * 2 - 12 * 3) / 4}
+      onClick={handleClickFriend}
+    >
       <FriendInner>
         <Menu>
           <Image src="https://i.ibb.co/0Z6FNN7/60pt.png" type="friend" />

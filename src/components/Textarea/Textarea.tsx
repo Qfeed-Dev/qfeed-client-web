@@ -17,6 +17,7 @@ const Textarea = ({ placeholder, size }: Props) => {
 };
 
 const TextareaWrapper = styled.div`
+  width: 100%;
   padding: 10px;
   position: relative;
   background-color: ${colors.Qwhite};

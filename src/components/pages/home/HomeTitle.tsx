@@ -3,13 +3,26 @@ import { useRouter } from "next/navigation";
 import Image from "src/components/Image";
 import { colors } from "src/constants/colors";
 import { Route } from "src/constants/Route";
+import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { styled } from "styled-components";
 
 const HomeTitle = ({}: {}) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const handleClickAlarm = () => {
     router.push(Route.ALARM());
   };
+
+  const handleClickCoin = () => {
+    dispatch(
+      changeVisibleType({
+        type: "bottomSheet",
+        value: [1, "coin"],
+      })
+    );
+  };
+
   return (
     <HomeTitleWrapper>
       <Menu>
@@ -18,7 +31,7 @@ const HomeTitle = ({}: {}) => {
         </ImageWrapper>
       </Menu>
       <div style={{ display: "flex", gap: "24px" }}>
-        <Menu>
+        <Menu onClick={handleClickCoin}>
           <div>코인충전</div>
         </Menu>
         <Menu>
