@@ -1,7 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
+import Report from "../Report";
 import Spacing from "../Spacing";
 
 export default function BackTitle() {
@@ -17,7 +19,9 @@ export default function BackTitle() {
         <BackTitleInner>
           <Menu onClick={handleClickBack}>&lt;--</Menu>
           <Menu>7/10</Menu>
-          <Menu>&lt;--</Menu>
+          <Menu>
+            <Report />
+          </Menu>
         </BackTitleInner>
       </BackTitleWrapper>
     </>
