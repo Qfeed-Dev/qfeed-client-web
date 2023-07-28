@@ -47,16 +47,13 @@ const BottomSheet = forwardRef(function Div(
   };
 
   const handleClickBackground = () => {
-    sheet.current!.style.setProperty(
-      "transform",
-      `translateY(${BOTTOMSHEET_HEIGHT}px)`
-    );
     dispatch(
       changeAction({
         type: "bottomSheet",
         value: false,
       })
     );
+    sheet.current!.style.setProperty("transform", `translateY(-${0}px)`);
     setTimeout(() => {
       dispatch(
         changeVisible({
@@ -77,11 +74,16 @@ const BottomSheet = forwardRef(function Div(
   return (
     <>
       <Background
-        visible={actionDelay}
-        currentOpacity={visible}
+        actionDelay={actionDelay}
+        visible={visible}
         onClick={handleClickBackground}
       />
-      <BottomSheetWrapper ref={sheet} height={BOTTOMSHEET_HEIGHT}>
+      <BottomSheetWrapper
+        ref={sheet}
+        actionDelay={actionDelay}
+        visible={visible}
+        height={BOTTOMSHEET_HEIGHT}
+      >
         <HandleWrapper>
           <Handle />
         </HandleWrapper>
@@ -91,16 +93,28 @@ const BottomSheet = forwardRef(function Div(
   );
 });
 
-const fade = (visible: number) => keyframes`
+const fade = (actionDelay: number) => keyframes`
   from {
-    opacity: ${visible ? 0 : 1};
+    opacity: ${actionDelay ? 0 : 1};
   }
   to {
-    opacity: ${visible ? 1 : 0};
+    opacity: ${actionDelay ? 1 : 0};
   }
 `;
 
-const Background = styled.div<{ visible: number; currentOpacity: number }>`
+const slide = (actionDelay: number, height: number) => keyframes`
+  from {
+    transform: translateY(${actionDelay ? 0 : -height + "px"});
+  }
+  to {
+    transform: translateY(${actionDelay ? -height + "px" : 0});
+  }
+`;
+
+const Background = styled.div<{
+  actionDelay: number;
+  visible: number;
+}>`
   width: 100%;
   height: 100%;
 
@@ -108,13 +122,13 @@ const Background = styled.div<{ visible: number; currentOpacity: number }>`
   position: absolute;
   top: 0;
 
-  ${({ visible, currentOpacity }) =>
-    currentOpacity === 0 || currentOpacity === 1
+  ${({ actionDelay, visible }) =>
+    visible === 0 || visible === 1
       ? css`
-          animation: ${fade(visible)} 300ms forwards;
+          animation: ${fade(actionDelay)} 300ms forwards;
         `
       : css`
-          opacity: ${currentOpacity};
+          opacity: ${visible};
         `}
   background-color: ${colors.Qwhite};
   z-index: 998;
@@ -137,7 +151,11 @@ const Handle = styled.div`
   background-color: ${colors.Qblack};
 `;
 
-const BottomSheetWrapper = styled.div<{ height: number }>`
+const BottomSheetWrapper = styled.div<{
+  height: number;
+  actionDelay: number;
+  visible: number;
+}>`
   width: 100%;
   height: ${({ height }) => height + "px"};
 
@@ -152,6 +170,13 @@ const BottomSheetWrapper = styled.div<{ height: number }>`
   z-index: 999;
 
   transition: transform 300ms ease-out;
+
+  ${({ height, actionDelay, visible }) =>
+    visible === 1
+      ? css`
+          animation: ${slide(actionDelay, height)} 300ms forwards;
+        `
+      : css``}
 `;
 
 const ContentWrapper = styled.div`

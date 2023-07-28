@@ -61,7 +61,7 @@ export default function Page() {
 }
 
 const AddQuestionWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   padding: 0 16px;
 `;
 

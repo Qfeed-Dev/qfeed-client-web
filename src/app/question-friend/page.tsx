@@ -62,7 +62,7 @@ export default function Page() {
 }
 
 const QuestionWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   padding: 0 16px;
 `;
 
