@@ -6,6 +6,12 @@
 }
 
 html,
+body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+html,
 body,
 div,
 span,
@@ -108,8 +114,6 @@ section {
 }
 body {
     line-height: 1;
-    font-family: "Open Sans", sans-serif;
-    color: #444444;
 }
 ol,
 ul {
