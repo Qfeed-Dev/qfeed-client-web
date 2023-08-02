@@ -49,7 +49,7 @@ const Organization = () => {
             <ButtonFillLarge
                 state="disabled"
                 text="다음"
-                onClick={() => router.push("/sign-in/complete")}
+                onClick={() => router.push("/sign-up/complete")}
             />
         </Flex>
     );
