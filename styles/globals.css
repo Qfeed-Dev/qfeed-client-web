@@ -154,11 +154,11 @@ a:visited {
     color: inherit;
 }
 
-input {
+input,
+select {
     -webkit-appearance: none; /* Safari and Chrome */
     -moz-appearance: none; /* Firefox */
     appearance: none;
-    box-sizing: border-box;
     border: none;
     background: transparent;
     padding: 0;
