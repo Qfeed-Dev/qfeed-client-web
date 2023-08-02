@@ -1,6 +1,5 @@
 "use client";
-import { styled } from "styled-components";
-import Flex from "src/components/common/Flex";
+import styled from "styled-components";
 import Text from "../common/Text";
 
 export interface NavProps {

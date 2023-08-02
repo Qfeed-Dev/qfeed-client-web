@@ -1,5 +1,5 @@
 "use client";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import Flex from "src/components/common/Flex";
 import Text from "../common/Text";
 import { colors } from "styles/theme";
