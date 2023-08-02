@@ -1,19 +1,23 @@
-import StyledComponentsRegistry from '../lib/registry';
-import '../../styles/globals.css';
-import Layout from 'src/components/layout/Layout';
+"use client";
+import { Provider } from "react-redux";
+import "./App.scss";
+import Head from "./head";
+import App from "./App";
+import { store } from "src/store";
 
 export default function RootLayout({
-  children,
+    children
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <html>
-      <body>
-        <StyledComponentsRegistry>
-          <Layout>{children}</Layout>
-        </StyledComponentsRegistry>
-      </body>
-    </html>
-  );
+    return (
+        <html>
+            <Head />
+            <body>
+                <Provider store={store}>
+                    <App>{children}</App>
+                </Provider>
+            </body>
+        </html>
+    );
 }
