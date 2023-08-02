@@ -5,6 +5,11 @@ export const ORGANIZATION_OPTIONS = [
     { value: "졸업생", name: "졸업생" }
 ];
 
+export const GRADUATE_OPTIONS = [
+    { value: "초/중/고등학교", name: "초/중/고등학교" },
+    { value: "대학교", name: "대학교" }
+];
+
 export const SCHOOL_YEAR_OPTIONS = [
     { value: "20", name: "20학번" },
     { value: "21", name: "21학번" },
