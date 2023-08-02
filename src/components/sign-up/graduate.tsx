@@ -11,7 +11,7 @@ const Graduate = () => {
             <SelectBox
                 label="졸업 학교"
                 options={GRADUATE_OPTIONS}
-                defaultValue="대학교"
+                value={selected}
             />
             {selected === "대학교" && <University />}
         </>

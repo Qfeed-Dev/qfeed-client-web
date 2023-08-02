@@ -14,12 +14,15 @@ import {
 export interface SelectBoxProps {
     label: string;
     options: any;
-    defaultValue: string;
+    value?: string;
+    defaultValue?: string;
 }
 
 const SelectBox = (props: SelectBoxProps) => {
     const [open, setOpen] = useState<Boolean>(false);
-    const [currentValue, setCurrentValue] = useState(props.defaultValue);
+    const [currentValue, setCurrentValue] = useState(
+        props.defaultValue || props.value
+    );
     const dispatch = useAppDispatch();
 
     return (

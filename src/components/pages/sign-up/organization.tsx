@@ -10,18 +10,11 @@ import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
 
-import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
-import { changeOrganization } from "src/reducer/slices/organization/organizationSlice";
-import { useEffect } from "react";
+import { useAppSelector } from "src/hooks/useReduxHooks";
 
 const Organization = () => {
     const router = useRouter();
     const selected = useAppSelector((state) => state.organization.selected);
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        dispatch(changeOrganization({ type: "organization", value: selected }));
-    }, [selected]);
 
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
@@ -32,7 +25,7 @@ const Organization = () => {
             <SelectBox
                 label="소속"
                 options={ORGANIZATION_OPTIONS}
-                defaultValue="대학생"
+                value={selected}
             />
             {selected === "초등학생" && <ElementarySchool />}
             {selected === "중/고등학생" && <MidHighSchool />}
