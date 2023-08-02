@@ -34,7 +34,7 @@ const InputWrapper = styled.div`
     align-items: center;
     gap: 0.5rem;
 
-    border-bottom: 1px solid ${colors.light_gray3};
+    border-bottom: 1.5px solid ${colors.light_gray3};
 `;
 
 const Input = styled.input`
