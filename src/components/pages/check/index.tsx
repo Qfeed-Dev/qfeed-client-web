@@ -1,18 +1,10 @@
-'use client';
-import { styled } from 'styled-components';
-import { Text } from 'src/components/common/Text';
+"use client";
+import { styled } from "styled-components";
 
 const Hi = () => {
-  return (
-    <Text typo="Headline1b" color="primary_qgreen">
-      테스트 페이지입니다.
-    </Text>
-  );
+    return <Test>check page</Test>;
 };
 
-const Test = styled.div`
-  width: 100%;
-  height: 2rem;
-`;
+const Test = styled.div``;
 
 export default Hi;
