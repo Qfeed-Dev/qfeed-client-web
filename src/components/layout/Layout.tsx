@@ -1,5 +1,5 @@
 "use client";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { colors, media } from "styles/theme";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
