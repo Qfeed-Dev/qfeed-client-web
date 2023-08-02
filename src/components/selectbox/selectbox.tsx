@@ -18,7 +18,7 @@ const SelectBox = (props: SelectBoxProps) => {
 
     return (
         <Flex direction="column" align="start" gap={8}>
-            <Text typo="Subtitle1r">소속</Text>
+            <Text typo="Subtitle1r">{props.label}</Text>
             <Select onClick={() => setOpen(!open)}>
                 <Selected justify="space-between">
                     <Text typo="Subtitle1r">{currentValue}</Text>
