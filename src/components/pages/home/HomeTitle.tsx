@@ -5,7 +5,7 @@ import { colors } from "src/constants/colors";
 import { Route } from "src/constants/Route";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const HomeTitle = ({}: {}) => {
   const router = useRouter();
