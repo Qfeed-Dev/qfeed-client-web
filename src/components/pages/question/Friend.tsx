@@ -5,7 +5,7 @@ import { colors } from "src/constants/colors";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export default function Friend() {
   const { width } = useDisplaySize();

@@ -1,7 +1,7 @@
 "use client";
 import { Metadata } from "next";
 import { useRouter } from "next/navigation";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import BottomNavigation from "src/components/BottomNavigation";
 import BasicQuestion from "src/components/pages/home/BasicQuestion";
 import Filter from "src/components/pages/home/Filter";

@@ -1,17 +1,17 @@
 "use client";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 interface Props {
-  size: number;
+    size: number;
 }
 
 const Spacing = ({ size }: Props) => {
-  return <SpacingWrapper size={size} />;
+    return <SpacingWrapper size={size} />;
 };
 
 const SpacingWrapper = styled.div<{ size: number }>`
-  width: 100%;
-  height: ${({ size }) => size + "px"};
+    width: 100%;
+    height: ${({ size }) => size + "px"};
 `;
 
 export default Spacing;

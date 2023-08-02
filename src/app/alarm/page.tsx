@@ -2,24 +2,24 @@
 import NewAlarm from "src/components/pages/alarm/NewAlarm";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const AlarmDatas = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Page() {
-  return (
-    <AlarmWrapper>
-      <BackTitle />
+    return (
+        <AlarmWrapper>
+            <BackTitle />
 
-      <Spacing size={36} />
-      {AlarmDatas.map((data: any, idx: number) => {
-        return <NewAlarm key={idx} />;
-      })}
-    </AlarmWrapper>
-  );
+            <Spacing size={36} />
+            {AlarmDatas.map((data: any, idx: number) => {
+                return <NewAlarm key={idx} />;
+            })}
+        </AlarmWrapper>
+    );
 }
 
 const AlarmWrapper = styled.div`
-  height: 100%;
-  padding: 0 16px;
+    height: 100%;
+    padding: 0 16px;
 `;
