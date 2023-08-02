@@ -1,8 +1,8 @@
-'use client';
-import { styled } from 'styled-components';
+"use client";
+import { styled } from "styled-components";
 
 const Hi = () => {
-  return <Test>check page</Test>;
+    return <Test>check page</Test>;
 };
 
 const Test = styled.div``;
