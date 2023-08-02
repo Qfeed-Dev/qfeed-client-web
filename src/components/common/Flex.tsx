@@ -6,7 +6,7 @@ const Flex = styled.div<{
     align?: string;
     gap?: number;
     width?: number;
-    height?: number;
+    height?: number | string;
 }>`
     display: flex;
     flex-direction: ${({ direction }) => (direction ? `${direction}` : "row")};
@@ -14,7 +14,8 @@ const Flex = styled.div<{
     align-items: ${({ align }) => (align ? `${align}` : "center")};
     gap: ${({ gap }) => (gap ? `${gap}px` : "0px")};
     width: ${({ width }) => (width ? `${width}px` : "100%")};
-    height: ${({ height }) => (height ? `${height}px` : "auto")};
+    height: ${({ height }) =>
+        typeof height === "string" ? height : height ? `${height}px` : "auto"};
 `;
 
 export default Flex;

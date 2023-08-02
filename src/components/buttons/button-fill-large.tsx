@@ -45,6 +45,7 @@ const ButtonWrapper = styled.button<{
     width: 100%;
     min-height: 52px;
     padding: 0.88rem 3.75rem;
+    margin-bottom: 8rem;
 
     text-align: center;
     color: ${({ state }) => TEXT_COLOR.default[state]};
