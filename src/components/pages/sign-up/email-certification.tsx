@@ -1,14 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
-import ButtonFillSmall from "src/components/buttons/button-fill-small";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/navigation-top";
-import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
 import { useInput } from "src/hooks/common/useInput";
 
-const SignIn = () => {
+const EmailCertification = () => {
     const router = useRouter();
     const email = useInput();
 
@@ -33,4 +31,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default EmailCertification;
