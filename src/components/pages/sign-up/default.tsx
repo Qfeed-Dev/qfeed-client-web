@@ -55,7 +55,7 @@ const SignIn = () => {
                 <ButtonFillLarge
                     state="disabled"
                     text="다음"
-                    onClick={() => router.push("/sign-in/organization")}
+                    onClick={() => router.push("/sign-up/organization")}
                 />
             </Flex>
         </Flex>
