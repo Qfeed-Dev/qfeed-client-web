@@ -1,8 +1,11 @@
 import SelectBox from "../selectbox/selectbox";
 import { GRADUATE_OPTIONS } from "src/constants/options";
 import University from "./university";
+import { useAppSelector } from "src/hooks/useReduxHooks";
 
 const Graduate = () => {
+    const selected = useAppSelector((state) => state.organization.graduate);
+
     return (
         <>
             <SelectBox
@@ -10,7 +13,7 @@ const Graduate = () => {
                 options={GRADUATE_OPTIONS}
                 defaultValue="대학교"
             />
-            {true && <University />}
+            {selected === "대학교" && <University />}
         </>
     );
 };

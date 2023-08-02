@@ -10,11 +10,21 @@ import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
 
+import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import { changeOrganization } from "src/reducer/slices/organization/organizationSlice";
+import { useEffect } from "react";
+
 const Organization = () => {
     const router = useRouter();
+    const selected = useAppSelector((state) => state.organization.selected);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(changeOrganization({ type: "organization", value: selected }));
+    }, [selected]);
 
     return (
-        <Flex direction="column" justify="start" gap={24}>
+        <Flex height="100%" direction="column" justify="start" gap={24}>
             <NavigationTop
                 leftIcon={<div onClick={router.back}>왼</div>}
                 title="회원 가입"
@@ -24,10 +34,10 @@ const Organization = () => {
                 options={ORGANIZATION_OPTIONS}
                 defaultValue="대학생"
             />
-            {false && <ElementarySchool />}
-            {false && <MidHighSchool />}
-            {false && <University />}
-            {true && <Graduate />}
+            {selected === "초등학생" && <ElementarySchool />}
+            {selected === "중/고등학생" && <MidHighSchool />}
+            {selected === "대학생" && <University />}
+            {selected === "졸업생" && <Graduate />}
             <ButtonFillLarge
                 state="disabled"
                 text="다음"
