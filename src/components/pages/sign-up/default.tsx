@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
+import ButtonFillSmall from "src/components/buttons/button-fill-small";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/navigation-top";
@@ -46,12 +47,15 @@ const SignIn = () => {
                     label="이메일"
                     placeholder="ex) ghkdcofls42@naver.com"
                 />
-                <InputLine
-                    value={nickname.value}
-                    onChange={nickname.handleChangeInput}
-                    label="닉네임"
-                    placeholder="ex) qwerk11"
-                />
+                <Flex align="end" gap={12}>
+                    <InputLine
+                        value={nickname.value}
+                        onChange={nickname.handleChangeInput}
+                        label="닉네임"
+                        placeholder="ex) qwerk11"
+                    />
+                    <ButtonFillSmall text="중복 확인" onClick={() => {}} />
+                </Flex>
                 <ButtonFillLarge
                     state="disabled"
                     text="다음"
