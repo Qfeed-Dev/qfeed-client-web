@@ -1,4 +1,5 @@
 import StyledComponentsRegistry from "../lib/registry";
+import ReactQueryProvider from "../lib/react-query-registry";
 import "../../styles/globals.css";
 import Layout from "src/components/layout/Layout";
 
@@ -11,7 +12,9 @@ export default function RootLayout({
         <html>
             <body style={{ background: "#131313" }}>
                 <StyledComponentsRegistry>
-                    <Layout>{children}</Layout>
+                    <ReactQueryProvider>
+                        <Layout>{children}</Layout>
+                    </ReactQueryProvider>
                 </StyledComponentsRegistry>
             </body>
         </html>
