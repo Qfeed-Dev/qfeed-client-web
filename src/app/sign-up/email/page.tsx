@@ -1,1 +1,1 @@
-export { default } from "../../../components/pages/sign-up/email";
+export { default } from "../../../components/pages/sign-up/email-certification";
