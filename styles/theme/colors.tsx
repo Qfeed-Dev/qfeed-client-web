@@ -55,3 +55,10 @@ export const repeatQuestionColor = [
     colors.primary_qred,
     colors.primary_qgreen
 ];
+
+export const repeatCoinColor = [
+    colors.primary_qblue,
+    colors.primary_qgreen,
+    colors.primary_qorange,
+    colors.primary_qpink
+];

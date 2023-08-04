@@ -95,6 +95,9 @@ const BottomSheet = forwardRef(function Div(
                 visible={visible}
                 height={BOTTOMSHEET_HEIGHT}
                 selectedIdx={selectedIdx}
+                backgroundColor={
+                    type === "coin" ? colors.light_gray3 : colors.light_gray0
+                }
             >
                 <HandleWrapper>
                     <Handle selectedIdx={selectedIdx} />
@@ -169,6 +172,7 @@ const BottomSheetWrapper = styled.div<{
     actionDelay: number;
     visible: number;
     selectedIdx: number;
+    backgroundColor: any;
 }>`
     width: 100%;
     height: ${({ height }) => height + "px"};
@@ -181,8 +185,8 @@ const BottomSheetWrapper = styled.div<{
 
     color: ${({ color }) => color};
     border-radius: 10px 10px 0 0;
-    background-color: ${({ selectedIdx }) =>
-        selectedIdx ? repeatBackgroundColor[selectedIdx] : colors.light_gray0};
+    background-color: ${({ selectedIdx, backgroundColor }) =>
+        selectedIdx ? repeatBackgroundColor[selectedIdx] : backgroundColor};
     z-index: 999;
 
     transition: transform 300ms ease-out;
