@@ -3,30 +3,49 @@ import { styled } from "styled-components";
 import { match } from "ts-pattern";
 
 interface Props {
-  src: any;
-  type: string;
-  size?: number;
+    src: any;
+    type: string;
+    size?: number;
+    height?: number;
+    grayscale?: number;
 }
 
-const Image = ({ src, type = "profile", size }: Props) => {
-  return (
-    <ImageWrapper
-      src={src}
-      size={match(type)
-        .with("profile", () => 40)
-        .with("friend", () => 35)
-        .with("default", () => size)
-        .exhaustive()}
-    />
-  );
+const Image = ({ src, type = "default", size, height, grayscale }: Props) => {
+    return (
+        <ImageWrapper
+            src={src}
+            width={match(type)
+                .with("background", () => "100%")
+                .with("default", () => size)
+                .exhaustive()}
+            height={match(type)
+                .with("background", () => (height ? height : "100%"))
+                .with("default", () => size)
+                .exhaustive()}
+            ratio={match(type)
+                .with("background", () => "auto")
+                .with("default", () => 1)
+                .exhaustive()}
+            radius={match(type)
+                .with("background", () => "0")
+                .with("default", () => "999px")
+                .exhaustive()}
+            style={{ filter: `grayscale(${grayscale}%)` }}
+        />
+    );
 };
 
-const ImageWrapper = styled.img<{ size: number }>`
-  width: ${({ size }) => size + "px"};
-  height: ${({ size }) => size + "px"};
-  margin: auto;
+const ImageWrapper = styled.img<{
+    ratio: number;
+    radius: number;
+}>`
+    margin: auto;
 
-  border-radius: 50%;
+    border-radius: 50%;
+
+    aspect-ratio: ${({ ratio }) => ratio};
+    border-radius: ${({ radius }) => radius};
+    object-fit: cover;
 `;
 
 export default Image;
