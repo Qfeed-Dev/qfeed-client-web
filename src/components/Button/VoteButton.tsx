@@ -11,28 +11,43 @@ interface Props {
 }
 
 const VoteButton = forwardRef(function Button(
-    {
-        children,
-        onClick,
-        idx,
-        type = "primary",
-        action = undefined,
-        ...props
-    }: any,
+    { children, onClick, idx, type = "primary", action = null, ...props }: any,
     ref
 ) {
     return (
         <VoteButtonWrapper
             onClick={onClick}
+            color={
+                props.top && !(type === "default")
+                    ? action
+                        ? colors.light_qblack
+                        : colors.light_qwhite
+                    : idx === props.selected
+                    ? colors.light_qblack
+                    : action
+                    ? colors.light_qwhite
+                    : colors.light_qwhite
+            }
             backgroundColor={
-                type === "default" || idx === props.selected
-                    ? repeatQuestionColor[idx % 6]
+                props.top && !(type === "default")
+                    ? action
+                        ? repeatQuestionColor[idx % 6]
+                        : colors.line_white_70
+                    : idx === props.selected
+                    ? action
+                        ? colors.line_white_70
+                        : repeatQuestionColor[idx % 6]
+                    : action
+                    ? colors.line_black_50
                     : colors.light_gray2
             }
         >
             <VoteButtonInner>
                 <TextWrapper>{children}</TextWrapper>
-                {type === "secondary" && idx === props.selected && (
+                {/* {type === "secondary" && idx === props.selected && (
+                    <CheckWrapper>svg</CheckWrapper>
+                )} */}
+                {type !== "primary" && idx === props.selected && (
                     <CheckWrapper>svg</CheckWrapper>
                 )}
                 {type === "primary" && <NumberWrapper>Hi</NumberWrapper>}
@@ -41,14 +56,14 @@ const VoteButton = forwardRef(function Button(
     );
 });
 
-const VoteButtonWrapper = styled.div<{ backgroundColor: any }>`
+const VoteButtonWrapper = styled.div<{ color: any; backgroundColor: any }>`
     width: 100%;
     height: 50px;
 
     display: flex;
 
     position: relative;
-    color: ${colors.light_qblack};
+    color: ${({ color }) => color};
     border-radius: 10px;
     background-color: ${({ backgroundColor }) => backgroundColor};
 `;
