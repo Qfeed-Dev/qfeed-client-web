@@ -9,7 +9,7 @@ const AlarmDatas = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 export default function Page() {
     return (
         <AlarmWrapper>
-            <BackTitle type="primary" text="알림 페이지" />
+            <BackTitle type="default" text="알림 페이지" />
 
             <Spacing size={8} />
             {AlarmDatas.map((data: any, idx: number) => {
