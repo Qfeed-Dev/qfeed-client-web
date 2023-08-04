@@ -1,13 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
 import { Text } from "../common/Text";
 import Report from "../Report";
 import Spacing from "../Spacing";
 
-export default function BackTitle() {
+export default function BackTitle({ type = "primary", ...props }: any) {
     const router = useRouter();
     const handleClickBack = () => {
         router.back();
@@ -18,15 +17,26 @@ export default function BackTitle() {
             <Spacing size={50} />
             <BackTitleWrapper>
                 <BackTitleInner>
-                    <Menu onClick={handleClickBack}>&lt;--</Menu>
-                    <Menu>
-                        <Text typo="Subtitle2b" color="light_qwhite">
-                            7/10
+                    <Menu onClick={handleClickBack} style={{ display: "flex" }}>
+                        <div style={{ margin: "auto", marginRight: 16 }}>
+                            &lt;--
+                        </div>
+                        <Text typo="Headline1b" color="light_qwhite">
+                            {props.text}
                         </Text>
                     </Menu>
-                    <Menu>
-                        <Report />
-                    </Menu>
+                    {type === "primary" ? null : (
+                        <>
+                            <Menu>
+                                <Text typo="Subtitle2b" color="light_qwhite">
+                                    {props.currentIdx + 1}/{props.count}
+                                </Text>
+                            </Menu>
+                            <Menu>
+                                <Report />
+                            </Menu>
+                        </>
+                    )}
                 </BackTitleInner>
             </BackTitleWrapper>
         </>

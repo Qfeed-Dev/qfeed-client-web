@@ -1,17 +1,32 @@
 "use client";
 import { css, styled } from "styled-components";
 import { colors } from "styles/theme";
+import { match } from "ts-pattern";
 
 interface Props {
+    type?: string;
     horizonal?: boolean;
     size?: number;
 }
 
-const Hr = ({ horizonal = false, size = 1 }: Props) => {
-    return <HrWrapper horizonal={horizonal} size={size} />;
+const Hr = ({ horizonal = false, type = "default", size = 1 }: Props) => {
+    return (
+        <HrWrapper
+            horizonal={horizonal}
+            size={size}
+            backgroundColor={match(type)
+                .with("primary", () => colors.light_qwhite)
+                .with("default", () => colors.line_black_5)
+                .exhaustive()}
+        />
+    );
 };
 
-const HrWrapper = styled.hr<{ horizonal: boolean; size: number }>`
+const HrWrapper = styled.hr<{
+    horizonal: boolean;
+    size: number;
+    backgroundColor: any;
+}>`
     ${({ horizonal, size }) =>
         horizonal
             ? css`
@@ -25,7 +40,7 @@ const HrWrapper = styled.hr<{ horizonal: boolean; size: number }>`
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: ${colors.line_black_5};
+    background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 export default Hr;

@@ -6,16 +6,18 @@ import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 
 interface Props {
+    onClick?: () => void;
     type: "primary" | "secondary" | "default";
     children?: any;
 }
 
 const Button = forwardRef(function Button(
-    { children, type = "primary", ...props }: Props,
+    { children, onClick, type = "primary", ...props }: Props,
     ref
 ) {
     return (
         <ButtonWrapper
+            onClick={onClick}
             color={match(type)
                 .with("primary", () => colors.Qblack)
                 .with("secondary", () => colors.Qwhite)
