@@ -7,19 +7,19 @@ import { styled } from "styled-components";
 const AlarmDatas = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Page() {
-  return (
-    <AlarmWrapper>
-      <BackTitle />
+    return (
+        <AlarmWrapper>
+            <BackTitle type="primary" text="알림 페이지" />
 
-      <Spacing size={36} />
-      {AlarmDatas.map((data: any, idx: number) => {
-        return <NewAlarm key={idx} />;
-      })}
-    </AlarmWrapper>
-  );
+            <Spacing size={8} />
+            {AlarmDatas.map((data: any, idx: number) => {
+                return <NewAlarm key={idx} />;
+            })}
+        </AlarmWrapper>
+    );
 }
 
 const AlarmWrapper = styled.div`
-  height: 100%;
-  padding: 0 16px;
+    height: 100%;
+    // padding: 0 16px;
 `;
