@@ -15,19 +15,19 @@ const Image = ({ src, type = "default", size, height, grayscale }: Props) => {
         <ImageWrapper
             src={src}
             width={match(type)
-                .with("home", () => "100%")
+                .with("background", () => "100%")
                 .with("default", () => size)
                 .exhaustive()}
             height={match(type)
-                .with("home", () => (height ? height : "100%"))
+                .with("background", () => (height ? height : "100%"))
                 .with("default", () => size)
                 .exhaustive()}
             ratio={match(type)
-                .with("home", () => "auto")
+                .with("background", () => "auto")
                 .with("default", () => 1)
                 .exhaustive()}
             radius={match(type)
-                .with("home", () => "10px")
+                .with("background", () => "0")
                 .with("default", () => "999px")
                 .exhaustive()}
             style={{ filter: `grayscale(${grayscale}%)` }}
