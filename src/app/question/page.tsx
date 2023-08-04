@@ -7,12 +7,16 @@ import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import { colors } from "src/constants/colors";
+import { useState } from "react";
 
 export default function Page() {
+    const [selected, setSelected] = useState<number>(-1);
+    const [type, setType] = useState<string>("default");
+
     return (
         <>
             <QuestionWrapper>
-                <BackTitle type="profile">
+                <BackTitle type="profile" reportType="report">
                     <ProfileTitle />
                 </BackTitle>
 
@@ -26,11 +30,31 @@ export default function Page() {
 
             <BottomButton>
                 <BottomInner>
-                    <VoteButton type="default" action={true}>
-                        text
-                    </VoteButton>
-                    <VoteButton type="default">text</VoteButton>
-                    <VoteButton type="primary">text</VoteButton>
+                    {["", "", ""].map((data: any, idx: number) => {
+                        return (
+                            <VoteButton
+                                key={idx}
+                                idx={idx}
+                                type={type}
+                                selected={selected}
+                                // action={false}
+                                onClick={() => {
+                                    if (idx === selected) {
+                                        setSelected(-1); // default
+                                        setType("default");
+                                    } else {
+                                        setSelected(idx);
+                                        setType("secondary");
+                                    }
+                                }}
+                            >
+                                text
+                            </VoteButton>
+                            // default
+                            // secondary
+                            // primary
+                        );
+                    })}
                 </BottomInner>
                 <Spacing size={52} />
             </BottomButton>

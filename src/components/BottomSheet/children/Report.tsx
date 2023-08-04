@@ -1,65 +1,57 @@
 "use client";
-import { Text } from "src/components/common/Text";
-import Hr from "src/components/Hr";
-import Spacing from "src/components/Spacing";
 import { styled } from "styled-components";
 
 interface Props {}
 
 const ReportDatas = [
-    "이 질문은 보고싶지 않아요",
-    "불쾌한 질문이에요",
-    "이미 답변한 질문이에요",
-    "그냥 싫어요"
+    "스팸",
+    "성적 행위",
+    "혐오 발언",
+    "거짓 정보",
+    "폭력",
+    "사기",
+    "따돌림",
+    "자살 자해",
+    "지식재산권 침해",
+    "기타문제"
 ];
 
 const Report = ({}: Props) => {
     return (
         <ReportWrapper>
-            <Spacing size={32} />
-            <MenuWrapper>
-                <Text typo="Subtitle2b" color="light_qblack">
-                    신고하기
-                </Text>
-            </MenuWrapper>
-            <Spacing size={32} />
-
-            <MenuWrapper>
-                {ReportDatas.map((data: string, idx: number) => {
-                    return (
-                        <div
-                            key={idx}
-                            style={{ width: "100%", textAlign: "center" }}
-                        >
-                            <Text
-                                key={idx}
-                                typo="Subtitle1r"
-                                color="light_qblack"
-                            >
-                                {data}
-                                <Spacing size={16} />
-                            </Text>
-                            {idx !== ReportDatas.length - 1 && <Hr />}
-                        </div>
-                    );
-                })}
-            </MenuWrapper>
+            <ReportTitle>
+                <Menu>신고하기</Menu>
+            </ReportTitle>
+            {ReportDatas.map((data: string, idx: number) => {
+                return (
+                    <ReportSelection key={idx}>
+                        <Menu>{data}</Menu>
+                    </ReportSelection>
+                );
+            })}
         </ReportWrapper>
     );
 };
 
 const ReportWrapper = styled.div`
     width: 100%;
-    align-items: center;
 `;
 
-const MenuWrapper = styled.div`
+const ReportTitle = styled.div`
     width: 100%;
-
+    height: 70px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+`;
+
+const ReportSelection = styled.div`
+    width: 100%;
+    height: 45px;
+    display: flex;
+`;
+
+const Menu = styled.div`
+    margin: auto;
+    display: flex;
 `;
 
 export default Report;
