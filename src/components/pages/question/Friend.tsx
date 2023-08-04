@@ -1,21 +1,29 @@
 "use client";
+import { useState } from "react";
+import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
-import { colors } from "src/constants/colors";
 import useDisplaySize from "src/hooks/useDisplaySize";
-import { useAppDispatch } from "src/hooks/useReduxHooks";
-import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import {
+    changeFriend,
+    changeVisibleType
+} from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { styled } from "styled-components";
+import { colors, repeatColor } from "styles/theme";
 
-export default function Friend() {
+export default function Friend({ idx }: any) {
     const { width } = useDisplaySize();
     const dispatch = useAppDispatch();
+    const { visible, selectedIdx } = useAppSelector(
+        (state) => state.bottomSheet
+    );
 
     const handleClickFriend = () => {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "friend"]
+                value: [1, "friend", idx]
             })
         );
     };
@@ -24,6 +32,11 @@ export default function Friend() {
         <FriendWrapper
             width={(width - 16 * 2 - 12 * 3) / 4}
             onClick={handleClickFriend}
+            backgroundColor={
+                selectedIdx && idx !== selectedIdx && visible === 1
+                    ? colors.light_gray2
+                    : repeatColor[idx % 12]
+            }
         >
             <FriendInner>
                 <Menu>
@@ -31,27 +44,36 @@ export default function Friend() {
                         type="default"
                         size={35}
                         src="https://i.ibb.co/0Z6FNN7/60pt.png"
+                        grayscale={
+                            selectedIdx && idx !== selectedIdx && visible === 1
+                                ? 100
+                                : 0
+                        }
                     />
                 </Menu>
                 <Spacing size={8} />
 
                 <Menu>
-                    <Name>김은별</Name>
+                    <Text typo="Caption1b" color="light_qblack">
+                        김은별
+                    </Text>
                 </Menu>
                 <Menu>
-                    <QfeedId>dlraud1</QfeedId>
+                    <Text typo="Caption2r" color="light_qblack">
+                        dlraud1
+                    </Text>
                 </Menu>
             </FriendInner>
         </FriendWrapper>
     );
 }
 
-const FriendWrapper = styled.div<{ width: number }>`
+const FriendWrapper = styled.div<{ width: number; backgroundColor: any }>`
     width: ${({ width }) => width + "px"};
     //   height: ${({ width }) => (width * 92) / 73 + "px"};
 
     border-radius: 10px;
-    background-color: ${colors.Qorange};
+    background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const FriendInner = styled.div`
@@ -61,7 +83,3 @@ const FriendInner = styled.div`
 const Menu = styled.div`
     text-align: center;
 `;
-
-const Name = styled.div``;
-
-const QfeedId = styled.div``;

@@ -7,9 +7,10 @@ interface Props {
     type: string;
     size?: number;
     height?: number;
+    grayscale?: number;
 }
 
-const Image = ({ src, type = "profile", size, height }: Props) => {
+const Image = ({ src, type = "default", size, height, grayscale }: Props) => {
     return (
         <ImageWrapper
             src={src}
@@ -29,6 +30,7 @@ const Image = ({ src, type = "profile", size, height }: Props) => {
                 .with("home", () => "10px")
                 .with("default", () => "999px")
                 .exhaustive()}
+            style={{ filter: `grayscale(${grayscale}%)` }}
         />
     );
 };
