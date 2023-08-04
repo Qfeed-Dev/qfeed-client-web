@@ -48,7 +48,7 @@ const BackTitle = forwardRef(function Div(
                                 </div>
                             )}
                             <Menu>
-                                <Report />
+                                <Report type={props.reportType} />
                             </Menu>
                         </>
                     ) : null}

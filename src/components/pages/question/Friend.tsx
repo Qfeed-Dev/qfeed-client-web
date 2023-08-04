@@ -5,12 +5,9 @@ import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
-import {
-    changeFriend,
-    changeVisibleType
-} from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { styled } from "styled-components";
-import { colors, repeatColor } from "styles/theme";
+import { colors, repeatBackgroundColor } from "styles/theme";
 
 export default function Friend({ idx }: any) {
     const { width } = useDisplaySize();
@@ -35,7 +32,7 @@ export default function Friend({ idx }: any) {
             backgroundColor={
                 selectedIdx && idx !== selectedIdx && visible === 1
                     ? colors.light_gray2
-                    : repeatColor[idx % 12]
+                    : repeatBackgroundColor[idx % 12]
             }
         >
             <FriendInner>

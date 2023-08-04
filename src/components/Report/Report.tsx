@@ -8,21 +8,20 @@ import { Text } from "../common/Text";
 
 interface Props {}
 
-const Report = ({}: Props) => {
+const Report = ({ type = "report" }: any) => {
     const dispatch = useAppDispatch();
 
     const handleClickReport = () => {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "report"]
+                value: [1, type === "report" ? "report" : "reportFriend"]
             })
         );
     };
 
     return (
         <ReportWrapper onClick={handleClickReport}>
-            {" "}
             <Text typo="Caption1b" color="primary_qred">
                 신고
             </Text>

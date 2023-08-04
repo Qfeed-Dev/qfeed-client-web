@@ -4,7 +4,7 @@ import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import styled from "styled-components";
-import { colors, repeatColor, typo } from "styles/theme";
+import { colors, repeatBackgroundColor, typo } from "styles/theme";
 
 interface Props {
     idx: number;
@@ -16,14 +16,17 @@ const QfeedFrame = ({ idx, data, onClick }: Props) => {
     const { width } = useDisplaySize();
 
     return (
-        <QfeedFrameWrapper onClick={onClick} repeatColor={repeatColor[idx]}>
+        <QfeedFrameWrapper
+            onClick={onClick}
+            repeatBackgroundColor={repeatBackgroundColor[idx]}
+        >
             <div style={{ padding: 3, overflow: "hidden" }}>
-                {/* <ImageWrapper>
+                <ImageWrapper>
                     <Image
                         type="home"
                         src="https://i.ibb.co/0Z6FNN7/60pt.png"
                     />
-                </ImageWrapper> */}
+                </ImageWrapper>
                 <QfeedFrameInner>
                     <Text typo="Headline2b" color="light_qwhite">
                         {data.title}
@@ -46,11 +49,11 @@ const QfeedFrame = ({ idx, data, onClick }: Props) => {
     );
 };
 
-const QfeedFrameWrapper = styled.div<{ repeatColor: any }>`
+const QfeedFrameWrapper = styled.div<{ repeatBackgroundColor: any }>`
     height: calc(100% + 20px);
     // position: relative;
     border-radius: 10px;
-    background-color: ${({ repeatColor }) => repeatColor};
+    background-color: ${({ repeatBackgroundColor }) => repeatBackgroundColor};
 `;
 
 const QfeedFrameInner = styled.div`

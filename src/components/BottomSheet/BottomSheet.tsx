@@ -7,17 +7,28 @@ import {
     changeVisible
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { css, keyframes, styled } from "styled-components";
-import { colors, repeatColor } from "styles/theme";
+import { colors, repeatBackgroundColor } from "styles/theme";
 import Coin from "./children/Coin";
 import Frined from "./children/Friend";
 import Report from "./children/Report";
+import ReportFriend from "./children/ReportFriend";
 
 interface Props {
     children?: any;
 }
 
-const COMPONENT_HEIGHT = { report: 331, coin: 324 + 30, friend: 325 + 60 };
-const COMPONENT = { report: <Report />, coin: <Coin />, friend: <Frined /> };
+const COMPONENT_HEIGHT = {
+    report: 540 + 30,
+    reportFriend: 331,
+    coin: 324 + 30,
+    friend: 325 + 60
+};
+const COMPONENT = {
+    report: <Report />,
+    reportFriend: <ReportFriend />,
+    coin: <Coin />,
+    friend: <Frined />
+};
 
 const BottomSheet = forwardRef(function Div(
     { children, ...props }: Props,
@@ -171,7 +182,7 @@ const BottomSheetWrapper = styled.div<{
     color: ${({ color }) => color};
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx }) =>
-        selectedIdx ? repeatColor[selectedIdx] : colors.light_gray0};
+        selectedIdx ? repeatBackgroundColor[selectedIdx] : colors.light_gray0};
     z-index: 999;
 
     transition: transform 300ms ease-out;

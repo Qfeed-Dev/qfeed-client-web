@@ -54,6 +54,7 @@ export default function Page() {
                     currentIdx={currentIdx}
                     setCurrentIdx={setCurrentIdx}
                     count={COUNT}
+                    reportType="reportFriend"
                 />
 
                 <SlideLine percentage={percentage} />

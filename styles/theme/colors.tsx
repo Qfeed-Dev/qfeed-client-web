@@ -32,7 +32,7 @@ export const colors = {
 };
 
 // 12 개
-export const repeatColor = [
+export const repeatBackgroundColor = [
     colors.primary_qpink,
     colors.primary_qorange,
     colors.primary_qblue,
@@ -43,6 +43,15 @@ export const repeatColor = [
     colors.primary_qred,
     colors.primary_qorange,
     colors.primary_qblue,
+    colors.primary_qred,
+    colors.primary_qgreen
+];
+
+export const repeatQuestionColor = [
+    colors.primary_qyellow,
+    colors.primary_qpink,
+    colors.primary_qblue,
+    colors.primary_qorange,
     colors.primary_qred,
     colors.primary_qgreen
 ];
