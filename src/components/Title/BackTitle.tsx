@@ -1,12 +1,16 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { forwardRef } from "react";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
 import { Text } from "../common/Text";
 import Report from "../Report";
 import Spacing from "../Spacing";
 
-export default function BackTitle({ type = "primary", ...props }: any) {
+const BackTitle = forwardRef(function Div(
+    { children, onClick, type = "default", ...props }: any,
+    ref
+) {
     const router = useRouter();
     const handleClickBack = () => {
         router.back();
@@ -25,23 +29,34 @@ export default function BackTitle({ type = "primary", ...props }: any) {
                             {props.text}
                         </Text>
                     </Menu>
-                    {type === "primary" ? null : (
+                    {type !== "default" ? (
                         <>
-                            <Menu>
-                                <Text typo="Subtitle2b" color="light_qwhite">
-                                    {props.currentIdx + 1}/{props.count}
-                                </Text>
-                            </Menu>
+                            {type === "slide" ? (
+                                <Menu>
+                                    <Text
+                                        typo="Subtitle2b"
+                                        color="light_qwhite"
+                                    >
+                                        {props.currentIdx + 1}/{props.count}
+                                    </Text>
+                                </Menu>
+                            ) : (
+                                <div
+                                    style={{ width: "100%", margin: "0 16px" }}
+                                >
+                                    {children}
+                                </div>
+                            )}
                             <Menu>
                                 <Report />
                             </Menu>
                         </>
-                    )}
+                    ) : null}
                 </BackTitleInner>
             </BackTitleWrapper>
         </>
     );
-}
+});
 
 const BackTitleWrapper = styled.div`
     width: 100%;
@@ -66,6 +81,9 @@ const BackTitleInner = styled.div`
 
 const Menu = styled.div`
     //   width: 40px;
+    min-width: 24px;
     margin: auto 0;
     text-align: center;
 `;
+
+export default BackTitle;

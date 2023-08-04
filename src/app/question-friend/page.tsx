@@ -50,7 +50,7 @@ export default function Page() {
         <>
             <QuestionWrapper>
                 <BackTitle
-                    type="default"
+                    type="slide"
                     currentIdx={currentIdx}
                     setCurrentIdx={setCurrentIdx}
                     count={COUNT}

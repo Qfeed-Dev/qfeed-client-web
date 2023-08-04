@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import { colors } from "src/constants/colors";
 import { styled } from "styled-components";
@@ -10,15 +11,15 @@ export default function ProfileTitle() {
     return (
         <ProfileTitleWrapper>
             <ProfileTitleInner>
-                <div style={{ display: "flex" }}>
-                    <Menu>
-                        <Image
-                            type="default"
-                            size={35}
-                            src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                        />
-                    </Menu>
-                    <Menu>dlraud56</Menu>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <Image
+                        type="default"
+                        size={35}
+                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
+                    />
+                    <Text typo="Subtitle1b" style={{ marginLeft: 8 }}>
+                        dlraud56
+                    </Text>
                 </div>
                 <Menu>12명 응답</Menu>
             </ProfileTitleInner>
