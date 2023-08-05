@@ -79,8 +79,9 @@ const Selected = styled(Flex)`
 `;
 
 const Options = styled.ul`
+    max-height: 212px;
     border-radius: 0 0 10px 10px;
-    overflow: hidden;
+    overflow: scroll;
 `;
 
 const Option = styled.li`
