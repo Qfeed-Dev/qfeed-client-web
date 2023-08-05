@@ -9,9 +9,9 @@ const AlarmDatas = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 export default function Page() {
     return (
         <AlarmWrapper>
-            <BackTitle />
+            <BackTitle type="default" text="알림 페이지" />
 
-            <Spacing size={36} />
+            <Spacing size={8} />
             {AlarmDatas.map((data: any, idx: number) => {
                 return <NewAlarm key={idx} />;
             })}
@@ -21,5 +21,5 @@ export default function Page() {
 
 const AlarmWrapper = styled.div`
     height: 100%;
-    padding: 0 16px;
+    // padding: 0 16px;
 `;

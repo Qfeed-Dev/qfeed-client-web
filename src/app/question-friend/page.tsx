@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Button from "src/components/Button";
 import Input from "src/components/Input";
 import Friend from "src/components/pages/question/Friend";
@@ -6,8 +7,7 @@ import Question from "src/components/pages/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors } from "src/constants/colors";
-import { globalValue } from "src/constants/globalValue";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 
 const QuestionDatas = [
@@ -30,12 +30,34 @@ const QuestionDatas = [
 ];
 
 export default function Page() {
+    const COUNT = 10;
+    const [currentIdx, setCurrentIdx] = useState<number>(0);
+    const [percentage, setPercentage] = useState([
+        (currentIdx / COUNT) * 100,
+        ((currentIdx + 1) / COUNT) * 100
+    ]);
+
+    const clickButton = () => {
+        let newPercentage = percentage;
+        const newCurrentIdx = currentIdx + 1;
+        newPercentage[0] = (newCurrentIdx / COUNT) * 100;
+        newPercentage[1] = ((newCurrentIdx + 1) / COUNT) * 100;
+        setCurrentIdx(newCurrentIdx);
+        setPercentage(newPercentage);
+    };
+
     return (
         <>
             <QuestionWrapper>
-                <BackTitle />
+                <BackTitle
+                    type="slide"
+                    currentIdx={currentIdx}
+                    setCurrentIdx={setCurrentIdx}
+                    count={COUNT}
+                    reportType="reportFriend"
+                />
 
-                <SlideLine />
+                <SlideLine percentage={percentage} />
                 <Spacing size={50} />
                 <Question />
                 <Spacing size={38} />
@@ -45,7 +67,7 @@ export default function Page() {
 
                 <FriendWrapper>
                     {QuestionDatas.map((data: any, idx: number) => {
-                        return <Friend key={idx} />;
+                        return <Friend key={idx} idx={idx} />;
                     })}
                 </FriendWrapper>
                 <Spacing size={111 + 20} />
@@ -54,7 +76,9 @@ export default function Page() {
             <BottomButton>
                 <BottomInner>
                     <Button type="secondary">넘기기</Button>
-                    <Button type="primary">보내기</Button>
+                    <Button type="primary" onClick={clickButton}>
+                        보내기
+                    </Button>
                 </BottomInner>
             </BottomButton>
         </>
@@ -80,7 +104,7 @@ const BottomButton = styled.div`
     left: 0;
     bottom: 0;
 
-    background-color: ${colors.Qblack};
+    background-color: ${colors.light_qblack};
 `;
 
 const BottomInner = styled.div`

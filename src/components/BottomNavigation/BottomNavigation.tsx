@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import styled from "styled-components";
 
@@ -51,18 +51,19 @@ const BottomNavigationWrapper = styled.div`
 
     position: fixed;
     bottom: 0;
-    background-color: ${colors.Qblack};
+    background-color: ${colors.light_qblack};
+    z-index: 900;
 `;
 
 const BottomNavigationInner = styled.div`
     height: 100%;
     padding: 0 48px;
 
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
     display: flex;
     justify-content: space-between;
 
-    border-top: 1px solid ${colors.Qwhite};
+    border-top: 1px solid ${colors.light_qwhite};
 `;
 
 export default BottomNavigation;

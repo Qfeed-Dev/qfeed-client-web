@@ -1,6 +1,5 @@
 "use client";
 import { forwardRef } from "react";
-import { colors } from "src/constants/colors";
 import useBottomSheet from "src/hooks/useBottomSheet";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import {
@@ -8,23 +7,35 @@ import {
     changeVisible
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
+import { colors, repeatBackgroundColor } from "styles/theme";
 import Coin from "./children/Coin";
 import Frined from "./children/Friend";
 import Report from "./children/Report";
+import ReportFriend from "./children/ReportFriend";
 
 interface Props {
     children?: any;
 }
 
-const COMPONENT_HEIGHT = { report: 540 + 30, coin: 324 + 30, friend: 325 + 60 };
-const COMPONENT = { report: <Report />, coin: <Coin />, friend: <Frined /> };
+const COMPONENT_HEIGHT = {
+    report: 540 + 30,
+    reportFriend: 331,
+    coin: 324 + 30,
+    friend: 325 + 60
+};
+const COMPONENT = {
+    report: <Report />,
+    reportFriend: <ReportFriend />,
+    coin: <Coin />,
+    friend: <Frined />
+};
 
 const BottomSheet = forwardRef(function Div(
     { children, ...props }: Props,
     ref
 ) {
     const dispatch = useAppDispatch();
-    const { type, visible, actionDelay } = useAppSelector(
+    const { type, visible, actionDelay, selectedIdx } = useAppSelector(
         (state) => state.bottomSheet
     );
     const BOTTOMSHEET_HEIGHT = COMPONENT_HEIGHT[type];
@@ -83,9 +94,13 @@ const BottomSheet = forwardRef(function Div(
                 actionDelay={actionDelay}
                 visible={visible}
                 height={BOTTOMSHEET_HEIGHT}
+                selectedIdx={selectedIdx}
+                backgroundColor={
+                    type === "coin" ? colors.light_gray3 : colors.light_gray0
+                }
             >
                 <HandleWrapper>
-                    <Handle />
+                    <Handle selectedIdx={selectedIdx} />
                 </HandleWrapper>
                 <ContentWrapper ref={content}>{COMPONENT[type]}</ContentWrapper>
             </BottomSheetWrapper>
@@ -130,7 +145,7 @@ const Background = styled.div<{
             : css`
                   opacity: ${visible};
               `}
-    background-color: ${colors.Qwhite};
+    background-color: ${colors.line_black_50};
     z-index: 998;
 `;
 
@@ -142,19 +157,22 @@ const HandleWrapper = styled.div`
     background-color: transparent;
 `;
 
-const Handle = styled.div`
-    width: 56px;
+const Handle = styled.div<{ selectedIdx: number }>`
+    width: 73px;
     height: 4px;
     margin: auto;
     display: flex;
 
-    background-color: ${colors.Qblack};
+    background-color: ${({ selectedIdx }) =>
+        selectedIdx ? colors.line_white_50 : colors.light_gray1};
 `;
 
 const BottomSheetWrapper = styled.div<{
     height: number;
     actionDelay: number;
     visible: number;
+    selectedIdx: number;
+    backgroundColor: any;
 }>`
     width: 100%;
     height: ${({ height }) => height + "px"};
@@ -166,7 +184,9 @@ const BottomSheetWrapper = styled.div<{
     bottom: ${({ height }) => -height + "px"}; // -height
 
     color: ${({ color }) => color};
-    background-color: ${colors.Gray3};
+    border-radius: 10px 10px 0 0;
+    background-color: ${({ selectedIdx, backgroundColor }) =>
+        selectedIdx ? repeatBackgroundColor[selectedIdx] : backgroundColor};
     z-index: 999;
 
     transition: transform 300ms ease-out;

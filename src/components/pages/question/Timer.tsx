@@ -1,5 +1,5 @@
 "use client";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 
 export default function Timer() {
@@ -11,7 +11,7 @@ const TimerWrapper = styled.div`
     height: 90px;
     margin: auto;
 
-    background-color: ${colors.Qwhite};
+    background-color: ${colors.light_qwhite};
 `;
 
 const Menu = styled.div`
