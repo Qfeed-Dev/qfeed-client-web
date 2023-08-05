@@ -1,30 +1,35 @@
 "use client";
 import { forwardRef } from "react";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 import { match } from "ts-pattern";
+import { Text } from "../common/Text";
 
 interface Props {
+    onClick?: () => void;
     type: "primary" | "secondary" | "default";
     children?: any;
 }
 
 const Button = forwardRef(function Button(
-    { children, type = "primary", ...props }: Props,
+    { children, onClick, type = "primary", ...props }: Props,
     ref
 ) {
     return (
         <ButtonWrapper
+            onClick={onClick}
             color={match(type)
-                .with("primary", () => colors.Qblack)
-                .with("secondary", () => colors.Qwhite)
+                .with("primary", () => colors.light_qblack)
+                .with("secondary", () => colors.light_qwhite)
                 .exhaustive()}
             backgroundColor={match(type)
-                .with("primary", () => colors.Qwhite)
-                .with("secondary", () => colors.Qblack)
+                .with("primary", () => colors.light_qwhite)
+                .with("secondary", () => colors.light_qblack)
                 .exhaustive()}
         >
-            <Text>{children}</Text>
+            <Text typo="Subtitle1b" style={{ margin: "auto" }}>
+                {children}
+            </Text>
         </ButtonWrapper>
     );
 });
@@ -38,13 +43,9 @@ const ButtonWrapper = styled.div<{
     display: flex;
 
     color: ${({ color }) => color};
-    border: 1px solid ${colors.Qwhite};
+    border: 1px solid ${colors.light_qwhite};
+    border-radius: 10px;
     background-color: ${({ backgroundColor }) => backgroundColor};
-`;
-
-const Text = styled.div`
-    margin: auto;
-    display: flex;
 `;
 
 export default Button;

@@ -1,39 +1,71 @@
 "use client";
 import { forwardRef } from "react";
 import styled from "styled-components";
-import { colors } from "src/constants/colors";
-import Hr from "src/components/Hr";
+import { colors, repeatQuestionColor } from "styles/theme";
 
 interface Props {
+    idx: number;
     type: "primary" | "default";
     action?: boolean;
     children?: any;
 }
 
 const VoteButton = forwardRef(function Button(
-    { children, type = "primary", action = false, ...props }: Props,
+    { children, onClick, idx, type = "primary", action = null, ...props }: any,
     ref
 ) {
     return (
-        <VoteButtonWrapper>
+        <VoteButtonWrapper
+            onClick={onClick}
+            color={
+                props.top && !(type === "default")
+                    ? action
+                        ? colors.light_qblack
+                        : colors.light_qwhite
+                    : idx === props.selected
+                    ? colors.light_qblack
+                    : action
+                    ? colors.light_qwhite
+                    : colors.light_qwhite
+            }
+            backgroundColor={
+                props.top && !(type === "default")
+                    ? action
+                        ? repeatQuestionColor[idx % 6]
+                        : colors.line_white_70
+                    : idx === props.selected
+                    ? action
+                        ? colors.line_white_70
+                        : repeatQuestionColor[idx % 6]
+                    : action
+                    ? colors.line_black_50
+                    : colors.light_gray2
+            }
+        >
             <VoteButtonInner>
                 <TextWrapper>{children}</TextWrapper>
-                {action && <CheckWrapper>svg</CheckWrapper>}
+                {/* {type === "secondary" && idx === props.selected && (
+                    <CheckWrapper>svg</CheckWrapper>
+                )} */}
+                {type !== "primary" && idx === props.selected && (
+                    <CheckWrapper>svg</CheckWrapper>
+                )}
                 {type === "primary" && <NumberWrapper>Hi</NumberWrapper>}
             </VoteButtonInner>
         </VoteButtonWrapper>
     );
 });
 
-const VoteButtonWrapper = styled.div`
+const VoteButtonWrapper = styled.div<{ color: any; backgroundColor: any }>`
     width: 100%;
-    height: 47px;
+    height: 50px;
 
     display: flex;
 
     position: relative;
-    color: ${colors.Qwhite};
-    background-color: ${colors.Gray3};
+    color: ${({ color }) => color};
+    border-radius: 10px;
+    background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const VoteButtonInner = styled.div`
@@ -66,7 +98,7 @@ const NumberWrapper = styled.div`
     right: 0;
     transform: translate(0, -50%);
 
-    border-left: 1px solid ${colors.Qwhite};
+    border-left: 1px solid ${colors.light_qwhite};
 `;
 
 export default VoteButton;

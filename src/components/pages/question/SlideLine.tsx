@@ -1,5 +1,5 @@
 "use client";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 
 export default function SlideLine() {
@@ -13,7 +13,7 @@ const SlideLineWrapper = styled.div`
     position: absolute;
     top: 50px;
     left: 0;
-    background-color: ${colors.Qwhite};
+    background-color: ${colors.light_qwhite};
 `;
 
 const Menu = styled.div`

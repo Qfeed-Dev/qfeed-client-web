@@ -6,18 +6,31 @@ import Question from "src/components/pages/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors } from "src/constants/colors";
+import { useState } from "react";
+import Image from "src/components/Image";
 
 export default function Page() {
+    const [selected, setSelected] = useState<number>(-1);
+    const [type, setType] = useState<string>("default");
+    // const imageUrl = "https://i.ibb.co/0Z6FNN7/60pt.png";
+    const imageUrl = null;
+
     return (
         <>
-            <QuestionWrapper>
-                <BackTitle />
+            {imageUrl && (
+                <ImageWrapper>
+                    <Image type="background" src={imageUrl} />
+                </ImageWrapper>
+            )}
 
-                <SlideLine />
+            <QuestionWrapper>
+                <BackTitle type="profile" reportType="report">
+                    <ProfileTitle />
+                </BackTitle>
+
+                {/* <SlideLine /> */}
                 <Spacing size={4} />
 
-                <ProfileTitle />
                 <Spacing size={50} />
 
                 <Question />
@@ -25,11 +38,29 @@ export default function Page() {
 
             <BottomButton>
                 <BottomInner>
-                    <VoteButton type="default" action={true}>
-                        text
-                    </VoteButton>
-                    <VoteButton type="default">text</VoteButton>
-                    <VoteButton type="primary">text</VoteButton>
+                    {["", "", ""].map((data: any, idx: number) => {
+                        return (
+                            <VoteButton
+                                key={idx}
+                                idx={idx}
+                                type={type}
+                                top={idx === 0}
+                                selected={selected}
+                                action={imageUrl}
+                                onClick={() => {
+                                    if (idx === selected) {
+                                        setSelected(-1); // default
+                                    } else {
+                                        setSelected(idx);
+                                    }
+                                }}
+                            >
+                                text
+                            </VoteButton>
+                            // default
+                            // primary, top
+                        );
+                    })}
                 </BottomInner>
                 <Spacing size={52} />
             </BottomButton>
@@ -37,15 +68,16 @@ export default function Page() {
     );
 }
 
+const ImageWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+`;
+
 const QuestionWrapper = styled.div`
     height: 100%;
     padding: 0 16px;
-`;
-
-const QuestionInner = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 14px 12px;
 `;
 
 const BottomButton = styled.div`
@@ -55,7 +87,7 @@ const BottomButton = styled.div`
     left: 0;
     bottom: 0;
 
-    background-color: ${colors.Qblack};
+    background-color: transparent;
 `;
 
 const BottomInner = styled.div`

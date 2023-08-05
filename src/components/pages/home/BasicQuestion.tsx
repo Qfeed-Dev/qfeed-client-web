@@ -1,6 +1,6 @@
 "use client";
 import Spacing from "src/components/Spacing";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 import { match } from "ts-pattern";
 
@@ -16,8 +16,8 @@ const BasicQuestion = ({ type = "pick-me", ...props }: Props) => {
             <BasicQuestionWrapper
                 onClick={props.onClick}
                 color={match(type)
-                    .with("pick-me", () => colors.Qwhite)
-                    .with("question", () => colors.Qred)
+                    .with("pick-me", () => colors.light_qwhite)
+                    .with("question", () => colors.primary_qred)
                     .exhaustive()}
             >
                 <BasicQuestionInner>
