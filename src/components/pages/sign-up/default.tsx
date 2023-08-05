@@ -7,6 +7,7 @@ import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/navigation-top";
 import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
 import { useInput } from "src/hooks/common/useInput";
+import { useToggle } from "src/hooks/sign-up/useToggle";
 
 const SignIn = () => {
     const router = useRouter();
@@ -16,6 +17,17 @@ const SignIn = () => {
     const phone = useInput();
     const email = useInput();
     const nickname = useInput();
+
+    const gender = useToggle("여성");
+
+    console.log({
+        name: name.value,
+        gender: gender.value,
+        birthday: birthday.value,
+        phone: phone.value,
+        email: email.value,
+        nickname: nickname.value
+    });
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -30,7 +42,10 @@ const SignIn = () => {
                     label="이름"
                     placeholder="ex) 황채린"
                 />
-                <ButtonGenderSelect />
+                <ButtonGenderSelect
+                    value={gender.value}
+                    onClick={gender.handleChangeState}
+                />
                 <InputLine
                     value={birthday.value}
                     onChange={birthday.handleChangeInput}
