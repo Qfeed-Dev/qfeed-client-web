@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import styled from "styled-components";
 import Text from "../common/Text";
 import Flex from "../common/Flex";
@@ -22,22 +21,25 @@ const BUTTON_COLOR = {
     }
 };
 
-const ButtonGenderSelect = () => {
-    const [selected, setSelected] = useState<string>("여성");
+interface toggleProps {
+    value: string;
+    onClick: any;
+}
 
+const ButtonGenderSelect = ({ ...props }: toggleProps) => {
     return (
         <Flex justify="start" gap={24}>
             <Text typo="Subtitle1r">성별</Text>
             <ButtonWrapper>
                 <Button
-                    state={selected === "여성" ? "active" : "disabled"}
-                    onClick={() => setSelected("여성")}
+                    state={props.value === "여성" ? "active" : "disabled"}
+                    onClick={props.onClick}
                 >
                     <Text typo="Subtitle1r">여성</Text>
                 </Button>
                 <Button
-                    state={selected === "남성" ? "active" : "disabled"}
-                    onClick={() => setSelected("남성")}
+                    state={props.value === "남성" ? "active" : "disabled"}
+                    onClick={props.onClick}
                 >
                     <Text typo="Subtitle1r">남성</Text>
                 </Button>

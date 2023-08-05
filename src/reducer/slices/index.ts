@@ -3,6 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "redux";
 import bottomSheetSlice from "./bottomSheet/bottomSheetSlice";
 import organizationSlice from "./organization/organizationSlice";
+import userSlice from "./user/userSlice";
 
 const rootReducer = (state: any, action: PayloadAction<any>) => {
     switch (action.type) {
@@ -14,7 +15,8 @@ const rootReducer = (state: any, action: PayloadAction<any>) => {
         default: {
             const combineReducer = combineReducers({
                 bottomSheet: bottomSheetSlice,
-                organization: organizationSlice
+                organization: organizationSlice,
+                user: userSlice
             });
             return combineReducer(state, action);
         }
