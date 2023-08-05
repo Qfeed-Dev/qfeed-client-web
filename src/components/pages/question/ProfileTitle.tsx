@@ -2,8 +2,8 @@
 import { useRouter } from "next/navigation";
 import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 
 export default function ProfileTitle() {
     const router = useRouter();
@@ -40,7 +40,7 @@ const ProfileTitleInner = styled.div`
 
     display: flex;
     justify-content: space-between;
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
 `;
 
 const Menu = styled.div`

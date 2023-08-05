@@ -1,6 +1,9 @@
 "use client";
+import StyledComponentsRegistry from "../lib/registry";
+import ReactQueryProvider from "../lib/react-query-registry";
+import "../../styles/globals.css";
+import Layout from "src/components/layout/Layout";
 import { Provider } from "react-redux";
-import "./App.scss";
 import Head from "./head";
 import App from "./App";
 import { store } from "src/store";
@@ -13,10 +16,14 @@ export default function RootLayout({
     return (
         <html>
             <Head />
-            <body>
-                <Provider store={store}>
-                    <App>{children}</App>
-                </Provider>
+            <body style={{ background: "#131313" }}>
+                <StyledComponentsRegistry>
+                    <Provider store={store}>
+                        <ReactQueryProvider>
+                            <App>{children}</App>
+                        </ReactQueryProvider>
+                    </Provider>
+                </StyledComponentsRegistry>
             </body>
         </html>
     );

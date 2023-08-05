@@ -1,5 +1,5 @@
 "use client";
-import { css, styled } from "styled-components";
+import styled, { css } from "styled-components";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import Textarea from "src/components/Textarea";

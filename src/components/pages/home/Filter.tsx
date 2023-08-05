@@ -1,8 +1,8 @@
 "use client";
 import { Text } from "src/components/common/Text";
 import Hr from "src/components/Hr";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 import { match } from "ts-pattern";
 
 interface Props {}
@@ -34,7 +34,7 @@ const FilterWrapper = styled.div`
 `;
 
 const Menu = styled.div`
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
 `;
 
 export default Filter;

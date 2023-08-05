@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import useBottomSheet from "src/hooks/useBottomSheet";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { Text } from "../common/Text";
 
 interface Props {}

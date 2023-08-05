@@ -1,5 +1,5 @@
 "use client";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { match } from "ts-pattern";
 
 interface Props {

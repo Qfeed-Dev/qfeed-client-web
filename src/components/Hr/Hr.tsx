@@ -1,6 +1,6 @@
 "use client";
-import { css, styled } from "styled-components";
 import { colors } from "styles/theme";
+import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 
 interface Props {

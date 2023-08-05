@@ -1,7 +1,7 @@
 "use client";
 import { Text } from "src/components/common/Text";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 
 export default function Question() {
     return (
@@ -15,6 +15,6 @@ export default function Question() {
 }
 
 const QuestionWrapper = styled.div`
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
     text-align: center;
 `;

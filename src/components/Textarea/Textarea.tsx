@@ -1,6 +1,6 @@
 "use client";
-import { styled } from "styled-components";
 import { colors } from "styles/theme";
+import styled from "styled-components";
 import { Text } from "../common/Text";
 
 interface Props {

@@ -1,12 +1,11 @@
 "use client";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import VoteButton from "src/components/Button/VoteButton";
 import ProfileTitle from "src/components/pages/question/ProfileTitle";
 import Question from "src/components/pages/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors } from "src/constants/colors";
 import { useState } from "react";
 import Image from "src/components/Image";
 

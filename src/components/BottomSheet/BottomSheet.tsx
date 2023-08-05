@@ -6,7 +6,7 @@ import {
     changeAction,
     changeVisible
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { css, keyframes, styled } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { colors, repeatBackgroundColor } from "styles/theme";
 import Coin from "./children/Coin";
 import Frined from "./children/Friend";
