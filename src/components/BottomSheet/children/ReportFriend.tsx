@@ -2,7 +2,7 @@
 import { Text } from "src/components/common/Text";
 import Hr from "src/components/Hr";
 import Spacing from "src/components/Spacing";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 interface Props {}
 

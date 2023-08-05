@@ -1,6 +1,6 @@
 "use client";
 import { Text } from "src/components/common/Text";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { repeatCoinColor } from "styles/theme";
 
 interface Props {}

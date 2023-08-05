@@ -6,7 +6,7 @@ import Spacing from "src/components/Spacing";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { colors, repeatBackgroundColor } from "styles/theme";
 
 export default function Friend({ idx }: any) {

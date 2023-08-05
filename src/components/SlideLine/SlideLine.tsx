@@ -1,5 +1,5 @@
 "use client";
-import { keyframes, styled } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "styles/theme";
 
 export default function SlideLine({ percentage }: any) {

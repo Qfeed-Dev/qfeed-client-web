@@ -1,6 +1,6 @@
 "use client";
 import { colors, repeatQuestionColor, typo } from "styles/theme";
-import { css, styled } from "styled-components";
+import styled,{css} from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 

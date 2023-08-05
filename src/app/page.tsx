@@ -1,14 +1,14 @@
 "use client";
 import { Metadata } from "next";
 import { useRouter } from "next/navigation";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import BottomNavigation from "src/components/BottomNavigation";
 import BasicQuestion from "src/components/pages/home/BasicQuestion";
 import Filter from "src/components/pages/home/Filter";
 import HomeTitle from "src/components/pages/home/HomeTitle";
 import QfeedFrame from "src/components/pages/home/QfeedFrame";
 import Spacing from "src/components/Spacing";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import { globalValue } from "src/constants/globalValue";
 import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
@@ -102,6 +102,6 @@ const PlusButton = styled.div`
     bottom: 64px;
 
     border-radius: 50%;
-    background-color: ${colors.Qwhite};
+    background-color: ${colors.light_qwhite};
     z-index: 999;
 `;

@@ -2,7 +2,7 @@
 import NewAlarm from "src/components/pages/alarm/NewAlarm";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const AlarmDatas = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 

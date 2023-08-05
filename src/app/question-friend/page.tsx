@@ -7,8 +7,8 @@ import Question from "src/components/pages/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 
 const QuestionDatas = [
     {},
@@ -104,7 +104,7 @@ const BottomButton = styled.div`
     left: 0;
     bottom: 0;
 
-    background-color: ${colors.Qblack};
+    background-color: ${colors.light_qblack};
 `;
 
 const BottomInner = styled.div`

@@ -1,7 +1,7 @@
 import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
-import { css, styled } from "styled-components";
+import styled,{css} from "styled-components";
 import { colors } from "styles/theme";
 
 export default function NewAlarm() {

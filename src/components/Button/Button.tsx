@@ -1,7 +1,7 @@
 "use client";
 import { forwardRef } from "react";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 
@@ -19,12 +19,12 @@ const Button = forwardRef(function Button(
         <ButtonWrapper
             onClick={onClick}
             color={match(type)
-                .with("primary", () => colors.Qblack)
-                .with("secondary", () => colors.Qwhite)
+                .with("primary", () => colors.light_qblack)
+                .with("secondary", () => colors.light_qwhite)
                 .exhaustive()}
             backgroundColor={match(type)
-                .with("primary", () => colors.Qwhite)
-                .with("secondary", () => colors.Qblack)
+                .with("primary", () => colors.light_qwhite)
+                .with("secondary", () => colors.light_qblack)
                 .exhaustive()}
         >
             <Text typo="Subtitle1b" style={{ margin: "auto" }}>
@@ -43,7 +43,7 @@ const ButtonWrapper = styled.div<{
     display: flex;
 
     color: ${({ color }) => color};
-    border: 1px solid ${colors.Qwhite};
+    border: 1px solid ${colors.light_qwhite};
     border-radius: 10px;
     background-color: ${({ backgroundColor }) => backgroundColor};
 `;

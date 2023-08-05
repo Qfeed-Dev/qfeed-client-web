@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 import { colors, repeatQuestionColor } from "styles/theme";
 
 interface Props {
@@ -98,7 +98,7 @@ const NumberWrapper = styled.div`
     right: 0;
     transform: translate(0, -50%);
 
-    border-left: 1px solid ${colors.Qwhite};
+    border-left: 1px solid ${colors.light_qwhite};
 `;
 
 export default VoteButton;

@@ -3,15 +3,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 
 const makeStore = () =>
-  configureStore({
-    reducer: rootReducer,
-    devTools: process.env.NODE_ENV !== "production",
-  });
+    configureStore({
+        reducer: rootReducer,
+        devTools: process.env.NODE_ENV !== "production"
+    });
 
 export const store = makeStore();
 
 export const wrapper = createWrapper<AppStore>(makeStore, {
-  // debug: process.env.NODE_ENV === 'development',
+    // debug: process.env.NODE_ENV === 'development',
 });
 
 export type AppStore = ReturnType<typeof makeStore>;

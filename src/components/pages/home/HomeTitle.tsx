@@ -1,11 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Image from "src/components/Image";
-import { colors } from "src/constants/colors";
+import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const HomeTitle = ({}: {}) => {
     const router = useRouter();
@@ -60,7 +60,7 @@ const HomeTitleWrapper = styled.div`
 const Menu = styled.div`
     margin: auto 0;
     display: flex;
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
 `;
 
 const ImageWrapper = styled.div`
@@ -69,7 +69,7 @@ const ImageWrapper = styled.div`
     display: flex;
 
     border-radius: 50%;
-    background-color: ${colors.Qwhite};
+    background-color: ${colors.light_qwhite};
 `;
 
 export default HomeTitle;

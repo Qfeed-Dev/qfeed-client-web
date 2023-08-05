@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { forwardRef } from "react";
-import { colors } from "src/constants/colors";
-import { styled } from "styled-components";
+import { colors } from "styles/theme";
+import styled from "styled-components";
 import { Text } from "../common/Text";
 import Report from "../Report";
 import Spacing from "../Spacing";
@@ -76,7 +76,7 @@ const BackTitleInner = styled.div`
 
     display: flex;
     justify-content: space-between;
-    color: ${colors.Qwhite};
+    color: ${colors.light_qwhite};
 `;
 
 const Menu = styled.div`
