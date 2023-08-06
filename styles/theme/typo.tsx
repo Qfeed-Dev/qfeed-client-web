@@ -62,7 +62,7 @@ export const typo = {
     Caption1r: css`
         font-family: "pretendard";
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         font-size: ${calcRem(12)};
         line-height: 150%;
     `,
