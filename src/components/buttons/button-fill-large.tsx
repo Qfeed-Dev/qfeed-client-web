@@ -28,7 +28,7 @@ const BUTTON_COLOR = {
 };
 
 const ButtonFillLarge = ({
-    state = "active",
+    state = "disabled",
     text = "",
     bottom = true,
     onClick

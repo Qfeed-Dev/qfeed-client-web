@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
@@ -32,6 +32,23 @@ const SignIn = () => {
     useEffect(() => {
         isDupNickname.refetch();
     }, [nickname.value]);
+
+    const User = {
+        name: name.value,
+        gender: gender.value,
+        birthday: birthday.value,
+        phone: phone.value,
+        email: email.value,
+        nickname: nickname.value,
+        isOk: isDupNickname.data?.abailable
+    };
+
+    const isActive = (user: any) => {
+        const result = Object.values(user).every(
+            (userItem) => userItem && userItem !== null && userItem !== ""
+        );
+        return result;
+    };
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -86,7 +103,7 @@ const SignIn = () => {
                     />
                 </Flex>
                 <ButtonFillLarge
-                    state="disabled"
+                    state={isActive(User) ? "active" : "disabled"}
                     text="다음"
                     onClick={() => router.push("/sign-up/organization")}
                 />
