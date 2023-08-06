@@ -9,6 +9,8 @@ export interface InputProps {
     value: string;
     placeholder?: string;
     onChange: any;
+    message?: string;
+    isError?: boolean;
 }
 
 const InputLine = ({ ...props }: InputProps) => {
@@ -22,6 +24,14 @@ const InputLine = ({ ...props }: InputProps) => {
                     onChange={props.onChange}
                 />
             </InputWrapper>
+            {props.value && (
+                <Text
+                    typo="Caption1r"
+                    color={props.isError ? "primary_qred" : "primary_qgreen"}
+                >
+                    {props.message}
+                </Text>
+            )}
         </Flex>
     );
 };
@@ -29,6 +39,7 @@ const InputLine = ({ ...props }: InputProps) => {
 const InputWrapper = styled.div`
     width: 100%;
     padding: 1rem 0;
+    margin-bottom: 0.5rem;
 
     display: flex;
     align-items: center;
