@@ -91,11 +91,8 @@ const SignIn = () => {
                         onChange={nickname.handleChangeInput}
                         label="닉네임"
                         placeholder="ex) qwerk11"
-                        message={
-                            isDupNickname.data?.abailable
-                                ? nicknameMsg.RIGHT
-                                : nicknameMsg.DUPLICATE
-                        }
+                        message={isDupNickname.data?.message}
+                        isError={!isDupNickname.data?.abailable}
                     />
                 </Flex>
                 <ButtonFillLarge
