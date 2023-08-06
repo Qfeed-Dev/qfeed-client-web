@@ -23,7 +23,7 @@ const University = () => {
             <SelectBox
                 label="학번"
                 options={SCHOOL_YEAR_OPTIONS}
-                defaultValue="20학번"
+                defaultValue="23학번"
             />
         </>
     );

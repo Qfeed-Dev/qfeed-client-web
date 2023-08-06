@@ -9,12 +9,19 @@ import ElementarySchool from "src/components/sign-up/elementary-school";
 import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
+import { Route } from "src/constants/Route";
 
 import { useAppSelector } from "src/hooks/useReduxHooks";
 
 const Organization = () => {
     const router = useRouter();
     const selected = useAppSelector((state) => state.organization.selected);
+
+    const handleClickRoute = () => {
+        if (selected === "중/고등학생") return Route.MIDHIGH;
+        else if (selected === "대학생") return Route.UNIVERSITY;
+        else return Route.COMPLETE;
+    };
 
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
@@ -34,7 +41,7 @@ const Organization = () => {
             <ButtonFillLarge
                 state="disabled"
                 text="다음"
-                onClick={() => router.push("/sign-up/complete")}
+                onClick={() => router.push(handleClickRoute())}
             />
         </Flex>
     );

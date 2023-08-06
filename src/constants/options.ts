@@ -11,6 +11,16 @@ export const GRADUATE_OPTIONS = [
 ];
 
 export const SCHOOL_YEAR_OPTIONS = [
+    { value: "10", name: "10학번" },
+    { value: "11", name: "11학번" },
+    { value: "12", name: "12학번" },
+    { value: "13", name: "13학번" },
+    { value: "14", name: "14학번" },
+    { value: "15", name: "15학번" },
+    { value: "16", name: "16학번" },
+    { value: "17", name: "17학번" },
+    { value: "18", name: "18학번" },
+    { value: "19", name: "19학번" },
     { value: "20", name: "20학번" },
     { value: "21", name: "21학번" },
     { value: "22", name: "22학번" },

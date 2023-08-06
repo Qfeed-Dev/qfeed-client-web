@@ -1,15 +1,18 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useAuth } from "src/hooks/common/useAuth";
+import { useEffect } from "react";
+import { useAuth } from "src/hooks/account/useAuth";
 
 const KakaoLoginCallback = () => {
     const searchParams = useSearchParams();
     const code = searchParams.get("code");
     const { kakaoMutation } = useAuth();
 
-    if (code) {
-        kakaoMutation.mutate(code);
-    }
+    useEffect(() => {
+        if (code) {
+            kakaoMutation.mutate(code);
+        }
+    }, [code]);
 
     return <></>;
 };
