@@ -10,7 +10,7 @@ on:
     push:
         branches: [develop]
 jobs:
-    build:
+    deploy:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
