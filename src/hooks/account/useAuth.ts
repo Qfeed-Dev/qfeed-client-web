@@ -4,20 +4,22 @@ import { setAccessToken } from "src/utils/cookie";
 import { qFeedAxios } from "src/apis/axios";
 
 const getAccessToken = async (code: string) => {
-    const response = await qFeedAxios.get(
-        `/account/kakao/callback?code=${code}`
-    );
+    const response = await qFeedAxios.get("/account/kakao/login", {
+        params: {
+            code: code,
+            redirectUrl: process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI
+        }
+    });
     return response.data;
 };
 
 export const useAuth = () => {
     const router = useRouter();
 
-    // 로그인
     const kakaoMutation = useMutation(getAccessToken, {
-        onSuccess: async (data: any) => {
+        onSuccess: (data: any) => {
             setAccessToken(data.accessToken);
-            router.push("/");
+            router.push("/sign-up/default");
         },
         onError: (error: any) => {
             alert(error);

@@ -1,6 +1,6 @@
 "use client";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useState } from "react";
 import Flex from "../common/Flex";
 import Text from "../common/Text";
@@ -10,6 +10,8 @@ import {
     changeGraduate,
     changeOrganization
 } from "src/reducer/slices/organization/organizationSlice";
+import { motion } from "framer-motion";
+import { dropdown } from "src/constants/animation";
 
 export interface SelectBoxProps {
     label: string;
@@ -19,7 +21,7 @@ export interface SelectBoxProps {
 }
 
 const SelectBox = (props: SelectBoxProps) => {
-    const [open, setOpen] = useState<Boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
     const [currentValue, setCurrentValue] = useState(
         props.defaultValue || props.value
     );
@@ -33,33 +35,36 @@ const SelectBox = (props: SelectBoxProps) => {
                     <Text typo="Subtitle1r">{currentValue}</Text>
                     <div>down</div>
                 </Selected>
-                <Options>
-                    {open &&
-                        props.options.map((option: any) => (
-                            <Option
-                                key={option.value}
-                                onClick={() => {
-                                    setCurrentValue(option.name);
-                                    if (props.label === "소속") {
-                                        dispatch(
-                                            changeOrganization({
-                                                type: "organization",
-                                                value: option.name
-                                            })
-                                        );
-                                    } else if (props.label === "졸업 학교") {
-                                        dispatch(
-                                            changeGraduate({
-                                                type: "organization",
-                                                value: option.name
-                                            })
-                                        );
-                                    }
-                                }}
-                            >
-                                <Text typo="Subtitle1r">{option.name}</Text>
-                            </Option>
-                        ))}
+                <Options
+                    initial="hide"
+                    animate={open ? "show" : "hide"}
+                    variants={dropdown}
+                >
+                    {props.options.map((option: any) => (
+                        <Option
+                            key={option.value}
+                            onClick={() => {
+                                setCurrentValue(option.name);
+                                if (props.label === "소속") {
+                                    dispatch(
+                                        changeOrganization({
+                                            type: "organization",
+                                            value: option.name
+                                        })
+                                    );
+                                } else if (props.label === "졸업 학교") {
+                                    dispatch(
+                                        changeGraduate({
+                                            type: "organization",
+                                            value: option.name
+                                        })
+                                    );
+                                }
+                            }}
+                        >
+                            <Text typo="Subtitle1r">{option.name}</Text>
+                        </Option>
+                    ))}
                 </Options>
             </Select>
         </Flex>
@@ -68,6 +73,7 @@ const SelectBox = (props: SelectBoxProps) => {
 
 const Select = styled.div`
     width: 100%;
+    position: relative;
 `;
 
 const Selected = styled(Flex)`
@@ -78,9 +84,10 @@ const Selected = styled(Flex)`
     border-bottom: 1.5px solid ${colors.light_gray3};
 `;
 
-const Options = styled.ul`
+const Options = styled(motion.ul)`
+    max-height: 212px;
     border-radius: 0 0 10px 10px;
-    overflow: hidden;
+    overflow: scroll;
 `;
 
 const Option = styled.li`
