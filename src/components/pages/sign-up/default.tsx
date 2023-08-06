@@ -16,6 +16,7 @@ import {
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
 import { useInput } from "src/hooks/common/useInput";
 import { useToggle } from "src/hooks/sign-up/useToggle";
+import { useIsActive } from "src/hooks/common/useIsActive";
 
 const SignIn = () => {
     const router = useRouter();
@@ -43,15 +44,7 @@ const SignIn = () => {
         isOk: isDupNickname.data?.abailable
     };
 
-    const isActive = useCallback(
-        (user: any) => {
-            const result = Object.values(user).every(
-                (userItem) => userItem && userItem !== null && userItem !== ""
-            );
-            return result;
-        },
-        [User]
-    );
+    const { isActive } = useIsActive(User);
 
     return (
         <Flex direction="column" justify="start" gap={24}>
