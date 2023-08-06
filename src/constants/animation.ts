@@ -1,3 +1,5 @@
+import { theme } from "styles/theme";
+
 export const dropdown = {
     show: {
         opacity: 1,
@@ -16,5 +18,22 @@ export const dropdown = {
         transitionEnd: {
             display: "none"
         }
+    }
+};
+
+export const changeBtnColor = {
+    disabled: {
+        transition: {
+            duration: 0.2
+        },
+        color: theme.colors.light_qwhite,
+        background: theme.colors.light_gray2
+    },
+    active: {
+        transition: {
+            duration: 0.2
+        },
+        color: theme.colors.light_qblack,
+        background: theme.colors.light_qwhite
     }
 };
