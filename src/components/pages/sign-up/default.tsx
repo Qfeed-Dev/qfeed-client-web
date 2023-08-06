@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
@@ -43,12 +43,15 @@ const SignIn = () => {
         isOk: isDupNickname.data?.abailable
     };
 
-    const isActive = (user: any) => {
-        const result = Object.values(user).every(
-            (userItem) => userItem && userItem !== null && userItem !== ""
-        );
-        return result;
-    };
+    const isActive = useCallback(
+        (user: any) => {
+            const result = Object.values(user).every(
+                (userItem) => userItem && userItem !== null && userItem !== ""
+            );
+            return result;
+        },
+        [User]
+    );
 
     return (
         <Flex direction="column" justify="start" gap={24}>
