@@ -12,6 +12,11 @@ import { useInput } from "src/hooks/common/useInput";
 import { useToggle } from "src/hooks/sign-up/useToggle";
 import { useIsActive } from "src/hooks/common/useIsActive";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
+import {
+    validEmail,
+    validBirth,
+    validPhone
+} from "src/hooks/common/useCheckValidation";
 
 const SignIn = () => {
     const router = useRouter();
@@ -65,21 +70,36 @@ const SignIn = () => {
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
                     placeholder="ex) 1997.04.02"
-                    message={birthMsg.RIGHT}
+                    message={
+                        validBirth(birthday.value)
+                            ? birthMsg.RIGHT
+                            : birthMsg.WRONG
+                    }
+                    isError={!validBirth(birthday.value)}
                 />
                 <InputLine
                     value={phone.value}
                     onChange={phone.handleChangeInput}
                     label="휴대폰 번호"
                     placeholder="ex) 010-5016-5886"
-                    message={phoneMsg.RIGHT}
+                    message={
+                        validPhone(phone.value)
+                            ? phoneMsg.RIGHT
+                            : phoneMsg.WRONG
+                    }
+                    isError={!validPhone(phone.value)}
                 />
                 <InputLine
                     value={email.value}
                     onChange={email.handleChangeInput}
                     label="이메일"
                     placeholder="ex) ghkdcofls42@naver.com"
-                    message={emailMsg.RIGHT}
+                    message={
+                        validEmail(email.value)
+                            ? emailMsg.RIGHT
+                            : emailMsg.WRONG
+                    }
+                    isError={!validEmail(email.value)}
                 />
                 <Flex align="end" gap={12}>
                     <InputLine

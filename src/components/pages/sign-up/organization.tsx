@@ -10,6 +10,7 @@ import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
 import { Route } from "src/constants/Route";
+import { useIsActive } from "src/hooks/common/useIsActive";
 
 import { useAppSelector } from "src/hooks/useReduxHooks";
 
@@ -22,6 +23,8 @@ const Organization = () => {
         else if (selected === "대학생") return Route.UNIVERSITY;
         else return Route.COMPLETE;
     };
+
+    // const { isActive } = useIsActive();
 
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
@@ -39,7 +42,7 @@ const Organization = () => {
             {selected === "대학생" && <University />}
             {selected === "졸업생" && <Graduate />}
             <ButtonFillLarge
-                state="disabled"
+                // state={isActive(User) ? "active" : "disabled"}
                 text="다음"
                 onClick={() => router.push(handleClickRoute())}
             />
