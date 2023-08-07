@@ -1,22 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/navigation-top";
 import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
-import {
-    birthMsg,
-    emailMsg,
-    nameMsg,
-    nicknameMsg,
-    phoneMsg
-} from "src/constants/messages";
+import { birthMsg, emailMsg, nameMsg, phoneMsg } from "src/constants/messages";
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
 import { useInput } from "src/hooks/common/useInput";
 import { useToggle } from "src/hooks/sign-up/useToggle";
 import { useIsActive } from "src/hooks/common/useIsActive";
+import { useUserMutation } from "src/hooks/account/useUserMutation";
 
 const SignIn = () => {
     const router = useRouter();
@@ -45,6 +40,7 @@ const SignIn = () => {
     };
 
     const { isActive } = useIsActive(User);
+    const { userMutation } = useUserMutation();
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -98,7 +94,20 @@ const SignIn = () => {
                 <ButtonFillLarge
                     state={isActive(User) ? "active" : "disabled"}
                     text="다음"
-                    onClick={() => router.push("/sign-up/organization")}
+                    onClick={() => {
+                        userMutation.mutate({
+                            nickname: nickname.value,
+                            schoolType: "",
+                            schoolName: "",
+                            grade: "",
+                            class: "",
+                            gender: gender.value,
+                            birthday: birthday.value,
+                            profileImage: "",
+                            idCardImage: ""
+                        });
+                        router.push("/sign-up/organization");
+                    }}
                 />
             </Flex>
         </Flex>
