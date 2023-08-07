@@ -20,7 +20,7 @@ interface User {
 const getUser = async () => {
     const response = await qFeedAxios.get("/account/me", {
         headers: {
-            JWT: getCookie()
+            Authorization: `Bearer ${getCookie()}`
         }
     });
     return response.data;
