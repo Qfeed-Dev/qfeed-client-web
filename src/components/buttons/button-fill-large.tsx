@@ -25,7 +25,7 @@ const ButtonFillLarge = ({
             initial="disabled"
             animate={state}
             variants={changeBtnColor}
-            bottom={bottom}
+            $bottom={bottom}
             onClick={onClick}
         >
             <Text typo="Subtitle2b">{text}</Text>
@@ -34,12 +34,12 @@ const ButtonFillLarge = ({
 };
 
 const ButtonWrapper = styled(motion.button)<{
-    bottom: boolean;
+    $bottom: boolean;
 }>`
     width: 100%;
     min-height: 52px;
     padding: 0.88rem 3.75rem;
-    margin-bottom: ${({ bottom }) => bottom && "8rem"};
+    margin-bottom: ${({ $bottom }) => $bottom && "8rem"};
 
     text-align: center;
     border-radius: 10px;
