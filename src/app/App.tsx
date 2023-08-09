@@ -9,10 +9,8 @@ export default function App({ children }: { children: React.ReactNode }) {
 
     return (
         <StyledComponentsRegistry>
-            <Layout>
-                {children}
-                {visible && <BottomSheet />}
-            </Layout>
+            <Layout>{children}</Layout>
+            {visible ? <BottomSheet /> : null}
         </StyledComponentsRegistry>
     );
 }
