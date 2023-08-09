@@ -1,6 +1,6 @@
 "use client";
 import { colors, repeatQuestionColor, typo } from "styles/theme";
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 
@@ -14,14 +14,14 @@ const Input = ({ type = "question-friend", ...props }: any) => {
             radius={match(type)
                 .with("question-friend", () => 48)
                 .with("add-question", () => 10)
-                .exhaustive()}
+                .otherwise(() => 48)}
             backgroundColor={match(type)
                 .with("question-friend", () => colors.light_gray3)
                 .with(
                     "add-question",
                     () => repeatQuestionColor[5 - (props.idx % 6)]
                 )
-                .exhaustive()}
+                .otherwise(() => () => colors.light_gray3)}
         >
             <InputInner>
                 <InputBox
@@ -29,18 +29,18 @@ const Input = ({ type = "question-friend", ...props }: any) => {
                     color={match(type)
                         .with("question-friend", () => colors.light_qwhite)
                         .with("add-question", () => colors.light_qblack)
-                        .exhaustive()}
+                        .otherwise(() => colors.light_qwhite)}
                     placeholderColor={match(type)
                         .with("question-friend", () => colors.light_gray2)
                         .with("add-question", () => colors.light_qblack)
-                        .exhaustive()}
+                        .otherwise(() => colors.light_qwhite)}
                     backgroundColor={match(type)
                         .with("question-friend", () => colors.light_gray3)
                         .with(
                             "add-question",
                             () => repeatQuestionColor[5 - (props.idx % 6)]
                         )
-                        .exhaustive()}
+                        .otherwise(() => colors.light_qwhite)}
                 />
                 <div style={{ display: "flex", margin: "auto" }}>
                     {type === "add-question" && (
