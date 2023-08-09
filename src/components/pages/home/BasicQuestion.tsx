@@ -19,7 +19,7 @@ const BasicQuestion = ({ type = "pick-me", ...props }: Props) => {
                 color={match(type)
                     .with("pick-me", () => colors.light_qwhite)
                     .with("question", () => colors.primary_qred)
-                    .exhaustive()}
+                    .otherwise(() => colors.light_qwhite)}
             >
                 <BasicQuestionInner>
                     <Text typo="Headline2b" color="light_qblack">

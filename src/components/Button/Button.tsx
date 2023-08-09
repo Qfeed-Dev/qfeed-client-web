@@ -21,11 +21,11 @@ const Button = forwardRef(function Button(
             color={match(type)
                 .with("primary", () => colors.light_qblack)
                 .with("secondary", () => colors.light_qwhite)
-                .exhaustive()}
+                .otherwise(() => colors.light_qblack)}
             backgroundColor={match(type)
                 .with("primary", () => colors.light_qwhite)
                 .with("secondary", () => colors.light_qblack)
-                .exhaustive()}
+                .otherwise(() => colors.light_qwhite)}
         >
             <Text typo="Subtitle1b" style={{ margin: "auto" }}>
                 {children}
