@@ -1,5 +1,4 @@
 "use client";
-import { Metadata } from "next";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
 import BottomNavigation from "src/components/BottomNavigation";
@@ -9,7 +8,6 @@ import HomeTitle from "src/components/pages/home/HomeTitle";
 import QfeedFrame from "src/components/pages/home/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
-import { globalValue } from "src/constants/globalValue";
 import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
 import useDisplaySize from "src/hooks/useDisplaySize";
@@ -40,6 +38,7 @@ export default function Page() {
     const handleClickPlus = () => {
         router.push(Route.ADD_QUESTION());
     };
+    console.log(width);
 
     return (
         <>
@@ -83,7 +82,6 @@ export default function Page() {
 
 const HomeWrapper = styled.div`
     height: 100%;
-    padding: 0 16px;
 `;
 
 const FrameWrapper = styled.div`

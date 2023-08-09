@@ -17,7 +17,7 @@ const Hr = ({ horizonal = false, type = "default", size = 1 }: Props) => {
             backgroundColor={match(type)
                 .with("primary", () => colors.light_qwhite)
                 .with("default", () => colors.line_black_5)
-                .exhaustive()}
+                .otherwise(() => colors.light_qwhite)}
         />
     );
 };
