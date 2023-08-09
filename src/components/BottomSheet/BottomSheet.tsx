@@ -23,7 +23,7 @@ const COMPONENT_HEIGHT: any = {
     coin: 324 + 30,
     friend: 325 + 60
 };
-const COMPONENT = {
+const COMPONENT: any = {
     report: <Report />,
     reportFriend: <ReportFriend />,
     coin: <Coin />,
