@@ -17,7 +17,7 @@ interface Props {
     children?: any;
 }
 
-const COMPONENT_HEIGHT = {
+const COMPONENT_HEIGHT: any = {
     report: 540 + 30,
     reportFriend: 331,
     coin: 324 + 30,
