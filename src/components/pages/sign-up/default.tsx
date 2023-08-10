@@ -31,7 +31,9 @@ const SignIn = () => {
 
     const isDupNickname = useCheckNicknameQuery(nickname.value);
     useEffect(() => {
-        isDupNickname.refetch();
+        if (!!nickname.value) {
+            isDupNickname.refetch();
+        }
     }, [nickname.value]);
 
     const User = {
