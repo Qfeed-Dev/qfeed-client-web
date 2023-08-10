@@ -4,7 +4,7 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import styled from "styled-components";
 
-const KaKaoLogin = () => {
+const Login = () => {
     return (
         <Flex direction="column" justify="center" height="100%" gap={34}>
             <Flex direction="column" gap={15}>
@@ -45,4 +45,4 @@ const LoginButton = styled(Link)<{ background: string }>`
     border-radius: 11px;
 `;
 
-export default KaKaoLogin;
+export default Login;
