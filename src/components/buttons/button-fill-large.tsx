@@ -2,7 +2,8 @@
 
 import styled from "styled-components";
 import Text from "../common/Text";
-import { theme } from "styles/theme";
+import { motion } from "framer-motion";
+import { changeBtnColor } from "src/constants/animation";
 
 export type ButtonState = "active" | "disabled";
 
@@ -13,31 +14,18 @@ interface ButtonProps {
     bottom?: boolean;
 }
 
-const TEXT_COLOR = {
-    default: {
-        active: theme.colors.light_qblack,
-        disabled: theme.colors.light_qwhite
-    }
-};
-
-const BUTTON_COLOR = {
-    default: {
-        active: theme.colors.light_qwhite,
-        disabled: theme.colors.light_gray2
-    }
-};
-
 const ButtonFillLarge = ({
-    state = "disabled",
+    state,
     text = "",
     bottom = true,
     onClick
 }: ButtonProps) => {
     return (
         <ButtonWrapper
-            state={state}
-            text={text}
-            bottom={bottom}
+            initial="disabled"
+            animate={state}
+            variants={changeBtnColor}
+            $bottom={bottom}
             onClick={onClick}
         >
             <Text typo="Subtitle2b">{text}</Text>
@@ -45,20 +33,15 @@ const ButtonFillLarge = ({
     );
 };
 
-const ButtonWrapper = styled.button<{
-    state: ButtonState;
-    text: string;
-    bottom: boolean;
+const ButtonWrapper = styled(motion.button)<{
+    $bottom: boolean;
 }>`
     width: 100%;
     min-height: 52px;
     padding: 0.88rem 3.75rem;
-    margin-bottom: ${({ bottom }) => bottom && "8rem"};
+    margin-bottom: ${({ $bottom }) => $bottom && "8rem"};
 
     text-align: center;
-    color: ${({ state }) => TEXT_COLOR.default[state]};
-    background: ${({ state }) => BUTTON_COLOR.default[state]};
-
     border-radius: 10px;
 `;
 
