@@ -42,8 +42,9 @@ export default function Page() {
 
     return (
         <>
+            <Spacing size={50} />
+            <HomeTitle />
             <HomeWrapper>
-                <HomeTitle />
                 <BasicQuestion type="pick-me" onClick={handleClickPickMe} />
                 <BasicQuestion
                     type="question"
@@ -71,10 +72,12 @@ export default function Page() {
                     })}
                 </StackGrid>
 
-                <PlusButton onClick={handleClickPlus} />
                 <Spacing size={68} />
             </HomeWrapper>
 
+            <PlusButtonWrapper>
+                <PlusButton onClick={handleClickPlus} />
+            </PlusButtonWrapper>
             <BottomNavigation />
         </>
     );
@@ -82,7 +85,19 @@ export default function Page() {
 
 const HomeWrapper = styled.div`
     height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
     position: relative;
+`;
+
+const PlusButtonWrapper = styled.div`
+    width: 100%;
+    max-width: 600px;
+
+    text-align: end;
+    position: fixed;
+    bottom: 0;
+    z-index: 901;
 `;
 
 const PlusButton = styled.div`
@@ -90,10 +105,9 @@ const PlusButton = styled.div`
     height: 60px;
 
     position: absolute;
-    right: 16px;
+    right: 0;
     bottom: 64px;
 
     border-radius: 50%;
     background-color: ${colors.light_qwhite};
-    z-index: 999;
 `;

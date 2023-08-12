@@ -70,6 +70,7 @@ const BackTitleWrapper = styled.div`
 `;
 
 const BackTitleInner = styled.div`
+    max-width: 600px;
     height: 50px;
     margin: auto;
     padding: 0 16px;
