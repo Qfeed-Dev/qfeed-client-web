@@ -24,9 +24,17 @@ qFeedAxios.interceptors.response.use(
     },
     async (error) => {
         const err = error as AxiosError;
-        if (err.response?.status === 401) {
-            deleteCookie();
-            window.location.href = "/account";
+        if (err.isAxiosError) {
+            window.location.href = "/";
+        }
+        switch (err.response?.status) {
+            case 401: {
+                deleteCookie();
+                window.location.href = "/account";
+            }
+            case 502:
+            case 503:
+                window.location.href = "/";
         }
         return Promise.reject(error);
     }
