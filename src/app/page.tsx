@@ -28,7 +28,7 @@ export default function Page() {
     const { width } = useDisplaySize();
 
     const handleClickPickMe = () => {
-        router.push(Route.PICK_ME());
+        router.push(Route.MYPAGE());
     };
     const handleClickBasicQuestion = () => {
         router.push(Route.QUESTION_FRIEND());
