@@ -51,12 +51,10 @@ export default function Page() {
                 </UploadButton>
 
                 <Spacing size={42} />
-                <div style={{ paddingRight: 16 }}>
-                    <Textarea
-                        placeholder="원하는 질문지를 작성하세요."
-                        size={140}
-                    />
-                </div>
+                <Textarea
+                    placeholder="원하는 질문지를 작성하세요."
+                    size={140}
+                />
                 <Spacing size={60} />
 
                 <PlusWrapper>
@@ -81,6 +79,7 @@ export default function Page() {
 const AddQuestionWrapper = styled.div`
     height: 100%;
     padding: 0 16px;
+    position: relative;
 `;
 
 const PlusWrapper = styled.div`
@@ -109,6 +108,8 @@ const BottomButton = styled.div<{ timer: boolean }>`
 `;
 
 const BottomInner = styled.div<{ timer: boolean }>`
+    max-width: 600px;
+    margin: auto;
     margin-top: 20px;
     padding: 0 16px;
 

@@ -33,7 +33,7 @@ const TextareaBox = styled.textarea<{ size: number }>`
     width: 100%;
     height: ${({ size }) => size + "px"};
     margin: 0;
-    padding: 10px;
+    padding: 16px;
     border: 0;
     outline: 0;
     resize: none;
@@ -44,7 +44,7 @@ const TextareaBox = styled.textarea<{ size: number }>`
 
 const TextareaCount = styled.div`
     position: absolute;
-    right: -10px;
+    right: 16px;
     bottom: 10px;
 `;
 

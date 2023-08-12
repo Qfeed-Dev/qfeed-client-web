@@ -45,7 +45,7 @@ const Menu = styled.div`
 `;
 
 const TextareaWrapper = styled.div`
-    width: calc(100% - 20px);
+    width: 100%;
 `;
 
 const Name = styled.div``;

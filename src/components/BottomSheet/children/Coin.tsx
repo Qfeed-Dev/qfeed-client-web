@@ -45,7 +45,7 @@ const CoinTitle = styled.div`
 `;
 
 const CoinSelection = styled.div<{ backgroundColor: any }>`
-    width: calc(100% - 32px);
+    width: 100%;
     height: 52px;
     padding: 0 16px;
 

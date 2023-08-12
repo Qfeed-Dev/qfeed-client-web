@@ -186,7 +186,9 @@ const BottomSheetWrapper = styled.div<{
     color: ${({ color }) => color};
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx, backgroundColor }) =>
-        selectedIdx ? repeatBackgroundColor[selectedIdx] : backgroundColor};
+        selectedIdx
+            ? repeatBackgroundColor[selectedIdx % 12]
+            : backgroundColor};
     z-index: 999;
 
     transition: transform 300ms ease-out;
@@ -200,7 +202,7 @@ const BottomSheetWrapper = styled.div<{
 `;
 
 const ContentWrapper = styled.div`
-    width: calc(100% - 32px);
+    width: 100%;
     padding: 0 16px;
     overflow: auto;
     -webkit-overflow-scrolling: touch;

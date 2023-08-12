@@ -91,8 +91,10 @@ const BottomButton = styled.div`
 `;
 
 const BottomInner = styled.div`
+    max-width: 600px;
     margin-top: 20px;
     padding: 0 16px;
+    margin: auto;
 
     display: flex;
     flex-direction: column;

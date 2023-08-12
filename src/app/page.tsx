@@ -11,6 +11,7 @@ import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
 import useDisplaySize from "src/hooks/useDisplaySize";
+import Icon from "src/components/Icon";
 
 const HomeDatas = [
     { title: "기말고사에 솔직히 족보 봤다", answer: 0 },
@@ -27,7 +28,7 @@ export default function Page() {
     const { width } = useDisplaySize();
 
     const handleClickPickMe = () => {
-        router.push(Route.PICK_ME());
+        router.push(Route.MYPAGE());
     };
     const handleClickBasicQuestion = () => {
         router.push(Route.QUESTION_FRIEND());
@@ -42,8 +43,9 @@ export default function Page() {
 
     return (
         <>
+            <Spacing size={50} />
+            <HomeTitle />
             <HomeWrapper>
-                <HomeTitle />
                 <BasicQuestion type="pick-me" onClick={handleClickPickMe} />
                 <BasicQuestion
                     type="question"
@@ -71,10 +73,14 @@ export default function Page() {
                     })}
                 </StackGrid>
 
-                <PlusButton onClick={handleClickPlus} />
                 <Spacing size={68} />
             </HomeWrapper>
 
+            <PlusButtonWrapper>
+                <PlusButton onClick={handleClickPlus}>
+                    <Icon icon="HomePlus" />
+                </PlusButton>
+            </PlusButtonWrapper>
             <BottomNavigation />
         </>
     );
@@ -82,24 +88,31 @@ export default function Page() {
 
 const HomeWrapper = styled.div`
     height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
 `;
 
-const FrameWrapper = styled.div`
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 170px);
-    grid-auto-rows: 1px;
+const PlusButtonWrapper = styled.div`
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    z-index: 901;
 `;
 
 const PlusButton = styled.div`
     width: 60px;
     height: 60px;
+    padding-top: 16px;
 
     position: absolute;
-    right: 16px;
+    right: 0;
     bottom: 64px;
 
     border-radius: 50%;
     background-color: ${colors.light_qwhite};
-    z-index: 999;
 `;
