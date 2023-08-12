@@ -13,10 +13,30 @@ const BottomNavigation = ({}: Props) => {
     return (
         <BottomNavigationWrapper>
             <BottomNavigationInner>
-                <Icon icon="Home" />
-                <Icon icon="Chat" />
-                <Icon icon="Mypage" />
-                <Icon icon="Friend" />
+                <Icon
+                    icon="Home"
+                    onClick={() => {
+                        router.push(Route.HOME());
+                    }}
+                />
+                <Icon
+                    icon="Chat"
+                    onClick={() => {
+                        router.push(Route.CHAT());
+                    }}
+                />
+                <Icon
+                    icon="Mypage"
+                    onClick={() => {
+                        router.push(Route.MYPAGE());
+                    }}
+                />
+                <Icon
+                    icon="Friend"
+                    onClick={() => {
+                        router.push(Route.FRIEND());
+                    }}
+                />
             </BottomNavigationInner>
         </BottomNavigationWrapper>
     );
