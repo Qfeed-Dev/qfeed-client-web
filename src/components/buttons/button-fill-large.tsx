@@ -27,6 +27,7 @@ const ButtonFillLarge = ({
             variants={changeBtnColor}
             $bottom={bottom}
             onClick={onClick}
+            disabled={state === "disabled"}
         >
             <Text typo="Subtitle2b">{text}</Text>
         </ButtonWrapper>

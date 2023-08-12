@@ -27,8 +27,7 @@ export const changeBtnColor = {
             duration: 0.2
         },
         color: theme.colors.light_qwhite,
-        background: theme.colors.light_gray2,
-        pointerEvents: "none"
+        background: theme.colors.light_gray2
     },
     active: {
         transition: {
