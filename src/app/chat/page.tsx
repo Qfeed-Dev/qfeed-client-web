@@ -1,10 +1,54 @@
+"use client";
 import BottomNavigation from "src/components/BottomNavigation";
+import ChatTitle from "src/components/pages/chat/ChatTitle";
+import styled from "styled-components";
+import Chatting from "src/components/pages/chat/Chatting";
 
 export default function Page() {
-  return (
-    <>
-      Chat
-      <BottomNavigation />
-    </>
-  );
+    return (
+        <>
+            <ChatWrapper>
+                <ChatTitle />
+                <ChattingWrapper>
+                    {chats.map((data: any, idx: number) => {
+                        return <Chatting key={idx} />;
+                    })}
+                </ChattingWrapper>
+            </ChatWrapper>
+            <BottomNavigation />
+        </>
+    );
 }
+
+const ChatWrapper = styled.div`
+    padding: 0 16px;
+`;
+
+const ChattingWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`;
+
+const chats = [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+];

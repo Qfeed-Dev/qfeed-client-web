@@ -5,7 +5,11 @@ export const Route = {
 
     ADD_QUESTION: () => "/add-question",
     ALARM: () => "/alarm",
+
     CHAT: () => "/chat",
+    CHATTING: () => "/chatting",
+    ADD_CHATTING: () => "/add-chatting",
+
     CHECK: () => "/check",
     FRIEND: () => "/friend",
     MYPAGE: () => "/mypage",
