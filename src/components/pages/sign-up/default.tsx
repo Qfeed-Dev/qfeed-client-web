@@ -27,7 +27,7 @@ const SignIn = () => {
     const email = useInput();
     const nickname = useInput();
 
-    const gender = useToggle("여성");
+    const gender = useToggle("여");
 
     const isDupNickname = useCheckNicknameQuery(nickname.value);
     useEffect(() => {
@@ -119,14 +119,8 @@ const SignIn = () => {
                     onClick={() => {
                         userMutation.mutate({
                             nickname: nickname.value,
-                            schoolType: "",
-                            schoolName: "",
-                            grade: "",
-                            class: "",
                             gender: gender.value,
-                            birthday: birthday.value,
-                            profileImage: "",
-                            idCardImage: ""
+                            birthday: new Date(birthday.value)
                         });
                         router.push("/sign-up/organization");
                     }}
