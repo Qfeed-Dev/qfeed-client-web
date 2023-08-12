@@ -31,14 +31,18 @@ const ButtonGenderSelect = ({ ...props }: toggleProps) => {
         <Flex justify="start" gap={24}>
             <Text typo="Subtitle1r">성별</Text>
             <ButtonWrapper>
+                <Input type="gender" id="여" />
+                <Input type="gender" id="남" />
                 <Button
-                    state={props.value === "여성" ? "active" : "disabled"}
+                    id="여"
+                    state={props.value === "여" ? "active" : "disabled"}
                     onClick={props.onClick}
                 >
                     <Text typo="Subtitle1r">여성</Text>
                 </Button>
                 <Button
-                    state={props.value === "남성" ? "active" : "disabled"}
+                    id="남"
+                    state={props.value === "남" ? "active" : "disabled"}
                     onClick={props.onClick}
                 >
                     <Text typo="Subtitle1r">남성</Text>
@@ -57,7 +61,7 @@ const ButtonWrapper = styled.div`
     overflow: hidden;
 `;
 
-const Button = styled.button<{
+const Button = styled.label<{
     state: ButtonState;
 }>`
     width: 100%;
@@ -68,6 +72,10 @@ const Button = styled.button<{
     background: ${({ state }) => BUTTON_COLOR.default[state]};
 
     white-space: nowrap;
+`;
+
+const Input = styled.input`
+    width: 0;
 `;
 
 export default ButtonGenderSelect;
