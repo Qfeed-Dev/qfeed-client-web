@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Text } from "../common/Text";
 import Report from "../Report";
 import Spacing from "../Spacing";
+import Icon from "../Icon";
 
 const BackTitle = forwardRef(function Div(
     { children, onClick, type = "default", ...props }: any,
@@ -22,9 +23,7 @@ const BackTitle = forwardRef(function Div(
             <BackTitleWrapper>
                 <BackTitleInner>
                     <Menu onClick={handleClickBack} style={{ display: "flex" }}>
-                        <div style={{ margin: "auto", marginRight: 16 }}>
-                            &lt;--
-                        </div>
+                        <Icon icon="LeftArrow" width={24} height={24} />
                         <Text typo="Headline1b" color="light_qwhite">
                             {props.text}
                         </Text>
@@ -70,6 +69,7 @@ const BackTitleWrapper = styled.div`
 `;
 
 const BackTitleInner = styled.div`
+    max-width: 600px;
     height: 50px;
     margin: auto;
     padding: 0 16px;

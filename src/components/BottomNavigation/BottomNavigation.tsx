@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import styled from "styled-components";
+import Icon from "../Icon";
 
 interface Props {}
 
@@ -12,34 +13,30 @@ const BottomNavigation = ({}: Props) => {
     return (
         <BottomNavigationWrapper>
             <BottomNavigationInner>
-                <div
+                <Icon
+                    icon="Home"
                     onClick={() => {
                         router.push(Route.HOME());
                     }}
-                >
-                    Hi
-                </div>
-                <div
+                />
+                <Icon
+                    icon="Chat"
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
-                >
-                    Hi
-                </div>
-                <div
+                />
+                <Icon
+                    icon="Mypage"
                     onClick={() => {
                         router.push(Route.MYPAGE());
                     }}
-                >
-                    Hi
-                </div>
-                <div
+                />
+                <Icon
+                    icon="Friend"
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
-                >
-                    Hi
-                </div>
+                />
             </BottomNavigationInner>
         </BottomNavigationWrapper>
     );
@@ -47,6 +44,7 @@ const BottomNavigation = ({}: Props) => {
 
 const BottomNavigationWrapper = styled.div`
     width: 100%;
+    max-width: 600px;
     height: 68px;
 
     position: fixed;

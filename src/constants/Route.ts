@@ -9,7 +9,6 @@ export const Route = {
     CHECK: () => "/check",
     FRIEND: () => "/friend",
     MYPAGE: () => "/mypage",
-    PICK_ME: () => "/pick-me",
 
     COMPLETE: "/sign-up/complete",
     MIDHIGH: "/sign-up/id-card",
