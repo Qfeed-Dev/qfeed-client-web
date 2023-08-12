@@ -6,6 +6,8 @@ import { Route } from "src/constants/Route";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
+import Icon from "src/components/Icon";
+import Text from "src/components/common/Text";
 
 const HomeTitle = ({}: {}) => {
     const router = useRouter();
@@ -34,15 +36,23 @@ const HomeTitle = ({}: {}) => {
                     />
                 </ImageWrapper>
             </Menu>
-            <div style={{ display: "flex", gap: "24px" }}>
-                <Menu onClick={handleClickCoin}>
-                    <div>코인충전</div>
-                </Menu>
-                <Menu>
-                    <div>질문추천</div>
-                </Menu>
+            <div style={{ display: "flex", margin: "auto 0", gap: "24px" }}>
+                <Text
+                    typo="Caption1b"
+                    color="light_qwhite"
+                    onClick={handleClickCoin}
+                >
+                    코인충전
+                </Text>
+                <Text
+                    typo="Caption1b"
+                    color="light_qwhite"
+                    onClick={handleClickAlarm}
+                >
+                    질문추천
+                </Text>
                 <Menu onClick={handleClickAlarm}>
-                    <div>svg</div>
+                    <Icon icon="Alarm" />
                 </Menu>
             </div>
         </HomeTitleWrapper>
