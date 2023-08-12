@@ -21,23 +21,21 @@ export const useAuth = () => {
     const { user, isLoading } = useUserQuery();
     const [isActive, setIsActive] = useState<boolean | undefined>(undefined);
 
-    useEffect(() => {
-        if (!isLoading && user !== undefined) {
-            setIsActive(useIsActive(user));
-        }
-    }, [isLoading, user]);
-
     const kakaoMutation = useMutation(getAccessToken, {
         onSuccess: (data: any) => {
-            if (isActive !== undefined) {
-                setAccessToken(data.accessToken);
-                isActive ? router.push("/") : router.push("/sign-up/default");
-            }
+            setAccessToken(data.accessToken);
         },
         onError: (error: any) => {
             alert(error);
         }
     });
+
+    useEffect(() => {
+        if (!kakaoMutation.isLoading && !isLoading && user !== undefined) {
+            setIsActive(useIsActive(user));
+            isActive ? router.push("/") : router.push("/sign-up/default");
+        }
+    }, [kakaoMutation.isLoading, isLoading, user, isActive, router]);
 
     return {
         kakaoMutation
