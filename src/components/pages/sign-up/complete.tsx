@@ -27,13 +27,11 @@ const Complete = () => {
                 justify="space-between"
                 align="start"
             >
-                <Text typo="Headline0b">
-                    채린님의 회원가입이
-                    <br />
-                    완료되었습니다.
-                    <br />
-                    나만의 큐피드를 만들어보세요!
-                </Text>
+                <Flex direction="column" align="start">
+                    <Text typo="Headline0b">채린님의 회원가입이</Text>
+                    <Text typo="Headline0b">완료되었습니다.</Text>
+                    <Text typo="Headline0b">나만의 큐피드를 만들어보세요!</Text>
+                </Flex>
                 <ButtonFillLarge
                     state="active"
                     text="다음"
