@@ -18,6 +18,7 @@ const getAccessToken = async (code: string) => {
 
 export const useAuth = () => {
     const router = useRouter();
+    const { user, isLoading } = useUserQuery();
     const [isActive, setIsActive] = useState<boolean | undefined>(undefined);
 
     const kakaoMutation = useMutation(getAccessToken, {
@@ -29,13 +30,12 @@ export const useAuth = () => {
         }
     });
 
-    const { user, isLoading } = useUserQuery();
     useEffect(() => {
         if (!kakaoMutation.isLoading && !isLoading && user !== undefined) {
             setIsActive(useIsActive(user));
             isActive ? router.push("/") : router.push("/sign-up/default");
         }
-    }, [kakaoMutation.isLoading, isActive, router]);
+    }, [kakaoMutation.isLoading, isLoading, user, isActive, router]);
 
     return {
         kakaoMutation
