@@ -52,9 +52,7 @@ const SignIn = () => {
             validPhone(phone.value)
     };
 
-    console.log(User);
-
-    const { isActive } = useIsActive(User);
+    const isActive = useIsActive(User);
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -132,7 +130,7 @@ const SignIn = () => {
                     />
                 </Flex>
                 <ButtonFillLarge
-                    state={isActive(User) ? "active" : "disabled"}
+                    state={isActive ? "active" : "disabled"}
                     text="다음"
                     onClick={() => {
                         userMutation.mutate({

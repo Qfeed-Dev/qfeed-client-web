@@ -4,6 +4,7 @@ import { setAccessToken } from "src/utils/cookie";
 import { qFeedAxios } from "src/apis/axios";
 import { useUserQuery } from "./useUserQuery";
 import { useIsActive } from "../common/useIsActive";
+import { useState, useEffect } from "react";
 
 const getAccessToken = async (code: string) => {
     const response = await qFeedAxios.get("/account/kakao/login", {
@@ -17,14 +18,21 @@ const getAccessToken = async (code: string) => {
 
 export const useAuth = () => {
     const router = useRouter();
-    // const user = useUserQuery();
-    // const isActive = useIsActive({ ...user.data });
+    const { user, isLoading } = useUserQuery();
+    const [isActive, setIsActive] = useState<boolean | undefined>(undefined);
+
+    useEffect(() => {
+        if (!isLoading && user !== undefined) {
+            setIsActive(useIsActive(user));
+        }
+    }, [isLoading, user]);
 
     const kakaoMutation = useMutation(getAccessToken, {
         onSuccess: (data: any) => {
-            setAccessToken(data.accessToken);
-            router.push("/sign-up/default");
-            // isActive ? router.push("/") : router.push("/sign-up/default");
+            if (isActive !== undefined) {
+                setAccessToken(data.accessToken);
+                isActive ? router.push("/") : router.push("/sign-up/default");
+            }
         },
         onError: (error: any) => {
             alert(error);

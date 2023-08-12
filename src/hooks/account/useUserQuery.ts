@@ -14,11 +14,11 @@ export const getUser = async () => {
 };
 
 export const useUserQuery = () => {
-    const { data: user } = useQuery<User>(userKeys.all, getUser, {
+    const { data: user, isLoading } = useQuery<User>(userKeys.all, getUser, {
         onError: (error: any) => {
             alert(error);
         }
     });
 
-    return { user };
+    return { user, isLoading };
 };
