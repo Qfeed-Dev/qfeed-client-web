@@ -8,6 +8,7 @@ import {
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
 import { colors, repeatBackgroundColor } from "styles/theme";
+import ChattingCoin from "./children/ChattingCoin";
 import Coin from "./children/Coin";
 import Frined from "./children/Friend";
 import Report from "./children/Report";
@@ -21,13 +22,15 @@ const COMPONENT_HEIGHT: any = {
     report: 540 + 30,
     reportFriend: 331,
     coin: 324 + 30,
-    friend: 325 + 60
+    friend: 325 + 60,
+    chattingCoin: 376
 };
 const COMPONENT: any = {
     report: <Report />,
     reportFriend: <ReportFriend />,
     coin: <Coin />,
-    friend: <Frined />
+    friend: <Frined />,
+    chattingCoin: <ChattingCoin />
 };
 
 const BottomSheet = forwardRef(function Div(
@@ -96,7 +99,9 @@ const BottomSheet = forwardRef(function Div(
                 height={BOTTOMSHEET_HEIGHT}
                 selectedIdx={selectedIdx}
                 backgroundColor={
-                    type === "coin" ? colors.light_gray3 : colors.light_gray0
+                    type === "coin" || type === "chattingCoin"
+                        ? colors.light_gray3
+                        : colors.light_gray0
                 }
             >
                 <HandleWrapper>
@@ -164,7 +169,7 @@ const Handle = styled.div<{ selectedIdx: number }>`
     display: flex;
 
     background-color: ${({ selectedIdx }) =>
-        selectedIdx ? colors.line_white_50 : colors.light_gray1};
+        selectedIdx !== -1 ? colors.line_white_50 : colors.light_gray1};
 `;
 
 const BottomSheetWrapper = styled.div<{
@@ -186,7 +191,7 @@ const BottomSheetWrapper = styled.div<{
     color: ${({ color }) => color};
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx, backgroundColor }) =>
-        selectedIdx
+        selectedIdx !== -1
             ? repeatBackgroundColor[selectedIdx % 12]
             : backgroundColor};
     z-index: 999;

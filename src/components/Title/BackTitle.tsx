@@ -24,7 +24,11 @@ const BackTitle = forwardRef(function Div(
                 <BackTitleInner>
                     <Menu onClick={handleClickBack} style={{ display: "flex" }}>
                         <Icon icon="LeftArrow" width={24} height={24} />
-                        <Text typo="Headline1b" color="light_qwhite">
+                        <Text
+                            typo="Headline1b"
+                            color="light_qwhite"
+                            style={{ marginLeft: 16 }}
+                        >
                             {props.text}
                         </Text>
                     </Menu>
