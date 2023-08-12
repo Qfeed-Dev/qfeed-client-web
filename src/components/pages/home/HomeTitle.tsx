@@ -51,10 +51,17 @@ const HomeTitle = ({}: {}) => {
 
 const HomeTitleWrapper = styled.div`
     width: 100%;
+    max-width: 600px;
     height: 50px;
+    padding: 0 16px;
+
+    position: fixed;
+    top: 0;
 
     display: flex;
     justify-content: space-between;
+    background-color: ${colors.light_qblack};
+    z-index: 900;
 `;
 
 const Menu = styled.div`

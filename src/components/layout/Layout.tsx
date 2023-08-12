@@ -24,7 +24,7 @@ const LayoutWrapper = styled.div`
 const LayoutContent = styled.div`
     width: 600px;
     height: 100%;
-    padding: 0 1rem;
+    padding: 0;
 
     ${media.mobile} {
         width: 100vw;
