@@ -21,18 +21,19 @@ import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 const SignIn = () => {
     const router = useRouter();
+    const { userMutation } = useUserMutation();
+    const { user } = useUserQuery();
 
     const name = useInput();
-    const birthday = useInput();
+    const birthday = useInput(user?.birthday.split("T")[0]);
     const phone = useInput();
-    const email = useInput();
-    const nickname = useInput();
-
-    const gender = useToggle("여");
+    const email = useInput(user?.email);
+    const nickname = useInput(user?.nickname);
+    const gender = useToggle(user?.gender || "여");
 
     const isDupNickname = useCheckNicknameQuery(nickname.value);
     useEffect(() => {
-        if (!!nickname.value) {
+        if (!!nickname.value && nickname.value !== "") {
             isDupNickname.refetch();
         }
     }, [nickname.value]);
@@ -44,12 +45,16 @@ const SignIn = () => {
         phone: phone.value,
         email: email.value,
         nickname: nickname.value,
-        isOk: isDupNickname.data?.abailable
+        isOk:
+            (user?.nickname || isDupNickname.data?.abailable) &&
+            validEmail(email.value) &&
+            validBirth(birthday.value) &&
+            validPhone(phone.value)
     };
 
+    console.log(User);
+
     const { isActive } = useIsActive(User);
-    const { userMutation } = useUserMutation();
-    const { user } = useUserQuery();
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -70,12 +75,14 @@ const SignIn = () => {
                     onClick={gender.handleChangeState}
                 />
                 <InputLine
-                    value={user?.birthday || birthday.value}
+                    value={user?.birthday.split("T")[0] || birthday.value}
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
-                    placeholder="ex) 1997.04.02"
+                    placeholder="ex) 1997-04-02"
                     message={
-                        validBirth(birthday.value)
+                        user?.birthday
+                            ? undefined
+                            : validBirth(birthday.value)
                             ? birthMsg.RIGHT
                             : birthMsg.WRONG
                     }
@@ -100,7 +107,9 @@ const SignIn = () => {
                     label="이메일"
                     placeholder="ex) ghkdcofls42@naver.com"
                     message={
-                        validEmail(email.value)
+                        user?.email
+                            ? undefined
+                            : validEmail(email.value)
                             ? emailMsg.RIGHT
                             : emailMsg.WRONG
                     }
@@ -113,7 +122,11 @@ const SignIn = () => {
                         onChange={nickname.handleChangeInput}
                         label="닉네임"
                         placeholder="ex) qwerk11"
-                        message={isDupNickname.data?.message}
+                        message={
+                            user?.email
+                                ? undefined
+                                : isDupNickname.data?.message
+                        }
                         isError={!isDupNickname.data?.abailable}
                         readonly={Boolean(user?.nickname)}
                     />
