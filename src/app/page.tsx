@@ -11,6 +11,7 @@ import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
 import useDisplaySize from "src/hooks/useDisplaySize";
+import Icon from "src/components/Icon";
 
 const HomeDatas = [
     { title: "기말고사에 솔직히 족보 봤다", answer: 0 },
@@ -76,7 +77,9 @@ export default function Page() {
             </HomeWrapper>
 
             <PlusButtonWrapper>
-                <PlusButton onClick={handleClickPlus} />
+                <PlusButton onClick={handleClickPlus}>
+                    <Icon icon="HomePlus" />
+                </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
         </>
@@ -93,8 +96,9 @@ const HomeWrapper = styled.div`
 const PlusButtonWrapper = styled.div`
     width: 100%;
     max-width: 600px;
+    margin: auto;
 
-    text-align: end;
+    display: flex;
     position: fixed;
     bottom: 0;
     z-index: 901;
@@ -103,6 +107,7 @@ const PlusButtonWrapper = styled.div`
 const PlusButton = styled.div`
     width: 60px;
     height: 60px;
+    padding-top: 16px;
 
     position: absolute;
     right: 0;

@@ -1,5 +1,6 @@
 export { default as Alarm } from "./Alarm";
 export { default as LeftArrow } from "./LeftArrow";
+export { default as HomePlus } from "./HomePlus";
 
 // bottom navigation
 export { default as Home } from "./bottomNavigation/Home";
