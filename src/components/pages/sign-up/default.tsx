@@ -9,7 +9,7 @@ import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
 import { birthMsg, emailMsg, nameMsg, phoneMsg } from "src/constants/messages";
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
 import { useInput } from "src/hooks/common/useInput";
-import { useToggle } from "src/hooks/sign-up/useToggle";
+import { useToggle } from "src/hooks/common/useToggle";
 import { useIsActive } from "src/hooks/common/useIsActive";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
 import {
@@ -17,6 +17,7 @@ import {
     validBirth,
     validPhone
 } from "src/hooks/common/useCheckValidation";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 const SignIn = () => {
     const router = useRouter();
@@ -48,6 +49,7 @@ const SignIn = () => {
 
     const { isActive } = useIsActive(User);
     const { userMutation } = useUserMutation();
+    const { user } = useUserQuery();
 
     return (
         <Flex direction="column" justify="start" gap={24}>
@@ -64,11 +66,11 @@ const SignIn = () => {
                     message={nameMsg.RIGHT}
                 />
                 <ButtonGenderSelect
-                    value={gender.value}
+                    value={user?.gender || gender.value}
                     onClick={gender.handleChangeState}
                 />
                 <InputLine
-                    value={birthday.value}
+                    value={user?.birthday || birthday.value}
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
                     placeholder="ex) 1997.04.02"
@@ -78,6 +80,7 @@ const SignIn = () => {
                             : birthMsg.WRONG
                     }
                     isError={!validBirth(birthday.value)}
+                    readonly={Boolean(user?.birthday)}
                 />
                 <InputLine
                     value={phone.value}
@@ -92,7 +95,7 @@ const SignIn = () => {
                     isError={!validPhone(phone.value)}
                 />
                 <InputLine
-                    value={email.value}
+                    value={user?.email || email.value}
                     onChange={email.handleChangeInput}
                     label="이메일"
                     placeholder="ex) ghkdcofls42@naver.com"
@@ -102,15 +105,17 @@ const SignIn = () => {
                             : emailMsg.WRONG
                     }
                     isError={!validEmail(email.value)}
+                    readonly={Boolean(user?.email)}
                 />
                 <Flex align="end" gap={12}>
                     <InputLine
-                        value={nickname.value}
+                        value={user?.nickname || nickname.value}
                         onChange={nickname.handleChangeInput}
                         label="닉네임"
                         placeholder="ex) qwerk11"
                         message={isDupNickname.data?.message}
                         isError={!isDupNickname.data?.abailable}
+                        readonly={Boolean(user?.nickname)}
                     />
                 </Flex>
                 <ButtonFillLarge
@@ -118,9 +123,10 @@ const SignIn = () => {
                     text="다음"
                     onClick={() => {
                         userMutation.mutate({
-                            nickname: nickname.value,
                             gender: gender.value,
-                            birthday: new Date(birthday.value)
+                            birthday: new Date(birthday.value),
+                            nickname: nickname.value,
+                            email: email.value
                         });
                         router.push("/sign-up/organization");
                     }}

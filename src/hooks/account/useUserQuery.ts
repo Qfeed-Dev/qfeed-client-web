@@ -4,7 +4,7 @@ import { userKeys } from "src/constants/accountKeys";
 import { getCookie } from "src/utils/cookie";
 import { User } from "src/models/account";
 
-const getUser = async () => {
+export const getUser = async () => {
     const response = await qFeedAxios.get("/account/me", {
         headers: {
             Authorization: `Bearer ${getCookie()}`
@@ -14,9 +14,11 @@ const getUser = async () => {
 };
 
 export const useUserQuery = () => {
-    return useQuery<User>(userKeys.all, getUser, {
+    const { data: user } = useQuery<User>(userKeys.all, getUser, {
         onError: (error: any) => {
             alert(error);
         }
     });
+
+    return { user };
 };
