@@ -4,15 +4,16 @@ import { userKeys } from "src/constants/accountKeys";
 import { getCookie } from "src/utils/cookie";
 
 interface User {
-    nickname: string;
-    schoolType: string;
-    schoolName: string;
-    grade: string;
-    class: string;
-    gender: string;
-    birthday: string;
-    profileImage: string;
-    idCardImage: string;
+    email?: string;
+    nickname?: string;
+    schoolType?: string;
+    schoolName?: string;
+    grade?: string;
+    class?: string;
+    gender?: string;
+    birthday?: Date;
+    profileImage?: string;
+    idCardImage?: string;
 }
 
 const patchUser = async (user: User) => {

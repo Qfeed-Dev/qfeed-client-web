@@ -1,6 +1,6 @@
 "use client";
 
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useState } from "react";
 import Flex from "../common/Flex";
 import Text from "../common/Text";
@@ -17,6 +17,7 @@ export interface SelectBoxProps {
     label: string;
     options: any;
     value?: string;
+    setState?: any;
     defaultValue?: string;
 }
 
@@ -42,7 +43,7 @@ const SelectBox = (props: SelectBoxProps) => {
                 >
                     {props.options.map((option: any) => (
                         <Option
-                            key={option.value}
+                            key={option.name}
                             onClick={() => {
                                 setCurrentValue(option.name);
                                 if (props.label === "소속") {
@@ -59,6 +60,8 @@ const SelectBox = (props: SelectBoxProps) => {
                                             value: option.name
                                         })
                                     );
+                                } else {
+                                    props.setState(option.name);
                                 }
                             }}
                         >

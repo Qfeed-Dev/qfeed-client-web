@@ -11,6 +11,7 @@ export interface InputProps {
     onChange: any;
     message?: string;
     isError?: boolean;
+    readonly?: boolean;
 }
 
 const InputLine = ({ ...props }: InputProps) => {
@@ -22,6 +23,7 @@ const InputLine = ({ ...props }: InputProps) => {
                     value={props.value}
                     placeholder={props.placeholder}
                     onChange={props.onChange}
+                    readOnly={props.readonly}
                 />
             </InputWrapper>
             {props.value && (

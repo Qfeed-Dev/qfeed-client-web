@@ -23,7 +23,7 @@ export const validPhone = (phone: string) => {
 
 // 생년월일 유효성 검사
 const birth_pattern =
-    /^(19[0-9][0-9]|20\d{2}). (0[0-9]|1[0-2]). (0[1-9]|[1-2][0-9]|3[0-1])$/;
+    /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
 export const validBirth = (birthday: string) => {
     if (!birth_pattern.test(birthday)) {
         return false;
