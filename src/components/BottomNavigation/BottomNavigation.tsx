@@ -47,6 +47,7 @@ const BottomNavigation = ({}: Props) => {
 
 const BottomNavigationWrapper = styled.div`
     width: 100%;
+    max-width: 600px;
     height: 68px;
 
     position: fixed;

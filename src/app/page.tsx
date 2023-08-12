@@ -82,13 +82,7 @@ export default function Page() {
 
 const HomeWrapper = styled.div`
     height: 100%;
-`;
-
-const FrameWrapper = styled.div`
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 170px);
-    grid-auto-rows: 1px;
+    position: relative;
 `;
 
 const PlusButton = styled.div`
