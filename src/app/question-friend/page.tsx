@@ -87,7 +87,6 @@ export default function Page() {
 
 const QuestionWrapper = styled.div`
     height: 100%;
-    padding: 0 16px;
 `;
 
 const FriendWrapper = styled.div`
@@ -108,8 +107,11 @@ const BottomButton = styled.div`
 `;
 
 const BottomInner = styled.div`
+    max-width: 600px;
+    margin: auto;
     margin-top: 20px;
     padding: 0 16px;
+
     display: flex;
     gap: 14px;
 `;
