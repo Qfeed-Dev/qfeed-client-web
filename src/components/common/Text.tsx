@@ -7,6 +7,7 @@ export const Text = styled.div<{
 }>`
     ${({ typo }) => typo && theme.typo[typo]};
     color: ${({ color }) => color && theme.colors[color]};
+    pointer-events: none;
 `;
 
 export default Text;
