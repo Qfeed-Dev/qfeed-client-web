@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
-import { cookies } from "next/headers";
+import { getCookie } from "src/utils/cookie";
 import { deleteCookie } from "src/utils/cookie";
 
 export const qFeedAxios: AxiosInstance = axios.create({
@@ -29,8 +29,10 @@ qFeedAxios.interceptors.response.use(
         }
         switch (err.response?.status) {
             case 401: {
-                deleteCookie();
-                window.location.href = "/account";
+                if (getCookie()) {
+                    deleteCookie();
+                    window.location.href = "/account";
+                }
             }
             case 502:
             case 503:
