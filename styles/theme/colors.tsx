@@ -6,7 +6,7 @@ const hexToRGBA = (color: string, opacity: number) => {
     return `rgba(${r}, ${g}, ${b}, ${opacity * 0.01})`;
 };
 
-export const colors: any = {
+export const colors = {
     primary_qyellow: "#EEF619",
     primary_qpink: "#FE98CA",
     primary_qorange: "#FF812F",
