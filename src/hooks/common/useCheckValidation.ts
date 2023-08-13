@@ -13,7 +13,7 @@ export const validEmail = (email: string) => {
 };
 
 // 전화번호 유효성 검사
-const mobile_pattern = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/;
+const mobile_pattern = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}/;
 export const validPhone = (phone: string) => {
     if (!mobile_pattern.test(phone)) {
         return false;

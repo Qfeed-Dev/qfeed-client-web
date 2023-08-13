@@ -25,7 +25,7 @@ qFeedAxios.interceptors.response.use(
     async (error) => {
         const err = error as AxiosError;
         if (err.isAxiosError) {
-            window.location.href = "/";
+            // window.location.href = "/";
         }
         switch (err.response?.status) {
             case 401: {
@@ -36,7 +36,7 @@ qFeedAxios.interceptors.response.use(
             }
             case 502:
             case 503:
-                window.location.href = "/";
+            // window.location.href = "/";
         }
         return Promise.reject(error);
     }

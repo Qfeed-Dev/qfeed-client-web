@@ -1,20 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { User } from "src/models/account";
 import { qFeedAxios } from "src/apis/axios";
 import { userKeys } from "src/constants/accountKeys";
-import { getCookie } from "src/utils/cookie";
-
-interface User {
-    email?: string;
-    nickname?: string;
-    schoolType?: string;
-    schoolName?: string;
-    grade?: string;
-    class?: string;
-    gender?: string;
-    birthday?: Date;
-    profileImage?: string;
-    idCardImage?: string;
-}
+import { setUser, getCookie } from "src/utils/cookie";
 
 const patchUser = async (user: User) => {
     const response = await qFeedAxios.patch(
@@ -33,12 +21,13 @@ export const useUserMutation = () => {
     const queryClient = useQueryClient();
 
     const userMutation = useMutation(patchUser, {
-        onSuccess: (data: any) => {
+        onSuccess: (data: User) => {
             queryClient.invalidateQueries(userKeys.all);
+            if (data.id) {
+                setUser(data.id);
+            }
         },
-        onError: (error: any) => {
-            alert(error);
-        }
+        onError: (error: any) => {}
     });
 
     return {
