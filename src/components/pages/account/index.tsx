@@ -42,13 +42,13 @@ const Background = styled(Flex)`
     width: 100%;
     height: 100%;
 
-    background-image: url("/img/background.png");
+    background-image: url(${process.env.PUBLIC_URL}/img/background.png);
     background-size: cover;
     background-position: center;
 `;
 
 const LoginWrapper = styled(Flex)`
-    padding 0 1rem;
+    padding: 0 1rem;
 
     background: ${colors.line_black_50};
     -webkit-backdrop-filter: blur(7.5px);
