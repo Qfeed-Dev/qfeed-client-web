@@ -8,15 +8,12 @@ import ElementarySchool from "src/components/sign-up/elementary-school";
 import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
-import { useIsActive } from "src/hooks/common/useIsActive";
 
 import { useAppSelector } from "src/hooks/useReduxHooks";
 
 const Organization = () => {
     const router = useRouter();
     const selected = useAppSelector((state) => state.organization.selected);
-
-    // const { isActive } = useIsActive();
 
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
