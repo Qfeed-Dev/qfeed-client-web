@@ -24,9 +24,9 @@ const SignIn = () => {
     const { userMutation } = useUserMutation();
     const { user } = useUserQuery();
 
-    const name = useInput();
-    const birthday = useInput(user?.birthday.split("T")[0]);
-    const phone = useInput();
+    const name = useInput(user?.name);
+    const birthday = useInput(user?.birthday?.split("T")[0]);
+    const phone = useInput(user?.phone);
     const email = useInput(user?.email);
     const nickname = useInput(user?.nickname);
     const gender = useToggle(user?.gender || "여");
@@ -62,18 +62,19 @@ const SignIn = () => {
             />
             <Flex direction="column" justify="start" gap={24}>
                 <InputLine
-                    value={name.value}
+                    value={user?.name || name.value}
                     onChange={name.handleChangeInput}
                     label="이름"
                     placeholder="ex) 황채린"
                     message={nameMsg.RIGHT}
+                    readonly={Boolean(user?.name)}
                 />
                 <ButtonGenderSelect
                     value={user?.gender || gender.value}
                     onClick={gender.handleChangeState}
                 />
                 <InputLine
-                    value={user?.birthday.split("T")[0] || birthday.value}
+                    value={user?.birthday?.split("T")[0] || birthday.value}
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
                     placeholder="ex) 1997-04-02"
@@ -88,16 +89,17 @@ const SignIn = () => {
                     readonly={Boolean(user?.birthday)}
                 />
                 <InputLine
-                    value={phone.value}
+                    value={user?.phone || phone.value}
                     onChange={phone.handleChangeInput}
                     label="휴대폰 번호"
-                    placeholder="ex) 010-5016-5886"
+                    placeholder="ex) 01050165886"
                     message={
                         validPhone(phone.value)
                             ? phoneMsg.RIGHT
                             : phoneMsg.WRONG
                     }
                     isError={!validPhone(phone.value)}
+                    readonly={Boolean(user?.phone)}
                 />
                 <InputLine
                     value={user?.email || email.value}
@@ -121,7 +123,7 @@ const SignIn = () => {
                         label="닉네임"
                         placeholder="ex) qwerk11"
                         message={
-                            user?.email
+                            user?.nickname
                                 ? undefined
                                 : isDupNickname.data?.message
                         }
@@ -134,10 +136,12 @@ const SignIn = () => {
                     text="다음"
                     onClick={() => {
                         userMutation.mutate({
+                            name: name.value,
                             gender: gender.value,
-                            birthday: new Date(birthday.value),
+                            birthday: birthday.value,
                             nickname: nickname.value,
-                            email: email.value
+                            email: email.value,
+                            phone: phone.value
                         });
                         router.push("/sign-up/organization");
                     }}

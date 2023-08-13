@@ -110,7 +110,11 @@ const IdCard = () => {
                     <Text typo="Subtitle2r" color="light_qwhite">
                         영역 안에 학생증이 꽉 차도록 촬영하세요.
                     </Text>
-                    <Text typo="Subtitle1r" color="light_gray0">
+                    <Text
+                        typo="Subtitle1r"
+                        color="light_gray0"
+                        style={{ textAlign: "center" }}
+                    >
                         가로로 어두운 배경에서 촬영하세요.
                         <br />빛 반사에 주의하세요.
                     </Text>
