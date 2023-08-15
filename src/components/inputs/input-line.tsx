@@ -51,6 +51,7 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
+    width: 100%;
     color: ${colors.light_qwhite};
 `;
 
