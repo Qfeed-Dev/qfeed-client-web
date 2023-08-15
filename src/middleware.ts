@@ -1,24 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { checkSignUp } from "./apis/auth/checkSignUp";
+import { checkSignIn } from "./apis/auth/checkSignIn";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    const isLoggedIn = request.cookies.get("accessToken");
-
-    // request.headers.append("Authorization", `Bearer ${token}`);
-    // console.log("내가만든헤더", request);
-    if (
-        !isLoggedIn &&
-        pathname.match(
-            "/((?!account|https://kauth.kakao.com/oauth/authorize).*)"
-        )
-    ) {
-        return NextResponse.redirect(new URL("/account", request.url));
+    if (pathname.match("/(auth.*)")) {
+        return await checkSignUp(request);
+    } else if (pathname.match("/((?!account|auth).*)")) {
+        return await checkSignIn(request);
     }
+
     return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/((?!api|img|_next/static|_next/image|favicon.ico).*)"]
+    matcher: ["/((?!api|account|img|_next/static|_next/image|favicon.ico).*)"]
 };

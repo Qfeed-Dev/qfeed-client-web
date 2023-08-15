@@ -1,5 +1,4 @@
 "use client";
-import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
@@ -56,107 +55,100 @@ const SignIn = () => {
     const isActive = useIsActive(User);
 
     return (
-        <SignUpWrapper>
+        <Flex direction="column" justify="start" gap={24}>
+            <NavigationTop
+                leftIcon={<div onClick={router.back}>왼</div>}
+                title="회원 가입"
+            />
             <Flex direction="column" justify="start" gap={24}>
-                <NavigationTop
-                    leftIcon={<div onClick={router.back}>왼</div>}
-                    title="회원 가입"
+                <InputLine
+                    value={user?.name || name.value}
+                    onChange={name.handleChangeInput}
+                    label="이름"
+                    placeholder="ex) 황채린"
+                    message={nameMsg.RIGHT}
+                    readonly={Boolean(user?.name)}
                 />
-                <Flex direction="column" justify="start" gap={24}>
+                <ButtonGenderSelect
+                    value={user?.gender || gender.value}
+                    onClick={gender.handleChangeState}
+                />
+                <InputLine
+                    value={user?.birthday?.split("T")[0] || birthday.value}
+                    onChange={birthday.handleChangeInput}
+                    label="생년월일"
+                    placeholder="ex) 1997-04-02"
+                    message={
+                        user?.birthday
+                            ? undefined
+                            : validBirth(birthday.value)
+                            ? birthMsg.RIGHT
+                            : birthMsg.WRONG
+                    }
+                    isError={!validBirth(birthday.value)}
+                    readonly={Boolean(user?.birthday)}
+                />
+                <InputLine
+                    value={user?.phone || phone.value}
+                    onChange={phone.handleChangeInput}
+                    label="휴대폰 번호"
+                    placeholder="ex) 01050165886"
+                    message={
+                        validPhone(phone.value)
+                            ? phoneMsg.RIGHT
+                            : phoneMsg.WRONG
+                    }
+                    isError={!validPhone(phone.value)}
+                    readonly={Boolean(user?.phone)}
+                />
+                <InputLine
+                    value={user?.email || email.value}
+                    onChange={email.handleChangeInput}
+                    label="이메일"
+                    placeholder="ex) ghkdcofls42@naver.com"
+                    message={
+                        user?.email
+                            ? undefined
+                            : validEmail(email.value)
+                            ? emailMsg.RIGHT
+                            : emailMsg.WRONG
+                    }
+                    isError={!validEmail(email.value)}
+                    readonly={Boolean(user?.email)}
+                />
+                <Flex align="end" gap={12}>
                     <InputLine
-                        value={user?.name || name.value}
-                        onChange={name.handleChangeInput}
-                        label="이름"
-                        placeholder="ex) 황채린"
-                        message={nameMsg.RIGHT}
-                        readonly={Boolean(user?.name)}
-                    />
-                    <ButtonGenderSelect
-                        value={user?.gender || gender.value}
-                        onClick={gender.handleChangeState}
-                    />
-                    <InputLine
-                        value={user?.birthday?.split("T")[0] || birthday.value}
-                        onChange={birthday.handleChangeInput}
-                        label="생년월일"
-                        placeholder="ex) 1997-04-02"
+                        value={user?.nickname || nickname.value}
+                        onChange={nickname.handleChangeInput}
+                        label="닉네임"
+                        placeholder="ex) qwerk11"
                         message={
-                            user?.birthday
+                            user?.nickname
                                 ? undefined
-                                : validBirth(birthday.value)
-                                ? birthMsg.RIGHT
-                                : birthMsg.WRONG
+                                : isDupNickname.data?.message
                         }
-                        isError={!validBirth(birthday.value)}
-                        readonly={Boolean(user?.birthday)}
-                    />
-                    <InputLine
-                        value={user?.phone || phone.value}
-                        onChange={phone.handleChangeInput}
-                        label="휴대폰 번호"
-                        placeholder="ex) 01050165886"
-                        message={
-                            validPhone(phone.value)
-                                ? phoneMsg.RIGHT
-                                : phoneMsg.WRONG
-                        }
-                        isError={!validPhone(phone.value)}
-                        readonly={Boolean(user?.phone)}
-                    />
-                    <InputLine
-                        value={user?.email || email.value}
-                        onChange={email.handleChangeInput}
-                        label="이메일"
-                        placeholder="ex) ghkdcofls42@naver.com"
-                        message={
-                            user?.email
-                                ? undefined
-                                : validEmail(email.value)
-                                ? emailMsg.RIGHT
-                                : emailMsg.WRONG
-                        }
-                        isError={!validEmail(email.value)}
-                        readonly={Boolean(user?.email)}
-                    />
-                    <Flex align="end" gap={12}>
-                        <InputLine
-                            value={user?.nickname || nickname.value}
-                            onChange={nickname.handleChangeInput}
-                            label="닉네임"
-                            placeholder="ex) qwerk11"
-                            message={
-                                user?.nickname
-                                    ? undefined
-                                    : isDupNickname.data?.message
-                            }
-                            isError={!isDupNickname.data?.available}
-                            readonly={Boolean(user?.nickname)}
-                        />
-                    </Flex>
-                    <ButtonFillLarge
-                        state={isActive ? "active" : "disabled"}
-                        text="다음"
-                        onClick={() => {
-                            userMutation.mutate({
-                                name: name.value,
-                                gender: gender.value,
-                                birthday: birthday.value,
-                                nickname: nickname.value,
-                                email: email.value,
-                                phone: phone.value
-                            });
-                            router.push("/organization");
-                        }}
+                        isError={!isDupNickname.data?.available}
+                        readonly={Boolean(user?.nickname)}
                     />
                 </Flex>
+                <ButtonFillLarge
+                    state={isActive ? "active" : "disabled"}
+                    text="다음"
+                    onClick={() => {
+                        userMutation.mutate({
+                            name: name.value,
+                            gender: gender.value,
+                            birthday: birthday.value,
+                            nickname: nickname.value,
+                            email: email.value,
+                            phone: phone.value
+                        });
+                        router.push("/auth/organization");
+                    }}
+                />
             </Flex>
-        </SignUpWrapper>
+        </Flex>
     );
 };
-
-const SignUpWrapper = styled.div`
-    width: 100%;
-    padding: 0 1rem;
-`;
 
 export default SignIn;
