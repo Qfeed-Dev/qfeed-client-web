@@ -23,7 +23,7 @@ const UnivCertification = () => {
                 <ButtonFillLarge
                     state="active"
                     text="학생증으로 인증하기"
-                    onClick={() => router.push("/id-card")}
+                    onClick={() => router.push("/auth/id-card")}
                     bottom={false}
                 />
             </Flex>
