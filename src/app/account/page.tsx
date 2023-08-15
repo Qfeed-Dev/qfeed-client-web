@@ -1,1 +1,1 @@
-export { default } from "../../components/pages/account";
+export { default } from "../../pages-edit/account";
