@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Button from "src/components/Button";
 import Input from "src/components/Input";
-import Friend from "src/components/pages/question/Friend";
-import Question from "src/components/pages/question/Question";
+import Friend from "src/pages-edit/question/Friend";
+import Question from "src/pages-edit/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";

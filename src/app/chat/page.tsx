@@ -1,8 +1,8 @@
 "use client";
 import BottomNavigation from "src/components/BottomNavigation";
-import ChatTitle from "src/components/pages/chat/ChatTitle";
+import ChatTitle from "src/pages-edit/chat/ChatTitle";
 import styled from "styled-components";
-import Chatting from "src/components/pages/chat/Chatting";
+import Chatting from "src/pages-edit/chat/Chatting";
 
 export default function Page() {
     return (

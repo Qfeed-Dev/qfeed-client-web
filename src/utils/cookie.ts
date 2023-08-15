@@ -7,12 +7,6 @@ export const setAccessToken = (accessToken: string) => {
     });
 };
 
-export const setUser = (userId: number) => {
-    return cookies.set("userId", userId, {
-        path: "/"
-    });
-};
-
 export const getCookie = () => {
     return cookies.get("accessToken");
 };

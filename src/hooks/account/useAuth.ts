@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { setAccessToken } from "src/utils/cookie";
 import { qFeedAxios } from "src/apis/axios";
+import { useUserQuery } from "./useUserQuery";
 
 const getAccessToken = async (code: string) => {
     const response = await qFeedAxios.get("/account/kakao/login", {
@@ -19,6 +20,18 @@ export const useAuth = () => {
     const kakaoMutation = useMutation(getAccessToken, {
         onSuccess: (data: any) => {
             setAccessToken(data.accessToken);
+            qFeedAxios.interceptors.request.use(
+                (config) => {
+                    try {
+                        config.headers.Authorization = `Bearer ${data.accessToken}`;
+                        return config;
+                    } catch (err) {}
+                    return config;
+                },
+                (error) => {
+                    return Promise.reject(error);
+                }
+            );
             router.push("/");
         },
         onError: (error: any) => {

@@ -14,7 +14,7 @@ export const Route = {
     FRIEND: () => "/friend",
     MYPAGE: () => "/mypage",
 
-    COMPLETE: "/sign-up/complete",
-    MIDHIGH: "/sign-up/id-card",
-    UNIVERSITY: "/sign-up/university"
+    COMPLETE: "/complete",
+    MIDHIGH: "/id-card",
+    UNIVERSITY: "/university"
 };

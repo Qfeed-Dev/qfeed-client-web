@@ -1,1 +1,1 @@
-export { default } from "../../../../components/pages/account/kakao/callback";
+export { default } from "../../../../pages-edit/account/kakao/callback";

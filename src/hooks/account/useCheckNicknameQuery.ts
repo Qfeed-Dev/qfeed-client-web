@@ -4,7 +4,7 @@ import { nicknameKeys } from "src/constants/accountKeys";
 
 interface CheckNickname {
     nickname: string;
-    abailable: boolean;
+    available: boolean;
     message: string;
 }
 
