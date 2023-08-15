@@ -8,10 +8,9 @@ export function middleware(request: NextRequest) {
 
     // request.headers.append("Authorization", `Bearer ${token}`);
     // console.log("내가만든헤더", request);
-
-    if (!isLoggedIn && pathname.match("/((?!account).*)")) {
-        return NextResponse.redirect(new URL("/account", request.url));
-    }
+    // if (!isLoggedIn && pathname.match("/((?!account).*)")) {
+    //     return NextResponse.redirect(new URL("/account", request.url));
+    // }
     return NextResponse.next();
 }
 
