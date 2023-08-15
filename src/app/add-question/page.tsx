@@ -6,7 +6,7 @@ import Textarea from "src/components/Textarea";
 import Input from "src/components/Input";
 import { useState } from "react";
 import Button from "src/components/Button";
-import Timer from "src/components/pages/question/Timer";
+import Timer from "src/pages-edit/question/Timer";
 import { colors } from "styles/theme";
 import { Text } from "src/components/common/Text";
 

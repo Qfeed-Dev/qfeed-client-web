@@ -1,5 +1,5 @@
 "use client";
-import NewAlarm from "src/components/pages/alarm/NewAlarm";
+import NewAlarm from "src/pages-edit/alarm/NewAlarm";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import styled from "styled-components";

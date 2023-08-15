@@ -1,8 +1,8 @@
 "use client";
 import styled from "styled-components";
 import VoteButton from "src/components/Button/VoteButton";
-import ProfileTitle from "src/components/pages/question/ProfileTitle";
-import Question from "src/components/pages/question/Question";
+import ProfileTitle from "src/pages-edit/question/ProfileTitle";
+import Question from "src/pages-edit/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
