@@ -22,12 +22,12 @@ const Login = () => {
                             카카오 로그인
                         </Text>
                     </LoginButton>
-                    <LoginButton background="#03C75A" href={""}>
+                    <LoginButton background="#03C75A" href={"/"}>
                         <Text typo="Subtitle1b" color="light_qwhite">
                             네이버 로그인
                         </Text>
                     </LoginButton>
-                    <LoginButton background="white" href={""}>
+                    <LoginButton background="white" href={"/"}>
                         <Text typo="Subtitle1b" color="light_qblack">
                             애플 로그인
                         </Text>
