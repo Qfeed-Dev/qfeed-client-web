@@ -51,7 +51,11 @@ const University = () => {
                 options={SCHOOL_YEAR_OPTIONS}
             />
             <ButtonFillLarge
-                state={school.value ? "active" : "disabled"}
+                state={
+                    school.value && department.value && grade.value
+                        ? "active"
+                        : "disabled"
+                }
                 text="다음"
                 onClick={handleClickNext}
             />

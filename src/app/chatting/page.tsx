@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import Icon from "src/components/Icon";
-import BackTitle from "src/components/pages/chatting/BackTitle";
-import ChattingBox from "src/components/pages/chatting/ChattingBox";
-import Question from "src/components/pages/chatting/Question";
+import BackTitle from "src/pages-edit/chatting/BackTitle";
+import ChattingBox from "src/pages-edit/chatting/ChattingBox";
+import Question from "src/pages-edit/chatting/Question";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
