@@ -4,9 +4,19 @@ export default function useDisplaySize() {
     const [width, setWidth] = useState<number>(0);
     const [height, setHeight] = useState<number>(0);
 
-    useEffect(() => {
-        setWidth(window.innerWidth > 600 ? 600 : window.innerWidth);
+    const handleResize = () => {
+        setWidth(window.innerWidth > 820 ? 820 : window.innerWidth);
         setHeight(window.innerHeight);
+    };
+
+    useEffect(() => {
+        setWidth(window.innerWidth > 820 ? 820 : window.innerWidth);
+        setHeight(window.innerHeight);
+
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     return { width, height };
