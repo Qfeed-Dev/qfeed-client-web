@@ -3,19 +3,26 @@ import styled from "styled-components";
 import VoteButton from "src/components/Button/VoteButton";
 import ProfileTitle from "src/pages-edit/question/ProfileTitle";
 import Question from "src/pages-edit/question/Question";
-import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import { useState } from "react";
 import Image from "src/components/Image";
+import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
-    const [selected, setSelected] = useState<number>(-1);
-    const [type, setType] = useState<string>("default");
-    // const imageUrl = "https://i.ibb.co/0Z6FNN7/60pt.png";
-    const imageUrl = null;
+    const searchParams = useSearchParams();
+    const id = searchParams.get("id");
 
-    return (
+    const { data, isLoading } = useGetQuestionsId({ id });
+    console.log(data);
+    const imageUrl = null;
+    // data?.backgroundImage;
+
+    const [selected, setSelected] = useState<number>(-1);
+    const [type, setType] = useState<string>(imageUrl ? "primary" : "default");
+
+    return isLoading ? undefined : (
         <>
             {imageUrl && (
                 <ImageWrapper>
@@ -27,18 +34,13 @@ export default function Page() {
                 <BackTitle type="profile" reportType="report">
                     <ProfileTitle />
                 </BackTitle>
-
-                {/* <SlideLine /> */}
-                <Spacing size={4} />
-
-                <Spacing size={50} />
-
+                <Spacing size={54} />
                 <Question />
             </QuestionWrapper>
 
             <BottomButton>
                 <BottomInner>
-                    {["", "", ""].map((data: any, idx: number) => {
+                    {data?.info?.choiceList?.map((d: any, idx: number) => {
                         return (
                             <VoteButton
                                 key={idx}

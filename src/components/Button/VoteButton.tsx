@@ -2,6 +2,7 @@
 import { forwardRef } from "react";
 import styled from "styled-components";
 import { colors, repeatQuestionColor } from "styles/theme";
+import { match } from "ts-pattern";
 
 interface Props {
     idx: number;
@@ -18,35 +19,41 @@ const VoteButton = forwardRef(function Button(
         <VoteButtonWrapper
             onClick={onClick}
             color={
-                props.top && !(type === "default")
-                    ? action
-                        ? colors.light_qblack
-                        : colors.light_qwhite
-                    : idx === props.selected
-                    ? colors.light_qblack
-                    : action
-                    ? colors.light_qwhite
-                    : colors.light_qwhite
+                match(type)
+                    .with("primary", () => colors.light_qblack)
+                    .with("default", () => colors.light_qblack)
+                    .otherwise(() => colors.light_qblack)
+                // "light_qblack"
+                // props.top && !(type === "default")
+                //     ? action
+                //         ? colors.light_qblack
+                //         : colors.light_qwhite
+                //     : idx === props.selected
+                //     ? colors.light_qblack
+                //     : action
+                //     ? colors.light_qwhite
+                //     : colors.light_qwhite
             }
             backgroundColor={
-                props.top && !(type === "default")
-                    ? action
-                        ? repeatQuestionColor[idx % 6]
-                        : colors.line_white_70
-                    : idx === props.selected
-                    ? action
-                        ? colors.line_white_70
-                        : repeatQuestionColor[idx % 6]
-                    : action
-                    ? colors.line_black_50
-                    : colors.light_gray2
+                match(type)
+                    .with("primary", () => colors.line_white_70)
+                    .with("default", () => repeatQuestionColor[idx % 6])
+                    .otherwise(() => colors.line_white_70)
+                // props.top && !(type === "default")
+                //     ? action
+                //         ? repeatQuestionColor[idx % 6]
+                //         : colors.line_white_70
+                //     : idx === props.selected
+                //     ? action
+                //         ? colors.line_white_70
+                //         : repeatQuestionColor[idx % 6]
+                //     : action
+                //     ? colors.line_black_50
+                //     : colors.light_gray2
             }
         >
             <VoteButtonInner>
                 <TextWrapper>{children}</TextWrapper>
-                {/* {type === "secondary" && idx === props.selected && (
-                    <CheckWrapper>svg</CheckWrapper>
-                )} */}
                 {type !== "primary" && idx === props.selected && (
                     <CheckWrapper>svg</CheckWrapper>
                 )}

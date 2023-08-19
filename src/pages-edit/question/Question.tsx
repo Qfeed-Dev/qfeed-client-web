@@ -2,8 +2,11 @@
 import { Text } from "src/components/common/Text";
 import { colors } from "styles/theme";
 import styled from "styled-components";
+import { useSearchParams } from "next/navigation";
 
 export default function Question() {
+    const searchParams = useSearchParams();
+
     return (
         <QuestionWrapper>
             <Text typo="Headline1b" color="light_qwhite">
