@@ -1,35 +1,37 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { Text } from "src/components/common/Text";
-import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
-import useDisplaySize from "src/hooks/useDisplaySize";
+import { Route } from "src/constants/Route";
 import styled from "styled-components";
 import { colors, repeatBackgroundColor, typo } from "styles/theme";
 
 interface Props {
     idx: number;
     data: any;
-    onClick: () => void;
 }
 
-const QfeedFrame = ({ idx, data, onClick }: Props) => {
-    const { width } = useDisplaySize();
-    const imageUrl = "https://i.ibb.co/0Z6FNN7/60pt.png";
-    // const imageUrl = null;
+const QfeedFrame = ({ idx, data }: Props) => {
+    const router = useRouter();
+    const imageUrl = data.backgroundImage;
+
+    const writeDay = new Date(data.updatedAt);
+    const today = new Date();
+    const pastTime =
+        (today.getDate() - writeDay.getDate()) * 24 +
+        today.getHours() -
+        writeDay.getHours();
+
+    const handleClickFrame = () => {
+        router.push(`${Route.QUESTION()}?id=${data.id}`);
+    };
 
     return (
         <QfeedFrameWrapper
-            onClick={onClick}
+            onClick={handleClickFrame}
             repeatBackgroundColor={repeatBackgroundColor[idx]}
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
-                {/* <ImageWrapper>
-                    <Image
-                        type="home"
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                        // height={"100%"}
-                    />
-                </ImageWrapper> */}
                 <QfeedFrameInner
                     imageUrl={imageUrl}
                     backgroundColor={repeatBackgroundColor[idx]}
@@ -45,7 +47,7 @@ const QfeedFrame = ({ idx, data, onClick }: Props) => {
                         typo="Caption1r"
                         color={imageUrl ? "light_qwhite" : "light_qblack"}
                     >
-                        {data.title}
+                        {pastTime}시간 전
                     </Text>
                     <Spacing size={27} />
                     <CountWrapper>
@@ -56,7 +58,7 @@ const QfeedFrame = ({ idx, data, onClick }: Props) => {
                                     imageUrl ? "light_qwhite" : "light_qblack"
                                 }
                             >
-                                {data.answer}명 응답
+                                {0}명 응답
                             </Text>
                         </div>
                     </CountWrapper>
@@ -68,7 +70,6 @@ const QfeedFrame = ({ idx, data, onClick }: Props) => {
 
 const QfeedFrameWrapper = styled.div<{ repeatBackgroundColor: any }>`
     height: calc(100% + 20px);
-    // position: relative;
     border-radius: 10px;
     background-color: ${({ repeatBackgroundColor }) => repeatBackgroundColor};
 `;

@@ -35,8 +35,21 @@ qFeedAxios.interceptors.response.use(
             }
             case 502:
             case 503:
-            // window.location.href = "/";
+                // window.location.href = "/";
+                switch (
+                    err.response?.status
+                    // case 401: {
+                    //     if (getCookie()) {
+                    //         deleteCookie();
+                    //         window.location.href = "/account";
+                    //     }
+                    // }
+                    // case 502:
+                    // case 503:
+                    //     window.location.href = "/";
+                ) {
+                }
+                return Promise.reject(error);
         }
-        return Promise.reject(error);
     }
 );
