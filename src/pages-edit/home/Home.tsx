@@ -12,16 +12,8 @@ import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import Icon from "src/components/Icon";
-
-const HomeDatas = [
-    { title: "기말고사에 솔직히 족보 봤다", answer: 0 },
-    { title: "기말고사에 솔직히 족보 봤다고 생각하는 사람", answer: 0 },
-    { title: "기말고사에 솔", answer: 100 },
-    { title: "기말고사에 솔직히 족보 봤다", answer: 100 },
-    { title: "기말고사에 솔", answer: 10 },
-    { title: "기말고사에 솔직히 족보 봤다고 생각하는 사람", answer: 100 },
-    { title: "기말고사에 솔", answer: 10 }
-];
+import { useGetQuestions } from "src/hooks/home/useGetQuestions";
+import { globalValue } from "src/constants/globalValue";
 
 export default function Home() {
     const router = useRouter();
@@ -33,14 +25,14 @@ export default function Home() {
     const handleClickBasicQuestion = () => {
         router.push(Route.QUESTION_FRIEND());
     };
-    const handleClickFrame = () => {
-        router.push(Route.QUESTION());
-    };
     const handleClickPlus = () => {
         router.push(Route.ADD_QUESTION());
     };
 
-    return (
+    const { data, isLoading } = useGetQuestions();
+    console.log(data);
+
+    return isLoading ? undefined : (
         <>
             <Spacing size={50} />
             <HomeTitle />
@@ -56,19 +48,12 @@ export default function Home() {
                 <Spacing size={14} />
 
                 <StackGrid
-                    columnWidth={(width - 45) / 2}
+                    columnWidth={Math.floor((width - 45) / 2)}
                     gutterWidth={12}
                     gutterHeight={14}
                 >
-                    {HomeDatas.map((data: any, idx: number) => {
-                        return (
-                            <QfeedFrame
-                                key={idx}
-                                idx={idx}
-                                data={data}
-                                onClick={handleClickFrame}
-                            />
-                        );
+                    {data.data.map((data: any, idx: number) => {
+                        return <QfeedFrame key={idx} idx={idx} data={data} />;
                     })}
                 </StackGrid>
 
@@ -86,7 +71,7 @@ export default function Home() {
 }
 
 const HomeWrapper = styled.div`
-    height: 100%;
+    height: calc(100% - ${globalValue.bottomSheetHeight});
     margin: 0 auto;
     padding: 0 16px;
     position: relative;
