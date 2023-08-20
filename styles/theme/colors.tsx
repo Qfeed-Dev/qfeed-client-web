@@ -1,4 +1,4 @@
-import { TypeOfColor } from "./theme";
+import { KeyOfColor, TypeOfColor } from "./theme";
 
 const hexToRGBA = (color: string, opacity: number) => {
     const r = parseInt(color.slice(1, 3), 16);
@@ -34,7 +34,7 @@ export const colors = {
 } as const;
 
 // 12 개
-export const repeatBackgroundColor = [
+export const repeatBackgroundColor: Partial<KeyOfColor>[] = [
     // colors.primary_qpink,
     // colors.primary_qorange,
     // colors.primary_qblue,

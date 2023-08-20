@@ -59,7 +59,7 @@ const Title = styled(Text)`
 
 const HintItem = styled(Flex)<{ idx: number }>`
     height: 50px;
-    background: ${({ idx }) => repeatBackgroundColor[idx]};
+    background: ${({ idx }) => colors[repeatBackgroundColor[idx % 12]]};
 
     border-radius: 10px;
     overflow: hidden;
