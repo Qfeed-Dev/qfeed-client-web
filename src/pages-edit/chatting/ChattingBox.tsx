@@ -1,8 +1,14 @@
 import Text from "src/components/common/Text";
 import styled from "styled-components";
-import { colors } from "styles/theme";
+import { KeyOfColor, colors } from "styles/theme";
 
-export default function ChattingBox({ mine, title, description }: any) {
+interface PropType {
+    mine: boolean;
+    title: string;
+    description: string;
+}
+
+export default function ChattingBox({ mine, title, description }: PropType) {
     return (
         <BoxWrapper color={mine ? "light_gray2" : "primary_qyellow"}>
             {title ? (
@@ -28,10 +34,10 @@ export default function ChattingBox({ mine, title, description }: any) {
     );
 }
 
-const BoxWrapper = styled.div<{ color: any }>`
+const BoxWrapper = styled.div<{ color: KeyOfColor }>`
     width: 100%;
     padding: 16px;
 
     border-radius: 10px;
-    background-color: ${({ color }) => colors[color]};
+    background-color: ${({ color }) => color && colors[color]};
 `;
