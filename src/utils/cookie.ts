@@ -1,9 +1,10 @@
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 
-export const setAccessToken = (accessToken: string) => {
+export const setAccessToken = (accessToken: string, expires: string) => {
     return cookies.set("accessToken", accessToken, {
-        path: "/"
+        path: "/",
+        expires: new Date(expires)
     });
 };
 
