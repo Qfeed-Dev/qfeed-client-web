@@ -9,6 +9,7 @@ import { colors, repeatBackgroundColor } from "styles/theme";
 
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 export default function SelectDetailPage({
     params
@@ -25,33 +26,28 @@ export default function SelectDetailPage({
         );
     };
     return (
-        <>
-            <Flex direction="column" align="center" gap={40}>
-                <Title typo="Headline1b">
-                    애인에게 가장 잘 해줄 것 같은 사람은?
-                </Title>
-                <Flex direction="column" gap={16}>
-                    {[0, 1, 2, 3, 5].map((idx: number) => (
-                        <HintItem
-                            key={idx}
-                            idx={idx}
-                            onClick={handleClickShowHint}
-                        >
-                            <Person typo="Subtitle2b" color="light_qblack">
-                                02년생 여자
-                            </Person>
-                            <Message>아이콘</Message>
-                            <Hint width={"auto"}>
-                                <HintText typo="Subtitle2b" idx={idx}>
-                                    첫 번째 글자 ㅁ
-                                </HintText>
-                            </Hint>
-                        </HintItem>
-                    ))}
-                </Flex>
-                <BottomNavigation />
+        <Flex direction="column" align="center" gap={94}>
+            <NavigationTopBack rightIcon={<div>아이콘</div>} />
+            <Title typo="Headline1b">
+                애인에게 가장 잘 해줄 것 같은 사람은?
+            </Title>
+            <Flex direction="column" gap={16}>
+                {[0, 1, 2, 3, 5].map((idx: number) => (
+                    <HintItem key={idx} idx={idx} onClick={handleClickShowHint}>
+                        <Person typo="Subtitle2b" color="light_qblack">
+                            02년생 여자
+                        </Person>
+                        <Message>아이콘</Message>
+                        <Hint width={"auto"}>
+                            <HintText typo="Subtitle2b" idx={idx}>
+                                첫 번째 글자 ㅁ
+                            </HintText>
+                        </Hint>
+                    </HintItem>
+                ))}
             </Flex>
-        </>
+            <BottomNavigation />
+        </Flex>
     );
 }
 
