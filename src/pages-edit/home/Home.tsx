@@ -5,7 +5,7 @@ import BottomNavigation from "src/components/BottomNavigation";
 import BasicQuestion from "src/pages-edit/home/components/BasicQuestion";
 import Filter from "./components/Filter";
 import HomeTitle from "src/pages-edit/home/components/HomeTitle";
-import QfeedFrame from "./components/QfeedFrame";
+import QFeedFrame from "./components/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
@@ -14,10 +14,12 @@ import useDisplaySize from "src/hooks/useDisplaySize";
 import Icon from "src/components/Icon";
 import { useGetQuestions } from "src/hooks/home/useGetQuestions";
 import { globalValue } from "src/constants/globalValue";
+import { useState } from "react";
 
 export default function Home() {
     const router = useRouter();
     const { width } = useDisplaySize();
+    const [isSort, setIsSort] = useState(true);
 
     const handleClickPickMe = () => {
         router.push(Route.MYPAGE());
@@ -30,21 +32,25 @@ export default function Home() {
     };
 
     const { data, isLoading } = useGetQuestions();
-    console.log(data);
 
     return isLoading ? undefined : (
         <>
             <Spacing size={50} />
             <HomeTitle />
             <HomeWrapper>
-                <BasicQuestion type="pick-me" onClick={handleClickPickMe} />
+                <BasicQuestion
+                    type="pick-me"
+                    count={8}
+                    onClick={handleClickPickMe}
+                />
                 <BasicQuestion
                     type="question"
+                    count={9}
                     onClick={handleClickBasicQuestion}
                 />
                 <Spacing size={20} />
 
-                <Filter />
+                <Filter isSort={isSort} setIsSort={setIsSort} />
                 <Spacing size={14} />
 
                 <StackGrid
@@ -52,12 +58,12 @@ export default function Home() {
                     gutterWidth={12}
                     gutterHeight={14}
                 >
-                    {data.data.map((data: any, idx: number) => {
-                        return <QfeedFrame key={idx} idx={idx} data={data} />;
+                    {data?.data?.map((data: any, idx: number) => {
+                        return <QFeedFrame key={idx} idx={idx} data={data} />;
                     })}
                 </StackGrid>
 
-                <Spacing size={68} />
+                <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 
             <PlusButtonWrapper>
@@ -94,7 +100,7 @@ const PlusButton = styled.div`
     padding-top: 16px;
 
     position: absolute;
-    right: 0;
+    right: 17px;
     bottom: 64px;
 
     border-radius: 50%;

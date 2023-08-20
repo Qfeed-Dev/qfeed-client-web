@@ -35,18 +35,30 @@ export const colors = {
 
 // 12 개
 export const repeatBackgroundColor = [
-    colors.primary_qpink,
-    colors.primary_qorange,
-    colors.primary_qblue,
-    colors.primary_qyellow,
-    colors.primary_qyellow,
-    colors.primary_qgreen,
-    colors.primary_qpink,
-    colors.primary_qred,
-    colors.primary_qorange,
-    colors.primary_qblue,
-    colors.primary_qred,
-    colors.primary_qgreen
+    // colors.primary_qpink,
+    // colors.primary_qorange,
+    // colors.primary_qblue,
+    // colors.primary_qyellow,
+    // colors.primary_qyellow,
+    // colors.primary_qgreen,
+    // colors.primary_qpink,
+    // colors.primary_qred,
+    // colors.primary_qorange,
+    // colors.primary_qblue,
+    // colors.primary_qred,
+    // colors.primary_qgreen
+
+    "primary_qpink",
+    "primary_qorange",
+    "primary_qblue",
+    "primary_qyellow",
+    "primary_qgreen",
+    "primary_qpink",
+    "primary_qred",
+    "primary_qorange",
+    "primary_qblue",
+    "primary_qred",
+    "primary_qgreen"
 ];
 
 export const repeatQuestionColor = [

@@ -1,26 +1,35 @@
 "use client";
-import { Text } from "src/components/common/Text";
-import Hr from "src/components/Hr";
-import { colors } from "styles/theme";
 import styled from "styled-components";
-import { match } from "ts-pattern";
+import { colors } from "styles/theme";
+import Hr from "src/components/Hr";
+import { Text } from "src/components/common/Text";
 
 interface Props {}
 
-const Filter = ({}: Props) => {
+const Filter = ({ isSort, setIsSort }: any) => {
     return (
         <FilterWrapper>
-            <Text typo="Subtitle2r" color="light_qwhite">
-                최신순
-            </Text>
+            <div onClick={() => setIsSort(true)}>
+                <Text
+                    typo={isSort ? "Subtitle2b" : "Subtitle2r"}
+                    color="light_qwhite"
+                >
+                    최신순
+                </Text>
+            </div>
 
             <Menu style={{ padding: "5px 0" }}>
                 <Hr horizonal={true} type="primary" />
             </Menu>
 
-            <Text typo="Subtitle2r" color="light_qwhite">
-                인기순
-            </Text>
+            <div onClick={() => setIsSort(false)}>
+                <Text
+                    typo={isSort ? "Subtitle2r" : "Subtitle2b"}
+                    color="light_qwhite"
+                >
+                    인기순
+                </Text>
+            </div>
         </FilterWrapper>
     );
 };
