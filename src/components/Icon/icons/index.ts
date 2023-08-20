@@ -1,11 +1,18 @@
 export { default as Alarm } from "./Alarm";
 export { default as LeftArrow } from "./LeftArrow";
+export { default as RightArrow } from "./RightArrow";
 export { default as HomePlus } from "./HomePlus";
 export { default as Message } from "./Message";
 export { default as Dots } from "./Dots";
 export { default as AddChat } from "./AddChat";
 export { default as CoinChat } from "./CoinChat";
 export { default as HeartArrow } from "./HeartArrow";
+
+// images
+export { default as AngelImage } from "./images/AngelImage";
+export { default as QFeedImage } from "./images/QFeedImage";
+export { default as QFeedImage2 } from "./images/QFeedImage2";
+export { default as WaveImage } from "./images/WaveImage";
 
 // bottom navigation
 export { default as Home } from "./bottomNavigation/Home";

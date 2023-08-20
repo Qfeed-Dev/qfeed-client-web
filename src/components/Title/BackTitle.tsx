@@ -44,9 +44,7 @@ const BackTitle = forwardRef(function Div(
                                     </Text>
                                 </Menu>
                             ) : (
-                                <div
-                                    style={{ width: "100%", margin: "0 16px" }}
-                                >
+                                <div style={{ width: "100%", marginRight: 16 }}>
                                     {children}
                                 </div>
                             )}

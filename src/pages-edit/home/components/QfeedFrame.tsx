@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Text } from "src/components/common/Text";
+import Icon from "src/components/Icon";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
 import styled from "styled-components";
@@ -15,7 +16,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
     const router = useRouter();
     const imageUrl = data.backgroundImage;
 
-    const writeDay = new Date(data.updatedAt);
+    const writeDay = new Date(data.createdAt);
     const today = new Date();
     const pastTime =
         (today.getDate() - writeDay.getDate()) * 24 +
@@ -29,12 +30,12 @@ const QfeedFrame = ({ idx, data }: Props) => {
     return (
         <QfeedFrameWrapper
             onClick={handleClickFrame}
-            repeatBackgroundColor={repeatBackgroundColor[idx]}
+            repeatBackgroundColor={colors[repeatBackgroundColor[idx % 12]]}
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
                 <QfeedFrameInner
                     imageUrl={imageUrl}
-                    backgroundColor={repeatBackgroundColor[idx]}
+                    backgroundColor={colors[repeatBackgroundColor[idx % 12]]}
                 >
                     <Text
                         typo="Headline2b"
@@ -55,21 +56,35 @@ const QfeedFrame = ({ idx, data }: Props) => {
                             <Text
                                 typo="Subtitle1b"
                                 color={
-                                    imageUrl ? "light_qwhite" : "light_qblack"
+                                    imageUrl ? "line_white_50" : "light_qblack"
                                 }
                             >
-                                {0}명 응답
+                                {data.choiceCount}명 응답
                             </Text>
                         </div>
                     </CountWrapper>
                 </QfeedFrameInner>
             </div>
+            {data.isViewed ? undefined : (
+                <QFeedWrapper>
+                    {imageUrl ? (
+                        <Icon
+                            icon="QFeedImage"
+                            color={repeatBackgroundColor[idx % 12]}
+                            fill={repeatBackgroundColor[idx % 12]}
+                        />
+                    ) : (
+                        <Icon icon="QFeedImage2" />
+                    )}
+                </QFeedWrapper>
+            )}
         </QfeedFrameWrapper>
     );
 };
 
 const QfeedFrameWrapper = styled.div<{ repeatBackgroundColor: any }>`
     height: calc(100% + 20px);
+    position: relative;
     border-radius: 10px;
     background-color: ${({ repeatBackgroundColor }) => repeatBackgroundColor};
 `;
@@ -110,14 +125,10 @@ const CountWrapper = styled.div`
     display: flex;
 `;
 
-const Background = styled.div`
-    width: 100%;
-    height: 100%;
-    margin-right: 6px;
-
-    opacity: 0.5;
+const QFeedWrapper = styled.div`
     position: absolute;
-    background-color: ${colors.light_qwhite};
+    right: 12px;
+    bottom: 28px;
 `;
 
 export default QfeedFrame;
