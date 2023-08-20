@@ -9,7 +9,7 @@ export const useAuth = () => {
 
     const kakaoMutation = useMutation(accountAPI.getAccessToken, {
         onSuccess: (data: any) => {
-            setAccessToken(data.accessToken);
+            setAccessToken(data.accessToken, data.expireTime);
             qFeedAxios.interceptors.request.use(
                 (config) => {
                     try {
