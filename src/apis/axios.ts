@@ -1,6 +1,13 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
 import { getCookie, deleteCookie } from "src/utils/cookie";
 
+export const defaultAxios: AxiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    headers: {
+        "Content-Type": "application/json;charset=utf-8"
+    }
+});
+
 export const qFeedAxios: AxiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
     headers: {

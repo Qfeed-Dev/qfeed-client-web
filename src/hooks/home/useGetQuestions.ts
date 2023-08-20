@@ -3,7 +3,7 @@ import { getQuestions } from "src/apis/questions";
 
 export const useGetQuestions = () => {
     const { data, isLoading, error, refetch } = useQuery(
-        [location],
+        ["location"],
         async () => {
             const params: any = {};
             const result = await getQuestions();
