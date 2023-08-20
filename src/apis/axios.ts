@@ -11,6 +11,7 @@ export const defaultAxios: AxiosInstance = axios.create({
 export const qFeedAxios: AxiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
     headers: {
+        Authorization: `Bearer ${getCookie()}`,
         "Content-Type": "application/json;charset=utf-8"
     }
 });
@@ -50,8 +51,9 @@ qFeedAxios.interceptors.response.use(
             }
             case 502:
             case 503:
-                // window.location.href = "/";
-
+                {
+                    // window.location.href = "/";
+                }
                 return Promise.reject(error);
         }
     }
