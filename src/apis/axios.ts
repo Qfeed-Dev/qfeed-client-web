@@ -29,33 +29,29 @@ qFeedAxios.interceptors.response.use(
         return response;
     },
     async (error) => {
-        const err = error as AxiosError;
-        if (err.isAxiosError) {
+        const {
+            config,
+            response: { status }
+        } = error;
+
+        if (error.isAxiosError) {
             // window.location.href = "/";
         }
-        switch (err.response?.status) {
+        switch (status) {
             case 401: {
-                if (getCookie()) {
-                    deleteCookie();
+                const token = getCookie();
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                    const originalResponse = await axios.request(config);
+                    return originalResponse;
+                } else {
                     window.location.href = "/account";
                 }
             }
             case 502:
             case 503:
                 // window.location.href = "/";
-                switch (
-                    err.response?.status
-                    // case 401: {
-                    //     if (getCookie()) {
-                    //         deleteCookie();
-                    //         window.location.href = "/account";
-                    //     }
-                    // }
-                    // case 502:
-                    // case 503:
-                    //     window.location.href = "/";
-                ) {
-                }
+
                 return Promise.reject(error);
         }
     }
