@@ -1,7 +1,7 @@
 import React from "react";
 import * as icons from "src/components/Icon/icons";
 import styled, { css } from "styled-components";
-import { colors } from "styles/theme";
+import { KeyOfColor, colors } from "styles/theme";
 
 interface Props {
     icon: string;
@@ -11,8 +11,8 @@ interface Props {
     style?: any;
 
     rotate?: number;
-    fill?: string;
-    color?: string;
+    fill?: KeyOfColor;
+    color?: KeyOfColor;
 
     onClick?: any;
     onTouchEnd?: any;
@@ -53,8 +53,8 @@ const IconWrapper = styled.div<{
     width?: number;
     height?: number;
     rotate?: number;
-    fill?: any;
-    color?: any;
+    fill?: KeyOfColor;
+    color?: KeyOfColor;
     styles?: any;
 }>`
     display: flex;
@@ -73,8 +73,9 @@ const IconWrapper = styled.div<{
         height: ${({ height }) => height}px;
 
         path {
-            stroke: ${({ color }) => colors[color]};
-            fill: ${({ fill }) => colors[fill]};
+            stroke: ${({ color }) =>
+                color ? colors[color] : colors.light_qwhite};
+            fill: ${({ fill }) => (fill ? colors[fill] : colors.light_qwhite)};
         }
     }
 
