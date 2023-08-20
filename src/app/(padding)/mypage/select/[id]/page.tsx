@@ -7,31 +7,48 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { colors, repeatBackgroundColor } from "styles/theme";
 
+import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+
 export default function SelectDetailPage({
     params
 }: {
     params: { id: number };
 }) {
+    const dispatch = useAppDispatch();
+    const handleClickShowHint = () => {
+        dispatch(
+            changeVisibleType({
+                type: "bottomSheet",
+                value: [1, "hint"]
+            })
+        );
+    };
     return (
         <>
             <Flex direction="column" align="center" gap={40}>
-                {params.id}
                 <Title typo="Headline1b">
                     애인에게 가장 잘 해줄 것 같은 사람은?
                 </Title>
-                {[0, 1, 2, 3, 5].map((idx: number) => (
-                    <HintItem key={idx} idx={idx}>
-                        <Person typo="Subtitle2b" color="light_qblack">
-                            02년생 여자
-                        </Person>
-                        <Message>아이콘</Message>
-                        <Hint width={"auto"}>
-                            <HintText typo="Subtitle2b" idx={idx}>
-                                첫 번째 글자 ㅁ
-                            </HintText>
-                        </Hint>
-                    </HintItem>
-                ))}
+                <Flex direction="column" gap={16}>
+                    {[0, 1, 2, 3, 5].map((idx: number) => (
+                        <HintItem
+                            key={idx}
+                            idx={idx}
+                            onClick={handleClickShowHint}
+                        >
+                            <Person typo="Subtitle2b" color="light_qblack">
+                                02년생 여자
+                            </Person>
+                            <Message>아이콘</Message>
+                            <Hint width={"auto"}>
+                                <HintText typo="Subtitle2b" idx={idx}>
+                                    첫 번째 글자 ㅁ
+                                </HintText>
+                            </Hint>
+                        </HintItem>
+                    ))}
+                </Flex>
                 <BottomNavigation />
             </Flex>
         </>
