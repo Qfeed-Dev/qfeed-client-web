@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
-import NavigationTop from "src/components/navigations/navigation-top";
+import NavigationTop from "src/components/navigations/NavigationTopBack";
 
 import Text from "src/components/common/Text";
 import Flex from "src/components/common/Flex";

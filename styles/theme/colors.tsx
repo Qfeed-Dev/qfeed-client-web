@@ -1,3 +1,5 @@
+import { KeyOfColor, TypeOfColor } from "./theme";
+
 const hexToRGBA = (color: string, opacity: number) => {
     const r = parseInt(color.slice(1, 3), 16);
     const g = parseInt(color.slice(3, 5), 16);
@@ -6,7 +8,7 @@ const hexToRGBA = (color: string, opacity: number) => {
     return `rgba(${r}, ${g}, ${b}, ${opacity * 0.01})`;
 };
 
-export const colors: any = {
+export const colors = {
     primary_qyellow: "#EEF619",
     primary_qpink: "#FE98CA",
     primary_qorange: "#FF812F",
@@ -29,10 +31,10 @@ export const colors: any = {
     line_white_50: hexToRGBA("#FFFFFF", 50),
     line_white_30: hexToRGBA("#FFFFFF", 30),
     line_white_5: hexToRGBA("#FFFFFF", 5)
-};
+} as const;
 
 // 12 개
-export const repeatBackgroundColor = [
+export const repeatBackgroundColor: Partial<KeyOfColor>[] = [
     // colors.primary_qpink,
     // colors.primary_qorange,
     // colors.primary_qblue,
