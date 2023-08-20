@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
-import NavigationTop from "src/components/navigations/navigation-top";
+import NavigationTop from "src/components/navigations/NavigationTopBack";
 import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
 import { birthMsg, emailMsg, nameMsg, phoneMsg } from "src/constants/messages";
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
