@@ -12,8 +12,8 @@ export default function Mypage() {
             <Flex direction="column" align="center" gap={40}>
                 <InfoList />
                 <QfeedList />
+                <BottomNavigation />
             </Flex>
-            <BottomNavigation />
         </>
     );
 }
