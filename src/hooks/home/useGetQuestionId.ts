@@ -7,9 +7,7 @@ export const useGetQuestionsId = ({ id }: any) => {
         async () => {
             const params: any = {};
             const result = await getQuestionsId(id);
-            const choices = await getQuestionsIdChoices(id);
-            console.log("A");
-            return { info: result, choices: choices };
+            return result;
         },
         {
             staleTime: 1000 * 60 * 5,

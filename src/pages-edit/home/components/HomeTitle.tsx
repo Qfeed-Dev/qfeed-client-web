@@ -36,7 +36,7 @@ const HomeTitle = ({}: {}) => {
                     />
                 </ImageWrapper>
             </Menu>
-            <div style={{ display: "flex", margin: "auto 0", gap: "24px" }}>
+            <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
                 <Text
                     typo="Caption1b"
                     color="light_qwhite"

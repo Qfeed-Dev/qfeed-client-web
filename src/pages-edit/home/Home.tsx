@@ -5,7 +5,7 @@ import BottomNavigation from "src/components/BottomNavigation";
 import BasicQuestion from "src/pages-edit/home/components/BasicQuestion";
 import Filter from "./components/Filter";
 import HomeTitle from "src/pages-edit/home/components/HomeTitle";
-import QfeedFrame from "./components/QfeedFrame";
+import QFeedFrame from "./components/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
@@ -32,7 +32,6 @@ export default function Home() {
     };
 
     const { data, isLoading } = useGetQuestions();
-    console.log(data);
 
     return isLoading ? undefined : (
         <>
@@ -60,7 +59,7 @@ export default function Home() {
                     gutterHeight={14}
                 >
                     {data?.data?.map((data: any, idx: number) => {
-                        return <QfeedFrame key={idx} idx={idx} data={data} />;
+                        return <QFeedFrame key={idx} idx={idx} data={data} />;
                     })}
                 </StackGrid>
 
