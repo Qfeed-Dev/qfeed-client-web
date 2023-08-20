@@ -1,9 +1,17 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
 import { getCookie, deleteCookie } from "src/utils/cookie";
 
+export const defaultAxios: AxiosInstance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    headers: {
+        "Content-Type": "application/json;charset=utf-8"
+    }
+});
+
 export const qFeedAxios: AxiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL,
     headers: {
+        Authorization: `Bearer ${getCookie()}`,
         "Content-Type": "application/json;charset=utf-8"
     }
 });
@@ -22,32 +30,29 @@ qFeedAxios.interceptors.response.use(
         return response;
     },
     async (error) => {
-        const err = error as AxiosError;
-        if (err.isAxiosError) {
+        const {
+            config,
+            response: { status }
+        } = error;
+
+        if (error.isAxiosError) {
             // window.location.href = "/";
         }
-        switch (err.response?.status) {
+        switch (status) {
             case 401: {
-                if (getCookie()) {
-                    deleteCookie();
+                const token = getCookie();
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`;
+                    const originalResponse = await axios.request(config);
+                    return originalResponse;
+                } else {
                     window.location.href = "/account";
                 }
             }
             case 502:
             case 503:
-                // window.location.href = "/";
-                switch (
-                    err.response?.status
-                    // case 401: {
-                    //     if (getCookie()) {
-                    //         deleteCookie();
-                    //         window.location.href = "/account";
-                    //     }
-                    // }
-                    // case 502:
-                    // case 503:
-                    //     window.location.href = "/";
-                ) {
+                {
+                    // window.location.href = "/";
                 }
                 return Promise.reject(error);
         }

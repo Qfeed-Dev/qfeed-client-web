@@ -5,7 +5,7 @@ const Flex = styled.div<{
     justify?: string;
     align?: string;
     gap?: number;
-    width?: number;
+    width?: number | string;
     height?: number | string;
 }>`
     display: flex;
@@ -13,7 +13,8 @@ const Flex = styled.div<{
     justify-content: ${({ justify }) => (justify ? `${justify}` : "center")};
     align-items: ${({ align }) => (align ? `${align}` : "center")};
     gap: ${({ gap }) => (gap ? `${gap}px` : "0px")};
-    width: ${({ width }) => (width ? `${width}px` : "100%")};
+    width: ${({ width }) =>
+        typeof width === "string" ? width : width ? `${width}px` : "100%"};
     height: ${({ height }) =>
         typeof height === "string" ? height : height ? `${height}px` : "auto"};
 `;

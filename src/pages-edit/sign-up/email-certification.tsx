@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
-import NavigationTop from "src/components/navigations/navigation-top";
+import NavigationTop from "src/components/navigations/NavigationTopBack";
 import { useInput } from "src/hooks/common/useInput";
 
 const EmailCertification = () => {

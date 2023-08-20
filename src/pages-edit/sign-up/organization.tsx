@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import NavigationTop from "src/components/navigations/navigation-top";
+import NavigationTop from "src/components/navigations/NavigationTopBack";
 import Flex from "src/components/common/Flex";
 import SelectBox from "src/components/selectbox/selectbox";
 import { ORGANIZATION_OPTIONS } from "src/constants/options";

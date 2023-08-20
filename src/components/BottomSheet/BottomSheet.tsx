@@ -13,6 +13,7 @@ import Coin from "./children/Coin";
 import Frined from "./children/Friend";
 import Report from "./children/Report";
 import ReportFriend from "./children/ReportFriend";
+import Hint from "./children/Hint";
 
 interface Props {
     children?: any;
@@ -23,14 +24,16 @@ const COMPONENT_HEIGHT: any = {
     reportFriend: 331,
     coin: 324 + 30,
     friend: 325 + 60,
-    chattingCoin: 376
+    chattingCoin: 376,
+    hint: 376
 };
 const COMPONENT: any = {
     report: <Report />,
     reportFriend: <ReportFriend />,
     coin: <Coin />,
     friend: <Frined />,
-    chattingCoin: <ChattingCoin />
+    chattingCoin: <ChattingCoin />,
+    hint: <Hint />
 };
 
 const BottomSheet = forwardRef(function Div(
@@ -99,7 +102,9 @@ const BottomSheet = forwardRef(function Div(
                 height={BOTTOMSHEET_HEIGHT}
                 selectedIdx={selectedIdx}
                 backgroundColor={
-                    type === "coin" || type === "chattingCoin"
+                    type === "coin" ||
+                    type === "chattingCoin" ||
+                    type === "hint"
                         ? colors.light_gray3
                         : colors.light_gray0
                 }
