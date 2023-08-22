@@ -4,11 +4,18 @@ import Text from "src/components/common/Text";
 import styled from "styled-components";
 import { colors } from "styles/theme";
 
+import { useRouter } from "next/navigation";
+
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
 export default function FriendItem() {
+    const router = useRouter();
+
     return (
-        <FriendWrapper justify="space-between">
+        <FriendWrapper
+            justify="space-between"
+            onClick={() => router.push("/friend/1")}
+        >
             <Flex width="auto" gap={16}>
                 <ImgCover></ImgCover>
                 <Flex direction="column">
