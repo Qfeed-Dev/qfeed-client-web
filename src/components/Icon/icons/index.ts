@@ -7,6 +7,7 @@ export { default as Dots } from "./Dots";
 export { default as AddChat } from "./AddChat";
 export { default as CoinChat } from "./CoinChat";
 export { default as HeartArrow } from "./HeartArrow";
+export { default as Money } from "./Money";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";

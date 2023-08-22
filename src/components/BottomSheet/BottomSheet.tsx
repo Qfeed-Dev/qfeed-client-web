@@ -102,11 +102,12 @@ const BottomSheet = forwardRef(function Div(
                 height={BOTTOMSHEET_HEIGHT}
                 selectedIdx={selectedIdx}
                 backgroundColor={
+                    // "light_gray3"
                     type === "coin" ||
                     type === "chattingCoin" ||
                     type === "hint"
-                        ? colors.light_gray3
-                        : colors.light_gray0
+                        ? "light_gray3"
+                        : "light_gray0"
                 }
             >
                 <HandleWrapper>
@@ -197,8 +198,9 @@ const BottomSheetWrapper = styled.div<{
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx, backgroundColor }) =>
         selectedIdx !== -1
-            ? repeatBackgroundColor[selectedIdx % 12]
-            : backgroundColor};
+            ? colors["light_qwhite"]
+            : // colors[repeatBackgroundColor[selectedIdx % 12]]
+              colors[backgroundColor]};
     z-index: 999;
 
     transition: transform 300ms ease-out;

@@ -1,13 +1,20 @@
 "use client";
-import Button from "src/components/Button";
+import Text from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import Textarea from "src/components/Textarea";
+import { useAppSelector } from "src/hooks/useReduxHooks";
 import styled from "styled-components";
+import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
 
 interface Props {}
 
 const Frined = ({}: Props) => {
+    const { type, visible, actionDelay, selectedIdx } = useAppSelector(
+        (state) => state.bottomSheet
+    );
+    console.log(repeatBackgroundColor[selectedIdx % 12]);
+
     return (
         <FrinedWrapper>
             <Spacing size={12} />
@@ -30,7 +37,13 @@ const Frined = ({}: Props) => {
                 </TextareaWrapper>
 
                 <Spacing size={42} />
-                <Button type="primary">보내기</Button>
+                <ButtonBox
+                    backgroundColor={repeatBackgroundColor[selectedIdx % 12]}
+                >
+                    <Text typo="Subtitle1b" style={{ margin: "auto" }}>
+                        보내기
+                    </Text>
+                </ButtonBox>
             </Menu>
         </FrinedWrapper>
     );
@@ -51,5 +64,14 @@ const TextareaWrapper = styled.div`
 const Name = styled.div``;
 
 const QfeedId = styled.div``;
+
+const ButtonBox = styled.div<{ backgroundColor: KeyOfColor }>`
+    width: 100%;
+    height: 47px;
+    display: flex;
+
+    border-radius: 10px;
+    background-color: ${({ backgroundColor }) => colors[backgroundColor]};
+`;
 
 export default Frined;

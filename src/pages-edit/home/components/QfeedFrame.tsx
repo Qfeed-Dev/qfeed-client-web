@@ -24,6 +24,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
         writeDay.getHours();
 
     const handleClickFrame = () => {
+        // router.push(Route.QUESTION());
         router.push(`${Route.QUESTION()}?id=${data.id}`);
     };
 

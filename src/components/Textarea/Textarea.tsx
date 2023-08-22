@@ -39,7 +39,8 @@ const TextareaBox = styled.textarea<{ size: number }>`
     resize: none;
 
     border-radius: 10px;
-    background-color: ${colors.line_white_30};
+    background-color: ${colors.line_black_5};
+    // background-color: ${colors.line_white_30};
 `;
 
 const TextareaCount = styled.div`

@@ -51,7 +51,10 @@ const BasicQuestion = ({ type = "pick-me", ...props }: any) => {
                                 <span
                                     style={{ margin: "auto", display: "flex" }}
                                 >
-                                    <Icon icon="RightArrow" />
+                                    <Icon
+                                        icon="RightArrow"
+                                        color="light_qblack"
+                                    />
                                 </span>
                             </Text>
                         </BottomButton>
@@ -59,10 +62,18 @@ const BasicQuestion = ({ type = "pick-me", ...props }: any) => {
 
                     <ImageWrapper>
                         {type === "pick-me" ? (
-                            <Icon icon="AngelImage" />
+                            <Icon
+                                icon="AngelImage"
+                                fill="primary_qgreen"
+                                color="primary_qgreen"
+                            />
                         ) : (
                             // <></>
-                            <Icon icon="WaveImage" />
+                            <Icon
+                                icon="WaveImage"
+                                fill="light_qblack"
+                                color="light_qblack"
+                            />
                         )}
                     </ImageWrapper>
                 </BasicQuestionInner>

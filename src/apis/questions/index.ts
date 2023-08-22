@@ -6,9 +6,9 @@ export const getQuestions = async () =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const getQuestionsId = async (id: number) =>
+export const getQuestionsId = async (questionId: any) =>
     await qFeedAxios
-        .get(`/questions/${id}`)
+        .get(`/questions/${questionId}`)
         .then(({ data }) => data)
         .catch((err) => err.response);
 

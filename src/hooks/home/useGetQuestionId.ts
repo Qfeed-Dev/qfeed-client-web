@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getQuestionsId, getQuestionsIdChoices } from "src/apis/questions";
+import { getQuestionsId } from "src/apis/questions";
 
-export const useGetQuestionsId = ({ id }: any) => {
+export const useGetQuestionsId = ({ questionId }: any) => {
     const { data, isLoading, error, refetch } = useQuery(
         [],
         async () => {
-            const params: any = {};
-            const result = await getQuestionsId(id);
+            const result = getQuestionsId(questionId);
+            // console.log(result);
             return result;
         },
         {

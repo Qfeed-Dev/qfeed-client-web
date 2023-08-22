@@ -15,7 +15,7 @@ const Report = ({ type = "report" }: any) => {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, type === "report" ? "report" : "reportFriend"]
+                value: [1, type === "report" ? "report" : "reportFriend", -1]
             })
         );
     };

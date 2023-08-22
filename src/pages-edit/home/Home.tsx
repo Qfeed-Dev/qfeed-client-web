@@ -68,7 +68,11 @@ export default function Home() {
 
             <PlusButtonWrapper>
                 <PlusButton onClick={handleClickPlus}>
-                    <Icon icon="HomePlus" />
+                    <Icon
+                        icon="HomePlus"
+                        color="light_qblack"
+                        fill="light_qblack"
+                    />
                 </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />

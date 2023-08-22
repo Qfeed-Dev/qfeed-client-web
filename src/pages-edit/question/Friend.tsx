@@ -32,7 +32,7 @@ export default function Friend({ idx }: any) {
             backgroundColor={
                 selectedIdx && idx !== selectedIdx && visible === 1
                     ? colors.light_gray2
-                    : repeatBackgroundColor[idx % 12]
+                    : colors[repeatBackgroundColor[idx % 12]]
             }
         >
             <FriendInner>

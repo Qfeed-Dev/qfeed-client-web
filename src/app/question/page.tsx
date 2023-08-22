@@ -1,21 +1,23 @@
 "use client";
 import styled from "styled-components";
-import VoteButton from "src/components/Button/VoteButton";
 import ProfileTitle from "src/pages-edit/question/ProfileTitle";
 import Question from "src/pages-edit/question/Question";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import { useState } from "react";
 import Image from "src/components/Image";
-import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import { useSearchParams } from "next/navigation";
+import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 
 export default function Page() {
     const searchParams = useSearchParams();
     const id = searchParams.get("id");
 
-    const { data, isLoading } = useGetQuestionsId({ id });
-    console.log(data);
+    const { data: questionData, isLoading } = useGetQuestionsId({
+        questionId: Number(id)
+    });
+    // console.log(id);
+    console.log(questionData);
     const imageUrl = null;
     // data?.backgroundImage;
 
@@ -40,7 +42,7 @@ export default function Page() {
 
             <BottomButton>
                 <BottomInner>
-                    {data?.info?.choiceList?.map((d: any, idx: number) => {
+                    {/* {questionData?.info?.choiceList?.map((d: any, idx: number) => {
                         return (
                             <VoteButton
                                 key={idx}
@@ -62,7 +64,7 @@ export default function Page() {
                             // default
                             // primary, top
                         );
-                    })}
+                    })} */}
                 </BottomInner>
                 <Spacing size={52} />
             </BottomButton>
