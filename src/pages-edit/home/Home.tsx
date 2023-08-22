@@ -15,12 +15,14 @@ import Icon from "src/components/Icon";
 import { useGetQuestions } from "src/hooks/home/useGetQuestions";
 import { globalValue } from "src/constants/globalValue";
 import { useState } from "react";
+import Text from "src/components/common/Text";
 
 export default function Home() {
     const router = useRouter();
     const { width } = useDisplaySize();
     const [isSort, setIsSort] = useState(true);
     const time = 1;
+    const time2 = 1;
 
     const handleClickPickMe = () => {
         router.push(Route.MYPAGE());
@@ -69,12 +71,24 @@ export default function Home() {
             </HomeWrapper>
 
             <PlusButtonWrapper>
-                <PlusButton onClick={handleClickPlus}>
-                    <Icon
-                        icon="HomePlus"
-                        color="light_qblack"
-                        fill="light_qblack"
-                    />
+                <PlusButton time={time2} onClick={handleClickPlus}>
+                    {time2 ? (
+                        <Text
+                            typo="Caption1r"
+                            color="light_qwhite"
+                            style={{ margin: "auto", display: "flex" }}
+                        >
+                            1
+                        </Text>
+                    ) : (
+                        <div style={{ margin: "auto", display: "flex" }}>
+                            <Icon
+                                icon="HomePlus"
+                                color="light_qblack"
+                                fill="light_qblack"
+                            />
+                        </div>
+                    )}
                 </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
@@ -100,15 +114,19 @@ const PlusButtonWrapper = styled.div`
     z-index: 901;
 `;
 
-const PlusButton = styled.div`
+const PlusButton = styled.div<{ time: any }>`
     width: 60px;
     height: 60px;
-    padding-top: 16px;
+    margin: auto;
+
+    display: flex;
+    text-align: center;
 
     position: absolute;
     right: 17px;
     bottom: 64px;
 
     border-radius: 50%;
-    background-color: ${colors.light_qwhite};
+    background-color: ${({ time }) =>
+        time ? colors.light_qblack : colors.light_qwhite};
 `;
