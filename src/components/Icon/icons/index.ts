@@ -9,9 +9,12 @@ export { default as CoinChat } from "./CoinChat";
 export { default as HeartArrow } from "./HeartArrow";
 export { default as Money } from "./Money";
 export { default as Search } from "./Search";
+export { default as Camera } from "./Camera";
+export { default as Trash } from "./Trash";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";
+export { default as AngelImage2 } from "./images/AngelImage2";
 export { default as QFeedImage } from "./images/QFeedImage";
 export { default as QFeedImage2 } from "./images/QFeedImage2";
 export { default as WaveImage } from "./images/WaveImage";

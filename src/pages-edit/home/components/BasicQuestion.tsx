@@ -82,12 +82,17 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                                 fill="primary_qgreen"
                                 color="primary_qgreen"
                             />
-                        ) : (
-                            // <></>
+                        ) : type === "question" ? (
                             <Icon
                                 icon="WaveImage"
                                 fill="light_qblack"
                                 color="light_qblack"
+                            />
+                        ) : (
+                            <Icon
+                                icon="AngelImage2"
+                                fill="light_qwhite"
+                                color="light_qwhite"
                             />
                         )}
                     </ImageWrapper>

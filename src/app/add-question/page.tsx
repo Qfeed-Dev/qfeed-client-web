@@ -4,18 +4,46 @@ import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import Textarea from "src/components/Textarea";
 import Input from "src/components/Input";
-import { useState } from "react";
-import Button from "src/components/Button";
-import Timer from "src/pages-edit/question/Timer";
 import { colors } from "styles/theme";
 import { Text } from "src/components/common/Text";
 import QuestionImage from "src/components/Icon/icons/images/QuestionImage";
 import Icon from "src/components/Icon";
-
-const AddQuestionDatas = [{}, {}, {}, {}];
+import { useState } from "react";
+import Image from "src/components/Image";
 
 export default function Page() {
     const time2 = 1;
+    const [image, setImage] = useState(null);
+    // "https://i.ibb.co/0Z6FNN7/60pt.png"
+    const [question, setQuestion] = useState("");
+    const [values, setValues] = useState<any>([""]);
+
+    const handleQuestion = (e: any) => {
+        setQuestion(e.target.value);
+    };
+    const handleInput = (e: any, idx: number) => {
+        let newValues: any = [];
+        for (let i = 0; i < values.length; i++) {
+            if (i === idx) newValues.push(e.target.value);
+            else newValues.push(values[i]);
+        }
+        setValues(newValues);
+    };
+
+    const clickAddValue = () => {
+        setValues([...values, ""]);
+    };
+
+    const clickTrash = (idx: number) => {
+        if (values.length === 1) return;
+        setValues(values.filter((_: any, idx2: number) => idx !== idx2));
+    };
+
+    const clickUpload = () => {
+        console.log(image);
+        console.log(question);
+        console.log(values);
+    };
 
     return time2 ? (
         <>
@@ -92,9 +120,14 @@ export default function Page() {
         </>
     ) : (
         <>
+            {image ? (
+                <ImageBackground>
+                    <Image type="background" src={image} />
+                </ImageBackground>
+            ) : null}
             <AddQuestionWrapper>
-                <BackTitle type="default" text="생성 앙케이트 만들기" />
-                <UploadButton>
+                <BackTitle type="default" text="질문 올리기" />
+                <UploadButton onClick={clickUpload}>
                     <Text
                         typo="Subtitle1b"
                         color="light_qblack"
@@ -109,24 +142,52 @@ export default function Page() {
 
                 <Spacing size={42} />
                 <Textarea
+                    type={image ? "add-question-image" : "add-question"}
                     placeholder="원하는 질문지를 작성하세요."
                     size={140}
+                    value={question}
+                    setValue={handleQuestion}
                 />
                 <Spacing size={60} />
 
-                <PlusWrapper>
-                    {AddQuestionDatas.map((data: any, idx: number) => {
-                        return <Input idx={idx} type="add-question" />;
+                <InputWrapper>
+                    {values.map((data: any, idx: number) => {
+                        return (
+                            <Input
+                                key={idx}
+                                idx={idx}
+                                type={
+                                    image
+                                        ? "add-question-image"
+                                        : "add-question"
+                                }
+                                count={idx + 1}
+                                value={values[idx]}
+                                setValue={(e: any) => handleInput(e, idx)}
+                                clickTrash={() => clickTrash(idx)}
+                            />
+                        );
                     })}
-                    <PlusButton />
-                </PlusWrapper>
+                    {values.length < 6 ? (
+                        <PlusButton onClick={clickAddValue}>
+                            <div style={{ margin: "auto", display: "flex" }}>
+                                <Icon
+                                    icon="HomePlus"
+                                    width={14}
+                                    height={14}
+                                    color="light_qblack"
+                                    fill="light_qblack"
+                                />
+                            </div>
+                        </PlusButton>
+                    ) : null}
+                </InputWrapper>
                 <Spacing size={92} />
             </AddQuestionWrapper>
 
             <BottomButton timer={time2}>
                 <BottomInner timer={time2}>
-                    <div>Hi</div>
-                    <div>Hi</div>
+                    <Icon icon="Camera" />
                 </BottomInner>
             </BottomButton>
         </>
@@ -174,13 +235,20 @@ const CoinButton = styled.div`
 `;
 
 //
+const ImageBackground = styled.div`
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.3;
+    position: absolute;
+`;
 const AddQuestionWrapper = styled.div`
     height: 100%;
     padding: 0 16px;
     position: relative;
 `;
 
-const PlusWrapper = styled.div`
+const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -190,6 +258,7 @@ const PlusButton = styled.div`
     width: 100%;
     height: 50px;
 
+    display: flex;
     border-radius: 10px;
     background-color: ${colors.light_qwhite};
 `;
@@ -202,7 +271,7 @@ const BottomButton = styled.div<{ timer: any }>`
     left: 0;
     bottom: 0;
 
-    background-color: ${colors.light_qblack};
+    // background-color: ${colors.light_qblack};
 `;
 
 const BottomInner = styled.div<{ timer: any }>`

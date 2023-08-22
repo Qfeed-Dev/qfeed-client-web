@@ -1,19 +1,56 @@
 "use client";
-import { colors } from "styles/theme";
+import { colors, KeyOfColor } from "styles/theme";
 import styled from "styled-components";
 import { Text } from "../common/Text";
+import { match } from "ts-pattern";
 
 interface Props {
+    type: string;
     placeholder: string;
     size: number;
+    value: string;
+    setValue: Function;
 }
 
-const Textarea = ({ placeholder, size }: Props) => {
+const Textarea = ({
+    type = "question-friend",
+    placeholder,
+    size,
+    value,
+    setValue
+}: Props) => {
     return (
         <TextareaWrapper>
-            <TextareaBox placeholder={placeholder} size={size} />
+            <TextareaBox
+                value={value}
+                onChange={setValue}
+                placeholder={placeholder}
+                size={size}
+                color={match(type)
+                    .with("question-friend", () => "light_qblack")
+                    .with("add-question", () => "light_qwhite")
+                    .with("add-question-image", () => "light_qblack")
+                    .otherwise(() => "light_qblack")}
+                placeholderColor={match(type)
+                    .with("question-friend", () => "light_gray2")
+                    .with("add-question", () => "light_gray2")
+                    .with("add-question-image", () => "light_qblack")
+                    .otherwise(() => "light_qblack")}
+                backgroundColor={match(type)
+                    .with("question-friend", () => "line_black_5")
+                    .with("add-question", () => "line_white_5")
+                    .with("add-question-image", () => "line_white_50")
+                    .otherwise(() => "line_black_5")}
+            />
             <TextareaCount>
-                <Text typo="Caption2r" color="light_gray2">
+                <Text
+                    typo="Caption2r"
+                    color={
+                        type !== "add-question-image"
+                            ? "light_gray2"
+                            : "light_qblack"
+                    }
+                >
                     0/100
                 </Text>
             </TextareaCount>
@@ -23,13 +60,15 @@ const Textarea = ({ placeholder, size }: Props) => {
 
 const TextareaWrapper = styled.div`
     width: 100%;
-    // padding: 10px;
     position: relative;
-
-    // background-color: ${colors.line_white_30};
 `;
 
-const TextareaBox = styled.textarea<{ size: number }>`
+const TextareaBox = styled.textarea<{
+    size: number;
+    color: KeyOfColor;
+    placeholderColor: KeyOfColor;
+    backgroundColor: KeyOfColor;
+}>`
     width: 100%;
     height: ${({ size }) => size + "px"};
     margin: 0;
@@ -39,8 +78,12 @@ const TextareaBox = styled.textarea<{ size: number }>`
     resize: none;
 
     border-radius: 10px;
-    background-color: ${colors.line_black_5};
-    // background-color: ${colors.line_white_30};
+    color: ${({ color }) => colors[color]};
+    background-color: ${({ backgroundColor }) => colors[backgroundColor]};
+
+    &::placeholder {
+        color: ${({ placeholderColor }) => colors[placeholderColor]};
+    }
 `;
 
 const TextareaCount = styled.div`
