@@ -20,6 +20,7 @@ export default function Home() {
     const router = useRouter();
     const { width } = useDisplaySize();
     const [isSort, setIsSort] = useState(true);
+    const time = 1;
 
     const handleClickPickMe = () => {
         router.push(Route.MYPAGE());
@@ -44,8 +45,9 @@ export default function Home() {
                     onClick={handleClickPickMe}
                 />
                 <BasicQuestion
-                    type="question"
+                    type={time ? "question-none" : "question"}
                     count={9}
+                    time={time}
                     onClick={handleClickBasicQuestion}
                 />
                 <Spacing size={20} />

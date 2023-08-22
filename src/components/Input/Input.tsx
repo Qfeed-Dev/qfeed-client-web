@@ -3,6 +3,7 @@ import { colors, repeatQuestionColor, typo } from "styles/theme";
 import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
+import Icon from "../Icon";
 
 interface Props {
     type: "question-friend" | "add-question";
@@ -48,7 +49,7 @@ const Input = ({ type = "question-friend", ...props }: any) => {
                             0/20
                         </Text>
                     )}
-                    <div>Hi</div>
+                    <Icon icon="Search" />
                 </div>
             </InputInner>
         </InputWrapper>
