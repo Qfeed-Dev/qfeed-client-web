@@ -7,7 +7,7 @@ import {
     changeVisible
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
-import { colors, repeatBackgroundColor } from "styles/theme";
+import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
 import ChattingCoin from "./children/ChattingCoin";
 import Coin from "./children/Coin";
 import Frined from "./children/Friend";
@@ -105,12 +105,21 @@ const BottomSheet = forwardRef(function Div(
                     type === "coin" ||
                     type === "chattingCoin" ||
                     type === "hint"
-                        ? colors.light_gray3
-                        : colors.light_gray0
+                        ? "light_gray3"
+                        : "light_gray0"
                 }
             >
                 <HandleWrapper>
-                    <Handle selectedIdx={selectedIdx} />
+                    <Handle
+                        selectedIdx={selectedIdx}
+                        backgroundColor={
+                            type === "coin" ||
+                            type === "chattingCoin" ||
+                            type === "hint"
+                                ? "light_gray1"
+                                : "light_gray1"
+                        }
+                    />
                 </HandleWrapper>
                 <ContentWrapper ref={content}>{COMPONENT[type]}</ContentWrapper>
             </BottomSheetWrapper>
@@ -167,22 +176,28 @@ const HandleWrapper = styled.div`
     background-color: transparent;
 `;
 
-const Handle = styled.div<{ selectedIdx: number }>`
+const Handle = styled.div<{ selectedIdx: number; backgroundColor: KeyOfColor }>`
     width: 73px;
     height: 4px;
     margin: auto;
     display: flex;
 
-    background-color: ${({ selectedIdx }) =>
-        selectedIdx !== -1 ? colors.line_white_50 : colors.light_gray1};
+    background-color: ${({ selectedIdx, backgroundColor }) =>
+        selectedIdx !== -1
+            ? colors["light_qwhite"]
+            : // colors[repeatBackgroundColor[selectedIdx % 12]]
+              colors[backgroundColor]};
 `;
+
+// background-color: ${({ selectedIdx }) =>
+// selectedIdx !== -1 ? colors.line_white_50 : colors.light_gray1};
 
 const BottomSheetWrapper = styled.div<{
     height: number;
     actionDelay: number;
     visible: number;
     selectedIdx: number;
-    backgroundColor: any;
+    backgroundColor: KeyOfColor;
 }>`
     width: 100%;
     height: ${({ height }) => height + "px"};
@@ -197,8 +212,9 @@ const BottomSheetWrapper = styled.div<{
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx, backgroundColor }) =>
         selectedIdx !== -1
-            ? repeatBackgroundColor[selectedIdx % 12]
-            : backgroundColor};
+            ? colors["light_qwhite"]
+            : // colors[repeatBackgroundColor[selectedIdx % 12]]
+              colors[backgroundColor]};
     z-index: 999;
 
     transition: transform 300ms ease-out;

@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef } from "react";
-import { colors } from "styles/theme";
+import { colors, KeyOfColor } from "styles/theme";
 import styled from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
@@ -19,13 +19,13 @@ const Button = forwardRef(function Button(
         <ButtonWrapper
             onClick={onClick}
             color={match(type)
-                .with("primary", () => colors.light_qblack)
-                .with("secondary", () => colors.light_qwhite)
-                .otherwise(() => colors.light_qblack)}
+                .with("primary", () => "light_qblack")
+                .with("secondary", () => "light_qwhite")
+                .otherwise(() => "light_qblack")}
             backgroundColor={match(type)
-                .with("primary", () => colors.light_qwhite)
-                .with("secondary", () => colors.light_qblack)
-                .otherwise(() => colors.light_qwhite)}
+                .with("primary", () => "light_qwhite")
+                .with("secondary", () => "light_qblack")
+                .otherwise(() => props.backgroundColor)}
         >
             <Text typo="Subtitle1b" style={{ margin: "auto" }}>
                 {children}
@@ -35,17 +35,17 @@ const Button = forwardRef(function Button(
 });
 
 const ButtonWrapper = styled.div<{
-    color: any;
-    backgroundColor: any;
+    color: KeyOfColor;
+    backgroundColor: KeyOfColor;
 }>`
     width: 100%;
     height: 47px;
     display: flex;
 
-    color: ${({ color }) => color};
+    color: ${({ color }) => colors[color]};
     border: 1px solid ${colors.light_qwhite};
     border-radius: 10px;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ backgroundColor }) => colors[backgroundColor]};
 `;
 
 export default Button;

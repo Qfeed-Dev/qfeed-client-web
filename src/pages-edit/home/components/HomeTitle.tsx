@@ -17,10 +17,11 @@ const HomeTitle = ({}: {}) => {
     };
 
     const handleClickCoin = () => {
+        console.log("A");
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "coin"]
+                value: [1, "coin", -1]
             })
         );
     };
@@ -37,20 +38,16 @@ const HomeTitle = ({}: {}) => {
                 </ImageWrapper>
             </Menu>
             <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
-                <Text
-                    typo="Caption1b"
-                    color="light_qwhite"
-                    onClick={handleClickCoin}
-                >
-                    코인충전
-                </Text>
-                <Text
-                    typo="Caption1b"
-                    color="light_qwhite"
-                    onClick={handleClickAlarm}
-                >
-                    질문추천
-                </Text>
+                <div onClick={handleClickCoin}>
+                    <Text typo="Caption1b" color="light_qwhite">
+                        코인충전
+                    </Text>
+                </div>
+                <div onClick={handleClickAlarm}>
+                    <Text typo="Caption1b" color="light_qwhite">
+                        질문추천
+                    </Text>
+                </div>
                 <Menu onClick={handleClickAlarm}>
                     <Icon icon="Alarm" />
                 </Menu>

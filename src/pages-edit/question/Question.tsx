@@ -4,14 +4,13 @@ import { colors } from "styles/theme";
 import styled from "styled-components";
 import { useSearchParams } from "next/navigation";
 
-export default function Question() {
+export default function Question({ title }: any) {
     const searchParams = useSearchParams();
 
     return (
         <QuestionWrapper>
             <Text typo="Headline1b" color="light_qwhite">
-                애인에게 가장
-                <br />잘 해줄 것 같은 사람은?
+                {title}
             </Text>
         </QuestionWrapper>
     );

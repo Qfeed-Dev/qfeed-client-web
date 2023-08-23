@@ -3,52 +3,84 @@ import { colors, repeatQuestionColor, typo } from "styles/theme";
 import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
+import Icon from "../Icon";
 
 interface Props {
-    type: "question-friend" | "add-question";
+    type: "question-friend" | "add-question" | "add-question-image";
 }
 
-const Input = ({ type = "question-friend", ...props }: any) => {
+const Input = ({
+    type = "question-friend",
+    value,
+    setValue,
+    ...props
+}: any) => {
     return (
         <InputWrapper
             radius={match(type)
                 .with("question-friend", () => 48)
-                .with("add-question", () => 10)
-                .otherwise(() => 48)}
+                .otherwise(() => 10)}
             backgroundColor={match(type)
                 .with("question-friend", () => colors.light_gray3)
                 .with(
                     "add-question",
                     () => repeatQuestionColor[5 - (props.idx % 6)]
                 )
+                .with("add-question-image", () => colors.line_white_70)
                 .otherwise(() => () => colors.light_gray3)}
         >
             <InputInner>
                 <InputBox
-                    placeholder="내 친구의 이름을 검색해보세요."
+                    placeholder={match(type)
+                        .with(
+                            "question-friend",
+                            () => "내 친구의 이름을 검색해보세요."
+                        )
+                        .otherwise(() => `선택지${props.count}`)}
+                    value={value}
+                    onChange={setValue}
                     color={match(type)
                         .with("question-friend", () => colors.light_qwhite)
-                        .with("add-question", () => colors.light_qblack)
-                        .otherwise(() => colors.light_qwhite)}
+                        .otherwise(() => colors.light_qblack)}
                     placeholderColor={match(type)
                         .with("question-friend", () => colors.light_gray2)
-                        .with("add-question", () => colors.light_qblack)
-                        .otherwise(() => colors.light_qwhite)}
+                        .otherwise(() => colors.light_qblack)}
                     backgroundColor={match(type)
                         .with("question-friend", () => colors.light_gray3)
                         .with(
                             "add-question",
                             () => repeatQuestionColor[5 - (props.idx % 6)]
                         )
-                        .otherwise(() => colors.light_qwhite)}
+                        .with("add-question-image", () => `transparent`)
+                        .otherwise(() => `transparent`)}
                 />
-                <div style={{ display: "flex", margin: "auto" }}>
-                    {type === "add-question" && (
-                        <Text typo="Caption2r" color="light_qblack">
+                <div
+                    style={{
+                        display: "flex",
+                        margin: "auto",
+                        alignItems: "center"
+                    }}
+                >
+                    {type !== "question-friend" && (
+                        <Text
+                            typo="Caption2r"
+                            color="light_qblack"
+                            style={{ marginRight: 16 }}
+                        >
                             0/20
                         </Text>
                     )}
-                    <div>Hi</div>
+                    {type === "question-friend" ? (
+                        <Icon icon="Search" />
+                    ) : (
+                        <div onClick={props.clickTrash}>
+                            <Icon
+                                icon="Trash"
+                                color="light_qblack"
+                                fill="light_qblack"
+                            />
+                        </div>
+                    )}
                 </div>
             </InputInner>
         </InputWrapper>

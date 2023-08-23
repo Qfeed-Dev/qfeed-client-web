@@ -52,6 +52,7 @@ export const repeatBackgroundColor: Partial<KeyOfColor>[] = [
     "primary_qorange",
     "primary_qblue",
     "primary_qyellow",
+    "primary_qyellow",
     "primary_qgreen",
     "primary_qpink",
     "primary_qred",
