@@ -11,6 +11,7 @@ export { default as Money } from "./Money";
 export { default as Search } from "./Search";
 export { default as Camera } from "./Camera";
 export { default as Trash } from "./Trash";
+export { default as Check } from "./Check";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";
