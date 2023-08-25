@@ -15,6 +15,14 @@ const accountAPI = {
         const response = await qFeedAxios.get("/account/me");
         return response.data;
     },
+    async getUsers(keyword: string) {
+        const response = await qFeedAxios.get("/account/fetch", {
+            params: {
+                keyword: keyword
+            }
+        });
+        return response.data;
+    },
     async patchUser(user: User) {
         const response = await qFeedAxios.patch("/account/me", { ...user });
         return response.data;

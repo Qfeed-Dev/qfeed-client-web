@@ -7,7 +7,10 @@ import QfeedList from "./components/QfeedList";
 import Flex from "src/components/common/Flex";
 import NavigationTop from "src/components/navigations/NavigationTop";
 
+import { useUserQuery } from "src/hooks/account/useUserQuery";
+
 export default function Mypage() {
+    const { user, isLoading } = useUserQuery();
     return (
         <Flex direction="column" align="center" gap={40}>
             <Flex direction="column" align="center" gap={8}>
@@ -20,7 +23,7 @@ export default function Mypage() {
                         </Flex>
                     }
                 />
-                <InfoList />
+                {isLoading ? <div>로딩중</div> : <InfoList {...user} />}
             </Flex>
             <QfeedList />
             <BottomNavigation />

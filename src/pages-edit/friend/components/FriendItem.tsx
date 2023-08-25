@@ -22,7 +22,7 @@ export default function FriendItem(friend: Friend) {
                 <ImgCover></ImgCover>
                 <Flex direction="column">
                     <Text typo="Subtitle1b">{friend.name}</Text>
-                    <Text typo="Caption1r">{friend.nickname}</Text>
+                    <Text typo="Caption1r">@{friend.nickname}</Text>
                 </Flex>
             </Flex>
             <ButtonFillXSmall

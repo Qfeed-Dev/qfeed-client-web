@@ -6,6 +6,10 @@ export const userKeys = {
     all: ["user"] as const
 };
 
+export const usersKeys = {
+    all: ["users"] as const
+};
+
 export const friendKeys = {
     all: ["friend"] as const,
     detail: (id: number) => [...friendKeys.all, id] as const

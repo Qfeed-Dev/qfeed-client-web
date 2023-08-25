@@ -6,19 +6,19 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { User } from "src/models/account";
 
-export default function InfoList(friend: User) {
+export default function InfoList(user: User) {
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
                 <Profile />
-                <Text typo="Headline1b">{"@" + friend.nickname}</Text>
+                <Text typo="Headline1b">{"@" + user.nickname}</Text>
             </Flex>
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
                     <div>아이콘</div>
                     <Text typo="Subtitle2b">이름</Text>
                 </Flex>
-                <Text typo="Subtitle2r">{friend.name}</Text>
+                <Text typo="Subtitle2r">{user.name}</Text>
             </Flex>
             <Line />
             <Flex justify="space-between">
@@ -27,8 +27,8 @@ export default function InfoList(friend: User) {
                     <Text typo="Subtitle2b">학교</Text>
                 </Flex>
                 <Text typo="Subtitle2r">
-                    {friend.schoolName}
-                    {friend.schoolType === "대학생" && " " + friend.class}
+                    {user.schoolName}
+                    {user.schoolType === "대학생" && " " + user.class}
                 </Text>
             </Flex>
             <Line />
