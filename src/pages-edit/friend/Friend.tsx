@@ -8,9 +8,14 @@ import FriendItem from "./components/FriendItem";
 import InputFill from "src/components/inputs/input-fill";
 
 import { useInput } from "src/hooks/common/useInput";
+import useFollowingsQuery from "src/hooks/account/useFollowingsQuery";
+
+import { Friend } from "src/models/account";
 
 export default function Mypage() {
     const search = useInput();
+    const { followings, isLoading } = useFollowingsQuery();
+
     return (
         <Flex direction="column" align="center" gap={40}>
             <Flex direction="column" align="center" gap={16}>
@@ -23,18 +28,13 @@ export default function Mypage() {
                     value={search.value}
                     placeholder="내 친구의 이름을 검색해보세요."
                 />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
-                <FriendItem />
+                {isLoading ? (
+                    <div>로딩중...</div>
+                ) : (
+                    followings.data.map((following: Friend) => (
+                        <FriendItem key={following.id} {...following} />
+                    ))
+                )}
             </Flex>
             <BottomNavigation />
         </Flex>

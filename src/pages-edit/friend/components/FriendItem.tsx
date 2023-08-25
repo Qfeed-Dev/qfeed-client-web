@@ -8,19 +8,21 @@ import { useRouter } from "next/navigation";
 
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
-export default function FriendItem() {
+import { Friend } from "src/models/account";
+
+export default function FriendItem(friend: Friend) {
     const router = useRouter();
 
     return (
         <FriendWrapper
             justify="space-between"
-            onClick={() => router.push("/friend/1")}
+            onClick={() => router.push(`/friend/${friend.id}`)}
         >
             <Flex width="auto" gap={16}>
                 <ImgCover></ImgCover>
                 <Flex direction="column">
-                    <Text typo="Subtitle1b">김은별</Text>
-                    <Text typo="Caption1r">@adjlka</Text>
+                    <Text typo="Subtitle1b">{friend.name}</Text>
+                    <Text typo="Caption1r">{friend.nickname}</Text>
                 </Flex>
             </Flex>
             <ButtonFillXSmall
