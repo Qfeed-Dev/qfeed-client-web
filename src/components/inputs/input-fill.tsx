@@ -29,6 +29,7 @@ const InputFill = ({ ...props }: InputProps) => {
 
 const InputWrapper = styled(Flex)`
     width: 100%;
+    min-height: 48px;
     padding: 12px 20px;
 
     background: ${colors.light_gray3};
