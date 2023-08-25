@@ -8,10 +8,14 @@ import { useRouter } from "next/navigation";
 
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
+import useFriendMutation from "src/hooks/account/useFriendMutation";
+import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
 import { Friend } from "src/models/account";
 
 export default function FriendItem(friend: Friend) {
     const router = useRouter();
+    const { friendMutation } = useFriendMutation(friend.id);
+    const { delFriendMutation } = useDeleteFriendMutation(friend.id);
 
     return (
         <FriendWrapper
@@ -25,11 +29,22 @@ export default function FriendItem(friend: Friend) {
                     <Text typo="Caption1r">@{friend.nickname}</Text>
                 </Flex>
             </Flex>
-            <ButtonFillXSmall
-                text="팔로잉"
-                onClick={() => {}}
-                color="light_gray1"
-            ></ButtonFillXSmall>
+            <Flex width="auto" gap={16}>
+                <ButtonFillXSmall
+                    text="팔로잉"
+                    onClick={() => {
+                        delFriendMutation.mutate();
+                    }}
+                    color="light_gray1"
+                ></ButtonFillXSmall>
+                <ButtonFillXSmall
+                    text="팔로우"
+                    onClick={() => {
+                        friendMutation.mutate();
+                    }}
+                    color="primary_qgreen"
+                ></ButtonFillXSmall>
+            </Flex>
         </FriendWrapper>
     );
 }
