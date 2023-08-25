@@ -27,7 +27,7 @@ const accountAPI = {
         });
         return response.data;
     },
-    async getOtherUser(id: number) {
+    async getFriend(id: number) {
         const response = await qFeedAxios.get(`/account/${id}`);
         return response.data;
     },
