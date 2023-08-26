@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Flex from "src/components/common/Flex";
 import Text from "../common/Text";
 import { colors } from "styles/theme";
+import Icon from "../Icon/Icon";
 
 export interface InputProps {
     value: string;
@@ -22,7 +23,7 @@ const InputFill = ({ ...props }: InputProps) => {
                 onChange={props.onChange}
                 readOnly={props.readonly}
             />
-            <div>🔍</div>
+            <Icon icon="SearchHeart" />
         </InputWrapper>
     );
 };

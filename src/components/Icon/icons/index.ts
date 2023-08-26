@@ -9,6 +9,7 @@ export { default as CoinChat } from "./CoinChat";
 export { default as HeartArrow } from "./HeartArrow";
 export { default as Money } from "./Money";
 export { default as Search } from "./Search";
+export { default as SearchHeart } from "./SearchHeart";
 export { default as Camera } from "./Camera";
 export { default as Trash } from "./Trash";
 export { default as Check } from "./Check";
@@ -18,6 +19,7 @@ export { default as Ban } from "./Ban";
 export { default as Profile } from "./Profile";
 export { default as School } from "./School";
 export { default as Heart } from "./Heart";
+export { default as Person } from "./Person";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";

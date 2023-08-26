@@ -24,7 +24,7 @@ export default function FriendItem(friend: Friend) {
         >
             <Flex width="auto" gap={16}>
                 <ImgCover></ImgCover>
-                <Flex direction="column">
+                <Flex direction="column" align="start">
                     <Text typo="Subtitle1b">{friend.name}</Text>
                     <Text typo="Caption1r">@{friend.nickname}</Text>
                 </Flex>

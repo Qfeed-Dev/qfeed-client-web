@@ -4,7 +4,7 @@ import { Qtype } from "src/models/questions";
 import { questionKeys } from "src/constants/queryKeys/questionKeys";
 import { getUserQuestions } from "src/apis/questions";
 
-const useGetUsersQuery = (id: number, qtype: Qtype) => {
+const useGetUserQQuery = (id: number, qtype: Qtype) => {
     const {
         data: questions,
         isLoading,
@@ -22,4 +22,4 @@ const useGetUsersQuery = (id: number, qtype: Qtype) => {
     return { questions, isLoading, refetch };
 };
 
-export default useGetUsersQuery;
+export default useGetUserQQuery;

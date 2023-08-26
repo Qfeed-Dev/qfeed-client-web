@@ -40,6 +40,13 @@ export default function InfoList(user: User) {
                 </Flex>
                 <Text typo="Subtitle2r">{0}</Text>
             </Flex>
+            <Line />
+            <Flex justify="space-between">
+                <Flex width={"auto"} gap={16}>
+                    <Icon icon="Person" />
+                    <Text typo="Subtitle2b">내가 팔로우 하는 친구</Text>
+                </Flex>
+            </Flex>
         </InfoListWrapper>
     );
 }
