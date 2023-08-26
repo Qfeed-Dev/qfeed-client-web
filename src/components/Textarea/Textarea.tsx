@@ -1,15 +1,15 @@
 "use client";
-import { colors, KeyOfColor } from "styles/theme";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 import { Text } from "../common/Text";
 import { match } from "ts-pattern";
 
 interface Props {
-    type: string;
-    placeholder: string;
-    size: number;
-    value: string;
-    setValue: Function;
+    type?: any;
+    placeholder?: any;
+    size?: any;
+    value?: any;
+    setValue?: Function;
 }
 
 const Textarea = ({
@@ -23,7 +23,6 @@ const Textarea = ({
         <TextareaWrapper>
             <TextareaBox
                 value={value}
-                onChange={setValue}
                 placeholder={placeholder}
                 size={size}
                 color={match(type)
@@ -41,6 +40,7 @@ const Textarea = ({
                     .with("add-question", () => "line_white_5")
                     .with("add-question-image", () => "line_white_50")
                     .otherwise(() => "line_black_5")}
+                onChange={setValue}
             />
             <TextareaCount>
                 <Text
@@ -64,10 +64,11 @@ const TextareaWrapper = styled.div`
 `;
 
 const TextareaBox = styled.textarea<{
-    size: number;
-    color: KeyOfColor;
-    placeholderColor: KeyOfColor;
-    backgroundColor: KeyOfColor;
+    size: any;
+    color: any;
+    placeholderColor: any;
+    backgroundColor: any;
+    onChange?: any;
 }>`
     width: 100%;
     height: ${({ size }) => size + "px"};

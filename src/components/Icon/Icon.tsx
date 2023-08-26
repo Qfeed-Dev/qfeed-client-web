@@ -55,8 +55,8 @@ const IconWrapper = styled.div<{
     width?: number;
     height?: number;
     rotate?: number;
-    fill?: KeyOfColor;
-    color?: KeyOfColor;
+    fill?: any;
+    color?: any;
     styles?: any;
 }>`
     display: flex;

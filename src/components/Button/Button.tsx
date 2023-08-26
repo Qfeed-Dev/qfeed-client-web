@@ -7,12 +7,19 @@ import { Text } from "../common/Text";
 
 interface Props {
     onClick?: () => void;
-    type: "primary" | "secondary" | "default";
+    type?: "primary" | "secondary" | "default";
+    backgroundColor?: KeyOfColor;
     children?: any;
 }
 
 const Button = forwardRef(function Button(
-    { children, onClick, type = "primary", ...props }: Props,
+    {
+        children,
+        onClick,
+        type = "primary",
+        backgroundColor = "light_qblack",
+        ...props
+    }: Props,
     ref
 ) {
     return (
@@ -25,7 +32,7 @@ const Button = forwardRef(function Button(
             backgroundColor={match(type)
                 .with("primary", () => "light_qwhite")
                 .with("secondary", () => "light_qblack")
-                .otherwise(() => props.backgroundColor)}
+                .otherwise(() => backgroundColor)}
         >
             <Text typo="Subtitle1b" style={{ margin: "auto" }}>
                 {children}
@@ -35,16 +42,16 @@ const Button = forwardRef(function Button(
 });
 
 const ButtonWrapper = styled.div<{
-    color: KeyOfColor;
-    backgroundColor: KeyOfColor;
+    color?: any;
+    backgroundColor?: any;
 }>`
     width: 100%;
     height: 47px;
     display: flex;
 
-    color: ${({ color }) => colors[color]};
     border: 1px solid ${colors.light_qwhite};
     border-radius: 10px;
+    color: ${({ color }) => colors[color]};
     background-color: ${({ backgroundColor }) => colors[backgroundColor]};
 `;
 
