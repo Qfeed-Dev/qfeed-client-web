@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ interface Props {}
 
 const BottomNavigation = ({}: Props) => {
     const router = useRouter();
+    const pathname = usePathname();
 
     return (
         <BottomNavigationWrapper>
@@ -18,24 +19,28 @@ const BottomNavigation = ({}: Props) => {
                     onClick={() => {
                         router.push(Route.HOME());
                     }}
+                    selected={pathname === "/"}
                 />
                 <Icon
                     icon="Chat"
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
-                />
-                <Icon
-                    icon="Mypage"
-                    onClick={() => {
-                        router.push(Route.MYPAGE());
-                    }}
+                    selected={pathname === "/chat"}
                 />
                 <Icon
                     icon="Friend"
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
+                    selected={pathname === "/friend"}
+                />
+                <Icon
+                    icon="Mypage"
+                    onClick={() => {
+                        router.push(Route.MYPAGE());
+                    }}
+                    selected={pathname === "/mypage"}
                 />
             </BottomNavigationInner>
         </BottomNavigationWrapper>

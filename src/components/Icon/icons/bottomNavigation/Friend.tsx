@@ -1,6 +1,6 @@
 import React from "react";
 
-const Friend = () => {
+const Friend = ({ selected }: { selected: Boolean }) => {
     return (
         <svg
             width="30"

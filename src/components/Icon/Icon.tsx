@@ -16,6 +16,7 @@ interface Props {
 
     onClick?: any;
     onTouchEnd?: any;
+    selected?: boolean;
 }
 
 const Icon = ({
@@ -30,7 +31,8 @@ const Icon = ({
     color,
 
     onClick,
-    onTouchEnd
+    onTouchEnd,
+    selected
 }: Props) => {
     const IconComponent = icons[icon as keyof typeof icons];
 
@@ -44,7 +46,7 @@ const Icon = ({
             color={color}
             styles={style}
         >
-            <IconComponent />
+            <IconComponent selected={selected || false} />
         </IconWrapper>
     );
 };
