@@ -14,20 +14,17 @@ const Login = () => {
                     <Text typo="Headline0b">LOG IN</Text>
                 </Flex>
                 <Flex direction="column" gap={16}>
-                    <LoginButton
-                        href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`}
-                        background="#FEE500"
-                    >
+                    <LoginButton href={"/account/check"} background="#FEE500">
                         <Text typo="Subtitle1b" color="light_qblack">
                             카카오 로그인
                         </Text>
                     </LoginButton>
-                    <LoginButton background="#03C75A" href={"/"}>
+                    <LoginButton href={"/account/check"} background="#03C75A">
                         <Text typo="Subtitle1b" color="light_qwhite">
                             네이버 로그인
                         </Text>
                     </LoginButton>
-                    <LoginButton background="white" href={"/"}>
+                    <LoginButton href={"/account/check"} background="white">
                         <Text typo="Subtitle1b" color="light_qblack">
                             애플 로그인
                         </Text>
