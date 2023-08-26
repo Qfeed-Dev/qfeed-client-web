@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { friendKeys } from "src/constants/accountKeys";
+import { friendKeys } from "src/constants/queryKeys/accountKeys";
 import accountAPI from "src/apis/account";
 import { User } from "src/models/account";
 

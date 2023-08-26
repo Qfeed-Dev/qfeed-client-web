@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { User } from "src/models/account";
 import { qFeedAxios } from "src/apis/axios";
-import { userKeys } from "src/constants/accountKeys";
+import { userKeys } from "src/constants/queryKeys/accountKeys";
 import { getCookie } from "src/utils/cookie";
 
 const patchUser = async (user: User) => {

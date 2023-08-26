@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { followingKeys } from "src/constants/accountKeys";
+import { followingKeys } from "src/constants/queryKeys/accountKeys";
 import accountAPI from "src/apis/account";
 
 const useFollowingsQuery = () => {

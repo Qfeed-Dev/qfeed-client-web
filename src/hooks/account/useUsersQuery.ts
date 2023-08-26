@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import accountAPI from "src/apis/account";
-import { usersKeys } from "src/constants/accountKeys";
+import { usersKeys } from "src/constants/queryKeys/accountKeys";
 
 const useUsersQuery = (filter: string) => {
     const {
