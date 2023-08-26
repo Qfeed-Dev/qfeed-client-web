@@ -8,6 +8,7 @@ import Flex from "src/components/common/Flex";
 import NavigationTop from "src/components/navigations/NavigationTop";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
+import Icon from "src/components/Icon/Icon";
 
 export default function Mypage() {
     const { user, isLoading } = useUserQuery();
@@ -22,8 +23,8 @@ export default function Mypage() {
                             title="마이페이지"
                             rightIcon={
                                 <Flex width="auto" gap={24}>
-                                    <div>아이콘</div>
-                                    <div>아이콘</div>
+                                    <Icon icon="Share" />
+                                    <Icon icon="Setting" />
                                 </Flex>
                             }
                         />

@@ -1,16 +1,16 @@
 "use client";
 
-import styled from "styled-components";
+import { useRouter } from "next/navigation";
 import BottomNavigation from "src/components/BottomNavigation";
 
 import Flex from "src/components/common/Flex";
-import Text from "src/components/common/Text";
-import { colors } from "styles/theme";
 
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import InfoList from "src/pages-edit/mypage/components/InfoList";
 import FriendQfeedList from "./components/FriendQfeedList";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
+
+import Icon from "src/components/Icon/Icon";
 
 export default function FriendDetailPage({
     params
@@ -18,6 +18,7 @@ export default function FriendDetailPage({
     params: { id: number };
 }) {
     const { friend, isLoading } = useFriendQuery(params.id);
+    const router = useRouter();
 
     return (
         <Flex direction="column" align="center" gap={40}>
@@ -27,7 +28,12 @@ export default function FriendDetailPage({
                 <Flex direction="column" align="center" gap={8}>
                     <NavigationTopBack
                         title={friend?.nickname}
-                        rightIcon={<div>아이콘</div>}
+                        rightIcon={
+                            <Flex width="auto" gap={24}>
+                                <Icon icon="Share" />
+                                <Icon icon="Ban" />
+                            </Flex>
+                        }
                     />
                     <InfoList {...friend} />
                 </Flex>

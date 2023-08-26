@@ -5,6 +5,7 @@ import { colors } from "styles/theme";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { User } from "src/models/account";
+import Icon from "src/components/Icon/Icon";
 
 export default function InfoList(user: User) {
     return (
@@ -15,7 +16,7 @@ export default function InfoList(user: User) {
             </Flex>
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
-                    <div>아이콘</div>
+                    <Icon icon="Profile" />
                     <Text typo="Subtitle2b">이름</Text>
                 </Flex>
                 <Text typo="Subtitle2r">{user.name}</Text>
@@ -23,7 +24,7 @@ export default function InfoList(user: User) {
             <Line />
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
-                    <div>아이콘</div>
+                    <Icon icon="School" />
                     <Text typo="Subtitle2b">학교</Text>
                 </Flex>
                 <Text typo="Subtitle2r">
@@ -34,7 +35,7 @@ export default function InfoList(user: User) {
             <Line />
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
-                    <div>아이콘</div>
+                    <Icon icon="Heart" />
                     <Text typo="Subtitle2b">나의 하트</Text>
                 </Flex>
                 <Text typo="Subtitle2r">{0}</Text>

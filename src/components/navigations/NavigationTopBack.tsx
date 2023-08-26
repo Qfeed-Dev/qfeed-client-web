@@ -1,10 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
+
 import styled from "styled-components";
 import Flex from "../common/Flex";
 import Text from "../common/Text";
+import Icon from "../Icon/Icon";
 import { colors } from "styles/theme";
-
-import { useRouter } from "next/navigation";
 
 export interface NavProps {
     title?: string;
@@ -18,7 +19,7 @@ const NavigationTopBack = ({ title, leftIcon, rightIcon }: NavProps) => {
     return (
         <NavWrapper justify="space-between">
             <Flex width="auto" gap={8}>
-                <div onClick={() => router.back()}>이전</div>
+                <Icon icon="LeftArrow" onClick={() => router.back()} />
                 {title && <Text typo="Headline1b">{title}</Text>}
             </Flex>
             {rightIcon}

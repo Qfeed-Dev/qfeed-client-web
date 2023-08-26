@@ -15,28 +15,28 @@ const BottomNavigation = ({}: Props) => {
         <BottomNavigationWrapper>
             <BottomNavigationInner>
                 <Icon
-                    icon="Home"
+                    icon="BHome"
                     onClick={() => {
                         router.push(Route.HOME());
                     }}
                     selected={pathname === "/"}
                 />
                 <Icon
-                    icon="Chat"
+                    icon="BChat"
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
                     selected={pathname === "/chat"}
                 />
                 <Icon
-                    icon="Friend"
+                    icon="BSearch"
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
                     selected={pathname === "/friend"}
                 />
                 <Icon
-                    icon="Mypage"
+                    icon="BMypage"
                     onClick={() => {
                         router.push(Route.MYPAGE());
                     }}
