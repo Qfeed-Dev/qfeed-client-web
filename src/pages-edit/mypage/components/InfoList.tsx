@@ -4,22 +4,21 @@ import styled from "styled-components";
 import { colors } from "styles/theme";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
-import { useUserQuery } from "src/hooks/account/useUserQuery";
+import { User } from "src/models/account";
 
-export default function InfoList() {
-    const { user } = useUserQuery();
+export default function InfoList(user: User) {
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
                 <Profile />
-                <Text typo="Headline1b">{"@" + user?.nickname}</Text>
+                <Text typo="Headline1b">{"@" + user.nickname}</Text>
             </Flex>
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
                     <div>아이콘</div>
                     <Text typo="Subtitle2b">이름</Text>
                 </Flex>
-                <Text typo="Subtitle2r">{user?.name}</Text>
+                <Text typo="Subtitle2r">{user.name}</Text>
             </Flex>
             <Line />
             <Flex justify="space-between">
@@ -28,8 +27,8 @@ export default function InfoList() {
                     <Text typo="Subtitle2b">학교</Text>
                 </Flex>
                 <Text typo="Subtitle2r">
-                    {user?.schoolName}
-                    {user?.schoolType === "대학생" && " " + user?.class}
+                    {user.schoolName}
+                    {user.schoolType === "대학생" && " " + user.class}
                 </Text>
             </Flex>
             <Line />

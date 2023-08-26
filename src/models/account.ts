@@ -13,3 +13,13 @@ export interface User {
     profileImage?: string;
     idCardImage?: string;
 }
+
+export interface Friend {
+    id: number;
+    name: string;
+    nickname: string;
+    profileImage: string;
+    schoolName: string;
+    grade: string;
+    gender: string;
+}

@@ -1,4 +1,4 @@
-import accountAPI from "./../../apis/account";
+import accountAPI from "../../apis/account";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { setAccessToken } from "src/utils/cookie";
