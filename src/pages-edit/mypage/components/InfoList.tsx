@@ -11,7 +11,13 @@ import Icon from "src/components/Icon/Icon";
 
 import { User } from "src/models/account";
 
-export default function InfoList(user: User) {
+export default function InfoList({
+    user,
+    isMe
+}: {
+    user: User;
+    isMe: boolean;
+}) {
     const router = useRouter();
     return (
         <InfoListWrapper direction="column" gap={16}>
@@ -45,17 +51,21 @@ export default function InfoList(user: User) {
                 </Flex>
                 <Text typo="Subtitle2r">{0}</Text>
             </Flex>
-            <Line />
-            <Flex justify="space-between">
-                <Flex
-                    width={"auto"}
-                    gap={16}
-                    onClick={() => router.push("/mypage/followings")}
-                >
-                    <Icon icon="Person" />
-                    <Text typo="Subtitle2b">내가 팔로우 하는 친구</Text>
-                </Flex>
-            </Flex>
+            {isMe && (
+                <>
+                    <Line />
+                    <Flex justify="space-between">
+                        <Flex
+                            width={"auto"}
+                            gap={16}
+                            onClick={() => router.push("/mypage/followings")}
+                        >
+                            <Icon icon="Person" />
+                            <Text typo="Subtitle2b">내가 팔로우 하는 친구</Text>
+                        </Flex>
+                    </Flex>
+                </>
+            )}
         </InfoListWrapper>
     );
 }

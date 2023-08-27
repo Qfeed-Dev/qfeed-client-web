@@ -28,7 +28,7 @@ export default function Mypage() {
                                 </Flex>
                             }
                         />
-                        <InfoList {...user} />
+                        {user && <InfoList isMe={true} user={user} />}
                     </Flex>
                     {user?.id !== undefined && <QfeedList id={user.id} />}
                 </>
