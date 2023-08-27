@@ -28,8 +28,8 @@ const NavigationTopBack = ({ title, leftIcon, rightIcon }: NavProps) => {
 };
 
 const NavWrapper = styled(Flex)`
-    height: 50px;
-    padding: 0.62rem 1rem;
+    height: 56px;
+    padding: 1rem 1rem;
     background: ${colors.light_qblack};
 
     position: fixed;
