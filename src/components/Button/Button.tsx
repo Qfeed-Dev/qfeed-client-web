@@ -42,8 +42,8 @@ const Button = forwardRef(function Button(
 });
 
 const ButtonWrapper = styled.div<{
-    color?: any;
-    backgroundColor?: any;
+    color: string;
+    backgroundColor: string;
 }>`
     width: 100%;
     height: 47px;
@@ -51,8 +51,8 @@ const ButtonWrapper = styled.div<{
 
     border: 1px solid ${colors.light_qwhite};
     border-radius: 10px;
-    color: ${({ color }) => colors[color]};
-    background-color: ${({ backgroundColor }) => colors[backgroundColor]};
+    color: ${({ color }) => color};
+    background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 export default Button;
