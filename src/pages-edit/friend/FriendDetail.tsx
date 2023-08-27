@@ -1,16 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import BottomNavigation from "src/components/BottomNavigation";
+import { useToggle } from "src/hooks/common/useToggle";
 
+import BottomNavigation from "src/components/BottomNavigation";
 import Flex from "src/components/common/Flex";
+import Icon from "src/components/Icon/Icon";
 
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import InfoList from "src/pages-edit/mypage/components/InfoList";
-import FriendQfeedList from "./components/FriendQfeedList";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
-
-import Icon from "src/components/Icon/Icon";
+import QfeedList from "../mypage/components/QfeedList";
 
 export default function FriendDetailPage({
     params
@@ -18,7 +17,7 @@ export default function FriendDetailPage({
     params: { id: number };
 }) {
     const { friend, isLoading } = useFriendQuery(params.id);
-    const router = useRouter();
+    const { value, handleChangeState } = useToggle("personal");
 
     return (
         <Flex direction="column" align="center" gap={40}>
@@ -35,10 +34,12 @@ export default function FriendDetailPage({
                             </Flex>
                         }
                     />
-                    <InfoList {...friend} />
+                    <Flex direction="column" gap={32}>
+                        <InfoList {...friend} />
+                        {friend?.id && <QfeedList id={friend.id} />}
+                    </Flex>
                 </Flex>
             )}
-            <FriendQfeedList />
             <BottomNavigation />
         </Flex>
     );
