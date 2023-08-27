@@ -1,6 +1,6 @@
 "use client";
 
-import { useToggle } from "src/hooks/common/useToggle";
+import { useRouter } from "next/navigation";
 
 import BottomNavigation from "src/components/BottomNavigation";
 import Flex from "src/components/common/Flex";
@@ -17,7 +17,7 @@ export default function FriendDetailPage({
     params: { id: number };
 }) {
     const { friend, isLoading } = useFriendQuery(params.id);
-    const { value, handleChangeState } = useToggle("personal");
+    const router = useRouter();
 
     return (
         <Flex direction="column" align="center" gap={40}>
@@ -30,7 +30,10 @@ export default function FriendDetailPage({
                         rightIcon={
                             <Flex width="auto" gap={24}>
                                 <Icon icon="Share" />
-                                <Icon icon="Ban" />
+                                <Icon
+                                    icon="Ban"
+                                    onClick={() => router.push("/friend/ban")}
+                                />
                             </Flex>
                         }
                     />

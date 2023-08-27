@@ -7,8 +7,6 @@ import useDisplaySize from "src/hooks/useDisplaySize";
 import useGetUsersQuery from "src/hooks/questions/useGetUserQuery";
 
 import Text from "src/components/common/Text";
-import Flex from "src/components/common/Flex";
-import { globalValue } from "src/constants/globalValue";
 
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 
@@ -31,7 +29,9 @@ export default function MakeList({ id }: { id: number }) {
                     })}
                 </StackGrid>
             ) : (
-                <Text typo="Subtitle1r">아직 만든 큐피드가 없어요</Text>
+                <Text typo="Subtitle1r" style={{ textAlign: "center" }}>
+                    아직 만든 큐피드가 없어요
+                </Text>
             )}
         </GridWrapper>
     );
