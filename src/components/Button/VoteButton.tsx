@@ -70,11 +70,7 @@ const VoteButton = forwardRef(function Button(
                     <Text typo="Subtitle2b">{children}</Text>
                     {(typeNum === 2 && props.selected === idx) ||
                     (typeNum === 2 && action === 1) ? (
-                        <Icon
-                            icon="Check"
-                            fill="transparent"
-                            color="transparent"
-                        />
+                        <Icon icon="Check" />
                     ) : null}
                 </TextWrapper>
                 {typeNum === 1 && action === 1 ? (
