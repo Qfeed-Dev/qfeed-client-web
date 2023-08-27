@@ -1,7 +1,7 @@
 "use client";
 import { forwardRef } from "react";
 import styled, { css } from "styled-components";
-import { typo, colors, repeatQuestionColor } from "styles/theme";
+import { typo, colors, repeatQuestionColor, KeyOfColor } from "styles/theme";
 import { match } from "ts-pattern";
 import Text from "../common/Text";
 import Icon from "../Icon";
@@ -25,6 +25,9 @@ const VoteButton = forwardRef(function Button(
     }: any,
     ref
 ) {
+    const black: KeyOfColor = "light_qblack";
+    const white: KeyOfColor = "light_qwhite";
+
     return (
         <VoteButtonWrapper
             onClick={onClick}
@@ -70,11 +73,7 @@ const VoteButton = forwardRef(function Button(
                     <Text typo="Subtitle2b">{children}</Text>
                     {(typeNum === 2 && props.selected === idx) ||
                     (typeNum === 2 && action === 1) ? (
-                        <Icon
-                            icon="Check"
-                            fill="transparent"
-                            color="transparent"
-                        />
+                        <Icon icon="Check" />
                     ) : null}
                 </TextWrapper>
                 {typeNum === 1 && action === 1 ? (
@@ -82,13 +81,13 @@ const VoteButton = forwardRef(function Button(
                         <Icon
                             icon="QFeedImage"
                             fill={match(type)
-                                .with("primary", () => "light_qblack")
-                                .with("default", () => "light_qwhite")
-                                .otherwise(() => "light_qblack")}
+                                .with("primary", () => black)
+                                .with("default", () => white)
+                                .otherwise(() => black)}
                             color={match(type)
-                                .with("primary", () => "light_qblack")
-                                .with("default", () => "light_qwhite")
-                                .otherwise(() => "light_qblack")}
+                                .with("primary", () => black)
+                                .with("default", () => white)
+                                .otherwise(() => black)}
                         />
                     </CheckWrapper>
                 ) : null}

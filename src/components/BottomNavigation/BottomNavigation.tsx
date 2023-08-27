@@ -16,6 +16,8 @@ const BottomNavigation = ({}: Props) => {
             <BottomNavigationInner>
                 <Icon
                     icon="BHome"
+                    width={24}
+                    height={24}
                     onClick={() => {
                         router.push(Route.HOME());
                     }}
@@ -23,24 +25,30 @@ const BottomNavigation = ({}: Props) => {
                 />
                 <Icon
                     icon="BChat"
+                    width={24}
+                    height={24}
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
-                    selected={pathname === "/chat"}
+                    selected={Boolean(pathname.match("/((chat).*)"))}
                 />
                 <Icon
                     icon="BSearch"
+                    width={24}
+                    height={24}
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
-                    selected={pathname === "/friend"}
+                    selected={Boolean(pathname.match("/((friend).*)"))}
                 />
                 <Icon
                     icon="BMypage"
+                    width={24}
+                    height={24}
                     onClick={() => {
                         router.push(Route.MYPAGE());
                     }}
-                    selected={pathname === "/mypage"}
+                    selected={Boolean(pathname.match("/((mypage).*)"))}
                 />
             </BottomNavigationInner>
         </BottomNavigationWrapper>
@@ -63,7 +71,9 @@ const BottomNavigationInner = styled.div`
     padding: 0 48px;
 
     color: ${colors.light_qwhite};
+
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
     border-top: 1px solid ${colors.light_qwhite};

@@ -12,7 +12,7 @@ interface ButtonProps {
 
 const ButtonFillXSmall = ({ text = "", onClick, color }: ButtonProps) => {
     return (
-        <ButtonWrapper onClick={onClick} color={String(color)}>
+        <ButtonWrapper onClick={onClick} color={color}>
             <Text typo="Subtitle1b">{text}</Text>
         </ButtonWrapper>
     );

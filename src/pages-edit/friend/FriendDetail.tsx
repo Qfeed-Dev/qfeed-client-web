@@ -1,16 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import BottomNavigation from "src/components/BottomNavigation";
 
+import BottomNavigation from "src/components/BottomNavigation";
 import Flex from "src/components/common/Flex";
+import Icon from "src/components/Icon/Icon";
 
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import InfoList from "src/pages-edit/mypage/components/InfoList";
-import FriendQfeedList from "./components/FriendQfeedList";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
-
-import Icon from "src/components/Icon/Icon";
+import QfeedList from "../mypage/components/QfeedList";
 
 export default function FriendDetailPage({
     params
@@ -31,14 +30,19 @@ export default function FriendDetailPage({
                         rightIcon={
                             <Flex width="auto" gap={24}>
                                 <Icon icon="Share" />
-                                <Icon icon="Ban" />
+                                <Icon
+                                    icon="Ban"
+                                    onClick={() => router.push("/friend/ban")}
+                                />
                             </Flex>
                         }
                     />
-                    <InfoList {...friend} />
+                    <Flex direction="column" gap={32}>
+                        {friend && <InfoList user={friend} isMe={false} />}
+                        {friend?.id && <QfeedList id={friend.id} />}
+                    </Flex>
                 </Flex>
             )}
-            <FriendQfeedList />
             <BottomNavigation />
         </Flex>
     );

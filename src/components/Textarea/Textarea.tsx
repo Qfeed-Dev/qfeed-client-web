@@ -1,5 +1,5 @@
 "use client";
-import { colors } from "styles/theme";
+import { KeyOfColor, colors } from "styles/theme";
 import styled from "styled-components";
 import { Text } from "../common/Text";
 import { match } from "ts-pattern";
@@ -26,20 +26,20 @@ const Textarea = ({
                 placeholder={placeholder}
                 size={size}
                 color={match(type)
-                    .with("question-friend", () => "light_qblack")
-                    .with("add-question", () => "light_qwhite")
-                    .with("add-question-image", () => "light_qblack")
-                    .otherwise(() => "light_qblack")}
+                    .with("question-friend", () => colors.light_qblack)
+                    .with("add-question", () => colors.light_qwhite)
+                    .with("add-question-image", () => colors.light_qblack)
+                    .otherwise(() => colors.light_qblack)}
                 placeholderColor={match(type)
-                    .with("question-friend", () => "light_gray2")
-                    .with("add-question", () => "light_gray2")
-                    .with("add-question-image", () => "light_qblack")
-                    .otherwise(() => "light_qblack")}
+                    .with("question-friend", () => colors.light_gray2)
+                    .with("add-question", () => colors.light_gray2)
+                    .with("add-question-image", () => colors.light_qblack)
+                    .otherwise(() => colors.light_qblack)}
                 backgroundColor={match(type)
-                    .with("question-friend", () => "line_black_5")
-                    .with("add-question", () => "line_white_5")
-                    .with("add-question-image", () => "line_white_50")
-                    .otherwise(() => "line_black_5")}
+                    .with("question-friend", () => colors.line_black_5)
+                    .with("add-question", () => colors.line_white_5)
+                    .with("add-question-image", () => colors.line_white_50)
+                    .otherwise(() => colors.line_black_5)}
                 onChange={setValue}
             />
             <TextareaCount>
@@ -65,9 +65,9 @@ const TextareaWrapper = styled.div`
 
 const TextareaBox = styled.textarea<{
     size: any;
-    color: any;
-    placeholderColor: any;
-    backgroundColor: any;
+    color: string;
+    placeholderColor: string;
+    backgroundColor: string;
     onChange?: any;
 }>`
     width: 100%;
@@ -79,11 +79,11 @@ const TextareaBox = styled.textarea<{
     resize: none;
 
     border-radius: 10px;
-    color: ${({ color }) => colors[color]};
-    background-color: ${({ backgroundColor }) => colors[backgroundColor]};
+    color: ${({ color }) => color};
+    background-color: ${({ backgroundColor }) => backgroundColor};
 
     &::placeholder {
-        color: ${({ placeholderColor }) => colors[placeholderColor]};
+        color: ${({ placeholderColor }) => placeholderColor};
     }
 `;
 

@@ -7,10 +7,8 @@ import useDisplaySize from "src/hooks/useDisplaySize";
 import useGetUsersQuery from "src/hooks/questions/useGetUserQuery";
 
 import Text from "src/components/common/Text";
-import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 
-import { globalValue } from "src/constants/globalValue";
-import Flex from "src/components/common/Flex";
+import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 
 export default function MakeList({ id }: { id: number }) {
     const { questions, isLoading } = useGetUsersQuery(id, "personal");
@@ -19,7 +17,7 @@ export default function MakeList({ id }: { id: number }) {
     return isLoading ? (
         <div>로딩중...</div>
     ) : (
-        <QfeedWrapper direction="column">
+        <GridWrapper>
             {questions.count ? (
                 <StackGrid
                     columnWidth={Math.floor((width - 45) / 2)}
@@ -31,15 +29,16 @@ export default function MakeList({ id }: { id: number }) {
                     })}
                 </StackGrid>
             ) : (
-                <Text typo="Subtitle1r">아직 만든 큐피드가 없어요</Text>
+                <Text typo="Subtitle1r" style={{ textAlign: "center" }}>
+                    아직 만든 큐피드가 없어요
+                </Text>
             )}
-        </QfeedWrapper>
+        </GridWrapper>
     );
 }
 
-const QfeedWrapper = styled(Flex)`
-    height: calc(100% - ${globalValue.bottomSheetHeight});
-
+const GridWrapper = styled.div`
+    width: 100%;
     margin: 0 auto;
     position: relative;
 `;

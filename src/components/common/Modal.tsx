@@ -33,14 +33,14 @@ const Modal = ({
                 animate="visible"
                 exit="exit"
             >
-                <Flex height="100%" direction="column" gap={4}>
+                <ModalContent height="100%" direction="column" gap={4}>
                     <Text typo="Headline1b" color="light_qblack">
                         {title}
                     </Text>
                     <DetailText typo="Subtitle1r" color="light_qblack">
                         {detail}
                     </DetailText>
-                </Flex>
+                </ModalContent>
                 <Flex>
                     <Btn onClick={handleClose}>
                         <Text typo="Subtitle2b" color="light_qblack">
@@ -61,7 +61,6 @@ const Modal = ({
 
 const ModalWrapper = styled(motion.div)`
     width: 328px;
-    height: 176px;
     display: flex;
     flex-direction: column;
 
@@ -69,13 +68,18 @@ const ModalWrapper = styled(motion.div)`
     background: ${colors.light_qwhite};
 `;
 
+const ModalContent = styled(Flex)`
+    padding: 2rem 0;
+`;
+
 const DetailText = styled(Text)`
     width: 70%;
+    text-align: center;
 `;
 
 const Line = styled.div`
     width: 1px;
-    height: 100%;
+    height: 61px;
     border: 0.5px solid ${colors.line_black_30};
 `;
 

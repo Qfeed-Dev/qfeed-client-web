@@ -20,7 +20,7 @@ const BMypage = ({ selected }: { selected: boolean }) => {
         </svg>
     ) : (
         <svg
-            width="24"
+            width="25"
             height="24"
             viewBox="0 0 24 24"
             fill="none"

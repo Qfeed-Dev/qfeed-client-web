@@ -39,8 +39,12 @@ const accountAPI = {
         const response = await qFeedAxios.get(`/account/${id}`);
         return response.data;
     },
-    async getFollowings() {
-        const response = await qFeedAxios.get("/account/me/followings");
+    async getFollowings(keyword: string) {
+        const response = await qFeedAxios.get("/account/me/followings", {
+            params: {
+                keyword: keyword
+            }
+        });
         return response.data;
     },
     async getUnFollowings() {

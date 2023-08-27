@@ -13,7 +13,7 @@ const PaddingWrapper = styled.div`
     width: 100%;
     height: 100%;
 
-    padding: 50px 1rem 80px;
+    padding: 56px 1rem 80px;
 
     overflow: scroll;
     -ms-overflow-style: none;
