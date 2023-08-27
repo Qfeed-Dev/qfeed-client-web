@@ -1,13 +1,18 @@
 "use client";
 
 import styled from "styled-components";
+
+import { useRouter } from "next/navigation";
+
 import { colors } from "styles/theme";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
-import { User } from "src/models/account";
 import Icon from "src/components/Icon/Icon";
 
+import { User } from "src/models/account";
+
 export default function InfoList(user: User) {
+    const router = useRouter();
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
@@ -42,7 +47,11 @@ export default function InfoList(user: User) {
             </Flex>
             <Line />
             <Flex justify="space-between">
-                <Flex width={"auto"} gap={16}>
+                <Flex
+                    width={"auto"}
+                    gap={16}
+                    onClick={() => router.push("/mypage/followings")}
+                >
                     <Icon icon="Person" />
                     <Text typo="Subtitle2b">내가 팔로우 하는 친구</Text>
                 </Flex>
