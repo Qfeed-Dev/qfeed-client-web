@@ -26,21 +26,21 @@ const BottomNavigation = ({}: Props) => {
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
-                    selected={pathname === "/chat"}
+                    selected={Boolean(pathname.match("/((chat).*)"))}
                 />
                 <Icon
                     icon="BSearch"
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
-                    selected={pathname === "/friend"}
+                    selected={Boolean(pathname.match("/((friend).*)"))}
                 />
                 <Icon
                     icon="BMypage"
                     onClick={() => {
                         router.push(Route.MYPAGE());
                     }}
-                    selected={pathname === "/mypage"}
+                    selected={Boolean(pathname.match("/((mypage).*)"))}
                 />
             </BottomNavigationInner>
         </BottomNavigationWrapper>
