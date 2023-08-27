@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Key } from "react";
 import * as icons from "src/components/Icon/icons";
 import styled, { css } from "styled-components";
 import { KeyOfColor, colors } from "styles/theme";
@@ -55,7 +55,7 @@ const IconWrapper = styled.div<{
     width?: number;
     height?: number;
     rotate?: number;
-    fill?: any;
+    fill?: KeyOfColor;
     color?: any;
     styles?: any;
 }>`

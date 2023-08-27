@@ -20,6 +20,7 @@ export { default as Profile } from "./Profile";
 export { default as School } from "./School";
 export { default as Heart } from "./Heart";
 export { default as Person } from "./Person";
+export { default as Chat } from "./Chat";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";
