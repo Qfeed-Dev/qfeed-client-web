@@ -1,6 +1,6 @@
 import React from "react";
 
-const Mypage = ({ selected }: { selected: boolean }) => {
+const BMypage = ({ selected }: { selected: boolean }) => {
     return selected ? (
         <svg
             width="24"
@@ -45,4 +45,4 @@ const Mypage = ({ selected }: { selected: boolean }) => {
     );
 };
 
-export default Mypage;
+export default BMypage;

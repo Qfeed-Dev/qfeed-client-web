@@ -30,29 +30,21 @@ const ButtonQfeedSelect = ({ ...props }: toggleProps) => {
     return (
         <SelectWrapper gap={24}>
             <ButtonWrapper>
-                <Input type="qfeed" id="내가 만든 큐피드" />
-                <Input type="qfeed" id="나를 선택한 큐피드" />
+                <Input type="qfeed" id="personal" />
+                <Input type="qfeed" id="official" />
                 <Button
-                    id="내가 만든 큐피드"
-                    state={
-                        props.value === "내가 만든 큐피드"
-                            ? "active"
-                            : "disabled"
-                    }
+                    id="personal"
+                    state={props.value === "personal" ? "active" : "disabled"}
                     onClick={props.onClick}
                 >
-                    <Text typo="Subtitle2b">내가 만든 큐피드</Text>
+                    <Text typo="Subtitle2b">Personal Q</Text>
                 </Button>
                 <Button
-                    id="나를 선택한 큐피드"
-                    state={
-                        props.value === "나를 선택한 큐피드"
-                            ? "active"
-                            : "disabled"
-                    }
+                    id="official"
+                    state={props.value === "official" ? "active" : "disabled"}
                     onClick={props.onClick}
                 >
-                    <Text typo="Subtitle2b">나를 선택한 큐피드</Text>
+                    <Text typo="Subtitle2b">Official Q</Text>
                 </Button>
             </ButtonWrapper>
         </SelectWrapper>

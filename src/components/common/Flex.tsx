@@ -15,6 +15,7 @@ const Flex = styled.div<{
     gap: ${({ gap }) => (gap ? `${gap}px` : "0px")};
     width: ${({ width }) =>
         typeof width === "string" ? width : width ? `${width}px` : "100%"};
+    max-width: 600px;
     height: ${({ height }) =>
         typeof height === "string" ? height : height ? `${height}px` : "auto"};
 `;

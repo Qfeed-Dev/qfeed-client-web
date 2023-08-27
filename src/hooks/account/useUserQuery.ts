@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { qFeedAxios } from "src/apis/axios";
-import { userKeys } from "src/constants/accountKeys";
+import { userKeys } from "src/constants/queryKeys/accountKeys";
 import { getCookie } from "src/utils/cookie";
 import { User } from "src/models/account";
 

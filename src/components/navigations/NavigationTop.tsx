@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import Flex from "../common/Flex";
 import Text from "../common/Text";
+import { colors } from "styles/theme";
 
 export interface NavProps {
     title: string;
@@ -18,7 +19,13 @@ const NavigationTop = ({ title, rightIcon }: NavProps) => {
 };
 
 const NavWrapper = styled(Flex)`
-    padding: 0.62rem 0;
+    height: 50px;
+    padding: 0.62rem 1rem;
+    background: ${colors.light_qblack};
+
+    position: fixed;
+    top: 0;
+    z-index: 999999;
 `;
 
 export default NavigationTop;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Chat = ({ selected }: { selected: boolean }) => {
+const BChat = ({ selected }: { selected: boolean }) => {
     return selected ? (
         <svg
             width="24"
@@ -48,4 +48,4 @@ const Chat = ({ selected }: { selected: boolean }) => {
     );
 };
 
-export default Chat;
+export default BChat;

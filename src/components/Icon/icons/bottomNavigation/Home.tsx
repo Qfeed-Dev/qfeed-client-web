@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = ({ selected }: { selected: boolean }) => {
+const BHome = ({ selected }: { selected: boolean }) => {
     return selected ? (
         <svg
             width="24"
@@ -52,4 +52,4 @@ const Home = ({ selected }: { selected: boolean }) => {
     );
 };
 
-export default Home;
+export default BHome;

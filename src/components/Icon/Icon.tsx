@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { KeyOfColor, colors } from "styles/theme";
 
 interface Props {
-    icon: string;
+    icon: keyof typeof icons;
     width?: number;
     height?: number;
     margin?: string;
@@ -34,7 +34,7 @@ const Icon = ({
     onTouchEnd,
     selected
 }: Props) => {
-    const IconComponent = icons[icon as keyof typeof icons];
+    const IconComponent = icons[icon];
 
     return (
         <IconWrapper

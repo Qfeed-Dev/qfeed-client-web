@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { qFeedAxios } from "src/apis/axios";
-import { nicknameKeys } from "src/constants/accountKeys";
+import { nicknameKeys } from "src/constants/queryKeys/accountKeys";
 
 interface CheckNickname {
     nickname: string;
