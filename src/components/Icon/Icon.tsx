@@ -75,8 +75,6 @@ const IconWrapper = styled.div<{
         height: ${({ height }) => height}px;
 
         path {
-            stroke: ${({ color }) =>
-                color ? colors[color] : colors.light_qwhite};
             fill: ${({ fill }) => (fill ? colors[fill] : colors.light_qwhite)};
         }
     }

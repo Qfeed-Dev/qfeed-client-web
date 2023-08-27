@@ -9,6 +9,7 @@ import NavigationTop from "src/components/navigations/NavigationTop";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import Icon from "src/components/Icon/Icon";
+import { Setting } from "src/components/Icon/icons";
 
 export default function Mypage() {
     const { user, isLoading } = useUserQuery();
