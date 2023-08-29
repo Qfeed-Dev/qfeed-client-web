@@ -11,8 +11,8 @@ interface Props {
     style?: any;
 
     rotate?: number;
-    fill?: KeyOfColor;
-    color?: KeyOfColor;
+    fill?: any;
+    color?: any;
 
     onClick?: any;
     onTouchEnd?: any;

@@ -73,7 +73,11 @@ const VoteButton = forwardRef(function Button(
                     <Text typo="Subtitle2b">{children}</Text>
                     {(typeNum === 2 && props.selected === idx) ||
                     (typeNum === 2 && action === 1) ? (
-                        <Icon icon="Check" />
+                        <Icon
+                            icon="Check"
+                            fill="transparent"
+                            color="transparent"
+                        />
                     ) : null}
                 </TextWrapper>
                 {typeNum === 1 && action === 1 ? (
@@ -94,7 +98,7 @@ const VoteButton = forwardRef(function Button(
                 {typeNum === 2 ? (
                     <NumberWrapper>
                         <Text typo="Headline2b" style={{ lineHeight: 2.8 }}>
-                            0
+                            {props.count}
                         </Text>
                     </NumberWrapper>
                 ) : null}

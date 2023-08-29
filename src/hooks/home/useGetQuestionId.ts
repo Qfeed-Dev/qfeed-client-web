@@ -3,15 +3,10 @@ import { getQuestionsId } from "src/apis/questions";
 
 export const useGetQuestionsId = ({ questionId }: any) => {
     const { data, isLoading, error, refetch } = useQuery(
-        [],
+        [questionId],
         async () => {
             const result = getQuestionsId(questionId);
-            // console.log(result);
             return result;
-        },
-        {
-            staleTime: 1000 * 60 * 5,
-            cacheTime: 1000 * 60 * 30
         }
     );
 
