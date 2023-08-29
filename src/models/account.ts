@@ -22,4 +22,5 @@ export interface Friend {
     schoolName: string;
     grade: string;
     gender: string;
+    isFollowing: boolean;
 }

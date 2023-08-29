@@ -33,7 +33,11 @@ export default function MyFollowingPage() {
                     <div>로딩중...</div>
                 ) : (
                     followings.data.map((following: Friend) => (
-                        <FriendItem key={following.id} {...following} />
+                        <FriendItem
+                            key={following.id}
+                            isFollowing={true}
+                            friend={following}
+                        />
                     ))
                 )}
             </Flex>

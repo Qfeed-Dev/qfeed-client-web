@@ -42,13 +42,21 @@ export default function Mypage() {
                         <Text typo="Subtitle2b">추천 친구</Text>
                         {recommend.unfollowings.data.map(
                             (following: Friend) => (
-                                <FriendItem key={following.id} {...following} />
+                                <FriendItem
+                                    key={following.id}
+                                    isFollowing={false}
+                                    friend={following}
+                                />
                             )
                         )}
                     </Flex>
                 ) : (
                     searchResult.users.data.map((following: Friend) => (
-                        <FriendItem key={following.id} {...following} />
+                        <FriendItem
+                            key={following.id}
+                            isFollowing={following.isFollowing}
+                            friend={following}
+                        />
                     ))
                 )}
             </Flex>
