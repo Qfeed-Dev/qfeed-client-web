@@ -2,28 +2,35 @@
 
 import styled from "styled-components";
 import Text from "../common/Text";
+import { motion } from "framer-motion";
 import { KeyOfColor, colors } from "styles/theme";
+import { changeXSBtnColor } from "src/constants/animation";
+
+type ButtonState = "active" | "disabled";
 
 interface ButtonProps {
     text: string;
     onClick: any;
-    color: KeyOfColor;
+    state: ButtonState;
 }
 
-const ButtonFillXSmall = ({ text = "", onClick, color }: ButtonProps) => {
+const ButtonFillXSmall = ({ text = "", onClick, state }: ButtonProps) => {
     return (
-        <ButtonWrapper onClick={onClick} color={color}>
+        <ButtonWrapper
+            initial={state}
+            animate={state}
+            variants={changeXSBtnColor}
+            onClick={onClick}
+        >
             <Text typo="Subtitle1b">{text}</Text>
         </ButtonWrapper>
     );
 };
 
-const ButtonWrapper = styled.button<{ color: KeyOfColor }>`
+const ButtonWrapper = styled(motion.button)`
     padding: 5px 18px;
 
     text-align: center;
-    color: ${colors.light_qblack};
-    background: ${({ color }) => colors[color]};
 
     border-radius: 10px;
     white-space: nowrap;

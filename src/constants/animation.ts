@@ -38,6 +38,23 @@ export const changeBtnColor = {
     }
 };
 
+export const changeXSBtnColor = {
+    disabled: {
+        transition: {
+            duration: 0.2
+        },
+        color: theme.colors.light_qblack,
+        background: theme.colors.light_gray1
+    },
+    active: {
+        transition: {
+            duration: 0.2
+        },
+        color: theme.colors.light_qblack,
+        background: theme.colors.primary_qgreen
+    }
+};
+
 export const modal = {
     hidden: {
         y: "-20vh",

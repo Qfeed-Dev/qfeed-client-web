@@ -19,6 +19,8 @@ export default function FriendDetailPage({
     const { friend, isLoading } = useFriendQuery(params.id);
     const router = useRouter();
 
+    console.log(friend);
+
     return (
         <Flex direction="column" align="center" gap={40}>
             {isLoading ? (
