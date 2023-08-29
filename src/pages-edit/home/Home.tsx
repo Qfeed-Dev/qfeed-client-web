@@ -126,6 +126,7 @@ const PlusButton = styled.div<{ time: any }>`
     right: 17px;
     bottom: 64px;
 
+    border: ${({ time }) => (time > 0 ? 3 : 0)}px solid ${colors.light_qwhite};
     border-radius: 50%;
     background-color: ${({ time }) =>
         time ? colors.light_qblack : colors.light_qwhite};

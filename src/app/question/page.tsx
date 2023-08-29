@@ -9,6 +9,7 @@ import Image from "src/components/Image";
 import { useSearchParams } from "next/navigation";
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
+import { postQuestionsIdChoices } from "src/apis/questions";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -17,20 +18,14 @@ export default function Page() {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: id
     });
-    // console.log(id);
     console.log(questionData);
-    const imageUrl = null;
-    // "https://i.ibb.co/0Z6FNN7/60pt.png";
-    // data?.backgroundImage;
 
-    const [type, setType] = useState<string>(imageUrl ? "primary" : "default");
-    const [typeNum, setTypeNum] = useState(0);
+    const [typeNum, setTypeNum] = useState(2);
     const [selected, setSelected] = useState<number>(0);
     const best = 0;
 
-    const testData = ["", "", "", ""];
-
     const clickChoice = (idx: number) => {
+        postQuestionsIdChoices(questionData?.id, { value: idx });
         setSelected(idx);
         setTypeNum(1);
         setTimeout(() => {
@@ -40,15 +35,18 @@ export default function Page() {
 
     return isLoading ? undefined : (
         <>
-            {imageUrl && (
+            {questionData?.backgroundImage && (
                 <ImageWrapper>
-                    <Image type="background" src={imageUrl} />
+                    <Image
+                        type="background"
+                        src={questionData?.backgroundImage}
+                    />
                 </ImageWrapper>
             )}
 
             <QuestionWrapper>
                 <BackTitle type="profile" reportType="report">
-                    <ProfileTitle />
+                    <ProfileTitle data={questionData} />
                 </BackTitle>
                 <Spacing size={54} />
                 <Question title={questionData?.title} />
@@ -56,26 +54,33 @@ export default function Page() {
 
             <BottomButton>
                 <BottomInner>
-                    {/* questionData?.choiceList? */}
-                    {testData.map((d: any, idx: number) => {
+                    {questionData?.choiceList?.map((d: any, idx: number) => {
                         return (
                             <VoteButton
                                 key={idx}
                                 idx={idx}
-                                type={type} // primary default
+                                type={
+                                    questionData?.backgroundImage
+                                        ? "primary"
+                                        : "default"
+                                } // primary default
                                 typeNum={typeNum} // 0 1 2
                                 action={
-                                    typeNum === 2 && idx === best
+                                    typeNum === 2 && idx === best // best
                                         ? 2
                                         : idx === selected
                                         ? 1
                                         : 0
                                 } // 0 1 2
-                                top={idx === 0}
                                 selected={selected}
                                 onClick={() => clickChoice(idx)}
+                                count={
+                                    questionData?.choices?.filter(
+                                        (data2: any) => data2.value == idx
+                                    ).length
+                                }
                             >
-                                text
+                                {d}
                             </VoteButton>
                             // default
                             // primary, top

@@ -5,7 +5,7 @@ import Image from "src/components/Image";
 import { colors } from "styles/theme";
 import styled from "styled-components";
 
-export default function ProfileTitle() {
+export default function ProfileTitle({ data }: any) {
     const router = useRouter();
 
     return (
@@ -15,13 +15,17 @@ export default function ProfileTitle() {
                     <Image
                         type="default"
                         size={35}
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
+                        src={
+                            data?.owner?.profileImage
+                                ? data?.owner?.profileImage
+                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
+                        }
                     />
                     <Text typo="Subtitle1b" style={{ marginLeft: 8 }}>
-                        dlraud56
+                        {data?.owner?.nickname}
                     </Text>
                 </div>
-                <Menu>12명 응답</Menu>
+                <Menu>{data?.choices?.length}명 응답</Menu>
             </ProfileTitleInner>
         </ProfileTitleWrapper>
     );

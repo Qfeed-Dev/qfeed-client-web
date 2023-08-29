@@ -7,6 +7,18 @@ export const getQuestions = async () =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
+export const postQuestions = async (body: any) =>
+    await qFeedAxios
+        .post("/questions", body)
+        .then(({ data }) => data)
+        .catch((err) => err.response);
+
+export const postQuestionsIdChoices = async (questionId: any, body: any) =>
+    await qFeedAxios
+        .post(`/questions/${questionId}/choices`, body)
+        .then(({ data }) => data)
+        .catch((err) => err.response);
+
 export const getQuestionsQSet = async () =>
     await qFeedAxios
         .get("/questions/q-set")
