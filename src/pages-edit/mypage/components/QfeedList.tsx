@@ -15,7 +15,11 @@ export default function QfeedList({ id }: { id: number }) {
     return (
         <Flex direction="column" gap={16}>
             <ButtonQfeedSelect value={value} onClick={handleChangeState} />
-            {value === "personal" ? <MakeList id={id} /> : <SelectList />}
+            {value === "personal" ? (
+                <MakeList id={id} />
+            ) : (
+                <SelectList id={id} />
+            )}
         </Flex>
     );
 }
