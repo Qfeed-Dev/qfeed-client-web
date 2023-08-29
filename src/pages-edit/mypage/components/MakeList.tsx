@@ -4,21 +4,21 @@ import styled from "styled-components";
 import StackGrid from "react-stack-grid";
 
 import useDisplaySize from "src/hooks/useDisplaySize";
-import useGetUsersQuery from "src/hooks/questions/useGetUserQuery";
+import useGetUsersQQuery from "src/hooks/questions/useGetUserQQuery";
 
 import Text from "src/components/common/Text";
 
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 
 export default function MakeList({ id }: { id: number }) {
-    const { questions, isLoading } = useGetUsersQuery(id, "personal");
+    const { questions, isLoading } = useGetUsersQQuery(id, "personal");
     const { width } = useDisplaySize();
 
     return isLoading ? (
         <div>로딩중...</div>
     ) : (
         <GridWrapper>
-            {questions.count ? (
+            {questions.data.length ? (
                 <StackGrid
                     columnWidth={Math.floor((width - 45) / 2)}
                     gutterWidth={12}
