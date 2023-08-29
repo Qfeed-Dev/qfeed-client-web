@@ -15,7 +15,7 @@ export default function Page() {
     const id = searchParams.get("id");
 
     const { data: questionData, isLoading } = useGetQuestionsId({
-        questionId: Number(10)
+        questionId: id
     });
     // console.log(id);
     console.log(questionData);
