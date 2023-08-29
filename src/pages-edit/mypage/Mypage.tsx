@@ -23,7 +23,7 @@ export default function Mypage() {
                         <NavigationTop
                             title="마이페이지"
                             rightIcon={
-                                <Flex width="auto" gap={24}>
+                                <Flex width="auto" gap={16}>
                                     <Icon icon="Share" />
                                     <Icon icon="Setting" />
                                 </Flex>
