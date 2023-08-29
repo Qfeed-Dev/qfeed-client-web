@@ -9,7 +9,7 @@ import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSli
 import styled from "styled-components";
 import { colors, repeatBackgroundColor } from "styles/theme";
 
-export default function Friend({ idx }: any) {
+export default function Friend({ idx, data }: any) {
     const { width } = useDisplaySize();
     const dispatch = useAppDispatch();
     const { visible, selectedIdx } = useAppSelector(
@@ -40,7 +40,11 @@ export default function Friend({ idx }: any) {
                     <Image
                         type="default"
                         size={35}
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
+                        src={
+                            data?.profileImage
+                                ? data?.profileImage
+                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
+                        }
                         grayscale={
                             selectedIdx && idx !== selectedIdx && visible === 1
                                 ? 100
@@ -52,12 +56,12 @@ export default function Friend({ idx }: any) {
 
                 <Menu>
                     <Text typo="Caption1b" color="light_qblack">
-                        김은별
+                        {data?.name}
                     </Text>
                 </Menu>
                 <Menu>
                     <Text typo="Caption2r" color="light_qblack">
-                        dlraud1
+                        {data?.nickname}
                     </Text>
                 </Menu>
             </FriendInner>

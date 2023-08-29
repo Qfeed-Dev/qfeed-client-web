@@ -18,7 +18,7 @@ const ButtonFillXSmall = ({ text = "", onClick, color }: ButtonProps) => {
     );
 };
 
-const ButtonWrapper = styled.button<{ color: KeyOfColor }>`
+const ButtonWrapper = styled.button<{ color: any }>`
     padding: 5px 18px;
 
     text-align: center;

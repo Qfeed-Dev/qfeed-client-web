@@ -62,6 +62,14 @@ const accountAPI = {
     async deleteFollowing({ id }: { id: number }) {
         const response = await qFeedAxios.delete(`/account/${id}/unfollow`);
         return response.data;
+    },
+
+    async accountFetch() {
+        const response = await qFeedAxios
+            .get("/account/fetch")
+            .then(({ data }) => data)
+            .catch((err) => err.response);
+        return response.data;
     }
 };
 

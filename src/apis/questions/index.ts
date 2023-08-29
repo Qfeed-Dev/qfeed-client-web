@@ -7,6 +7,12 @@ export const getQuestions = async () =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
+export const getQuestionsQSet = async () =>
+    await qFeedAxios
+        .get("/questions/q-set")
+        .then(({ data }) => data)
+        .catch((err) => err.response);
+
 export const getQuestionsId = async (questionId: any) =>
     await qFeedAxios
         .get(`/questions/${questionId}`)
