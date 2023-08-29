@@ -11,8 +11,12 @@ import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
+import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 
-const SelectDetailPage = () => {
+const SelectDetailPage = ({ params }: { params: { id: number } }) => {
+    const { data, isLoading, error, refetch } = useGetQuestionsId(params.id);
+    console.log(data);
+
     const dispatch = useAppDispatch();
     const handleClickShowHint = () => {
         dispatch(
@@ -32,29 +36,42 @@ const SelectDetailPage = () => {
                     </Flex>
                 }
             />
-            <Title typo="Headline1b">
-                애인에게 가장 잘 해줄 것 같은 사람은?
-            </Title>
-            <Flex direction="column" gap={8}>
-                {[0, 1, 2, 3, 5].map((idx: number) => (
-                    <HintWrapper key={idx}>
-                        <HintItem idx={idx} onClick={handleClickShowHint}>
-                            <Person typo="Subtitle2b" color="light_qblack">
-                                02년생 여자
-                            </Person>
-                            <Message width={73}>
-                                <Icon icon="Chat" />
-                            </Message>
-                            <Hint width={73}>
-                                <Icon icon="Heart" fill="light_qblack" />
-                            </Hint>
-                        </HintItem>
-                        <HintText typo="Subtitle1r" color="light_gray3">
-                            안녕하세요 테스트입니다
-                        </HintText>
-                    </HintWrapper>
-                ))}
-            </Flex>
+            {isLoading ? (
+                <div>로딩중...</div>
+            ) : (
+                <>
+                    <Title typo="Headline1b">{data.title}</Title>
+                    <Flex direction="column" gap={8}>
+                        {[0, 1, 2, 3, 4, 5].map((idx: number) => (
+                            <HintWrapper key={idx}>
+                                <HintItem
+                                    idx={idx}
+                                    onClick={handleClickShowHint}
+                                >
+                                    <Person
+                                        typo="Subtitle2b"
+                                        color="light_qblack"
+                                    >
+                                        02년생 여자
+                                    </Person>
+                                    <Message width={73}>
+                                        <Icon icon="Chat" />
+                                    </Message>
+                                    <Hint width={73}>
+                                        <Icon
+                                            icon="Heart"
+                                            fill="light_qblack"
+                                        />
+                                    </Hint>
+                                </HintItem>
+                                <HintText typo="Subtitle1r" color="light_gray3">
+                                    안녕하세요 테스트입니다
+                                </HintText>
+                            </HintWrapper>
+                        ))}
+                    </Flex>
+                </>
+            )}
             <BottomNavigation />
         </Flex>
     );

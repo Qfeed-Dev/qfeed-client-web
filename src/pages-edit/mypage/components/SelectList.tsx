@@ -26,7 +26,7 @@ export default function SelectList({ id }: { id: number }) {
                         align="start"
                         gap={8}
                         onClick={() => {
-                            router.push(`/mypage/select/${1}`);
+                            router.push(`/mypage/select/${question.id}`);
                         }}
                     >
                         <Text typo="Subtitle2b">{question.title}</Text>
