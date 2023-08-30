@@ -54,15 +54,19 @@ export default function InfoList({
             {isMe && (
                 <>
                     <Line />
-                    <Flex justify="space-between">
-                        <Flex
-                            width={"auto"}
-                            gap={16}
-                            onClick={() => router.push("/mypage/followings")}
-                        >
+                    <Flex
+                        justify="space-between"
+                        onClick={() => router.push("/mypage/followings")}
+                    >
+                        <Flex width={"auto"} gap={16}>
                             <Icon icon="Person" />
                             <Text typo="Subtitle2b">내가 팔로우 하는 친구</Text>
                         </Flex>
+                        <Icon
+                            icon="RightBracket"
+                            color={colors.light_qwhite}
+                            fill="transparent"
+                        />
                     </Flex>
                 </>
             )}
