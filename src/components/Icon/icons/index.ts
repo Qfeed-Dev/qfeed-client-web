@@ -21,6 +21,7 @@ export { default as School } from "./School";
 export { default as Heart } from "./Heart";
 export { default as Person } from "./Person";
 export { default as Chat } from "./Chat";
+export { default as RightBracket } from "./RightBracket";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";
