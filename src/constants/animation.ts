@@ -52,6 +52,13 @@ export const changeXSBtnColor = {
         },
         color: theme.colors.light_qblack,
         background: theme.colors.primary_qgreen
+    },
+    default: {
+        transition: {
+            duration: 0.2
+        },
+        color: theme.colors.light_qblack,
+        background: theme.colors.light_qwhite
     }
 };
 

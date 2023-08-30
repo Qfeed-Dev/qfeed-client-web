@@ -189,9 +189,6 @@ const Handle = styled.div<{ selectedIdx: number; backgroundColor: KeyOfColor }>`
               colors[backgroundColor]};
 `;
 
-// background-color: ${({ selectedIdx }) =>
-// selectedIdx !== -1 ? colors.line_white_50 : colors.light_gray1};
-
 const BottomSheetWrapper = styled.div<{
     height: number;
     actionDelay: number;

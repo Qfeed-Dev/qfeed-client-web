@@ -1,15 +1,16 @@
 "use client";
 
+import React from "react";
 import styled from "styled-components";
 import Text from "../common/Text";
 import { motion } from "framer-motion";
 import { KeyOfColor, colors } from "styles/theme";
 import { changeXSBtnColor } from "src/constants/animation";
 
-type ButtonState = "active" | "disabled";
+type ButtonState = "active" | "disabled" | "default";
 
 interface ButtonProps {
-    text: string;
+    text: string | React.ReactNode;
     onClick: any;
     state: ButtonState;
 }
@@ -22,13 +23,18 @@ const ButtonFillXSmall = ({ text = "", onClick, state }: ButtonProps) => {
             variants={changeXSBtnColor}
             onClick={onClick}
         >
-            <Text typo="Subtitle1b">{text}</Text>
+            {typeof text === "string" ? (
+                <Text typo="Subtitle1b">{text}</Text>
+            ) : (
+                text
+            )}
         </ButtonWrapper>
     );
 };
 
 const ButtonWrapper = styled(motion.button)`
-    padding: 5px 18px;
+    min-width: 72px;
+    padding: 5px 0.5rem;
 
     text-align: center;
 
