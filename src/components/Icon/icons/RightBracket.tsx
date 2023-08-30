@@ -10,9 +10,9 @@ const RightArrow = () => {
             <path
                 d="M1.51367 13L7.51367 7L1.51367 1"
                 stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
             />
         </svg>
     );
