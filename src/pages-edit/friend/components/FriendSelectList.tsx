@@ -16,7 +16,7 @@ export default function FriendSelectList() {
                 align="start"
                 gap={8}
                 onClick={() => {
-                    router.push(`/mypage/select/${1}`);
+                    router.push(`/question/select/${1}`);
                 }}
             >
                 <Text typo="Subtitle2b">

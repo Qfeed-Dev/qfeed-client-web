@@ -25,7 +25,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
 
     const handleClickFrame = () => {
         // router.push(Route.QUESTION());
-        router.push(`${Route.QUESTION()}?id=${data.id}`);
+        router.push(`${Route.QUESTION()}/${data.id}`);
     };
 
     return (
