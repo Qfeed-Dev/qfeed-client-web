@@ -1,18 +1,19 @@
 "use client";
 
 import styled from "styled-components";
-import BottomNavigation from "src/components/BottomNavigation";
 
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { colors, repeatBackgroundColor } from "styles/theme";
 
+import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+
+import BottomNavigation from "src/components/BottomNavigation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
-import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
-import { User } from "src/models/account";
+import Loading from "src/components/common/Loading";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     const { data, isLoading, error, refetch } = useGetQuestionsId(params.id);
@@ -37,7 +38,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                 }
             />
             {isLoading ? (
-                <div>로딩중...</div>
+                <Loading />
             ) : (
                 <>
                     <Title typo="Headline1b">{data.title}</Title>

@@ -9,14 +9,14 @@ import NavigationTop from "src/components/navigations/NavigationTop";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import Icon from "src/components/Icon/Icon";
-import { Setting } from "src/components/Icon/icons";
+import Loading from "src/components/common/Loading";
 
 export default function Mypage() {
     const { user, isLoading } = useUserQuery();
     return (
         <Flex direction="column" align="center" gap={40}>
             {isLoading ? (
-                <div>로딩중</div>
+                <Loading />
             ) : (
                 <>
                     <Flex direction="column" align="center" gap={8}>

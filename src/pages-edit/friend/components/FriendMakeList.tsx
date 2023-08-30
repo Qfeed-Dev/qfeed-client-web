@@ -8,6 +8,7 @@ import { useGetQuestions } from "src/hooks/home/useGetQuestions";
 
 import Text from "src/components/common/Text";
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
+import Loading from "src/components/common/Loading";
 
 import { globalValue } from "src/constants/globalValue";
 
@@ -16,7 +17,7 @@ export default function FriendMakeList() {
     const { width } = useDisplaySize();
 
     return isLoading ? (
-        <div>로딩중...</div>
+        <Loading />
     ) : (
         <QfeedWrapper>
             <StackGrid
