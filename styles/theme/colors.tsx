@@ -8,7 +8,7 @@ const hexToRGBA = (color: string, opacity: number) => {
     return `rgba(${r}, ${g}, ${b}, ${opacity * 0.01})`;
 };
 
-export const colors = {
+export const colors: any = {
     primary_qyellow: "#EEF619",
     primary_qpink: "#FE98CA",
     primary_qorange: "#FF812F",
@@ -34,7 +34,7 @@ export const colors = {
 } as const;
 
 // 12 개
-export const repeatBackgroundColor: Partial<KeyOfColor>[] = [
+export const repeatBackgroundColor: any = [
     //Partial<KeyOfColor>
     // colors.primary_qpink,
     // colors.primary_qorange,

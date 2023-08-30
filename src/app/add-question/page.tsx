@@ -10,10 +10,15 @@ import QuestionImage from "src/components/Icon/icons/images/QuestionImage";
 import Icon from "src/components/Icon";
 import { useState } from "react";
 import Image from "src/components/Image";
+import usePostQuestions from "src/hooks/questions/usePostQuestions";
+import { postQuestions } from "src/apis/questions";
+import { useRouter } from "next/navigation";
+import { Route } from "src/constants/Route";
 
 export default function Page() {
-    const time2 = 1;
-    const [image, setImage] = useState(null);
+    const router = useRouter();
+    const time2 = 0;
+    const [image, setImage] = useState("");
     // "https://i.ibb.co/0Z6FNN7/60pt.png"
     const [question, setQuestion] = useState("");
     const [values, setValues] = useState<any>([""]);
@@ -40,9 +45,14 @@ export default function Page() {
     };
 
     const clickUpload = () => {
-        console.log(image);
-        console.log(question);
-        console.log(values);
+        postQuestions({
+            Qtype: "personal",
+            title: question,
+            choiceList: values,
+            backgroundImage: image,
+            isBlind: false
+        });
+        router.push(Route.HOME());
     };
 
     return time2 ? (
@@ -202,7 +212,7 @@ const Wrapper = styled.div`
     text-align: center;
 `;
 
-const BottomButton2 = styled.div`
+const BottomButton2 = styled.input`
     width: 100%;
     height: 200px;
     padding: 0 16px;
