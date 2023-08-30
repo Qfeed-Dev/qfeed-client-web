@@ -6,18 +6,14 @@ import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import { useEffect, useState } from "react";
 import Image from "src/components/Image";
-import { useSearchParams } from "next/navigation";
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 
-export default function Page() {
-    const searchParams = useSearchParams();
-    const id = searchParams.get("id");
-
+export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
-        questionId: id
+        questionId: params.id
     });
     const { user } = useUserQuery();
 

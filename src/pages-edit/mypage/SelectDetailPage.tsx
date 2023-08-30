@@ -16,7 +16,9 @@ import Icon from "src/components/Icon/Icon";
 import Loading from "src/components/common/Loading";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
-    const { data, isLoading, error, refetch } = useGetQuestionsId(params.id);
+    const { data, isLoading, error, refetch } = useGetQuestionsId({
+        questionId: params.id
+    });
 
     const dispatch = useAppDispatch();
     const handleClickShowHint = () => {
@@ -28,7 +30,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
         );
     };
     return (
-        <Flex direction="column" gap={144}>
+        <SelectQWrapper direction="column" gap={144}>
             <NavigationTopBack
                 rightIcon={
                     <Flex width="auto" gap={16}>
@@ -77,9 +79,13 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                 </>
             )}
             <BottomNavigation />
-        </Flex>
+        </SelectQWrapper>
     );
 };
+
+const SelectQWrapper = styled(Flex)`
+    padding: 56px 1rem 80px;
+`;
 
 const Title = styled(Text)`
     width: 185px;
