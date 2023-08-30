@@ -82,3 +82,50 @@ export const modal = {
         opacity: 0
     }
 };
+
+export const loadingContainerVariants = {
+    start: {
+        transition: {
+            staggerChildren: 0.2
+        }
+    },
+    end: {
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+export const loadingCircleVariants = {
+    start: {
+        y: "0%"
+    },
+    end: {
+        y: "100%"
+    }
+};
+
+export const loadingCircleTransition = {
+    duration: 0.5,
+    yoyo: Infinity,
+    ease: "easeInOut"
+};
+
+export const enterComponentVariants = {
+    hidden: {
+        y: "2vh",
+        opacity: 0
+    },
+    visible: {
+        y: "0",
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+            ease: "easeInOut"
+        }
+    },
+    exit: {
+        y: "2vh",
+        opacity: 0
+    }
+};

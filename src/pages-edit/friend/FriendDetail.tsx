@@ -10,6 +10,7 @@ import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import InfoList from "src/pages-edit/mypage/components/InfoList";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
 import QfeedList from "../mypage/components/QfeedList";
+import Loading from "src/components/common/Loading";
 
 export default function FriendDetailPage({
     params
@@ -24,7 +25,7 @@ export default function FriendDetailPage({
     return (
         <Flex direction="column" align="center" gap={40}>
             {isLoading ? (
-                <div>로딩중 ...</div>
+                <Loading />
             ) : (
                 <Flex direction="column" align="center" gap={8}>
                     <NavigationTopBack

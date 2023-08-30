@@ -7,17 +7,25 @@ import useGetUserQQuery from "src/hooks/questions/useGetUserQQuery";
 import { colors } from "styles/theme";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
+import Loading from "src/components/common/Loading";
 
 import { Questions } from "src/models/questions";
+import { motion } from "framer-motion";
+import { enterComponentVariants } from "src/constants/animation";
 
 export default function SelectList({ id }: { id: number }) {
     const router = useRouter();
     const { questions, isLoading } = useGetUserQQuery(id, "official");
 
     return isLoading ? (
-        <div>로딩중...</div>
+        <Loading />
     ) : (
-        <SelectWrapper direction="column" gap={16}>
+        <SelectWrapper
+            variants={enterComponentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+        >
             {questions.data.length ? (
                 questions.data.map((question: Questions) => (
                     <SelectItem
@@ -52,7 +60,12 @@ export default function SelectList({ id }: { id: number }) {
     );
 }
 
-const SelectWrapper = styled(Flex)``;
+const SelectWrapper = styled(motion.div)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`;
 
 const SelectItem = styled(Flex)`
     padding-bottom: 1rem;
