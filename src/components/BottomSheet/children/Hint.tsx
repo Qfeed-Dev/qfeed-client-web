@@ -6,6 +6,8 @@ import Flex from "src/components/common/Flex";
 
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import { colors } from "styles/theme";
+import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
+import Icon from "src/components/Icon/Icon";
 
 interface Props {}
 
@@ -14,9 +16,23 @@ const Hint = ({}: Props) => {
         <HintWrapper direction="column" gap={30}>
             <Flex justify="space-between">
                 <Text typo="Subtitle2b" color="light_qwhite">
-                    02년생 여자 힌트
+                    20학번 여자 힌트
                 </Text>
-                <div>아이콘</div>
+                <ButtonFillXSmall
+                    text={
+                        <Flex gap={8}>
+                            <Icon
+                                icon="Heart"
+                                fill="light_qblack"
+                                width={20}
+                                height={20}
+                            />
+                            <Text typo="Subtitle1b">0</Text>
+                        </Flex>
+                    }
+                    state="default"
+                    onClick={() => {}}
+                />
             </Flex>
             <Flex direction="column" gap={8}>
                 <Text typo="Subtitle1r" color="light_qwhite">
@@ -28,12 +44,20 @@ const Hint = ({}: Props) => {
             </Flex>
             <Flex direction="column" gap={8}>
                 <HintItem justify="space-between">
-                    <Text typo="Subtitle2b">30 코인</Text>
+                    <Flex width="auto" gap={8}>
+                        <Icon
+                            icon="Heart"
+                            fill="light_qblack"
+                            width={20}
+                            height={20}
+                        />
+                        <Text typo="Subtitle2b">30 하트</Text>
+                    </Flex>
                     <Text typo="Subtitle2b">힌트 보기</Text>
                 </HintItem>
                 <ButtonFillLarge
                     state="active"
-                    text="코인 충전하기"
+                    text="하트 충전하기"
                     onClick={() => {}}
                     bottom={false}
                 />

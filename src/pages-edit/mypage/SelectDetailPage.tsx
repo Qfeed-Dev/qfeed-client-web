@@ -12,17 +12,17 @@ import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSli
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
+import { User } from "src/models/account";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     const { data, isLoading, error, refetch } = useGetQuestionsId(params.id);
-    console.log(data);
 
     const dispatch = useAppDispatch();
     const handleClickShowHint = () => {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "hint"]
+                value: [1, "hint", -1]
             })
         );
     };
@@ -42,22 +42,25 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                 <>
                     <Title typo="Headline1b">{data.title}</Title>
                     <Flex direction="column" gap={8}>
-                        {[0, 1, 2, 3, 4, 5].map((idx: number) => (
-                            <HintWrapper key={idx}>
-                                <HintItem
-                                    idx={idx}
-                                    onClick={handleClickShowHint}
-                                >
+                        {data.choices.map((choice: any) => (
+                            <HintWrapper key={choice.user.id}>
+                                <HintItem idx={choice.user.id}>
                                     <Person
                                         typo="Subtitle2b"
                                         color="light_qblack"
                                     >
-                                        02년생 여자
+                                        {choice.user.grade +
+                                            " " +
+                                            choice.user.gender +
+                                            "자"}
                                     </Person>
                                     <Message width={73}>
                                         <Icon icon="Chat" />
                                     </Message>
-                                    <Hint width={73}>
+                                    <Hint
+                                        width={73}
+                                        onClick={handleClickShowHint}
+                                    >
                                         <Icon
                                             icon="Heart"
                                             fill="light_qblack"
