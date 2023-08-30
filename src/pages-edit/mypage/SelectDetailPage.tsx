@@ -1,29 +1,36 @@
 "use client";
 
 import styled from "styled-components";
-import BottomNavigation from "src/components/BottomNavigation";
 
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { colors, repeatBackgroundColor } from "styles/theme";
 
+import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+
+import BottomNavigation from "src/components/BottomNavigation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
+import Loading from "src/components/common/Loading";
 
-const SelectDetailPage = () => {
+const SelectDetailPage = ({ params }: { params: { id: number } }) => {
+    const { data, isLoading, error, refetch } = useGetQuestionsId({
+        questionId: params.id
+    });
+
     const dispatch = useAppDispatch();
     const handleClickShowHint = () => {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "hint"]
+                value: [1, "hint", -1]
             })
         );
     };
     return (
-        <Flex direction="column" gap={144}>
+        <SelectQWrapper direction="column" gap={144}>
             <NavigationTopBack
                 rightIcon={
                     <Flex width="auto" gap={16}>
@@ -32,33 +39,53 @@ const SelectDetailPage = () => {
                     </Flex>
                 }
             />
-            <Title typo="Headline1b">
-                애인에게 가장 잘 해줄 것 같은 사람은?
-            </Title>
-            <Flex direction="column" gap={8}>
-                {[0, 1, 2, 3, 5].map((idx: number) => (
-                    <HintWrapper key={idx}>
-                        <HintItem idx={idx} onClick={handleClickShowHint}>
-                            <Person typo="Subtitle2b" color="light_qblack">
-                                02년생 여자
-                            </Person>
-                            <Message width={73}>
-                                <Icon icon="Chat" />
-                            </Message>
-                            <Hint width={73}>
-                                <Icon icon="Heart" fill="light_qblack" />
-                            </Hint>
-                        </HintItem>
-                        <HintText typo="Subtitle1r" color="light_gray3">
-                            안녕하세요 테스트입니다
-                        </HintText>
-                    </HintWrapper>
-                ))}
-            </Flex>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <>
+                    <Title typo="Headline1b">{data.title}</Title>
+                    <Flex direction="column" gap={8}>
+                        {data.choices.map((choice: any) => (
+                            <HintWrapper key={choice.user.id}>
+                                <HintItem idx={choice.user.id}>
+                                    <Person
+                                        typo="Subtitle2b"
+                                        color="light_qblack"
+                                    >
+                                        {choice.user.grade +
+                                            " " +
+                                            choice.user.gender +
+                                            "자"}
+                                    </Person>
+                                    <Message width={73}>
+                                        <Icon icon="Chat" />
+                                    </Message>
+                                    <Hint
+                                        width={73}
+                                        onClick={handleClickShowHint}
+                                    >
+                                        <Icon
+                                            icon="Heart"
+                                            fill="light_qblack"
+                                        />
+                                    </Hint>
+                                </HintItem>
+                                <HintText typo="Subtitle1r" color="light_gray3">
+                                    안녕하세요 테스트입니다
+                                </HintText>
+                            </HintWrapper>
+                        ))}
+                    </Flex>
+                </>
+            )}
             <BottomNavigation />
-        </Flex>
+        </SelectQWrapper>
     );
 };
+
+const SelectQWrapper = styled(Flex)`
+    padding: 56px 1rem 80px;
+`;
 
 const Title = styled(Text)`
     width: 185px;

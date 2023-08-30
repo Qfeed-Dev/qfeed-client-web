@@ -8,9 +8,9 @@ import { Friend } from "src/models/account";
 
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Flex from "src/components/common/Flex";
-
 import FriendItem from "../friend/components/FriendItem";
 import InputFill from "src/components/inputs/input-fill";
+import Loading from "src/components/common/Loading";
 
 export default function MyFollowingPage() {
     const { value, handleChangeInput } = useInput();
@@ -30,10 +30,14 @@ export default function MyFollowingPage() {
                     placeholder="친구의 이름을 검색해보세요."
                 />
                 {isLoading ? (
-                    <div>로딩중...</div>
+                    <Loading />
                 ) : (
                     followings.data.map((following: Friend) => (
-                        <FriendItem key={following.id} {...following} />
+                        <FriendItem
+                            key={following.id}
+                            isFollowing={true}
+                            friend={following}
+                        />
                     ))
                 )}
             </Flex>

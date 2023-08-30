@@ -5,7 +5,7 @@ import Text from "../common/Text";
 import { motion } from "framer-motion";
 import { changeBtnColor } from "src/constants/animation";
 
-export type ButtonState = "active" | "disabled";
+type ButtonState = "active" | "disabled";
 
 interface ButtonProps {
     state?: ButtonState;
