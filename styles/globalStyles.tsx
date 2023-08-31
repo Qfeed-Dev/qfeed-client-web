@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -9,6 +12,7 @@ html,
 body {
     width: 100%;
     min-height: 100vh;
+    background: "#131313";
 }
 
 html,
@@ -174,3 +178,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input:focus {
     outline: none;
 }
+`;
+
+export default GlobalStyles;
