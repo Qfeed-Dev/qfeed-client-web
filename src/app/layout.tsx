@@ -1,10 +1,11 @@
 "use client";
 import ReactQueryProvider from "../lib/react-query-registry";
-import "../../styles/globals.css";
 import { Provider } from "react-redux";
 import Head from "./head";
 import App from "./App";
 import { store } from "src/store";
+
+import GlobalStyles from "styles/globalStyles";
 
 export default function RootLayout({
     children
@@ -18,6 +19,7 @@ export default function RootLayout({
                 <Provider store={store}>
                     <ReactQueryProvider>
                         <App>{children}</App>
+                        <GlobalStyles />
                     </ReactQueryProvider>
                 </Provider>
             </body>
