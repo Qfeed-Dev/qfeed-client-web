@@ -34,13 +34,13 @@ const BottomSheet = forwardRef(function Div(
     );
     const BOTTOMSHEET_HEIGHT = COMPONENT_HEIGHT[type];
 
-    const DynamicComponent = dynamic(
-        () =>
-            import(`./children/${type.charAt(0).toUpperCase() + type.slice(1)}`)
-    );
     const propertyData = {
         selectedIdx
     };
+    const DynamicComponent = dynamic<typeof propertyData>(
+        () =>
+            import(`./children/${type.charAt(0).toUpperCase() + type.slice(1)}`)
+    );
 
     const handleMove = (move: number) => {
         if (move)
