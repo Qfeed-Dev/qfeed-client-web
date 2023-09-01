@@ -4,29 +4,75 @@ import ProfileTitle from "src/pages-edit/question/ProfileTitle";
 import Question from "src/pages-edit/question/Question";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "src/components/Image";
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: params.id
     });
+    const { user } = useUserQuery();
 
-    const [typeNum, setTypeNum] = useState(2);
-    const [selected, setSelected] = useState<number>(0);
-    const best = 0;
+    // choices에 본인이 있는지 확인
+    const checkName = (el: any) => {
+        if (el?.user?.name === user?.name) {
+            return true;
+        }
+    };
+    // 어떤 선택을 했는지
+    const checkSelected = (el: any) => {
+        console.log("A");
+        if (el?.user?.name === user?.name) {
+            console.log(el?.value);
+            return el?.value;
+        } else {
+            return -1;
+        }
+    };
+    // 어떤 선택지가 최대값
+    const checkBest = () => {
+        let b = [];
+        for (let i = 0; i < questionData?.choiceList?.length; i++) {
+            const value = questionData?.choices?.filter(
+                (data: any, idx: number) => {
+                    return data?.value == i;
+                }
+            );
+            b.push(value.length);
+        }
+        setBest(b);
+    };
 
-    const clickChoice = (idx: number) => {
-        postQuestionsIdChoices(questionData?.id, { value: idx });
+    const [typeNum, setTypeNum] = useState<any>();
+    const [selected, setSelected] = useState<number>(-1);
+    const [best, setBest] = useState<any>([]);
+
+    const clickChoice = (idx: any, value: number) => {
+        postQuestionsIdChoices(questionData?.id, { value });
         setSelected(idx);
         setTypeNum(1);
         setTimeout(() => {
             setTypeNum(2);
         }, 3000);
     };
+
+    useEffect(() => {
+        setTypeNum(
+            questionData?.choices.some(checkName) ||
+                questionData?.owner?.name === user?.name
+                ? 2
+                : 0
+        );
+        const s = questionData?.choices?.filter(
+            (data: any) => data?.user?.name === user?.name
+        );
+        setSelected(s?.length !== 0 ? Number(s?.[0]?.value) : -1);
+        checkBest();
+    }, [questionData]);
 
     return isLoading ? undefined : (
         <>
@@ -61,14 +107,21 @@ export default function Page({ params }: { params: { id: number } }) {
                                 } // primary default
                                 typeNum={typeNum} // 0 1 2
                                 action={
-                                    typeNum === 2 && idx === best // best
+                                    typeNum === 2 &&
+                                    questionData?.choices?.filter(
+                                        (data2: any) => data2.value == idx
+                                    ).length === Math.max(...best) // best
                                         ? 2
                                         : idx === selected
                                         ? 1
                                         : 0
                                 } // 0 1 2
                                 selected={selected}
-                                onClick={() => clickChoice(idx)}
+                                onClick={
+                                    typeNum === 2
+                                        ? () => {}
+                                        : () => clickChoice(idx, d)
+                                }
                                 count={
                                     questionData?.choices?.filter(
                                         (data2: any) => data2.value == idx

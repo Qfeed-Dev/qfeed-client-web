@@ -4,7 +4,7 @@ import { questionKeys } from "src/constants/queryKeys/questionKeys";
 
 export const useGetQuestionsId = ({ questionId }: { questionId: number }) => {
     const { data, isLoading, error, refetch } = useQuery(
-        [questionId],
+        questionKeys.detail(questionId),
         async () => {
             const result = getQuestionsId(questionId);
             return result;

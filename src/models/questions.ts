@@ -20,3 +20,27 @@ export interface Questions {
     isChoiced: boolean;
     createdAt: string;
 }
+
+export interface QSet {
+    targetUserId: number;
+    value: string;
+}
+
+export interface QSetCursor {
+    id: number;
+    user: {
+        id: number;
+        name: string;
+        nickname: string;
+        profileImage: string;
+        schoolName: string;
+        grade: string;
+        gender: string;
+    };
+    currentQ: string;
+    cursor: number;
+    QsetLength: number;
+    isDone: boolean;
+    startAt: string;
+    endAt: string;
+}

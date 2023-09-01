@@ -4,7 +4,7 @@ interface GlobalType {
     type: string;
     visible: number;
     actionDelay: boolean;
-    selectedIdx: number;
+    selectedIdx: number | null;
     [index: string]: string | string[] | any;
 }
 
@@ -12,7 +12,7 @@ const initialState: GlobalType = {
     type: "primary",
     visible: 0,
     actionDelay: false,
-    selectedIdx: 0
+    selectedIdx: null
 };
 
 export const bottomSheetSlice = createSlice({
@@ -29,10 +29,20 @@ export const bottomSheetSlice = createSlice({
         },
         changeAction: (
             state,
-            { payload }: { payload: { type: string; value: boolean } }
+            {
+                payload
+            }: {
+                payload: {
+                    type: string;
+                    value: { on: boolean; onDismiss?: Function };
+                };
+            }
         ) => {
             const { value } = payload;
-            state.actionDelay = value;
+            state.actionDelay = value.on;
+            if (value.onDismiss && typeof value.onDismiss === "function")
+                value.onDismiss();
+            // if (!state.actionDelay) state.selectedIdx = null;
         },
         changeVisibleType: (
             state,
@@ -43,6 +53,7 @@ export const bottomSheetSlice = createSlice({
             state.visible = value[0];
             state.type = value[1];
             state.selectedIdx = value[2];
+            state.qset = value[3];
         }
     }
 });
