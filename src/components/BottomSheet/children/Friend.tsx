@@ -13,7 +13,6 @@ const Friend = ({}: Props) => {
     const { type, visible, actionDelay, selectedIdx } = useAppSelector(
         (state) => state.bottomSheet
     );
-    console.log(repeatBackgroundColor[selectedIdx % 12]);
 
     return (
         <FriendWrapper>
