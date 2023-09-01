@@ -19,7 +19,6 @@ export default function Page() {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: id
     });
-    console.log(questionData);
     const { user } = useUserQuery();
 
     // choices에 본인이 있는지 확인
@@ -30,18 +29,31 @@ export default function Page() {
     };
     // 어떤 선택을 했는지
     const checkSelected = (el: any) => {
+        console.log("A");
         if (el?.user?.name === user?.name) {
+            console.log(el?.value);
             return el?.value;
+        } else {
+            return -1;
         }
     };
+    // 어떤 선택지가 최대값
+    const checkBest = () => {
+        let b = [];
+        for (let i = 0; i < questionData?.choiceList?.length; i++) {
+            const value = questionData?.choices?.filter(
+                (data: any, idx: number) => {
+                    return data?.value == i;
+                }
+            );
+            b.push(value.length);
+        }
+        setBest(b);
+    };
 
-    const [typeNum, setTypeNum] = useState(
-        questionData?.choices.some(checkName) ? 2 : 0
-    );
-    const [selected, setSelected] = useState<number>(
-        Number(questionData?.choices.some(checkSelected))
-    );
-    const best = 0;
+    const [typeNum, setTypeNum] = useState<any>();
+    const [selected, setSelected] = useState<number>(-1);
+    const [best, setBest] = useState<any>([]);
 
     const clickChoice = (idx: any, value: number) => {
         postQuestionsIdChoices(questionData?.id, { value });
@@ -53,8 +65,18 @@ export default function Page() {
     };
 
     useEffect(() => {
-        setTypeNum(questionData?.choices.some(checkName) ? 2 : 0);
-        setSelected(Number(questionData?.choices.some(checkSelected)));
+        setTypeNum(
+            questionData?.choices.some(checkName) ||
+                questionData?.owner?.name === user?.name
+                ? 2
+                : 0
+        );
+        const s = questionData?.choices?.filter(
+            (data: any) => data?.user?.name === user?.name
+        );
+        console.log(s);
+        setSelected(s.length !== 0 ? Number(s?.[0]?.value) : -1);
+        checkBest();
     }, [questionData]);
 
     return isLoading ? undefined : (
@@ -90,14 +112,21 @@ export default function Page() {
                                 } // primary default
                                 typeNum={typeNum} // 0 1 2
                                 action={
-                                    typeNum === 2 && idx === best // best
+                                    typeNum === 2 &&
+                                    questionData?.choices?.filter(
+                                        (data2: any) => data2.value == idx
+                                    ).length === Math.max(...best) // best
                                         ? 2
                                         : idx === selected
                                         ? 1
                                         : 0
                                 } // 0 1 2
                                 selected={selected}
-                                onClick={() => clickChoice(idx, d)}
+                                onClick={
+                                    typeNum === 2
+                                        ? () => {}
+                                        : () => clickChoice(idx, d)
+                                }
                                 count={
                                     questionData?.choices?.filter(
                                         (data2: any) => data2.value == idx
