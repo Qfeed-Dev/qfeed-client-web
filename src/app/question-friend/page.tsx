@@ -103,7 +103,7 @@ export default function Page() {
                 <Question title={questionFriend?.data?.[currentIdx]?.title} />
                 <Spacing size={38} />
 
-                <Input type="question-friend" />
+                <Input type="question-friend" lazyDelay={400} />
                 <Spacing size={16} />
 
                 <FriendWrapper>
