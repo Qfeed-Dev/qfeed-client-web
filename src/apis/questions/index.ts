@@ -19,11 +19,22 @@ export const postQuestionsIdChoices = async (questionId: any, body: any) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const getQuestionsQSet = async () =>
-    await qFeedAxios
-        .get("/questions/q-set")
-        .then(({ data }) => data)
-        .catch((err) => err.response);
+export const getQsetCursor = async () => {
+    const response = await qFeedAxios.get("/questions/q-set/today");
+    return response.data;
+};
+
+export const createQset = async () => {
+    const response = await qFeedAxios.post("/questions/q-set");
+    return response.data;
+};
+
+export const createQuestionsQSet = async (userQsetId: number) => {
+    const response = await qFeedAxios.get(
+        `/questions/q-set/${userQsetId}/choice`
+    );
+    return response.data;
+};
 
 export const getQuestionsId = async (questionId: any) =>
     await qFeedAxios
