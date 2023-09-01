@@ -16,6 +16,7 @@ export const qFeedAxios: AxiosInstance = axios.create({
     }
 });
 
+let retries = 0;
 qFeedAxios.interceptors.response.use(
     (response) => {
         if (
@@ -38,16 +39,25 @@ qFeedAxios.interceptors.response.use(
         if (error.isAxiosError) {
             // window.location.href = "/";
         }
+
         switch (status) {
             case 401: {
                 const token = getCookie();
                 if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
-                    const originalResponse = await axios.request(config);
-                    return originalResponse;
+                    if (retries) {
+                        deleteCookie();
+                        window.location.href = "/account";
+                    } else {
+                        retries += 1;
+                        config.headers.Authorization = `Bearer ${token}`;
+                        const originalResponse = await axios.request(config);
+                        return originalResponse;
+                    }
                 } else {
                     window.location.href = "/account";
                 }
+            }
+            case 404: {
             }
             case 502:
             case 503:
