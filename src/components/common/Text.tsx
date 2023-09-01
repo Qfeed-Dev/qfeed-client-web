@@ -9,7 +9,6 @@ export const Text = styled.div<{
     color: ${({ color }) => color && theme.colors[color]};
     pointer-events: none;
     white-space: pre-line;
-    word-break: keep-all;
 `;
 
 export default Text;
