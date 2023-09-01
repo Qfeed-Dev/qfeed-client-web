@@ -48,6 +48,7 @@ const ButtonWrapper = styled.div<{
     width: 100%;
     height: 47px;
     display: flex;
+    cursor: pointer;
 
     border: 1px solid ${colors.light_qwhite};
     border-radius: 10px;
