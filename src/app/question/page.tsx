@@ -74,8 +74,7 @@ export default function Page() {
         const s = questionData?.choices?.filter(
             (data: any) => data?.user?.name === user?.name
         );
-        console.log(s);
-        setSelected(s.length !== 0 ? Number(s?.[0]?.value) : -1);
+        setSelected(s?.length !== 0 ? Number(s?.[0]?.value) : -1);
         checkBest();
     }, [questionData]);
 
