@@ -20,7 +20,7 @@ export default function Friend({ idx, data }: any) {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "friend", idx]
+                value: [1, "friendModal", data.id]
             })
         );
     };
