@@ -18,8 +18,9 @@ export default function RootLayout({
             <body style={{ background: "#131313" }}>
                 <Provider store={store}>
                     <ReactQueryProvider>
-                        <App>{children}</App>
-                        <GlobalStyles />
+                        <App>
+                            {children} <GlobalStyles />
+                        </App>
                     </ReactQueryProvider>
                 </Provider>
             </body>
