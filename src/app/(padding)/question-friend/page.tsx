@@ -5,6 +5,7 @@ import useQsetMutation from "src/hooks/questions/useQsetMutation";
 import { useInput } from "src/hooks/common/useInput";
 import useFollowingsQuery from "src/hooks/account/useFollowingsQuery";
 import { useEffect } from "react";
+import usePassQsetMutation from "src/hooks/questions/usePassQsetCursorMutation";
 
 import Friend from "src/pages-edit/question/Friend";
 import Question from "src/pages-edit/question/Question";
@@ -30,6 +31,7 @@ export default function Page() {
     const { mutate } = useQsetMutation();
     const { value, handleChangeInput } = useInput();
     const friend = useFollowingsQuery(value);
+    const pass = usePassQsetMutation();
 
     useEffect(() => {
         friend.refetch();
@@ -40,7 +42,6 @@ export default function Page() {
         mutate();
     }
 
-    const handleClickSkipButton = () => {};
     return isLoading ? (
         <Loading />
     ) : questionCursor && questionCursor[0].isDone ? (
@@ -65,12 +66,10 @@ export default function Page() {
             </Wrapper>
 
             <BottomButton2>
-                <BottomInner>
-                    <Button type="secondary">연락처 동기화</Button>
-                    <Button type="primary" onClick={() => {}}>
-                        공유하기
-                    </Button>
-                </BottomInner>
+                <ButtonWrapper gap={14}>
+                    <ButtonLineMid text="연락처 동기화" onClick={() => {}} />
+                    <ButtonFillMid text="공유하기" onClick={() => {}} />
+                </ButtonWrapper>
             </BottomButton2>
 
             <BottomText>
@@ -99,11 +98,14 @@ export default function Page() {
                 />
                 {questionCursor && (
                     <SlideLine
-                        percentage={
+                        percentage={[
+                            ((questionCursor[0].cursor - 1) /
+                                questionCursor[0].QsetLength) *
+                                100,
                             (questionCursor[0].cursor /
                                 questionCursor[0].QsetLength) *
-                            100
-                        }
+                                100
+                        ]}
                     />
                 )}
                 <Flex direction="column" gap={38}>
@@ -142,12 +144,9 @@ export default function Page() {
                 <ButtonWrapper gap={14}>
                     <ButtonLineMid
                         text="넘기기"
-                        onClick={handleClickSkipButton}
+                        onClick={() => pass.mutate(questionCursor[0].id)}
                     />
-                    <ButtonFillMid
-                        text="보내기"
-                        onClick={handleClickSkipButton}
-                    />
+                    <ButtonFillMid text="보내기" onClick={() => {}} />
                 </ButtonWrapper>
             </Flex>
         )

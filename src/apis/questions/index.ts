@@ -36,6 +36,13 @@ export const createQuestionsQSet = async (userQsetId: number) => {
     return response.data;
 };
 
+export const passQuestionsQSet = async (userQsetId: number) => {
+    const response = await qFeedAxios.patch(
+        `/questions/q-set/${userQsetId}/pass`
+    );
+    return response.data;
+};
+
 export const getQuestionsId = async (questionId: any) =>
     await qFeedAxios
         .get(`/questions/${questionId}`)
