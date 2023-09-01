@@ -12,11 +12,13 @@ import styled from "styled-components";
 export default function FriendItem({
     idx,
     bgColor,
-    data
+    data,
+    qset
 }: {
     idx: number;
     bgColor: string;
     data: Friend;
+    qset: number;
 }) {
     const { width } = useDisplaySize();
     const dispatch = useAppDispatch();
@@ -28,7 +30,7 @@ export default function FriendItem({
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "friend", idx]
+                value: [1, "friend", data.id, qset]
             })
         );
     };

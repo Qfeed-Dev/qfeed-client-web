@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
-import { colors, repeatBackgroundColor } from "styles/theme";
+import { colors } from "styles/theme";
 
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
@@ -14,6 +14,7 @@ import BottomNavigation from "src/components/BottomNavigation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
 import Loading from "src/components/common/Loading";
+import { getAppStateColor } from "src/utils/colorGenerate";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     const { data, isLoading, error, refetch } = useGetQuestionsId({
@@ -101,7 +102,7 @@ const HintWrapper = styled.div`
 
 const HintItem = styled(Flex)<{ idx: number }>`
     height: 50px;
-    background: ${({ idx }) => colors[repeatBackgroundColor[idx % 12]]};
+    background: ${({ idx }) => colors[getAppStateColor(idx)]};
 
     border-radius: 10px;
     overflow: hidden;

@@ -19,7 +19,7 @@ const ButtonLineMid = ({ text = "", onClick }: ButtonProps) => {
 
 const ButtonWrapper = styled.button`
     width: 100%;
-    padding: 14px 60px;
+    padding: 14px 30px;
 
     text-align: center;
     color: ${colors.light_qwhite};

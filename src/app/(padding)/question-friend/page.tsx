@@ -8,11 +8,10 @@ import { useEffect } from "react";
 import usePassQsetMutation from "src/hooks/questions/usePassQsetCursorMutation";
 
 import FriendItem from "src/pages-edit/question/Friend";
-import Question from "src/pages-edit/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors, repeatBackgroundColor } from "styles/theme";
+import { colors } from "styles/theme";
 import styled from "styled-components";
 import FriendImage from "src/components/Icon/icons/images/FriendImage";
 import Text from "src/components/common/Text";
@@ -26,6 +25,8 @@ import InputFill from "src/components/inputs/input-fill";
 import { Friend } from "src/models/account";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
+import { getAppStateColor } from "src/utils/colorGenerate";
+import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 export default function Page() {
     const router = useRouter();
@@ -46,13 +47,12 @@ export default function Page() {
     }
 
     const { selectedIdx } = useAppSelector((state) => state.bottomSheet);
-
     return isLoading ? (
         <Loading />
     ) : questionCursor && questionCursor[0].isDone ? (
-        <>
-            <BackTitle type="default" />
-            <Wrapper>
+        <Flex direction="column">
+            <NavigationTopBack />
+            <Wrapper direction="column">
                 <Text typo="Subtitle2r">10가지 질문에 모두 답했군요!</Text>
                 <Spacing size={8} />
                 <Text typo="Headline1b">
@@ -62,21 +62,21 @@ export default function Page() {
                 </Text>
 
                 <FriendImage />
-
-                <Text typo="Caption1r">
-                    초대한 친구가 가입하면
-                    <br />
-                    다음 질문을 바로 받을 수 있어요.
-                </Text>
+                <Flex direction="column" gap={24}>
+                    <Text typo="Caption1r" color="light_gray1">
+                        초대한 친구가 가입하면
+                        <br />
+                        다음 질문을 바로 받을 수 있어요.
+                    </Text>
+                    <ButtonPaddingWrapper gap={14}>
+                        <ButtonFillMid
+                            text="연락처 동기화"
+                            onClick={() => {}}
+                        />
+                        <ButtonLineMid text="공유하기" onClick={() => {}} />
+                    </ButtonPaddingWrapper>
+                </Flex>
             </Wrapper>
-
-            <BottomButton2>
-                <ButtonWrapper gap={14}>
-                    <ButtonLineMid text="연락처 동기화" onClick={() => {}} />
-                    <ButtonFillMid text="공유하기" onClick={() => {}} />
-                </ButtonWrapper>
-            </BottomButton2>
-
             <BottomText>
                 <Text typo="Caption1r" color="light_gray2">
                     <Text
@@ -91,7 +91,7 @@ export default function Page() {
                     않습니다.
                 </Text>
             </BottomText>
-        </>
+        </Flex>
     ) : (
         questionCursor && (
             <Flex direction="column">
@@ -134,17 +134,18 @@ export default function Page() {
                                             <FriendItem
                                                 bgColor={
                                                     selectedIdx === null ||
-                                                    selectedIdx === idx
+                                                    selectedIdx === data.id
                                                         ? colors[
-                                                              repeatBackgroundColor[
-                                                                  idx % 12
-                                                              ]
+                                                              getAppStateColor(
+                                                                  data.id
+                                                              )
                                                           ]
                                                         : colors.light_gray2
                                                 }
                                                 key={idx}
                                                 idx={idx}
                                                 data={data}
+                                                qset={questionCursor[0].id}
                                             />
                                         )
                                     )
@@ -168,24 +169,27 @@ export default function Page() {
     );
 }
 
-const Wrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    margin-top: 25px;
-
+const Wrapper = styled(Flex)`
+    width: 100vw;
+    max-width: 600px;
     text-align: center;
+
+    position: fixed;
+    top: 100px;
 `;
 
 const BottomText = styled.div`
-    padding: 0 16px;
-    display: flex;
-    position: absolute;
+    padding: 0 1rem;
+    position: fixed;
     bottom: 30px;
 `;
 
 const Title = styled(Text)`
     text-align: center;
-    white-space: nowrap;
+`;
+
+const ButtonPaddingWrapper = styled(Flex)`
+    padding: 0 1rem;
 `;
 
 const FriendWrapper = styled.div`
@@ -193,27 +197,6 @@ const FriendWrapper = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     row-gap: 12px;
     column-gap: 12px;
-`;
-
-const BottomButton2 = styled.div`
-    width: 100%;
-    height: 180px;
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    background-color: ${colors.light_qblack};
-`;
-
-const BottomInner = styled.div`
-    max-width: 600px;
-    margin: auto;
-    margin-top: 20px;
-    padding: 0 16px;
-
-    display: flex;
-    gap: 14px;
 `;
 
 const ButtonWrapper = styled(Flex)`

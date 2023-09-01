@@ -1,4 +1,4 @@
-import { Qtype } from "src/models/questions";
+import { QSet, Qtype } from "src/models/questions";
 import { qFeedAxios } from "../axios";
 
 export const getQuestions = async () =>
@@ -29,9 +29,10 @@ export const createQset = async () => {
     return response.data;
 };
 
-export const createQuestionsQSet = async (userQsetId: number) => {
-    const response = await qFeedAxios.get(
-        `/questions/q-set/${userQsetId}/choice`
+export const createQuestionsQSet = async (userQsetId: number, choice: QSet) => {
+    const response = await qFeedAxios.post(
+        `/questions/q-set/${userQsetId}/choice`,
+        { ...choice }
     );
     return response.data;
 };
