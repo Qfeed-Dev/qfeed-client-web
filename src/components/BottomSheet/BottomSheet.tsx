@@ -7,14 +7,8 @@ import {
     changeVisible
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
-import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
-import ChattingCoin from "./children/ChattingCoin";
-import Coin from "./children/Coin";
-import Report from "./children/Report";
-import ReportFriend from "./children/ReportFriend";
-import Hint from "./children/Hint";
+import { colors, KeyOfColor } from "styles/theme";
 import { RootState } from "src/store";
-import FriendModal from "./children/FriendModal";
 import dynamic from "next/dynamic";
 
 interface Props {
