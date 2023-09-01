@@ -7,14 +7,27 @@ import Icon from "../Icon";
 
 interface Props {
     type: "question-friend" | "add-question" | "add-question-image";
+    lazyDelay: number;
 }
 
 const Input = ({
     type = "question-friend",
     value,
     setValue,
+    lazyDelay = 0,
     ...props
 }: any) => {
+    const createLazyClosure = (callback: Function, delay: number) => {
+        let timeoutId: ReturnType<typeof setTimeout>;
+
+        return (...args: any[]) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                callback(...args);
+            }, delay);
+        };
+    };
+
     return (
         <InputWrapper
             radius={match(type)
@@ -38,7 +51,7 @@ const Input = ({
                         )
                         .otherwise(() => `선택지${props.count}`)}
                     value={value}
-                    onChange={setValue}
+                    onChange={createLazyClosure(setValue, lazyDelay)}
                     color={match(type)
                         .with("question-friend", () => colors.light_qwhite)
                         .otherwise(() => colors.light_qblack)}
