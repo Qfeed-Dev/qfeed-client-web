@@ -42,7 +42,7 @@ export default function Page() {
     const { selectedIdx } = useAppSelector((state) => state.bottomSheet);
     return isLoading ? (
         <Loading />
-    ) : questionCursor ? (
+    ) : questionCursor?.length ? (
         questionCursor[0].isDone ? (
             <Flex direction="column">
                 <NavigationTopBack />
@@ -163,11 +163,31 @@ export default function Page() {
         )
     ) : (
         // 아직 질문이 없거나 질문이 하나 있고 isDone이면
-        <ButtonFillLarge
-            state="active"
-            text="질문에 답하기를 시작해봐요!"
-            onClick={() => mutate()}
-        />
+        <>
+            <NavigationTopBack />
+            <NewWrapper height="100%" direction="column" align="space-around">
+                <Flex direction="column">
+                    <Text typo="Subtitle2r">새로운 질문을 받았어요!</Text>
+                    <Spacing size={8} />
+                    <Text typo="Headline1b">
+                        아무도 모르게 쉿!
+                        <br />새 큐피드를 보내볼까요?
+                    </Text>
+                    <Img src="/img/start.png" />
+                </Flex>
+                <Flex direction="column" gap={24}>
+                    <Text typo="Caption1r" color="light_gray1">
+                        새로운 10가지 질문에 답해보세요
+                    </Text>
+                    <ButtonFillLarge
+                        state="active"
+                        text="시작하기"
+                        onClick={() => mutate()}
+                        bottom={false}
+                    />
+                </Flex>
+            </NewWrapper>
+        </>
     );
 }
 
@@ -201,8 +221,17 @@ const FriendWrapper = styled.div`
     column-gap: 12px;
 `;
 
+const NewWrapper = styled(Flex)`
+    text-align: center;
+`;
+
 const ButtonWrapper = styled(Flex)`
     padding: 0 1rem;
     position: absolute;
     bottom: 62px;
+`;
+
+const Img = styled.img`
+    width: 100vw;
+    max-width: 600px;
 `;
