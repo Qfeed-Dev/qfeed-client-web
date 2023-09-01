@@ -4,6 +4,7 @@ import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import styled from "styled-components";
 import Icon from "../Icon";
+import Flex from "../common/Flex";
 
 interface Props {}
 
@@ -14,42 +15,54 @@ const BottomNavigation = ({}: Props) => {
     return (
         <BottomNavigationWrapper>
             <BottomNavigationInner>
-                <Icon
-                    icon="BHome"
-                    width={24}
-                    height={24}
+                <NavIconWrapper
                     onClick={() => {
                         router.push(Route.HOME());
                     }}
-                    selected={pathname === "/"}
-                />
-                <Icon
-                    icon="BChat"
-                    width={24}
-                    height={24}
+                >
+                    <Icon
+                        icon="BHome"
+                        width={24}
+                        height={24}
+                        selected={pathname === "/"}
+                    />
+                </NavIconWrapper>
+                <NavIconWrapper
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
-                    selected={Boolean(pathname.match("/((chat).*)"))}
-                />
-                <Icon
-                    icon="BSearch"
-                    width={24}
-                    height={24}
+                >
+                    <Icon
+                        icon="BChat"
+                        width={24}
+                        height={24}
+                        selected={Boolean(pathname.match("/((chat).*)"))}
+                    />
+                </NavIconWrapper>
+                <NavIconWrapper
                     onClick={() => {
                         router.push(Route.FRIEND());
                     }}
-                    selected={Boolean(pathname.match("/((friend).*)"))}
-                />
-                <Icon
-                    icon="BMypage"
-                    width={24}
-                    height={24}
+                >
+                    <Icon
+                        icon="BSearch"
+                        width={24}
+                        height={24}
+                        selected={Boolean(pathname.match("/((friend).*)"))}
+                    />
+                </NavIconWrapper>
+                <NavIconWrapper
                     onClick={() => {
                         router.push(Route.MYPAGE());
                     }}
-                    selected={Boolean(pathname.match("/((mypage).*)"))}
-                />
+                >
+                    <Icon
+                        icon="BMypage"
+                        width={24}
+                        height={24}
+                        selected={Boolean(pathname.match("/((mypage).*)"))}
+                    />
+                </NavIconWrapper>
             </BottomNavigationInner>
         </BottomNavigationWrapper>
     );
@@ -68,7 +81,7 @@ const BottomNavigationWrapper = styled.div`
 
 const BottomNavigationInner = styled.div`
     height: 100%;
-    padding: 0 48px;
+    padding: 0 1rem;
 
     color: ${colors.light_qwhite};
 
@@ -78,5 +91,7 @@ const BottomNavigationInner = styled.div`
 
     border-top: 1px solid ${colors.light_qwhite};
 `;
+
+const NavIconWrapper = styled(Flex)``;
 
 export default BottomNavigation;
