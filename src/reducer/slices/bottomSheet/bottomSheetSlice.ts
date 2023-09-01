@@ -4,7 +4,7 @@ interface GlobalType {
     type: string;
     visible: number;
     actionDelay: boolean;
-    selectedIdx: number;
+    selectedIdx: number | null;
     [index: string]: string | string[] | any;
 }
 
@@ -12,7 +12,7 @@ const initialState: GlobalType = {
     type: "primary",
     visible: 0,
     actionDelay: false,
-    selectedIdx: 0
+    selectedIdx: null
 };
 
 export const bottomSheetSlice = createSlice({

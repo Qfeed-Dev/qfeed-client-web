@@ -4,7 +4,8 @@ import useBottomSheet from "src/hooks/useBottomSheet";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import {
     changeAction,
-    changeVisible
+    changeVisible,
+    changeVisibleType
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
 import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
@@ -73,9 +74,9 @@ const BottomSheet = forwardRef(function Div(
         sheet.current!.style.setProperty("transform", `translateY(-${0}px)`);
         setTimeout(() => {
             dispatch(
-                changeVisible({
+                changeVisibleType({
                     type: "bottomSheet",
-                    value: 0
+                    value: [0, "bottomSheet", null]
                 })
             );
         }, 300);

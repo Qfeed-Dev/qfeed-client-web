@@ -7,12 +7,12 @@ import useFollowingsQuery from "src/hooks/account/useFollowingsQuery";
 import { useEffect } from "react";
 import usePassQsetMutation from "src/hooks/questions/usePassQsetCursorMutation";
 
-import Friend from "src/pages-edit/question/Friend";
+import FriendItem from "src/pages-edit/question/Friend";
 import Question from "src/pages-edit/question/Question";
 import SlideLine from "src/components/SlideLine";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { colors } from "styles/theme";
+import { colors, repeatBackgroundColor } from "styles/theme";
 import styled from "styled-components";
 import FriendImage from "src/components/Icon/icons/images/FriendImage";
 import Text from "src/components/common/Text";
@@ -23,6 +23,9 @@ import Flex from "src/components/common/Flex";
 import ButtonFillMid from "src/components/buttons/button-fill-mid";
 import ButtonLineMid from "src/components/buttons/button-line-mid";
 import InputFill from "src/components/inputs/input-fill";
+import { Friend } from "src/models/account";
+import { useAppSelector } from "src/hooks/useReduxHooks";
+import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
 export default function Page() {
     const router = useRouter();
@@ -41,6 +44,8 @@ export default function Page() {
     if (!isLoading && !questionCursor) {
         mutate();
     }
+
+    const { selectedIdx } = useAppSelector((state) => state.bottomSheet);
 
     return isLoading ? (
         <Loading />
@@ -125,8 +130,18 @@ export default function Page() {
                             <FriendWrapper>
                                 {friend.followings.count ? (
                                     friend.followings.data.map(
-                                        (data: any, idx: number) => (
-                                            <Friend
+                                        (data: Friend, idx: number) => (
+                                            <FriendItem
+                                                bgColor={
+                                                    selectedIdx === null ||
+                                                    selectedIdx === idx
+                                                        ? colors[
+                                                              repeatBackgroundColor[
+                                                                  idx % 12
+                                                              ]
+                                                          ]
+                                                        : colors.light_gray2
+                                                }
                                                 key={idx}
                                                 idx={idx}
                                                 data={data}
@@ -141,12 +156,12 @@ export default function Page() {
                     </Flex>
                 </Flex>
 
-                <ButtonWrapper gap={14}>
-                    <ButtonLineMid
+                <ButtonWrapper gap={14} justify="right">
+                    <ButtonFillXSmall
+                        state="default"
                         text="넘기기"
                         onClick={() => pass.mutate(questionCursor[0].id)}
                     />
-                    <ButtonFillMid text="보내기" onClick={() => {}} />
                 </ButtonWrapper>
             </Flex>
         )
