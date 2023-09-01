@@ -10,7 +10,6 @@ import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 
-import BottomNavigation from "src/components/BottomNavigation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
 import Loading from "src/components/common/Loading";
@@ -79,7 +78,6 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                     </Flex>
                 </>
             )}
-            <BottomNavigation />
         </SelectQWrapper>
     );
 };
