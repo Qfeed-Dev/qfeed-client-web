@@ -4,12 +4,13 @@ import ProfileTitle from "src/pages-edit/question/ProfileTitle";
 import Question from "src/pages-edit/question/Question";
 import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "src/components/Image";
 import { useSearchParams } from "next/navigation";
 import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -19,19 +20,42 @@ export default function Page() {
         questionId: id
     });
     console.log(questionData);
+    const { user } = useUserQuery();
 
-    const [typeNum, setTypeNum] = useState(2);
-    const [selected, setSelected] = useState<number>(0);
+    // choices에 본인이 있는지 확인
+    const checkName = (el: any) => {
+        if (el?.user?.name === user?.name) {
+            return true;
+        }
+    };
+    // 어떤 선택을 했는지
+    const checkSelected = (el: any) => {
+        if (el?.user?.name === user?.name) {
+            return el?.value;
+        }
+    };
+
+    const [typeNum, setTypeNum] = useState(
+        questionData?.choices.some(checkName) ? 2 : 0
+    );
+    const [selected, setSelected] = useState<number>(
+        Number(questionData?.choices.some(checkSelected))
+    );
     const best = 0;
 
-    const clickChoice = (idx: number) => {
-        postQuestionsIdChoices(questionData?.id, { value: idx });
+    const clickChoice = (idx: any, value: number) => {
+        postQuestionsIdChoices(questionData?.id, { value });
         setSelected(idx);
         setTypeNum(1);
         setTimeout(() => {
             setTypeNum(2);
         }, 3000);
     };
+
+    useEffect(() => {
+        setTypeNum(questionData?.choices.some(checkName) ? 2 : 0);
+        setSelected(Number(questionData?.choices.some(checkSelected)));
+    }, [questionData]);
 
     return isLoading ? undefined : (
         <>
@@ -73,7 +97,7 @@ export default function Page() {
                                         : 0
                                 } // 0 1 2
                                 selected={selected}
-                                onClick={() => clickChoice(idx)}
+                                onClick={() => clickChoice(idx, d)}
                                 count={
                                     questionData?.choices?.filter(
                                         (data2: any) => data2.value == idx
