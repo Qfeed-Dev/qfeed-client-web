@@ -9,14 +9,14 @@ import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
 
 interface Props {}
 
-const Frined = ({}: Props) => {
+const Friend = ({}: Props) => {
     const { type, visible, actionDelay, selectedIdx } = useAppSelector(
         (state) => state.bottomSheet
     );
     console.log(repeatBackgroundColor[selectedIdx % 12]);
 
     return (
-        <FrinedWrapper>
+        <FriendWrapper>
             <Spacing size={12} />
             <Menu>
                 <Image
@@ -26,7 +26,7 @@ const Frined = ({}: Props) => {
                 />
                 <Spacing size={10} />
                 <Name>이현성</Name>
-                <QfeedId>dlraud1</QfeedId>
+                <QfeedId>dlraud1z</QfeedId>
 
                 <Spacing size={20} />
                 <TextareaWrapper>
@@ -45,11 +45,11 @@ const Frined = ({}: Props) => {
                     </Text>
                 </ButtonBox>
             </Menu>
-        </FrinedWrapper>
+        </FriendWrapper>
     );
 };
 
-const FrinedWrapper = styled.div`
+const FriendWrapper = styled.div`
     width: 100%;
 `;
 
@@ -74,4 +74,4 @@ const ButtonBox = styled.div<{ backgroundColor: KeyOfColor }>`
     background-color: ${({ backgroundColor }) => colors[backgroundColor]};
 `;
 
-export default Frined;
+export default Friend;

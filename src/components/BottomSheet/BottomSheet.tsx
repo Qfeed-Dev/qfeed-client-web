@@ -10,7 +10,7 @@ import styled, { css, keyframes } from "styled-components";
 import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
 import ChattingCoin from "./children/ChattingCoin";
 import Coin from "./children/Coin";
-import Frined from "./children/Friend";
+import Friend from "./children/Friend";
 import Report from "./children/Report";
 import ReportFriend from "./children/ReportFriend";
 import Hint from "./children/Hint";
@@ -31,7 +31,7 @@ const COMPONENT: any = {
     report: <Report />,
     reportFriend: <ReportFriend />,
     coin: <Coin />,
-    friend: <Frined />,
+    friend: <Friend />,
     chattingCoin: <ChattingCoin />,
     hint: <Hint />
 };
