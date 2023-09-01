@@ -71,7 +71,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                     </Hint>
                                 </HintItem>
                                 <HintText typo="Subtitle1r" color="light_gray3">
-                                    안녕하세요 테스트입니다
+                                    {choice.value}
                                 </HintText>
                             </HintWrapper>
                         ))}
