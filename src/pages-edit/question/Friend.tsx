@@ -52,9 +52,9 @@ export default function FriendItem({
                                 : "https://i.ibb.co/0Z6FNN7/60pt.png"
                         }
                         grayscale={
-                            selectedIdx && idx !== selectedIdx && visible === 1
-                                ? 100
-                                : 0
+                            selectedIdx == null || selectedIdx === data.id
+                                ? 0
+                                : 100
                         }
                     />
                 </Menu>
