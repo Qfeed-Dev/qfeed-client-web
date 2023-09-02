@@ -18,7 +18,7 @@ export default function Mypage() {
             {isLoading ? (
                 <Loading />
             ) : (
-                <>
+                <Flex direction="column" align="center" gap={40}>
                     <Flex direction="column" align="center" gap={8}>
                         <NavigationTop
                             title="마이페이지"
@@ -32,7 +32,7 @@ export default function Mypage() {
                         {user && <InfoList isMe={true} user={user} />}
                     </Flex>
                     {user?.id !== undefined && <QfeedList id={user.id} />}
-                </>
+                </Flex>
             )}
             <BottomNavigation />
         </Flex>

@@ -10,12 +10,14 @@ import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
+import useQChoiceMutation from "src/hooks/questions/useQChoiceMutation";
 
 export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: params.id
     });
     const { user } = useUserQuery();
+    const { mutate } = useQChoiceMutation(params.id);
 
     // choices에 본인이 있는지 확인
     const checkName = (el: any) => {
@@ -51,8 +53,8 @@ export default function Page({ params }: { params: { id: number } }) {
     const [selected, setSelected] = useState<number>(-1);
     const [best, setBest] = useState<any>([]);
 
-    const clickChoice = (idx: any, value: number) => {
-        postQuestionsIdChoices(questionData?.id, { value });
+    const clickChoice = (idx: any, choice: string) => {
+        mutate(choice);
         setSelected(idx);
         setTypeNum(1);
         setTimeout(() => {
@@ -73,6 +75,8 @@ export default function Page({ params }: { params: { id: number } }) {
         setSelected(s?.length !== 0 ? Number(s?.[0]?.value) : -1);
         checkBest();
     }, [questionData]);
+
+    console.log(questionData);
 
     return isLoading ? undefined : (
         <>
@@ -95,45 +99,48 @@ export default function Page({ params }: { params: { id: number } }) {
 
             <BottomButton>
                 <BottomInner>
-                    {questionData?.choiceList?.map((d: any, idx: number) => {
-                        return (
-                            <VoteButton
-                                key={idx}
-                                idx={idx}
-                                type={
-                                    questionData?.backgroundImage
-                                        ? "primary"
-                                        : "default"
-                                } // primary default
-                                typeNum={typeNum} // 0 1 2
-                                action={
-                                    typeNum === 2 &&
-                                    questionData?.choices?.filter(
-                                        (data2: any) => data2.value == idx
-                                    ).length === Math.max(...best) // best
-                                        ? 2
-                                        : idx === selected
-                                        ? 1
-                                        : 0
-                                } // 0 1 2
-                                selected={selected}
-                                onClick={
-                                    typeNum === 2
-                                        ? () => {}
-                                        : () => clickChoice(idx, d)
-                                }
-                                count={
-                                    questionData?.choices?.filter(
-                                        (data2: any) => data2.value == idx
-                                    ).length
-                                }
-                            >
-                                {d}
-                            </VoteButton>
-                            // default
-                            // primary, top
-                        );
-                    })}
+                    {questionData.choiceList?.map(
+                        (choice: string, idx: number) => {
+                            return (
+                                <VoteButton
+                                    key={idx}
+                                    idx={idx}
+                                    type={
+                                        questionData?.backgroundImage
+                                            ? "primary"
+                                            : "default"
+                                    } // primary default
+                                    typeNum={typeNum} // 0 1 2
+                                    action={
+                                        typeNum === 2 &&
+                                        questionData?.choices?.filter(
+                                            (data2: any) => data2.value == idx
+                                        ).length === Math.max(...best) // best
+                                            ? 2
+                                            : idx === selected
+                                            ? 1
+                                            : 0
+                                    } // 0 1 2
+                                    selected={selected}
+                                    onClick={
+                                        typeNum === 2
+                                            ? () => {}
+                                            : () => clickChoice(idx, choice)
+                                    }
+                                    count={
+                                        questionData?.choices?.filter(
+                                            (choiceItem: any) =>
+                                                choiceItem.value == choice
+                                        ).length
+                                    }
+                                >
+                                    {choice}
+                                </VoteButton>
+                                // default
+                                // primary, top
+                            );
+                        }
+                    )}
                 </BottomInner>
                 <Spacing size={52} />
             </BottomButton>

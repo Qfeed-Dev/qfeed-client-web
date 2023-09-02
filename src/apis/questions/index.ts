@@ -20,9 +20,9 @@ export const postQuestions = async (body: any) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const postQuestionsIdChoices = async (questionId: any, body: any) =>
+export const postQuestionsIdChoices = async (questionId: any, choice: string) =>
     await qFeedAxios
-        .post(`/questions/${questionId}/choices`, body)
+        .post(`/questions/${questionId}/choices`, { value: choice })
         .then(({ data }) => data)
         .catch((err) => err.response);
 
