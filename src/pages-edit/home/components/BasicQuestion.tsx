@@ -18,8 +18,6 @@ interface Props {
 const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
     const userQ = useGetUserQQuery(props.user.id, "official");
 
-    console.log(userQ.questions.data);
-
     return userQ.isLoading ? (
         <Loading />
     ) : userQ.questions.count ? (
