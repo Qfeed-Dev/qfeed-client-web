@@ -44,3 +44,11 @@ export interface QSetCursor {
     startAt: string;
     endAt: string;
 }
+
+export interface Question {
+    Qtype: Qtype;
+    title: string;
+    choiceList: string[];
+    backgroundImage: string;
+    isBlind: boolean;
+}

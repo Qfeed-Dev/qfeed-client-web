@@ -10,10 +10,9 @@ import QuestionImage from "src/components/Icon/icons/images/QuestionImage";
 import Icon from "src/components/Icon";
 import { useState } from "react";
 import Image from "src/components/Image";
-import usePostQuestions from "src/hooks/questions/usePostQuestions";
-import { postQuestions } from "src/apis/questions";
 import { useRouter } from "next/navigation";
 import { Route } from "src/constants/Route";
+import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
 
 export default function Page() {
     const router = useRouter();
@@ -44,8 +43,10 @@ export default function Page() {
         setValues(values.filter((_: any, idx2: number) => idx !== idx2));
     };
 
+    const createPersonalQ = usePersonalQMutation();
+
     const clickUpload = () => {
-        postQuestions({
+        createPersonalQ.mutate({
             Qtype: "personal",
             title: question,
             choiceList: values,
@@ -195,11 +196,11 @@ export default function Page() {
                 <Spacing size={92} />
             </AddQuestionWrapper>
 
-            <BottomButton timer={time2}>
+            {/* <BottomButton timer={time2}>
                 <BottomInner timer={time2}>
                     <Icon icon="Camera" />
                 </BottomInner>
-            </BottomButton>
+            </BottomButton> */}
         </>
     );
 }

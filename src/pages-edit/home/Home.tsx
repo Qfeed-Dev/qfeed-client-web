@@ -16,7 +16,7 @@ import Icon from "src/components/Icon";
 import { globalValue } from "src/constants/globalValue";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
-import { useGetQuestions } from "src/hooks/home/useGetQuestions";
+import { useGetQuestions } from "src/hooks/questions/useGetQuestions";
 import useDisplaySize from "src/hooks/useDisplaySize";
 
 import MakeOfficial from "./components/MakeOfficial";
