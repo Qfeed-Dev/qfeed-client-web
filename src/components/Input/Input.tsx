@@ -21,7 +21,12 @@ interface Props {
     lazyDelay: number;
 }
 
-const Input = ({ type = "question-friend", setValue, ...props }: any) => {
+const Input = ({
+    type = "question-friend",
+    value,
+    setValue,
+    ...props
+}: any) => {
     return (
         <InputWrapper
             radius={match(type)

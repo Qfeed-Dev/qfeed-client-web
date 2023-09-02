@@ -15,7 +15,6 @@ import {
     changeAction,
     changeVisibleType
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
-import { pipe } from "fp-ts/lib/function";
 
 interface Props {}
 
