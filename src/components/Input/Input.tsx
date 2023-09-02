@@ -18,111 +18,79 @@ interface Props {
     onIconPress?: (value: string) => void;
     count?: number;
     idx?: number;
+    lazyDelay: number;
 }
 
-const Input = ({
-    type = "question-friend",
-    setValue,
-    value,
-    limit = 20,
-    onIconPress = (_: string) => {},
-    ...props
-}: Props) => {
-    const inputRef = useRef<HTMLInputElement>();
-    const [displayedValue, setDisplayedValue] = useState("");
-
-    const handleInputChange = () => {
-        const inputValue = inputRef.current?.value;
-        if (inputValue) setDisplayedValue(inputValue);
-    };
-
-    const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
-        const inputValue = inputRef.current?.value;
-        if (inputValue) onIconPress(inputValue);
-        setDisplayedValue("");
-    };
-
+const Input = ({ type = "question-friend", setValue, ...props }: any) => {
     return (
-        <form onSubmit={handleSubmit}>
-            <InputWrapper
-                radius={match(type)
-                    .with("question-friend", () => 48)
-                    .otherwise(() => 10)}
-                backgroundColor={match(type)
-                    .with("question-friend", () => colors.light_gray3)
-                    .with(
-                        "add-question",
-                        () => repeatQuestionColor[5 - (props?.idx ?? 0 % 6)]
-                    )
-                    .with("add-question-image", () => colors.line_white_70)
-                    .otherwise(() => () => colors.light_gray3)}
-            >
-                <InputInner>
-                    <InputBox
-                        type="text"
-                        // @ts-ignore-next-line
-                        ref={inputRef ?? null}
-                        onChange={handleInputChange}
-                        value={displayedValue.length ? displayedValue : value}
-                        placeholder={match(type)
-                            .with(
-                                "question-friend",
-                                () => "내 친구의 이름을 검색해보세요."
-                            )
-                            .with("chatting-send", () => "메세지 보내보세요")
-                            .otherwise(() => `선택지${props.count}`)}
-                        color={match(type)
-                            .with("question-friend", () => colors.light_qwhite)
-                            .otherwise(() => colors.light_qblack)}
-                        placeholderColor={match(type)
-                            .with("question-friend", () => colors.light_gray2)
-                            .otherwise(() => colors.light_qblack)}
-                        backgroundColor={match(type)
-                            .with("question-friend", () => colors.light_gray3)
-                            .with(
-                                "add-question",
-                                () =>
-                                    repeatQuestionColor[
-                                        5 - (props?.idx ?? 0 % 6)
-                                    ]
-                            )
-                            .with("add-question-image", () => `transparent`)
-                            .otherwise(() => `transparent`)}
-                    />
-                    <div
-                        style={{
-                            display: "flex",
-                            margin: "auto",
-                            alignItems: "center"
-                        }}
-                    >
-                        {type !== "question-friend" && limit !== 0 && (
-                            <Text
-                                typo="Caption2r"
+        <InputWrapper
+            radius={match(type)
+                .with("question-friend", () => 48)
+                .otherwise(() => 10)}
+            backgroundColor={match(type)
+                .with("question-friend", () => colors.light_gray3)
+                .with(
+                    "add-question",
+                    () => repeatQuestionColor[5 - (props.idx % 6)]
+                )
+                .with("add-question-image", () => colors.line_white_70)
+                .otherwise(() => () => colors.light_gray3)}
+        >
+            <InputInner>
+                <InputBox
+                    placeholder={match(type)
+                        .with(
+                            "question-friend",
+                            () => "내 친구의 이름을 검색해보세요."
+                        )
+                        .otherwise(() => `선택지${props.count}`)}
+                    value={value}
+                    onChange={setValue}
+                    color={match(type)
+                        .with("question-friend", () => colors.light_qwhite)
+                        .otherwise(() => colors.light_qblack)}
+                    placeholderColor={match(type)
+                        .with("question-friend", () => colors.light_gray2)
+                        .otherwise(() => colors.light_qblack)}
+                    backgroundColor={match(type)
+                        .with("question-friend", () => colors.light_gray3)
+                        .with(
+                            "add-question",
+                            () => repeatQuestionColor[5 - (props.idx % 6)]
+                        )
+                        .with("add-question-image", () => `transparent`)
+                        .otherwise(() => `transparent`)}
+                />
+                <div
+                    style={{
+                        display: "flex",
+                        margin: "auto",
+                        alignItems: "center"
+                    }}
+                >
+                    {type !== "question-friend" && (
+                        <Text
+                            typo="Caption2r"
+                            color="light_qblack"
+                            style={{ marginRight: 16 }}
+                        >
+                            0/20
+                        </Text>
+                    )}
+                    {type === "question-friend" ? (
+                        <Icon icon="Search" />
+                    ) : (
+                        <div onClick={props.clickTrash}>
+                            <Icon
+                                icon="Trash"
                                 color="light_qblack"
-                                style={{ marginRight: 16 }}
-                            >
-                                {`${displayedValue.length}/${limit}`}
-                            </Text>
-                        )}
-                        <button style={{ zIndex: 10 }} type="submit">
-                            {type === "question-friend" ? (
-                                <Icon icon="Search" />
-                            ) : type === "chatting-send" ? (
-                                <Icon icon="Message" />
-                            ) : (
-                                <Icon
-                                    icon="Trash"
-                                    color="light_qblack"
-                                    fill="light_qblack"
-                                />
-                            )}
-                        </button>
-                    </div>
-                </InputInner>
-            </InputWrapper>
-        </form>
+                                fill="light_qblack"
+                            />
+                        </div>
+                    )}
+                </div>
+            </InputInner>
+        </InputWrapper>
     );
 };
 
