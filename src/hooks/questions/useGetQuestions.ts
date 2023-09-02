@@ -7,7 +7,7 @@ export const useGetQuestions = () => {
     const { data, isLoading, error, refetch } = useQuery<Questions>(
         questionKeys.all,
         async () => {
-            const result = await getQuestions();
+            const result = await getQuestions(1, 100);
             return result;
         },
         {

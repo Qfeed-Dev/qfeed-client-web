@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 
 import BottomNavigation from "src/components/BottomNavigation";
@@ -15,7 +16,6 @@ import { globalValue } from "src/constants/globalValue";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import { useGetQuestions } from "src/hooks/questions/useGetQuestions";
-import useDisplaySize from "src/hooks/useDisplaySize";
 
 import MakeOfficial from "./components/MakeOfficial";
 import CheckOfficial from "./components/CheckOfficial";
@@ -36,8 +36,15 @@ export default function Home() {
         router.push(Route.ADD_QUESTION());
     };
 
-    const { data, isLoading } = useGetQuestions();
+    const { data, isLoading, refetch } = useGetQuestions();
     const user = useUserQuery();
+    const { ref, inView } = useInView();
+
+    // useEffect(() => {
+    //     if (inView) {
+    //         refetch();
+    //     }
+    // }, [inView]);
 
     return isLoading || user.isLoading ? (
         <></>
@@ -58,6 +65,11 @@ export default function Home() {
                 <Filter isSort={isSort} setIsSort={setIsSort} />
                 <Spacing size={14} />
                 {isLoading ? <></> : data && <QuestionGrid {...data} />}
+                {isLoading ? (
+                    <></>
+                ) : (
+                    <div ref={ref} style={{ height: "5px" }}></div>
+                )}
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 

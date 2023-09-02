@@ -12,9 +12,9 @@ interface Props {
 const Hr = ({ horizonal = false, type = "default", size = 1 }: Props) => {
     return (
         <HrWrapper
-            horizonal={horizonal}
+            $horizonal={horizonal}
             size={size}
-            backgroundColor={match(type)
+            backgroundcolor={match(type)
                 .with("primary", () => colors.light_qwhite)
                 .with("default", () => colors.line_black_5)
                 .otherwise(() => colors.light_qwhite)}
@@ -23,12 +23,12 @@ const Hr = ({ horizonal = false, type = "default", size = 1 }: Props) => {
 };
 
 const HrWrapper = styled.hr<{
-    horizonal: boolean;
+    $horizonal: boolean;
     size: number;
-    backgroundColor: any;
+    backgroundcolor: any;
 }>`
-    ${({ horizonal, size }) =>
-        horizonal
+    ${({ $horizonal, size }) =>
+        $horizonal
             ? css`
                   width: ${size}px;
                   height: 100%;
@@ -40,7 +40,7 @@ const HrWrapper = styled.hr<{
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ backgroundcolor }) => backgroundcolor};
 `;
 
 export default Hr;
