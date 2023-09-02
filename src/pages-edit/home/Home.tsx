@@ -73,13 +73,20 @@ export default function Home() {
             <PlusButtonWrapper>
                 <PlusButton time={time2} onClick={handleClickPlus}>
                     {time2 ? (
-                        <Text
-                            typo="Caption1r"
-                            color="light_qwhite"
-                            style={{ margin: "auto", display: "flex" }}
-                        >
-                            1
-                        </Text>
+                        // <Text
+                        //     typo="Caption1r"
+                        //     color="light_qwhite"
+                        //     style={{ margin: "auto", display: "flex" }}
+                        // >
+                        //     1
+                        // </Text>
+                        <div style={{ margin: "auto", display: "flex" }}>
+                            <Icon
+                                icon="HomePlus"
+                                color="light_qwhite"
+                                fill="light_qwhite"
+                            />
+                        </div>
                     ) : (
                         <div style={{ margin: "auto", display: "flex" }}>
                             <Icon

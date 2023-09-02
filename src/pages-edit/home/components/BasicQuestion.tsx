@@ -33,8 +33,8 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                     <Text typo="Headline2b" color="light_qblack">
                         {type === "pick-me"
                             ? "나를 선택한 큐피드"
-                            : time
-                            ? time
+                            : "02:39:47"
+                            ? "02:39:47"
                             : "가장 더위를 잘 탈 것 같은 사람은?"}
                     </Text>
 
