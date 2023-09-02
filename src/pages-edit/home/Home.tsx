@@ -77,11 +77,13 @@ export default function Home() {
             </HomeWrapper>
 
             <PlusButtonWrapper>
-                <Icon
-                    icon="HomePlus"
-                    color="light_qwhite"
-                    fill="light_qwhite"
-                />
+                <PlusButton>
+                    <Icon
+                        icon="HomePlus"
+                        color="light_qwhite"
+                        fill="light_qwhite"
+                    />
+                </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
         </>
@@ -106,20 +108,20 @@ const PlusButtonWrapper = styled.div`
     z-index: 901;
 `;
 
-const PlusButton = styled.div<{ time: any }>`
+const PlusButton = styled.div`
     width: 60px;
     height: 60px;
     margin: auto;
-
-    display: flex;
-    text-align: center;
 
     position: absolute;
     right: 17px;
     bottom: 64px;
 
-    border: ${({ time }) => (time > 0 ? 3 : 0)}px solid ${colors.light_qwhite};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 3px solid ${colors.light_qwhite};
     border-radius: 50%;
-    background-color: ${({ time }) =>
-        time ? colors.light_qblack : colors.light_qwhite};
+    background-color: ${colors.light_qblack};
 `;
