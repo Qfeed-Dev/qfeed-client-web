@@ -1,8 +1,9 @@
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styled from "styled-components";
+
 import BottomNavigation from "src/components/BottomNavigation";
-import BasicQuestion from "src/pages-edit/home/components/BasicQuestion";
 import Filter from "./components/Filter";
 import HomeTitle from "src/pages-edit/home/components/HomeTitle";
 import QFeedFrame from "./components/QfeedFrame";
@@ -10,22 +11,21 @@ import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import StackGrid from "react-stack-grid";
-import useDisplaySize from "src/hooks/useDisplaySize";
 import Icon from "src/components/Icon";
-import { useGetQuestions } from "src/hooks/home/useGetQuestions";
+
 import { globalValue } from "src/constants/globalValue";
-import { useState } from "react";
-import Text from "src/components/common/Text";
+
 import { useUserQuery } from "src/hooks/account/useUserQuery";
-import Loading from "src/components/common/Loading";
+import { useGetQuestions } from "src/hooks/home/useGetQuestions";
+import useDisplaySize from "src/hooks/useDisplaySize";
+
 import MakeOfficial from "./components/MakeOfficial";
+import CheckOfficial from "./components/CheckOfficial";
 
 export default function Home() {
     const router = useRouter();
     const { width } = useDisplaySize();
     const [isSort, setIsSort] = useState(true);
-    const time = 1;
-    const time2 = 1;
 
     const handleClickPickMe = () => {
         router.push(Route.MYPAGE());
@@ -47,12 +47,12 @@ export default function Home() {
             <Spacing size={50} />
             <HomeTitle />
             <HomeWrapper>
-                <BasicQuestion
-                    type="pick-me"
-                    onClick={handleClickPickMe}
-                    user={user.user}
-                />
-
+                {user.user && (
+                    <CheckOfficial
+                        onClick={handleClickPickMe}
+                        id={user.user.id}
+                    />
+                )}
                 <MakeOfficial onClick={handleClickBasicQuestion} />
                 <Spacing size={20} />
 
@@ -77,32 +77,11 @@ export default function Home() {
             </HomeWrapper>
 
             <PlusButtonWrapper>
-                <PlusButton time={time2} onClick={handleClickPlus}>
-                    {time2 ? (
-                        // <Text
-                        //     typo="Caption1r"
-                        //     color="light_qwhite"
-                        //     style={{ margin: "auto", display: "flex" }}
-                        // >
-                        //     1
-                        // </Text>
-                        <div style={{ margin: "auto", display: "flex" }}>
-                            <Icon
-                                icon="HomePlus"
-                                color="light_qwhite"
-                                fill="light_qwhite"
-                            />
-                        </div>
-                    ) : (
-                        <div style={{ margin: "auto", display: "flex" }}>
-                            <Icon
-                                icon="HomePlus"
-                                color="light_qblack"
-                                fill="light_qblack"
-                            />
-                        </div>
-                    )}
-                </PlusButton>
+                <Icon
+                    icon="HomePlus"
+                    color="light_qwhite"
+                    fill="light_qwhite"
+                />
             </PlusButtonWrapper>
             <BottomNavigation />
         </>

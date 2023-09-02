@@ -70,7 +70,7 @@ const MakeOfficial = (props: QuestionProps) => {
                                 <Text typo="Headline2b" color="light_qblack">
                                     {time
                                         ? `${time.hour}:${time.min}:${time.sec}`
-                                        : " "}
+                                        : ""}
                                 </Text>
                                 {/* <BottomButton>
                                     <Text
