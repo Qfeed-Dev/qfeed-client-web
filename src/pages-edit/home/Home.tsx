@@ -18,6 +18,7 @@ import { useState } from "react";
 import Text from "src/components/common/Text";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import Loading from "src/components/common/Loading";
+import MakeOfficial from "./components/MakeOfficial";
 
 export default function Home() {
     const router = useRouter();
@@ -48,17 +49,11 @@ export default function Home() {
             <HomeWrapper>
                 <BasicQuestion
                     type="pick-me"
-                    count={8}
                     onClick={handleClickPickMe}
                     user={user.user}
                 />
-                <BasicQuestion
-                    type={time ? "question-none" : "question"}
-                    count={9}
-                    time={time}
-                    onClick={handleClickBasicQuestion}
-                    user={user.user}
-                />
+
+                <MakeOfficial onClick={handleClickBasicQuestion} />
                 <Spacing size={20} />
 
                 <Filter isSort={isSort} setIsSort={setIsSort} />

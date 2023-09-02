@@ -37,7 +37,7 @@ const HomeTitle = ({}: {}) => {
                     />
                 </ImageWrapper>
             </Menu>
-            <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
+            {/* <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
                 <div onClick={handleClickCoin}>
                     <Text typo="Caption1b" color="light_qwhite">
                         코인충전
@@ -51,7 +51,7 @@ const HomeTitle = ({}: {}) => {
                 <Menu onClick={handleClickAlarm}>
                     <Icon icon="Alarm" />
                 </Menu>
-            </div>
+            </div> */}
         </HomeTitleWrapper>
     );
 };

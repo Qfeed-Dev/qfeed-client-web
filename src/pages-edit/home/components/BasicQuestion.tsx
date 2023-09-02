@@ -9,6 +9,7 @@ import Icon from "src/components/Icon";
 import useGetUserQQuery from "src/hooks/questions/useGetUserQQuery";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import Loading from "src/components/common/Loading";
+import useQsetCursorQuery from "src/hooks/questions/useQsetCursorQuery";
 
 interface Props {
     type: "pick-me" | "question";
@@ -17,10 +18,11 @@ interface Props {
 
 const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
     const userQ = useGetUserQQuery(props.user.id, "official");
+    const cursor = useQsetCursorQuery();
 
-    return userQ.isLoading ? (
+    return userQ.isLoading || cursor.isLoading ? (
         <Loading />
-    ) : userQ.questions.count ? (
+    ) : (
         <>
             <Spacing size={16} />
             <BasicQuestionWrapper
@@ -32,12 +34,9 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                     .otherwise(() => colors.light_qwhite)}
             >
                 <BasicQuestionInner>
-                    {time ? (
-                        <Text typo="Caption1r" color="light_qblack">
-                            다음 질문까지
-                        </Text>
-                    ) : null}
-
+                    <Text typo="Caption1r" color="light_qblack">
+                        다음 질문까지
+                    </Text>
                     <Text typo="Headline2b" color="light_qblack">
                         {type === "pick-me"
                             ? "나를 선택한 큐피드"
@@ -107,8 +106,6 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                 </BasicQuestionInner>
             </BasicQuestionWrapper>
         </>
-    ) : (
-        <></>
     );
 };
 
