@@ -70,11 +70,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
             {data.isViewed ? undefined : (
                 <QFeedWrapper>
                     {imageUrl ? (
-                        <Icon
-                            icon="QFeedImage"
-                            color={getAppStateColor(idx)}
-                            fill={getAppStateColor(idx)}
-                        />
+                        <Icon icon="QFeedImage" fill={getAppStateColor(idx)} />
                     ) : (
                         <Icon icon="QFeedImage2" />
                     )}
