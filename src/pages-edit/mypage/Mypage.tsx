@@ -18,8 +18,8 @@ export default function Mypage() {
             {isLoading ? (
                 <Loading />
             ) : (
-                <Flex direction="column" align="center" gap={40}>
-                    <Flex direction="column" align="center" gap={8}>
+                <Flex direction="column" gap={40}>
+                    <Flex direction="column" gap={8}>
                         <NavigationTop
                             title="마이페이지"
                             // rightIcon={
