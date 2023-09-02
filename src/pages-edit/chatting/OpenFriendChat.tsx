@@ -1,45 +1,38 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { postChatroom } from "src/apis/chatting";
 import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
+import { Route } from "src/constants/Route";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
-import { Friend } from "src/models/account";
-import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
+import { colors, repeatBackgroundColor } from "styles/theme";
 
-export default function FriendItem({
-    idx,
-    bgColor,
-    data,
-    qset
-}: {
-    idx: number;
-    bgColor: string;
-    data: Friend;
-    qset: number;
-}) {
+export default function Friend({ idx, data }: any) {
+    const router = useRouter();
     const { width } = useDisplaySize();
-    const dispatch = useAppDispatch();
     const { visible, selectedIdx } = useAppSelector(
         (state) => state.bottomSheet
     );
 
     const handleClickFriend = () => {
-        dispatch(
-            changeVisibleType({
-                type: "bottomSheet",
-                value: [1, "friend", data.id, qset]
-            })
-        );
+        postChatroom({
+            targetUserId: data.id,
+            title: ``
+        }).then((data) => router.push(Route.CHATTING(data.id)));
     };
 
     return (
         <FriendWrapper
             width={(width - 16 * 2 - 12 * 3) / 4}
             onClick={handleClickFriend}
-            backgroundColor={bgColor}
+            backgroundColor={
+                selectedIdx && idx !== selectedIdx && visible === 1
+                    ? colors.light_gray2
+                    : colors[repeatBackgroundColor[idx % 12]]
+            }
         >
             <FriendInner>
                 <Menu>
@@ -77,7 +70,6 @@ export default function FriendItem({
 
 const FriendWrapper = styled.div<{ width: number; backgroundColor: any }>`
     width: ${({ width }) => width + "px"};
-    //   height: ${({ width }) => (width * 92) / 73 + "px"};
 
     border-radius: 10px;
     background-color: ${({ backgroundColor }) => backgroundColor};

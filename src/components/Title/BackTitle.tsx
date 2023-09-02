@@ -40,7 +40,7 @@ const BackTitle = forwardRef(function Div(
                                         typo="Subtitle2b"
                                         color="light_qwhite"
                                     >
-                                        {props.currentIdx + 1}/{props.count}
+                                        {props.currentIdx}/{props.count}
                                     </Text>
                                 </Menu>
                             ) : (

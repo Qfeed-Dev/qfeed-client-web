@@ -8,7 +8,6 @@ export const Text = styled.div<{
     ${({ typo }) => typo && theme.typo[typo]};
     color: ${({ color }) => color && theme.colors[color]};
     pointer-events: none;
-    white-space: pre-line;
 `;
 
 export default Text;

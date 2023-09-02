@@ -55,13 +55,8 @@ export const repeatBackgroundColor: any = [
     "primary_qyellow",
     "primary_qyellow",
     "primary_qgreen",
-    "primary_qpink",
-    "primary_qred",
-    "primary_qorange",
-    "primary_qblue",
-    "primary_qred",
-    "primary_qgreen"
-];
+    "primary_qred"
+].sort((a, b) => Math.random() - 0.5);
 
 export const repeatQuestionColor: any = [
     colors.primary_qyellow,

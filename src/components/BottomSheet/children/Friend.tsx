@@ -1,50 +1,79 @@
 "use client";
+import Loading from "src/components/common/Loading";
 import Text from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import Textarea from "src/components/Textarea";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import useFriendQuery from "src/hooks/account/useFriendQuery";
+import { useInput } from "src/hooks/common/useInput";
+import useCreateCharacter from "src/hooks/questions/useQsetChoiceMutation";
+import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
-import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
+import { colors, KeyOfColor } from "styles/theme";
+import {
+    changeAction,
+    changeVisibleType
+} from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import { pipe } from "fp-ts/lib/function";
 
 interface Props {}
 
-const Frined = ({}: Props) => {
-    const { type, visible, actionDelay, selectedIdx } = useAppSelector(
-        (state) => state.bottomSheet
-    );
-    console.log(repeatBackgroundColor[selectedIdx % 12]);
+const Friend = ({}: Props) => {
+    const { selectedIdx, qset } = useAppSelector((state) => state.bottomSheet);
+    const textarea = useInput();
+    const friend = useFriendQuery(selectedIdx);
+    const choice = useCreateCharacter(qset, {
+        targetUserId: selectedIdx,
+        value: textarea.value
+    });
+    const dispatch = useAppDispatch();
 
     return (
         <FrinedWrapper>
             <Spacing size={12} />
-            <Menu>
-                <Image
-                    type="default"
-                    src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                    size={60}
-                />
-                <Spacing size={10} />
-                <Name>이현성</Name>
-                <QfeedId>dlraud1</QfeedId>
-
-                <Spacing size={20} />
-                <TextareaWrapper>
-                    <Textarea
-                        placeholder="투표한 친구에게 한 마디 작성해보세요!"
-                        size={82}
+            {friend.isLoading ? (
+                <Loading />
+            ) : (
+                <Menu>
+                    <Image
+                        type="default"
+                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
+                        size={60}
                     />
-                </TextareaWrapper>
+                    <Spacing size={10} />
+                    <Text typo="Subtitle2b">{friend.friend?.name}</Text>
+                    <Text typo="Caption1r">{friend.friend?.nickname}</Text>
 
-                <Spacing size={42} />
-                <ButtonBox
-                    backgroundColor={repeatBackgroundColor[selectedIdx % 12]}
-                >
-                    <Text typo="Subtitle1b" style={{ margin: "auto" }}>
-                        보내기
-                    </Text>
-                </ButtonBox>
-            </Menu>
+                    <Spacing size={20} />
+                    <TextareaWrapper>
+                        <Textarea
+                            placeholder="투표한 친구에게 한 마디 작성해보세요!"
+                            size={82}
+                            value={textarea.value}
+                            setValue={textarea.handleChangeInput}
+                        />
+                    </TextareaWrapper>
+
+                    <Spacing size={42} />
+                    <ButtonBox
+                        backgroundColor={getAppStateColor(selectedIdx)}
+                        onClick={() => {
+                            choice.mutate();
+                            dispatch(
+                                changeVisibleType({
+                                    type: "bottomSheet",
+                                    value: [0, "friend", null, qset]
+                                })
+                            );
+                        }}
+                    >
+                        <Text typo="Subtitle1b" style={{ margin: "auto" }}>
+                            보내기
+                        </Text>
+                    </ButtonBox>
+                </Menu>
+            )}
         </FrinedWrapper>
     );
 };
@@ -61,10 +90,6 @@ const TextareaWrapper = styled.div`
     width: 100%;
 `;
 
-const Name = styled.div``;
-
-const QfeedId = styled.div``;
-
 const ButtonBox = styled.div<{ backgroundColor: KeyOfColor }>`
     width: 100%;
     height: 47px;
@@ -74,4 +99,4 @@ const ButtonBox = styled.div<{ backgroundColor: KeyOfColor }>`
     background-color: ${({ backgroundColor }) => colors[backgroundColor]};
 `;
 
-export default Frined;
+export default Friend;

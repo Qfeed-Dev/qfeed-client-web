@@ -4,8 +4,15 @@ import styled from "styled-components";
 import { colors } from "styles/theme";
 import Spacing from "src/components/Spacing";
 import { useRouter } from "next/navigation";
+import { ChattingUser } from "../chat/Chatting";
 
-export default function BackTitle() {
+export default function BackTitle({
+    title,
+    targetUser
+}: {
+    title: string;
+    targetUser: ChattingUser;
+}) {
     const router = useRouter();
 
     return (
@@ -25,7 +32,7 @@ export default function BackTitle() {
                             color="light_qwhite"
                             style={{ marginLeft: 16 }}
                         >
-                            00년생 남자
+                            {title ?? targetUser?.name ?? "제목이 없음"}
                         </Text>
                     </div>
                     <div style={{ display: "flex" }}>

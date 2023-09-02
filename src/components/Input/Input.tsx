@@ -4,30 +4,24 @@ import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 import Icon from "../Icon";
+import { FormEventHandler, useRef, useState } from "react";
 
 interface Props {
-    type: "question-friend" | "add-question" | "add-question-image";
+    type:
+        | "question-friend"
+        | "add-question"
+        | "add-question-image"
+        | "chatting-send";
+    setValue?: Function;
+    value?: string;
+    limit?: number;
+    onIconPress?: (value: string) => void;
+    count?: number;
+    idx?: number;
     lazyDelay: number;
 }
 
-const Input = ({
-    type = "question-friend",
-    value,
-    setValue,
-    lazyDelay = 0,
-    ...props
-}: any) => {
-    const createLazyClosure = (callback: Function, delay: number) => {
-        let timeoutId: ReturnType<typeof setTimeout>;
-
-        return (...args: any[]) => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                callback(...args);
-            }, delay);
-        };
-    };
-
+const Input = ({ type = "question-friend", setValue, ...props }: any) => {
     return (
         <InputWrapper
             radius={match(type)
@@ -51,7 +45,7 @@ const Input = ({
                         )
                         .otherwise(() => `선택지${props.count}`)}
                     value={value}
-                    onChange={createLazyClosure(setValue, lazyDelay)}
+                    onChange={setValue}
                     color={match(type)
                         .with("question-friend", () => colors.light_qwhite)
                         .otherwise(() => colors.light_qblack)}

@@ -6,13 +6,21 @@ import { match } from "ts-pattern";
 import Text from "src/components/common/Text";
 import Icon from "src/components/Icon";
 
+import useGetUserQQuery from "src/hooks/questions/useGetUserQQuery";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
+import Loading from "src/components/common/Loading";
+
 interface Props {
     type: "pick-me" | "question";
     onClick?: () => void;
 }
 
 const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
-    return (
+    const userQ = useGetUserQQuery(props.user.id, "official");
+
+    return userQ.isLoading ? (
+        <Loading />
+    ) : userQ.questions.count ? (
         <>
             <Spacing size={16} />
             <BasicQuestionWrapper
@@ -33,15 +41,15 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                     <Text typo="Headline2b" color="light_qblack">
                         {type === "pick-me"
                             ? "나를 선택한 큐피드"
-                            : time
-                            ? time
+                            : "02:39:47"
+                            ? "02:39:47"
                             : "가장 더위를 잘 탈 것 같은 사람은?"}
                     </Text>
 
                     {time ? null : (
                         <Text typo="Caption1r" color="light_qblack">
                             {type === "pick-me"
-                                ? `총 ${props.count}명이 나를 선택했어요!`
+                                ? `총 ${userQ.questions.count}번 선택받았어요!`
                                 : `아직 ${props.count}문제 남았어요!`}
                         </Text>
                     )}
@@ -99,6 +107,8 @@ const BasicQuestion = ({ type = "pick-me", time, ...props }: any) => {
                 </BasicQuestionInner>
             </BasicQuestionWrapper>
         </>
+    ) : (
+        <></>
     );
 };
 

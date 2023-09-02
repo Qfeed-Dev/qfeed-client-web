@@ -16,7 +16,7 @@ export default function FriendItem({
     isFollowing,
     friend
 }: {
-    isFollowing: boolean;
+    isFollowing: boolean | undefined;
     friend: Friend;
 }) {
     const router = useRouter();
