@@ -59,13 +59,11 @@ const Friend = ({}: Props) => {
                     <ButtonBox
                         backgroundColor={getAppStateColor(selectedIdx)}
                         onClick={() => {
+                            choice.mutate();
                             dispatch(
-                                changeAction({
+                                changeVisibleType({
                                     type: "bottomSheet",
-                                    value: {
-                                        on: false,
-                                        onDismiss: () => choice.mutate()
-                                    }
+                                    value: [0, "friend", null, qset]
                                 })
                             );
                         }}

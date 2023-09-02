@@ -16,6 +16,8 @@ import { useGetQuestions } from "src/hooks/home/useGetQuestions";
 import { globalValue } from "src/constants/globalValue";
 import { useState } from "react";
 import Text from "src/components/common/Text";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
+import Loading from "src/components/common/Loading";
 
 export default function Home() {
     const router = useRouter();
@@ -35,8 +37,11 @@ export default function Home() {
     };
 
     const { data, isLoading } = useGetQuestions();
+    const user = useUserQuery();
 
-    return isLoading ? undefined : (
+    return isLoading || user.isLoading ? (
+        <></>
+    ) : (
         <>
             <Spacing size={50} />
             <HomeTitle />
@@ -45,41 +50,54 @@ export default function Home() {
                     type="pick-me"
                     count={8}
                     onClick={handleClickPickMe}
+                    user={user.user}
                 />
                 <BasicQuestion
                     type={time ? "question-none" : "question"}
                     count={9}
                     time={time}
                     onClick={handleClickBasicQuestion}
+                    user={user.user}
                 />
                 <Spacing size={20} />
 
                 <Filter isSort={isSort} setIsSort={setIsSort} />
                 <Spacing size={14} />
-
-                <StackGrid
-                    columnWidth={Math.floor((width - 45) / 2)}
-                    gutterWidth={12}
-                    gutterHeight={14}
-                >
-                    {data?.data?.map((data: any, idx: number) => {
-                        return <QFeedFrame key={idx} idx={idx} data={data} />;
-                    })}
-                </StackGrid>
-
+                {isLoading ? (
+                    <></>
+                ) : (
+                    <StackGrid
+                        columnWidth={Math.floor((width - 45) / 2)}
+                        gutterWidth={12}
+                        gutterHeight={14}
+                    >
+                        {data?.data?.map((data: any, idx: number) => {
+                            return (
+                                <QFeedFrame key={idx} idx={idx} data={data} />
+                            );
+                        })}
+                    </StackGrid>
+                )}
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 
             <PlusButtonWrapper>
                 <PlusButton time={time2} onClick={handleClickPlus}>
                     {time2 ? (
-                        <Text
-                            typo="Caption1r"
-                            color="light_qwhite"
-                            style={{ margin: "auto", display: "flex" }}
-                        >
-                            1
-                        </Text>
+                        // <Text
+                        //     typo="Caption1r"
+                        //     color="light_qwhite"
+                        //     style={{ margin: "auto", display: "flex" }}
+                        // >
+                        //     1
+                        // </Text>
+                        <div style={{ margin: "auto", display: "flex" }}>
+                            <Icon
+                                icon="HomePlus"
+                                color="light_qwhite"
+                                fill="light_qwhite"
+                            />
+                        </div>
                     ) : (
                         <div style={{ margin: "auto", display: "flex" }}>
                             <Icon
