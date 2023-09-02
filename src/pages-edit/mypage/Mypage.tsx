@@ -22,12 +22,12 @@ export default function Mypage() {
                     <Flex direction="column" align="center" gap={8}>
                         <NavigationTop
                             title="마이페이지"
-                            rightIcon={
-                                <Flex width="auto" gap={16}>
-                                    <Icon icon="Share" />
-                                    <Icon icon="Setting" />
-                                </Flex>
-                            }
+                            // rightIcon={
+                            //     <Flex width="auto" gap={16}>
+                            //         <Icon icon="Share" />
+                            //         <Icon icon="Setting" />
+                            //     </Flex>
+                            // }
                         />
                         {user && <InfoList isMe={true} user={user} />}
                     </Flex>

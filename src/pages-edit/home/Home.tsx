@@ -76,7 +76,7 @@ export default function Home() {
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 
-            <PlusButtonWrapper>
+            <PlusButtonWrapper onClick={handleClickPlus}>
                 <PlusButton>
                     <Icon
                         icon="HomePlus"

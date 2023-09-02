@@ -34,6 +34,8 @@ const BackdropWrapper = styled(motion.div)`
     align-items: center;
 
     background: ${colors.line_black_50};
+
+    z-index: 9999999;
 `;
 
 export default Backdrop;
