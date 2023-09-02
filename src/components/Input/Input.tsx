@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { match } from "ts-pattern";
 import { Text } from "../common/Text";
 import Icon from "../Icon";
-import { useRef, useState } from "react";
+import { FormEventHandler, useRef, useState } from "react";
 
 interface Props {
     type:
@@ -13,6 +13,7 @@ interface Props {
         | "add-question-image"
         | "chatting-send";
     setValue?: Function;
+    value?: string;
     limit?: number;
     onIconPress?: (value: string) => void;
     count?: number;
@@ -22,21 +23,23 @@ interface Props {
 const Input = ({
     type = "question-friend",
     setValue,
+    value,
     limit = 20,
     onIconPress = (_: string) => {},
     ...props
 }: Props) => {
-    const inputRef = useRef();
+    const inputRef = useRef<HTMLInputElement>();
     const [displayedValue, setDisplayedValue] = useState("");
 
     const handleInputChange = () => {
-        const inputValue = inputRef.current.value;
-        setDisplayedValue(inputValue);
+        const inputValue = inputRef.current?.value;
+        if (inputValue) setDisplayedValue(inputValue);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        onIconPress(inputRef.current.value);
+        const inputValue = inputRef.current?.value;
+        if (inputValue) onIconPress(inputValue);
         setDisplayedValue("");
     };
 
@@ -50,7 +53,7 @@ const Input = ({
                     .with("question-friend", () => colors.light_gray3)
                     .with(
                         "add-question",
-                        () => repeatQuestionColor[5 - (props?.idx % 6)]
+                        () => repeatQuestionColor[5 - (props?.idx ?? 0 % 6)]
                     )
                     .with("add-question-image", () => colors.line_white_70)
                     .otherwise(() => () => colors.light_gray3)}
@@ -58,9 +61,10 @@ const Input = ({
                 <InputInner>
                     <InputBox
                         type="text"
-                        ref={inputRef}
+                        // @ts-ignore-next-line
+                        ref={inputRef ?? null}
                         onChange={handleInputChange}
-                        value={displayedValue}
+                        value={displayedValue.length ? displayedValue : value}
                         placeholder={match(type)
                             .with(
                                 "question-friend",
@@ -78,7 +82,10 @@ const Input = ({
                             .with("question-friend", () => colors.light_gray3)
                             .with(
                                 "add-question",
-                                () => repeatQuestionColor[5 - (props?.idx % 6)]
+                                () =>
+                                    repeatQuestionColor[
+                                        5 - (props?.idx ?? 0 % 6)
+                                    ]
                             )
                             .with("add-question-image", () => `transparent`)
                             .otherwise(() => `transparent`)}
