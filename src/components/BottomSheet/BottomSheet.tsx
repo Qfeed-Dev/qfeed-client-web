@@ -9,12 +9,8 @@ import {
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
 import { colors, KeyOfColor } from "styles/theme";
-import ChattingCoin from "./children/ChattingCoin";
-import Coin from "./children/Coin";
-import Frined from "./children/Friend";
-import Report from "./children/Report";
-import ReportFriend from "./children/ReportFriend";
-import Hint from "./children/Hint";
+import { RootState } from "src/store";
+import dynamic from "next/dynamic";
 
 interface Props {
     children?: any;
@@ -24,17 +20,9 @@ const COMPONENT_HEIGHT: any = {
     report: 540 + 30,
     reportFriend: 331,
     coin: 324 + 30,
-    friend: 325 + 60,
+    friendModal: 325 + 60,
     chattingCoin: 376,
     hint: 376
-};
-const COMPONENT: any = {
-    report: <Report />,
-    reportFriend: <ReportFriend />,
-    coin: <Coin />,
-    friend: <Frined />,
-    chattingCoin: <ChattingCoin />,
-    hint: <Hint />
 };
 
 const BottomSheet = forwardRef(function Div(
@@ -43,9 +31,17 @@ const BottomSheet = forwardRef(function Div(
 ) {
     const dispatch = useAppDispatch();
     const { type, visible, actionDelay, selectedIdx } = useAppSelector(
-        (state) => state.bottomSheet
+        (state: RootState) => state.bottomSheet
     );
     const BOTTOMSHEET_HEIGHT = COMPONENT_HEIGHT[type];
+
+    const propertyData = {
+        selectedIdx
+    };
+    const DynamicComponent = dynamic<typeof propertyData>(
+        () =>
+            import(`./children/${type.charAt(0).toUpperCase() + type.slice(1)}`)
+    );
 
     const handleMove = (move: number) => {
         if (move)
@@ -122,7 +118,9 @@ const BottomSheet = forwardRef(function Div(
                         }
                     />
                 </HandleWrapper>
-                <ContentWrapper ref={content}>{COMPONENT[type]}</ContentWrapper>
+                <ContentWrapper ref={content}>
+                    <DynamicComponent {...propertyData} />
+                </ContentWrapper>
             </BottomSheetWrapper>
         </>
     );
