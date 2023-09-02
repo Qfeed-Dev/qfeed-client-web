@@ -31,6 +31,7 @@ export default function Question() {
 const QuestionWrapper = styled.div`
     width: 100%;
     padding: 16px;
+    flex: 0;
 
     border-radius: 10px;
     background-color: ${colors.light_gray0};
