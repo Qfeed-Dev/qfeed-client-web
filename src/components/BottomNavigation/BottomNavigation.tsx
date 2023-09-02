@@ -27,7 +27,7 @@ const BottomNavigation = ({}: Props) => {
                         selected={pathname === "/"}
                     />
                 </NavIconWrapper>
-                <NavIconWrapper
+                {/* <NavIconWrapper
                     onClick={() => {
                         router.push(Route.CHAT());
                     }}
@@ -38,7 +38,7 @@ const BottomNavigation = ({}: Props) => {
                         height={24}
                         selected={Boolean(pathname.match("/((chat).*)"))}
                     />
-                </NavIconWrapper>
+                </NavIconWrapper> */}
                 <NavIconWrapper
                     onClick={() => {
                         router.push(Route.FRIEND());
