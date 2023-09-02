@@ -19,10 +19,10 @@ const QfeedFrame = ({ idx, data }: Props) => {
 
     const writeDay = new Date(data.createdAt);
     const today = new Date();
-    const pastTime =
-        (today.getDate() - writeDay.getDate()) * 24 +
-        today.getHours() -
-        writeDay.getHours();
+
+    const pastTime = Math.round(
+        (today.getTime() - writeDay.getTime()) / (1000 * 60 * 60)
+    );
 
     const handleClickFrame = () => {
         // router.push(Route.QUESTION());
