@@ -9,7 +9,7 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import Loading from "src/components/common/Loading";
 
-import { Questions } from "src/models/questions";
+import { QuestionItem } from "src/models/questions";
 import { motion } from "framer-motion";
 import { enterComponentVariants } from "src/constants/animation";
 
@@ -27,7 +27,7 @@ export default function SelectList({ id }: { id: number }) {
             exit="exit"
         >
             {questions.data.length ? (
-                questions.data.map((question: Questions) => (
+                questions.data.map((question: QuestionItem) => (
                     <SelectItem
                         key={question.id}
                         direction="column"

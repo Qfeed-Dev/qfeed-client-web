@@ -85,7 +85,8 @@ const QfeedFrame = ({ idx, data }: Props) => {
 };
 
 const QfeedFrameWrapper = styled.div<{ repeatBackgroundColor: any }>`
-    height: calc(100% + 20px);
+    width: 100%;
+    height: fit-content;
     position: relative;
     border-radius: 10px;
     background-color: ${({ repeatBackgroundColor }) => repeatBackgroundColor};

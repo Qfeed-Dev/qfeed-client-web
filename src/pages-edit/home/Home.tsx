@@ -6,11 +6,9 @@ import styled from "styled-components";
 import BottomNavigation from "src/components/BottomNavigation";
 import Filter from "./components/Filter";
 import HomeTitle from "src/pages-edit/home/components/HomeTitle";
-import QFeedFrame from "./components/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
-import StackGrid from "react-stack-grid";
 import Icon from "src/components/Icon";
 
 import { globalValue } from "src/constants/globalValue";
@@ -22,9 +20,10 @@ import useDisplaySize from "src/hooks/useDisplaySize";
 import MakeOfficial from "./components/MakeOfficial";
 import CheckOfficial from "./components/CheckOfficial";
 
+import QuestionGrid from "src/components/GridWrapper";
+
 export default function Home() {
     const router = useRouter();
-    const { width } = useDisplaySize();
     const [isSort, setIsSort] = useState(true);
 
     const handleClickPickMe = () => {
@@ -58,21 +57,7 @@ export default function Home() {
 
                 <Filter isSort={isSort} setIsSort={setIsSort} />
                 <Spacing size={14} />
-                {isLoading ? (
-                    <></>
-                ) : (
-                    <StackGrid
-                        columnWidth={Math.floor((width - 45) / 2)}
-                        gutterWidth={12}
-                        gutterHeight={14}
-                    >
-                        {data?.data?.map((data: any, idx: number) => {
-                            return (
-                                <QFeedFrame key={idx} idx={idx} data={data} />
-                            );
-                        })}
-                    </StackGrid>
-                )}
+                {isLoading ? <></> : data && <QuestionGrid {...data} />}
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 
