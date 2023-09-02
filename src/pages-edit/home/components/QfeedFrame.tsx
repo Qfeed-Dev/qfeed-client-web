@@ -4,6 +4,7 @@ import { Text } from "src/components/common/Text";
 import Icon from "src/components/Icon";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
+import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
 import { colors, repeatBackgroundColor, typo } from "styles/theme";
 
@@ -18,10 +19,10 @@ const QfeedFrame = ({ idx, data }: Props) => {
 
     const writeDay = new Date(data.createdAt);
     const today = new Date();
-    const pastTime =
-        (today.getDate() - writeDay.getDate()) * 24 +
-        today.getHours() -
-        writeDay.getHours();
+
+    const pastTime = Math.round(
+        (today.getTime() - writeDay.getTime()) / (1000 * 60 * 60)
+    );
 
     const handleClickFrame = () => {
         // router.push(Route.QUESTION());
@@ -31,12 +32,12 @@ const QfeedFrame = ({ idx, data }: Props) => {
     return (
         <QfeedFrameWrapper
             onClick={handleClickFrame}
-            repeatBackgroundColor={colors[repeatBackgroundColor[idx % 12]]}
+            repeatBackgroundColor={colors[getAppStateColor(idx)]}
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
                 <QfeedFrameInner
                     imageUrl={imageUrl}
-                    backgroundColor={colors[repeatBackgroundColor[idx % 12]]}
+                    backgroundColor={colors[getAppStateColor(idx)]}
                 >
                     <Text
                         typo="Headline2b"
@@ -71,8 +72,8 @@ const QfeedFrame = ({ idx, data }: Props) => {
                     {imageUrl ? (
                         <Icon
                             icon="QFeedImage"
-                            color={repeatBackgroundColor[idx % 12]}
-                            fill={repeatBackgroundColor[idx % 12]}
+                            color={getAppStateColor(idx)}
+                            fill={getAppStateColor(idx)}
                         />
                     ) : (
                         <Icon icon="QFeedImage2" />

@@ -5,11 +5,21 @@ import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import { Friend } from "src/models/account";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
-import { colors, repeatBackgroundColor } from "styles/theme";
 
-export default function Friend({ idx, data }: any) {
+export default function FriendItem({
+    idx,
+    bgColor,
+    data,
+    qset
+}: {
+    idx: number;
+    bgColor: string;
+    data: Friend;
+    qset: number;
+}) {
     const { width } = useDisplaySize();
     const dispatch = useAppDispatch();
     const { visible, selectedIdx } = useAppSelector(
@@ -20,7 +30,7 @@ export default function Friend({ idx, data }: any) {
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
-                value: [1, "friendModal", data.id]
+                value: [1, "friend", data.id, qset]
             })
         );
     };
@@ -29,11 +39,7 @@ export default function Friend({ idx, data }: any) {
         <FriendWrapper
             width={(width - 16 * 2 - 12 * 3) / 4}
             onClick={handleClickFriend}
-            backgroundColor={
-                selectedIdx && idx !== selectedIdx && visible === 1
-                    ? colors.light_gray2
-                    : colors[repeatBackgroundColor[idx % 12]]
-            }
+            backgroundColor={bgColor}
         >
             <FriendInner>
                 <Menu>

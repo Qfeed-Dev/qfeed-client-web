@@ -4,7 +4,8 @@ import useBottomSheet from "src/hooks/useBottomSheet";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import {
     changeAction,
-    changeVisible
+    changeVisible,
+    changeVisibleType
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled, { css, keyframes } from "styled-components";
 import { colors, KeyOfColor } from "styles/theme";
@@ -63,15 +64,15 @@ const BottomSheet = forwardRef(function Div(
         dispatch(
             changeAction({
                 type: "bottomSheet",
-                value: false
+                value: { on: false }
             })
         );
         sheet.current!.style.setProperty("transform", `translateY(-${0}px)`);
         setTimeout(() => {
             dispatch(
-                changeVisible({
+                changeVisibleType({
                     type: "bottomSheet",
-                    value: 0
+                    value: [0, "bottomSheet", null]
                 })
             );
         }, 300);
@@ -181,10 +182,7 @@ const Handle = styled.div<{ selectedIdx: number; backgroundColor: KeyOfColor }>`
     display: flex;
 
     background-color: ${({ selectedIdx, backgroundColor }) =>
-        selectedIdx !== -1
-            ? colors["light_qwhite"]
-            : // colors[repeatBackgroundColor[selectedIdx % 12]]
-              colors[backgroundColor]};
+        selectedIdx !== -1 ? colors["light_qwhite"] : colors[backgroundColor]};
 `;
 
 const BottomSheetWrapper = styled.div<{
@@ -206,10 +204,7 @@ const BottomSheetWrapper = styled.div<{
     color: ${({ color }) => color};
     border-radius: 10px 10px 0 0;
     background-color: ${({ selectedIdx, backgroundColor }) =>
-        selectedIdx !== -1
-            ? colors["light_qwhite"]
-            : // colors[repeatBackgroundColor[selectedIdx % 12]]
-              colors[backgroundColor]};
+        selectedIdx !== -1 ? colors["light_qwhite"] : colors[backgroundColor]};
     z-index: 999;
 
     transition: transform 300ms ease-out;
