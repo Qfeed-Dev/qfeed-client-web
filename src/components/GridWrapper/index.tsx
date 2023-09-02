@@ -19,14 +19,14 @@ const QuestionGrid = (data: Questions) => {
                 {data.data
                     ?.filter((data: any, idx: number) => idx % 2 === 0)
                     .map((data: any, idx: number) => (
-                        <QfeedFrame key={idx} idx={idx} data={data} />
+                        <QfeedFrame key={idx} idx={data.id} data={data} />
                     ))}
             </QFeedGridOdd>
             <QFeedGridEven direction="column" gap={12}>
                 {data.data
                     ?.filter((data: any, idx: number) => idx % 2 === 1)
                     .map((data: any, idx: number) => (
-                        <QfeedFrame key={idx} idx={idx} data={data} />
+                        <QfeedFrame key={idx} idx={data.id} data={data} />
                     ))}
             </QFeedGridEven>
         </GridWrapper>
