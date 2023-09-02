@@ -7,7 +7,6 @@ import { useGetChatroomChats } from "src/hooks/chatting/useGetChatroomId";
 import Text from "src/components/common/Text";
 import Input from "src/components/Input/Input";
 import { postChatroomChats } from "src/apis/chatting";
-import { pipe } from "fp-ts/lib/function";
 
 export default function Page({ params }: { params: { id: number } }) {
     const chatroomId = params.id;
