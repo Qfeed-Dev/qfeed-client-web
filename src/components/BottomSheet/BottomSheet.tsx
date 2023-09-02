@@ -20,6 +20,7 @@ const COMPONENT_HEIGHT: any = {
     report: 540 + 30,
     reportFriend: 331,
     coin: 324 + 30,
+    friend: 394,
     friendModal: 325 + 60,
     chattingCoin: 376,
     hint: 376

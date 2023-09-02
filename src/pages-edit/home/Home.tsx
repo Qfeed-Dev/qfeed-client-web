@@ -1,30 +1,30 @@
 "use client";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
+
 import BottomNavigation from "src/components/BottomNavigation";
-import BasicQuestion from "src/pages-edit/home/components/BasicQuestion";
 import Filter from "./components/Filter";
 import HomeTitle from "src/pages-edit/home/components/HomeTitle";
-import QFeedFrame from "./components/QfeedFrame";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
-import StackGrid from "react-stack-grid";
-import useDisplaySize from "src/hooks/useDisplaySize";
 import Icon from "src/components/Icon";
-import { useGetQuestions } from "src/hooks/home/useGetQuestions";
+
 import { globalValue } from "src/constants/globalValue";
-import { useState } from "react";
-import Text from "src/components/common/Text";
+
 import { useUserQuery } from "src/hooks/account/useUserQuery";
-import Loading from "src/components/common/Loading";
+import { useGetQuestions } from "src/hooks/questions/useGetQuestions";
+
+import MakeOfficial from "./components/MakeOfficial";
+import CheckOfficial from "./components/CheckOfficial";
+
+import QuestionGrid from "src/components/GridWrapper";
 
 export default function Home() {
     const router = useRouter();
-    const { width } = useDisplaySize();
     const [isSort, setIsSort] = useState(true);
-    const time = 1;
-    const time2 = 1;
 
     const handleClickPickMe = () => {
         router.push(Route.MYPAGE());
@@ -36,8 +36,15 @@ export default function Home() {
         router.push(Route.ADD_QUESTION());
     };
 
-    const { data, isLoading } = useGetQuestions();
+    const { data, isLoading, refetch } = useGetQuestions();
     const user = useUserQuery();
+    const { ref, inView } = useInView();
+
+    // useEffect(() => {
+    //     if (inView) {
+    //         refetch();
+    //     }
+    // }, [inView]);
 
     return isLoading || user.isLoading ? (
         <></>
@@ -46,67 +53,33 @@ export default function Home() {
             <Spacing size={50} />
             <HomeTitle />
             <HomeWrapper>
-                <BasicQuestion
-                    type="pick-me"
-                    count={8}
-                    onClick={handleClickPickMe}
-                    user={user.user}
-                />
-                <BasicQuestion
-                    type={time ? "question-none" : "question"}
-                    count={9}
-                    time={time}
-                    onClick={handleClickBasicQuestion}
-                    user={user.user}
-                />
+                {user.user && (
+                    <CheckOfficial
+                        onClick={handleClickPickMe}
+                        id={user.user.id}
+                    />
+                )}
+                <MakeOfficial onClick={handleClickBasicQuestion} />
                 <Spacing size={20} />
 
                 <Filter isSort={isSort} setIsSort={setIsSort} />
                 <Spacing size={14} />
+                {isLoading ? <></> : data && <QuestionGrid {...data} />}
                 {isLoading ? (
                     <></>
                 ) : (
-                    <StackGrid
-                        columnWidth={Math.floor((width - 45) / 2)}
-                        gutterWidth={12}
-                        gutterHeight={14}
-                    >
-                        {data?.data?.map((data: any, idx: number) => {
-                            return (
-                                <QFeedFrame key={idx} idx={idx} data={data} />
-                            );
-                        })}
-                    </StackGrid>
+                    <div ref={ref} style={{ height: "5px" }}></div>
                 )}
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
             </HomeWrapper>
 
-            <PlusButtonWrapper>
-                <PlusButton time={time2} onClick={handleClickPlus}>
-                    {time2 ? (
-                        // <Text
-                        //     typo="Caption1r"
-                        //     color="light_qwhite"
-                        //     style={{ margin: "auto", display: "flex" }}
-                        // >
-                        //     1
-                        // </Text>
-                        <div style={{ margin: "auto", display: "flex" }}>
-                            <Icon
-                                icon="HomePlus"
-                                color="light_qwhite"
-                                fill="light_qwhite"
-                            />
-                        </div>
-                    ) : (
-                        <div style={{ margin: "auto", display: "flex" }}>
-                            <Icon
-                                icon="HomePlus"
-                                color="light_qblack"
-                                fill="light_qblack"
-                            />
-                        </div>
-                    )}
+            <PlusButtonWrapper onClick={handleClickPlus}>
+                <PlusButton>
+                    <Icon
+                        icon="HomePlus"
+                        color="light_qwhite"
+                        fill="light_qwhite"
+                    />
                 </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
@@ -132,20 +105,20 @@ const PlusButtonWrapper = styled.div`
     z-index: 901;
 `;
 
-const PlusButton = styled.div<{ time: any }>`
+const PlusButton = styled.div`
     width: 60px;
     height: 60px;
     margin: auto;
-
-    display: flex;
-    text-align: center;
 
     position: absolute;
     right: 17px;
     bottom: 64px;
 
-    border: ${({ time }) => (time > 0 ? 3 : 0)}px solid ${colors.light_qwhite};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 3px solid ${colors.light_qwhite};
     border-radius: 50%;
-    background-color: ${({ time }) =>
-        time ? colors.light_qblack : colors.light_qwhite};
+    background-color: ${colors.light_qblack};
 `;

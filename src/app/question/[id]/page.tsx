@@ -6,7 +6,7 @@ import Spacing from "src/components/Spacing";
 import BackTitle from "src/components/Title/BackTitle";
 import { useEffect, useState } from "react";
 import Image from "src/components/Image";
-import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
+import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
 import { useUserQuery } from "src/hooks/account/useUserQuery";

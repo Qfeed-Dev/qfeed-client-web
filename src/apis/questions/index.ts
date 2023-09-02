@@ -1,11 +1,18 @@
 import { QSet, Qtype } from "src/models/questions";
 import { qFeedAxios } from "../axios";
 
-export const getQuestions = async () =>
-    await qFeedAxios
-        .get("/questions")
+export const getQuestions = async (offset: number, limit: number) => {
+    const data = await qFeedAxios
+        .get("/questions", {
+            params: {
+                offset: offset,
+                limit: limit
+            }
+        })
         .then(({ data }) => data)
         .catch((err) => err.response);
+    return data;
+};
 
 export const postQuestions = async (body: any) =>
     await qFeedAxios

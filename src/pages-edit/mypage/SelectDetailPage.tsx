@@ -6,7 +6,7 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { colors } from "styles/theme";
 
-import { useGetQuestionsId } from "src/hooks/home/useGetQuestionId";
+import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 

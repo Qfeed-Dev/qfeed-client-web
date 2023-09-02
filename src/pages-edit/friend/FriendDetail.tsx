@@ -31,13 +31,13 @@ export default function FriendDetailPage({
                     <NavigationTopBack
                         title={friend?.nickname}
                         rightIcon={
-                            <Flex width="auto" gap={24}>
-                                <Icon icon="Share" />
-                                <Icon
-                                    icon="Ban"
-                                    onClick={() => router.push("/friend/ban")}
-                                />
-                            </Flex>
+                            // <Flex width="auto" gap={24}>
+                            //     <Icon icon="Share" />
+                            <Icon
+                                icon="Ban"
+                                onClick={() => router.push("/friend/ban")}
+                            />
+                            // </Flex>
                         }
                     />
                     <Flex direction="column" gap={32}>
