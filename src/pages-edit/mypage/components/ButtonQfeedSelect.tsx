@@ -56,6 +56,8 @@ const SelectWrapper = styled(Flex)`
     max-width: 600px;
     padding: 0 1rem;
     border-bottom: 1px solid ${colors.light_qwhite};
+
+    position: relative;
 `;
 
 const ButtonWrapper = styled.div`
