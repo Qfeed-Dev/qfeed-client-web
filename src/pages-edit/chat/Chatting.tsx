@@ -2,18 +2,43 @@ import { useRouter } from "next/navigation";
 import Text from "src/components/common/Text";
 import Icon from "src/components/Icon";
 import { Route } from "src/constants/Route";
+import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
 import { colors } from "styles/theme";
 
-export default function Chatting() {
+export type ChattingUser = {
+    id: number;
+    name: string;
+    nickname: string;
+    profileImage: string;
+    schoolName: string;
+    grade: string;
+    gender: string;
+};
+
+export default function Chatting({
+    id,
+    owner,
+    targetUser,
+    title,
+    lastMessage,
+    ownerUnreadCount,
+    targetUserUnreadCount,
+    createdAt
+}: {
+    id: number;
+    owner: ChattingUser;
+    targetUser: ChattingUser;
+    title: string;
+    lastMessage: string;
+    ownerUnreadCount: number;
+    targetUserUnreadCount: number;
+    createdAt: string;
+}) {
     const router = useRouter();
 
     return (
-        <ChattingWrapper
-            onClick={() => {
-                router.push(Route.CHATTING());
-            }}
-        >
+        <ChattingWrapper onClick={() => router.push(Route.CHATTING(id))}>
             <ChattingInner>
                 <ChatIcon>
                     <div style={{ margin: "auto" }}>
@@ -22,9 +47,11 @@ export default function Chatting() {
                 </ChatIcon>
                 <div style={{ margin: "auto 0" }}>
                     <Text typo="Subtitle1b" style={{ marginBottom: 4 }}>
-                        00년생 남자
+                        {title.length
+                            ? title
+                            : targetUser?.name ?? "제목이 없음"}
                     </Text>
-                    <Text typo="Caption1r">00년생 남자ㅁㅁㅁㅁㅁㅁㅁ</Text>
+                    <Text typo="Caption1r">{lastMessage ?? "메세지 없음"}</Text>
                 </div>
                 <TimeWrapper>
                     <Text
@@ -32,15 +59,22 @@ export default function Chatting() {
                         color="light_gray2"
                         style={{ marginBottom: 8 }}
                     >
-                        2023.12.30
+                        {new Date(createdAt)
+                            .toISOString()
+                            .slice(0, 10)
+                            .replace(/-/g, ".")}
                     </Text>
-                    <div style={{ height: 16, position: "relative" }}>
-                        <Count>
-                            <Text typo="Caption2r" color="light_qblack">
-                                1
-                            </Text>
-                        </Count>
-                    </div>
+                    {ownerUnreadCount ? (
+                        <div style={{ height: 16, position: "relative" }}>
+                            <Count>
+                                <Text typo="Caption2r" color="light_qblack">
+                                    {ownerUnreadCount}
+                                </Text>
+                            </Count>
+                        </div>
+                    ) : (
+                        <></>
+                    )}
                 </TimeWrapper>
             </ChattingInner>
         </ChattingWrapper>

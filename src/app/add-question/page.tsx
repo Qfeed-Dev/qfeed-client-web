@@ -174,7 +174,7 @@ export default function Page() {
                                 count={idx + 1}
                                 value={values[idx]}
                                 setValue={(e: any) => handleInput(e, idx)}
-                                clickTrash={() => clickTrash(idx)}
+                                onIconPress={() => clickTrash(idx)}
                             />
                         );
                     })}

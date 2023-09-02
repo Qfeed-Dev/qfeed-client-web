@@ -3,6 +3,7 @@ import { KeyOfColor, colors } from "styles/theme";
 import styled from "styled-components";
 import { Text } from "../common/Text";
 import { match } from "ts-pattern";
+import { ChangeEvent, useState } from "react";
 
 interface Props {
     type?: any;
@@ -10,6 +11,7 @@ interface Props {
     size?: any;
     value?: any;
     setValue?: Function;
+    limit?: number;
 }
 
 const Textarea = ({
@@ -17,14 +19,24 @@ const Textarea = ({
     placeholder,
     size,
     value,
+    limit = 100,
     setValue
 }: Props) => {
+    const [count, setCount] = useState(0);
+
+    const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setCount(event.target.value.length);
+        if (setValue) setValue(event);
+    };
+
     return (
         <TextareaWrapper>
             <TextareaBox
                 value={value}
                 placeholder={placeholder}
                 size={size}
+                onChange={handleOnChange}
+                maxLength={limit}
                 color={match(type)
                     .with("question-friend", () => colors.light_qblack)
                     .with("add-question", () => colors.light_qwhite)
@@ -40,19 +52,22 @@ const Textarea = ({
                     .with("add-question", () => colors.line_white_5)
                     .with("add-question-image", () => colors.line_white_50)
                     .otherwise(() => colors.line_black_5)}
-                onChange={setValue}
             />
             <TextareaCount>
-                <Text
-                    typo="Caption2r"
-                    color={
-                        type !== "add-question-image"
-                            ? "light_gray2"
-                            : "light_qblack"
-                    }
-                >
-                    0/100
-                </Text>
+                {count !== 0 && (
+                    <Text
+                        typo="Caption2r"
+                        color={
+                            count === limit
+                                ? "primary_qred"
+                                : type !== "add-question-image"
+                                ? "light_gray2"
+                                : "light_qblack"
+                        }
+                    >
+                        {count} / {limit}
+                    </Text>
+                )}
             </TextareaCount>
         </TextareaWrapper>
     );
