@@ -18,7 +18,7 @@ export default function ProfileTitle({ data }: any) {
                         src={
                             data?.owner?.profileImage
                                 ? data?.owner?.profileImage
-                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
+                                : ""
                         }
                     />
                     <Text typo="Subtitle1b" style={{ marginLeft: 8 }}>

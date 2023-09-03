@@ -8,11 +8,15 @@ const useUsersQuery = (filter: string) => {
         data: users,
         isLoading,
         refetch
-    } = useQuery<any>(usersKeys.all, () => accountAPI.getUsers(filter), {
-        onError: (error: any) => {
-            alert(error);
+    } = useQuery<any>(
+        usersKeys.filter(filter),
+        () => accountAPI.getUsers(filter),
+        {
+            onError: (error: any) => {
+                alert(error);
+            }
         }
-    });
+    );
 
     return { users, isLoading, refetch };
 };

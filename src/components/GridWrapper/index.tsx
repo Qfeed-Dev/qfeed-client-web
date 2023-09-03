@@ -5,9 +5,16 @@ import Flex from "src/components/common/Flex";
 
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 import { enterComponentVariants } from "src/constants/animation";
-import { Questions } from "src/models/questions";
 
-const QuestionGrid = (data: Questions) => {
+const QuestionGrid = ({
+    questions,
+    detail = false,
+    colorStart = 1
+}: {
+    questions: any;
+    detail?: boolean;
+    colorStart?: number;
+}) => {
     return (
         <GridWrapper
             variants={enterComponentVariants}
@@ -15,20 +22,15 @@ const QuestionGrid = (data: Questions) => {
             animate="visible"
             exit="exit"
         >
-            <QFeedGridOdd direction="column" gap={12}>
-                {data.data
-                    ?.filter((data: any, idx: number) => idx % 2 === 0)
-                    .map((data: any, idx: number) => (
-                        <QfeedFrame key={idx} idx={data.id} data={data} />
-                    ))}
-            </QFeedGridOdd>
-            <QFeedGridEven direction="column" gap={12}>
-                {data.data
-                    ?.filter((data: any, idx: number) => idx % 2 === 1)
-                    .map((data: any, idx: number) => (
-                        <QfeedFrame key={idx} idx={data.id} data={data} />
-                    ))}
-            </QFeedGridEven>
+            {questions.map((data: any, idx: number) => (
+                <QfeedFrame
+                    key={idx}
+                    idx={data.id}
+                    colorIdx={idx + colorStart}
+                    data={data}
+                    detail={detail}
+                />
+            ))}
         </GridWrapper>
     );
 };
@@ -36,16 +38,8 @@ const QuestionGrid = (data: Questions) => {
 const GridWrapper = styled(motion.div)`
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 12px;
-    align-items: start;
-`;
-
-const QFeedGridOdd = styled(Flex)`
-    width: 100%;
-`;
-
-const QFeedGridEven = styled(Flex)`
-    width: 100%;
 `;
 
 export default QuestionGrid;

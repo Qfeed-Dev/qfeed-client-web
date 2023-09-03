@@ -18,7 +18,6 @@ export default function Page() {
     const router = useRouter();
     const time2 = 0;
     const [image, setImage] = useState("");
-    // "https://i.ibb.co/0Z6FNN7/60pt.png"
     const [question, setQuestion] = useState("");
     const [values, setValues] = useState<any>([""]);
 

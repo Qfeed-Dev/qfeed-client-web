@@ -7,7 +7,8 @@ export const userKeys = {
 };
 
 export const usersKeys = {
-    all: ["users"] as const
+    all: ["users"] as const,
+    filter: (filter: string) => [...usersKeys.all, filter] as const
 };
 
 export const friendKeys = {

@@ -20,32 +20,29 @@ const CheckOfficial = (props: OfficialProp) => {
     const userQ = useGetUserQQuery(props.id, "official");
     const cursor = useQsetCursorQuery();
 
-    return userQ.isLoading || cursor.isLoading ? (
+    return !userQ.isFetched || cursor.isLoading ? (
         <></>
-    ) : userQ.questions.count ? (
-        <>
-            <Spacing size={16} />
-            <BasicQuestionWrapper
-                onClick={props.onClick}
-                color={colors.light_qwhite}
-            >
-                <BasicQuestionInner>
-                    <Text typo="Headline2b" color="light_qblack">
-                        나를 선택한 큐피드
-                    </Text>
-                    <Text typo="Caption1r" color="light_qblack">
-                        총 {userQ.questions.count}번 선택받았어요!
-                    </Text>
-                    <ImageWrapper>
-                        <Icon
-                            icon="AngelImage"
-                            fill="primary_qgreen"
-                            color="primary_qgreen"
-                        />
-                    </ImageWrapper>
-                </BasicQuestionInner>
-            </BasicQuestionWrapper>
-        </>
+    ) : userQ.data?.pages[0].count ? (
+        <BasicQuestionWrapper
+            onClick={props.onClick}
+            color={colors.light_qwhite}
+        >
+            <BasicQuestionInner>
+                <Text typo="Headline2b" color="light_qblack">
+                    나를 선택한 큐피드
+                </Text>
+                <Text typo="Caption1r" color="light_qblack">
+                    총 {userQ.data?.pages[0].count}번 선택받았어요!
+                </Text>
+                <ImageWrapper>
+                    <Icon
+                        icon="AngelImage"
+                        fill="primary_qgreen"
+                        color="primary_qgreen"
+                    />
+                </ImageWrapper>
+            </BasicQuestionInner>
+        </BasicQuestionWrapper>
     ) : (
         <></>
     );

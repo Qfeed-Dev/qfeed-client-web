@@ -13,7 +13,7 @@ import InputFill from "src/components/inputs/input-fill";
 import Loading from "src/components/common/Loading";
 
 export default function MyFollowingPage() {
-    const { value, handleChangeInput } = useInput();
+    const { value, handleChangeInput } = useInput("");
     const { followings, isLoading, refetch } = useFollowingsQuery(value);
 
     useEffect(() => {

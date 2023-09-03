@@ -36,7 +36,9 @@ const MakeOfficial = (props: QuestionProps) => {
 
     const getTime = () => {
         const date = new Date();
-        const times = new Date(endTime + 24 * 60 * 60 * 1000 - +date);
+        const times = new Date(
+            endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
+        );
 
         if (+times <= 0) {
             newQSet.mutate();
@@ -55,25 +57,23 @@ const MakeOfficial = (props: QuestionProps) => {
     return cursor.isLoading ? (
         <Loading />
     ) : (
-        <>
-            <Spacing size={16} />
-            <BasicQuestionWrapper
-                onClick={props.onClick}
-                color={colors.primary_qgreen}
-            >
-                {cursor.questionCursor && (
-                    <BasicQuestionInner>
-                        {cursor.questionCursor[0].isDone ? (
-                            <>
-                                <Text typo="Caption1r" color="light_qblack">
-                                    다음 질문까지
-                                </Text>
-                                <Text typo="Headline2b" color="light_qblack">
-                                    {time
-                                        ? `${time.hour}:${time.min}:${time.sec}`
-                                        : "00:00:00"}
-                                </Text>
-                                {/* <BottomButton>
+        <BasicQuestionWrapper
+            onClick={props.onClick}
+            color={colors.primary_qgreen}
+        >
+            {cursor.questionCursor && (
+                <BasicQuestionInner>
+                    {cursor.questionCursor[0].isDone ? (
+                        <>
+                            <Text typo="Caption1r" color="light_qblack">
+                                다음 질문까지
+                            </Text>
+                            <Text typo="Headline2b" color="light_qblack">
+                                {time
+                                    ? `${time.hour}:${time.min}:${time.sec}`
+                                    : "00:00:00"}
+                            </Text>
+                            {/* <BottomButton>
                                     <Text
                                         typo="Caption1b"
                                         color="light_qblack"
@@ -93,59 +93,58 @@ const MakeOfficial = (props: QuestionProps) => {
                                         />
                                     </Text>
                                 </BottomButton> */}
-                                <ImageWrapper>
+                            <ImageWrapper>
+                                <Icon
+                                    icon="AngelImage2"
+                                    fill="light_qwhite"
+                                    color="light_qwhite"
+                                />
+                            </ImageWrapper>
+                        </>
+                    ) : (
+                        <>
+                            <Text typo="Headline2b" color="light_qblack">
+                                {cursor.questionCursor[0].currentQ}
+                            </Text>
+                            <Text typo="Caption1r" color="light_qblack">
+                                아직{" "}
+                                {cursor.questionCursor[0].QsetLength -
+                                    cursor.questionCursor[0].cursor +
+                                    1}
+                                문제 남았어요!
+                            </Text>
+                            <BottomButton>
+                                <Text
+                                    typo="Caption1b"
+                                    color="light_qblack"
+                                    style={{
+                                        padding: "6px 16px",
+                                        display: "flex",
+                                        borderRadius: 5,
+                                        backgroundColor: colors.light_qwhite
+                                    }}
+                                >
+                                    <span style={{ marginRight: 8 }}>
+                                        계속하기
+                                    </span>
                                     <Icon
-                                        icon="AngelImage2"
-                                        fill="light_qwhite"
-                                        color="light_qwhite"
-                                    />
-                                </ImageWrapper>
-                            </>
-                        ) : (
-                            <>
-                                <Text typo="Headline2b" color="light_qblack">
-                                    {cursor.questionCursor[0].currentQ}
-                                </Text>
-                                <Text typo="Caption1r" color="light_qblack">
-                                    아직{" "}
-                                    {cursor.questionCursor[0].QsetLength -
-                                        cursor.questionCursor[0].cursor +
-                                        1}
-                                    문제 남았어요!
-                                </Text>
-                                <BottomButton>
-                                    <Text
-                                        typo="Caption1b"
-                                        color="light_qblack"
-                                        style={{
-                                            padding: "6px 16px",
-                                            display: "flex",
-                                            borderRadius: 5,
-                                            backgroundColor: colors.light_qwhite
-                                        }}
-                                    >
-                                        <span style={{ marginRight: 8 }}>
-                                            계속하기
-                                        </span>
-                                        <Icon
-                                            icon="RightArrow"
-                                            color="light_qblack"
-                                        />
-                                    </Text>
-                                </BottomButton>
-                                <ImageWrapper>
-                                    <Icon
-                                        icon="WaveImage"
-                                        fill="light_qblack"
+                                        icon="RightArrow"
                                         color="light_qblack"
                                     />
-                                </ImageWrapper>
-                            </>
-                        )}
-                    </BasicQuestionInner>
-                )}
-            </BasicQuestionWrapper>
-        </>
+                                </Text>
+                            </BottomButton>
+                            <ImageWrapper>
+                                <Icon
+                                    icon="WaveImage"
+                                    fill="light_qblack"
+                                    color="light_qblack"
+                                />
+                            </ImageWrapper>
+                        </>
+                    )}
+                </BasicQuestionInner>
+            )}
+        </BasicQuestionWrapper>
     );
 };
 
