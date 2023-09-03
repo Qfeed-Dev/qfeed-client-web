@@ -4,13 +4,14 @@ import { Text } from "src/components/common/Text";
 import Icon from "src/components/Icon";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
+import { QuestionItem } from "src/models/questions";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
 import { colors } from "styles/theme";
 
 interface Props {
     idx: number;
-    data: any;
+    data: QuestionItem;
 }
 
 const QfeedFrame = ({ idx, data }: Props) => {
@@ -32,12 +33,20 @@ const QfeedFrame = ({ idx, data }: Props) => {
     return (
         <QfeedFrameWrapper
             onClick={handleClickFrame}
-            repeatbackgroundcolor={colors[getAppStateColor(idx)]}
+            repeatbackgroundcolor={
+                data.isViewed
+                    ? colors.light_gray3
+                    : colors[getAppStateColor(idx)]
+            }
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
                 <QfeedFrameInner
                     imageurl={imageurl}
-                    backgroundcolor={colors[getAppStateColor(idx)]}
+                    backgroundcolor={
+                        data.isViewed
+                            ? colors.light_gray3
+                            : colors[getAppStateColor(idx)]
+                    }
                 >
                     <Text
                         typo="Headline2b"
@@ -113,6 +122,10 @@ const QfeedFrameInner = styled.div<{ imageurl: any; backgroundcolor: any }>`
         left: 3px;
         right: 3px;
         bottom: 3px;
+        filter: ${({ backgroundcolor }) =>
+            backgroundcolor === colors.light_gray3
+                ? "grayscale(100%)"
+                : "grayscale(0%)"};
     }
 
     div {
