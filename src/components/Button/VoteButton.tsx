@@ -19,7 +19,7 @@ const VoteButton = forwardRef(function Button(
         onClick,
         idx,
         type = "primary",
-        typeNum = 0,
+        $typeNum = 0,
         action = null,
         ...props
     }: any,
@@ -33,7 +33,7 @@ const VoteButton = forwardRef(function Button(
             onClick={onClick}
             color={match(type)
                 .with("primary", () =>
-                    typeNum !== 0 && action === 0
+                    $typeNum !== 0 && action === 0
                         ? colors.light_qwhite
                         : colors.light_qblack
                 )
@@ -41,9 +41,9 @@ const VoteButton = forwardRef(function Button(
                 .otherwise(() => colors.light_qblack)}
             backgroundColor={match(type)
                 .with("primary", () =>
-                    typeNum === 0
+                    $typeNum === 0
                         ? colors.line_white_70
-                        : typeNum === 1
+                        : $typeNum === 1
                         ? action === 0
                             ? colors.line_black_50
                             : colors.line_white_70
@@ -54,9 +54,9 @@ const VoteButton = forwardRef(function Button(
                         : colors.line_black_50
                 )
                 .with("default", () =>
-                    typeNum === 0
+                    $typeNum === 0
                         ? repeatQuestionColor[idx % 6]
-                        : typeNum === 1
+                        : $typeNum === 1
                         ? action === 0
                             ? colors.light_gray2
                             : repeatQuestionColor[idx % 6]
@@ -69,10 +69,10 @@ const VoteButton = forwardRef(function Button(
                 .otherwise(() => colors.line_white_70)}
         >
             <VoteButtonInner>
-                <TextWrapper typeNum={typeNum}>
+                <TextWrapper $typeNum={$typeNum}>
                     <Text typo="Subtitle2b">{children}</Text>
-                    {(typeNum === 2 && props.selected === idx) ||
-                    (typeNum === 2 && action === 1) ? (
+                    {($typeNum === 2 && props.selected === idx) ||
+                    ($typeNum === 2 && action === 1) ? (
                         <Icon
                             icon="Check"
                             fill="transparent"
@@ -80,7 +80,7 @@ const VoteButton = forwardRef(function Button(
                         />
                     ) : null}
                 </TextWrapper>
-                {typeNum === 1 && action === 1 ? (
+                {$typeNum === 1 && action === 1 ? (
                     <CheckWrapper>
                         <Icon
                             icon="QFeedImage"
@@ -95,7 +95,7 @@ const VoteButton = forwardRef(function Button(
                         />
                     </CheckWrapper>
                 ) : null}
-                {typeNum === 2 ? (
+                {$typeNum === 2 ? (
                     <NumberWrapper>
                         <Text typo="Headline2b" style={{ lineHeight: 2.8 }}>
                             {props.count}
@@ -131,15 +131,15 @@ const CheckWrapper = styled.div`
     transform: translate(0, -50%);
 `;
 
-const TextWrapper = styled.div<{ typeNum: number }>`
+const TextWrapper = styled.div<{ $typeNum: number }>`
     display: flex;
     gap: 14px;
 
     // 값 바꿔줌
     position: absolute;
-    left: ${({ typeNum }) => (typeNum === 2 ? "20px" : "50%")};
-    transform: ${({ typeNum }) =>
-        typeNum === 2 ? "translate(0%, -50%)" : "translate(-50%, -50%)"};
+    left: ${({ $typeNum }) => ($typeNum === 2 ? "20px" : "50%")};
+    transform: ${({ $typeNum }) =>
+        $typeNum === 2 ? "translate(0%, -50%)" : "translate(-50%, -50%)"};
 `;
 
 const NumberWrapper = styled.div`
