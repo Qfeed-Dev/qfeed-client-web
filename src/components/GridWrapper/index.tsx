@@ -7,8 +7,14 @@ import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 import { enterComponentVariants } from "src/constants/animation";
 import { Questions } from "src/models/questions";
 
-const QuestionGrid = (data: Questions) => {
-    const sortedData = data.data.reverse();
+const QuestionGrid = ({
+    questions,
+    detail = false
+}: {
+    questions: Questions;
+    detail?: boolean;
+}) => {
+    const sortedData = questions.data.reverse();
     return (
         <GridWrapper
             variants={enterComponentVariants}
@@ -25,6 +31,7 @@ const QuestionGrid = (data: Questions) => {
                             idx={data.id}
                             colorIdx={idx}
                             data={data}
+                            detail={detail}
                         />
                     ))}
             </QFeedGridOdd>
@@ -37,6 +44,7 @@ const QuestionGrid = (data: Questions) => {
                             idx={data.id}
                             colorIdx={idx + 4}
                             data={data}
+                            detail={detail}
                         />
                     ))}
             </QFeedGridEven>

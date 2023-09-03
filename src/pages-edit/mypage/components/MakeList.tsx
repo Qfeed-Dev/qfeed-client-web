@@ -17,7 +17,7 @@ export default function MakeList({ id }: { id: number }) {
     ) : (
         <GridWrapper>
             {questions.data.length ? (
-                <QuestionGrid {...questions} />
+                <QuestionGrid questions={questions} detail={true} />
             ) : (
                 <Text typo="Subtitle1r" style={{ textAlign: "center" }}>
                     아직 만든 큐피드가 없어요
