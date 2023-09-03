@@ -11,10 +11,11 @@ import { colors } from "styles/theme";
 
 interface Props {
     idx: number;
+    colorIdx: number;
     data: QuestionItem;
 }
 
-const QfeedFrame = ({ idx, data }: Props) => {
+const QfeedFrame = ({ idx, colorIdx, data }: Props) => {
     const router = useRouter();
     const imageurl = data.backgroundImage;
 
@@ -36,7 +37,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
             repeatbackgroundcolor={
                 data.isViewed
                     ? colors.light_gray3
-                    : colors[getAppStateColor(idx)]
+                    : colors[getAppStateColor(colorIdx)]
             }
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
@@ -45,7 +46,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
                     backgroundcolor={
                         data.isViewed
                             ? colors.light_gray3
-                            : colors[getAppStateColor(idx)]
+                            : colors[getAppStateColor(colorIdx)]
                     }
                 >
                     <Text
@@ -79,7 +80,10 @@ const QfeedFrame = ({ idx, data }: Props) => {
             {data.isViewed ? undefined : (
                 <QFeedWrapper>
                     {imageurl ? (
-                        <Icon icon="QFeedImage" fill={getAppStateColor(idx)} />
+                        <Icon
+                            icon="QFeedImage"
+                            fill={getAppStateColor(colorIdx)}
+                        />
                     ) : (
                         <Icon icon="QFeedImage2" />
                     )}
