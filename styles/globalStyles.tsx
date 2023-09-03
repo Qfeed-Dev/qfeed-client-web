@@ -159,6 +159,7 @@ a:visited {
 }
 
 input,
+textarea,
 select {
     font-size: 16px;
 }

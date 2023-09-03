@@ -20,12 +20,24 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
     const router = useRouter();
     const imageurl = data.backgroundImage;
 
-    const writeDay = new Date(data.createdAt);
+    const writeDay = Date.parse(data.createdAt);
     const today = new Date();
 
-    const pastTime = Math.round(
-        (today.getTime() - writeDay.getTime()) / (1000 * 60 * 60)
-    );
+    const getTime = () => {
+        const pastTime = Math.round(
+            (today.getTime() - writeDay - 9000 * 60 * 60) / (1000 * 60 * 60)
+        );
+        if (pastTime === 0) {
+            const pastMin = Math.round(
+                (today.getTime() - writeDay - 9000 * 60 * 60) / (1000 * 60)
+            );
+            return pastMin ? `${pastMin}분 전` : "방금 전";
+        } else {
+            return `${pastTime}시간 전`;
+        }
+    };
+
+    const time = getTime();
 
     const handleClickFrame = () => {
         // router.push(Route.QUESTION());
@@ -61,7 +73,7 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
                         typo="Caption1r"
                         color={imageurl ? "light_qwhite" : "light_qblack"}
                     >
-                        {pastTime}시간 전
+                        {time}
                     </Text>
                     <Spacing size={27} />
                     <CountWrapper>

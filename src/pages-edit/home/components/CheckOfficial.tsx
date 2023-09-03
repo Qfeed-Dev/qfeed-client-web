@@ -20,9 +20,9 @@ const CheckOfficial = (props: OfficialProp) => {
     const userQ = useGetUserQQuery(props.id, "official");
     const cursor = useQsetCursorQuery();
 
-    return userQ.isLoading || cursor.isLoading ? (
+    return !userQ.isFetched || cursor.isLoading ? (
         <></>
-    ) : userQ.questions.count ? (
+    ) : userQ.data?.pages[0].count ? (
         <BasicQuestionWrapper
             onClick={props.onClick}
             color={colors.light_qwhite}
@@ -32,7 +32,7 @@ const CheckOfficial = (props: OfficialProp) => {
                     나를 선택한 큐피드
                 </Text>
                 <Text typo="Caption1r" color="light_qblack">
-                    총 {userQ.questions.count}번 선택받았어요!
+                    총 {userQ.data?.pages[0].count}번 선택받았어요!
                 </Text>
                 <ImageWrapper>
                     <Icon
