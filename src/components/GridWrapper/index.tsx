@@ -5,7 +5,7 @@ import Flex from "src/components/common/Flex";
 
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 import { enterComponentVariants } from "src/constants/animation";
-import { Questions } from "src/models/questions";
+import { QuestionItem, Questions } from "src/models/questions";
 import { useEffect, useState } from "react";
 
 const QuestionGrid = ({
@@ -15,10 +15,12 @@ const QuestionGrid = ({
     questions: Questions;
     detail?: boolean;
 }) => {
-    const [sortedData, setSortedData] = useState(questions.data.reverse());
+    const [sortedData, setSortedData] = useState<QuestionItem[] | undefined>(
+        undefined
+    );
     useEffect(() => {
-        setSortedData(questions.data.reverse());
-    }, [questions]);
+        sortedData === undefined && setSortedData(questions.data.reverse());
+    }, []);
 
     return (
         <GridWrapper

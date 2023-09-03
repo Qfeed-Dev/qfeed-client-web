@@ -30,11 +30,7 @@ const HomeTitle = ({}: {}) => {
         <HomeTitleWrapper>
             <Menu>
                 <ImageWrapper>
-                    <Image
-                        type="default"
-                        size={40}
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                    />
+                    <Image type="default" size={40} src="" />
                 </ImageWrapper>
             </Menu>
             {/* <div style={{ display: "flex", gap: "24px", alignItems: "center" }}>
@@ -83,7 +79,9 @@ const ImageWrapper = styled.div`
     display: flex;
 
     border-radius: 50%;
-    background-color: ${colors.light_qwhite};
+    border: 3px solid ${colors.light_qwhite};
+
+    background: ${colors.light_gray2};
 `;
 
 export default HomeTitle;

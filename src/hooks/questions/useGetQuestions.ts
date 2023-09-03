@@ -6,10 +6,7 @@ import { Questions } from "src/models/questions";
 export const useGetQuestions = () => {
     const { data, isLoading, error, refetch } = useQuery<Questions>(
         questionKeys.all,
-        async () => {
-            const result = await getQuestions(1, 100);
-            return result;
-        }
+        () => getQuestions(1, 100)
     );
 
     return { data, isLoading, error, refetch };

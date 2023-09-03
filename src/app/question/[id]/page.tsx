@@ -76,8 +76,6 @@ export default function Page({ params }: { params: { id: number } }) {
         checkBest();
     }, [questionData]);
 
-    console.log(questionData);
-
     return isLoading ? undefined : (
         <>
             {questionData?.backgroundImage && (

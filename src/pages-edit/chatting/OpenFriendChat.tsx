@@ -39,11 +39,7 @@ export default function Friend({ idx, data }: any) {
                     <Image
                         type="default"
                         size={35}
-                        src={
-                            data?.profileImage
-                                ? data?.profileImage
-                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
-                        }
+                        src={data?.profileImage ? data?.profileImage : ""}
                         grayscale={
                             selectedIdx && idx !== selectedIdx && visible === 1
                                 ? 100

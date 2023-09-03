@@ -9,6 +9,7 @@ export const useInput = (initialState?: string) => {
     };
 
     const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
         if (!event.target.value) {
             reset();
         } else {

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
+import Flex from "src/components/common/Flex";
 
 import BottomNavigation from "src/components/BottomNavigation";
 import Filter from "./components/Filter";
@@ -57,21 +58,21 @@ export default function Home() {
     return isLoading || user.isLoading ? (
         <></>
     ) : (
-        <>
-            <Spacing size={50} />
+        <Flex direction="column">
             <HomeTitle />
-            <HomeWrapper>
-                {user.user && (
-                    <CheckOfficial
-                        onClick={handleClickPickMe}
-                        id={user.user.id}
-                    />
-                )}
-                <MakeOfficial onClick={handleClickBasicQuestion} />
+            <>
+                <Flex direction="column" gap={16}>
+                    {user.user && (
+                        <CheckOfficial
+                            onClick={handleClickPickMe}
+                            id={user.user.id}
+                        />
+                    )}
+                    <MakeOfficial onClick={handleClickBasicQuestion} />
+                </Flex>
                 <Spacing size={20} />
 
                 {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
-                <Spacing size={14} />
                 {isLoading ? <></> : data && <QuestionGrid questions={data} />}
                 {isLoading ? (
                     <></>
@@ -79,7 +80,7 @@ export default function Home() {
                     <div ref={ref} style={{ height: "5px" }}></div>
                 )}
                 <Spacing size={globalValue.bottomSheetHeight + 12} />
-            </HomeWrapper>
+            </>
 
             <PlusButtonWrapper onClick={handleClickPlus}>
                 <PlusButton>
@@ -91,16 +92,9 @@ export default function Home() {
                 </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
-        </>
+        </Flex>
     );
 }
-
-const HomeWrapper = styled.div`
-    height: calc(100% - ${globalValue.bottomSheetHeight});
-    margin: 0 auto;
-    padding: 0 16px;
-    position: relative;
-`;
 
 const PlusButtonWrapper = styled.div`
     width: 100%;
