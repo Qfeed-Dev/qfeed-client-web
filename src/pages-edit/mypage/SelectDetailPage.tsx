@@ -32,12 +32,12 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     return (
         <SelectQWrapper direction="column" gap={144}>
             <NavigationTopBack
-                rightIcon={
-                    <Flex width="auto" gap={16}>
-                        <Icon icon="Share" />
-                        <Icon icon="Trash" />
-                    </Flex>
-                }
+            // rightIcon={
+            //     <Flex width="auto" gap={16}>
+            //         <Icon icon="Share" />
+            //         <Icon icon="Trash" />
+            //     </Flex>
+            // }
             />
             {isLoading ? (
                 <Loading />
@@ -60,7 +60,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                     <Message width={73}>
                                         <Icon icon="Chat" />
                                     </Message>
-                                    <Hint
+                                    {/* <Hint
                                         width={73}
                                         onClick={handleClickShowHint}
                                     >
@@ -68,7 +68,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                             icon="Heart"
                                             fill="light_qblack"
                                         />
-                                    </Hint>
+                                    </Hint> */}
                                 </HintItem>
                                 <HintText typo="Subtitle1r" color="light_gray3">
                                     {choice.value}

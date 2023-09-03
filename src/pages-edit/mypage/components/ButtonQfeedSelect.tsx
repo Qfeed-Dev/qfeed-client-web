@@ -5,6 +5,10 @@ import Text from "src/components/common/Text";
 import Flex from "src/components/common/Flex";
 import { colors, theme } from "styles/theme";
 
+import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
+import { Qtype } from "src/models/questions";
+
 export type ButtonState = "active" | "disabled";
 
 const TEXT_COLOR = {
@@ -21,12 +25,8 @@ const BUTTON_COLOR = {
     }
 };
 
-interface toggleProps {
-    value: string;
-    onClick: any;
-}
-
-const ButtonQfeedSelect = ({ ...props }: toggleProps) => {
+const ButtonQfeedSelect = ({ value }: { value: Qtype }) => {
+    const dispatch = useAppDispatch();
     return (
         <SelectWrapper gap={24}>
             <ButtonWrapper>
@@ -34,15 +34,27 @@ const ButtonQfeedSelect = ({ ...props }: toggleProps) => {
                 <Input type="qfeed" id="official" />
                 <Button
                     id="personal"
-                    state={props.value === "personal" ? "active" : "disabled"}
-                    onClick={props.onClick}
+                    state={value === "personal" ? "active" : "disabled"}
+                    onClick={() =>
+                        dispatch(
+                            changeQType({
+                                value: "personal"
+                            })
+                        )
+                    }
                 >
                     <Text typo="Subtitle2b">Personal Q</Text>
                 </Button>
                 <Button
                     id="official"
-                    state={props.value === "official" ? "active" : "disabled"}
-                    onClick={props.onClick}
+                    state={value === "official" ? "active" : "disabled"}
+                    onClick={() =>
+                        dispatch(
+                            changeQType({
+                                value: "official"
+                            })
+                        )
+                    }
                 >
                     <Text typo="Subtitle2b">Official Q</Text>
                 </Button>
@@ -52,9 +64,9 @@ const ButtonQfeedSelect = ({ ...props }: toggleProps) => {
 };
 
 const SelectWrapper = styled(Flex)`
-    width: 100vw;
+    /* width: 100vw;
     max-width: 600px;
-    padding: 0 1rem;
+    padding: 0 1rem; */
     border-bottom: 1px solid ${colors.light_qwhite};
 `;
 

@@ -21,7 +21,7 @@ const CheckOfficial = (props: OfficialProp) => {
     const cursor = useQsetCursorQuery();
 
     return userQ.isLoading || cursor.isLoading ? (
-        <Loading />
+        <></>
     ) : userQ.questions.count ? (
         <>
             <Spacing size={16} />

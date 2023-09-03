@@ -21,12 +21,20 @@ import MakeOfficial from "./components/MakeOfficial";
 import CheckOfficial from "./components/CheckOfficial";
 
 import QuestionGrid from "src/components/GridWrapper";
+import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
 
 export default function Home() {
     const router = useRouter();
     const [isSort, setIsSort] = useState(true);
+    const dispatch = useAppDispatch();
 
     const handleClickPickMe = () => {
+        dispatch(
+            changeQType({
+                value: "official"
+            })
+        );
         router.push(Route.MYPAGE());
     };
     const handleClickBasicQuestion = () => {
