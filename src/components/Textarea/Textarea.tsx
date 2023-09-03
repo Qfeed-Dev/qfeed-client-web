@@ -5,8 +5,14 @@ import { Text } from "../common/Text";
 import { match } from "ts-pattern";
 import { ChangeEvent, useState } from "react";
 
+type Type =
+    | "question-friend"
+    | "add-question"
+    | "add-question-image"
+    | "add-chatting";
+
 interface Props {
-    type?: any;
+    type?: Type;
     placeholder?: any;
     size?: any;
     value?: any;
@@ -32,7 +38,7 @@ const Textarea = ({
     return (
         <TextareaWrapper
             size={size}
-            backgroundColor={match(type)
+            $backgroundColor={match(type)
                 .with("question-friend", () => colors.line_black_5)
                 .with("add-question", () => colors.line_white_5)
                 .with("add-question-image", () => colors.line_white_50)
@@ -47,11 +53,13 @@ const Textarea = ({
                     .with("question-friend", () => colors.light_qblack)
                     .with("add-question", () => colors.light_qwhite)
                     .with("add-question-image", () => colors.light_qblack)
+                    .with("add-chatting", () => colors.light_qwhite)
                     .otherwise(() => colors.light_qblack)}
-                placeholderColor={match(type)
+                $placeholderColor={match(type)
                     .with("question-friend", () => colors.light_gray2)
                     .with("add-question", () => colors.light_gray2)
                     .with("add-question-image", () => colors.light_qblack)
+                    .with("add-chatting", () => colors.light_gray2)
                     .otherwise(() => colors.light_qblack)}
             />
             <TextareaCount>
@@ -76,7 +84,7 @@ const Textarea = ({
 
 const TextareaWrapper = styled.div<{
     size: any;
-    backgroundColor: string;
+    $backgroundColor: string;
     onChange?: any;
 }>`
     width: 100%;
@@ -91,17 +99,17 @@ const TextareaWrapper = styled.div<{
     resize: none;
 
     border-radius: 10px;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
 const TextareaBox = styled.textarea<{
-    placeholderColor: string;
+    $placeholderColor: string;
     color: string;
 }>`
     width: 104vw;
     height: 120%;
     &::placeholder {
-        color: ${({ placeholderColor }) => placeholderColor};
+        color: ${({ $placeholderColor }) => $placeholderColor};
     }
     color: ${({ color }) => color};
 
