@@ -10,7 +10,7 @@ const useGetUserQQuery = (id: number, qtype: Qtype) => {
         isLoading,
         refetch
     } = useQuery<any>(
-        questionKeys.detail(id),
+        questionKeys.detail(id, qtype),
         () => getUserQuestions(id, qtype),
         {
             onError: (error: any) => {

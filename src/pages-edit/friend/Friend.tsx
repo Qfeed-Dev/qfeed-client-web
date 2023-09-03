@@ -22,7 +22,7 @@ import { enterComponentVariants } from "src/constants/animation";
 
 export default function Mypage() {
     const router = useRouter();
-    const search = useInput();
+    const search = useInput("");
     const searchResult = useUsersQuery(search.value);
 
     useEffect(() => {

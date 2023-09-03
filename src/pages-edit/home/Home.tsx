@@ -62,7 +62,7 @@ export default function Home() {
                 <MakeOfficial onClick={handleClickBasicQuestion} />
                 <Spacing size={20} />
 
-                <Filter isSort={isSort} setIsSort={setIsSort} />
+                {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
                 <Spacing size={14} />
                 {isLoading ? <></> : data && <QuestionGrid {...data} />}
                 {isLoading ? (
