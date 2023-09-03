@@ -58,7 +58,7 @@ export default function Home() {
     return isLoading || user.isLoading ? (
         <></>
     ) : (
-        <>
+        <Flex direction="column">
             <HomeTitle />
             <>
                 <Flex direction="column" gap={16}>
@@ -93,7 +93,7 @@ export default function Home() {
                 </PlusButton>
             </PlusButtonWrapper>
             <BottomNavigation />
-        </>
+        </Flex>
     );
 }
 
