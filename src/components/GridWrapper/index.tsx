@@ -34,6 +34,7 @@ const QuestionGrid = (data: Questions) => {
 };
 
 const GridWrapper = styled(motion.div)`
+    width: 100%;
     display: flex;
     gap: 12px;
     align-items: start;
