@@ -36,11 +36,12 @@ const MakeOfficial = (props: QuestionProps) => {
 
     const getTime = () => {
         const date = new Date();
-        if (!isNaN(endTime) && +date > endTime + 24 * 60 * 60 * 1000) {
+        const times = new Date(endTime + 24 * 60 * 60 * 1000 - +date);
+
+        if (+times <= 0) {
             newQSet.mutate();
         }
 
-        const times = new Date(endTime + 24 * 60 * 60 * 1000 - +date);
         const hours = String(times.getHours()).padStart(2, "0");
         const minutes = String(times.getMinutes()).padStart(2, "0");
         const seconds = String(times.getSeconds()).padStart(2, "0");
@@ -70,7 +71,7 @@ const MakeOfficial = (props: QuestionProps) => {
                                 <Text typo="Headline2b" color="light_qblack">
                                     {time
                                         ? `${time.hour}:${time.min}:${time.sec}`
-                                        : ""}
+                                        : "00:00:00"}
                                 </Text>
                                 {/* <BottomButton>
                                     <Text
