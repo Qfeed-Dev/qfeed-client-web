@@ -13,9 +13,10 @@ interface Props {
     idx: number;
     colorIdx: number;
     data: QuestionItem;
+    detail: boolean | undefined;
 }
 
-const QfeedFrame = ({ idx, colorIdx, data }: Props) => {
+const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
     const router = useRouter();
     const imageurl = data.backgroundImage;
 
@@ -35,7 +36,7 @@ const QfeedFrame = ({ idx, colorIdx, data }: Props) => {
         <QfeedFrameWrapper
             onClick={handleClickFrame}
             repeatbackgroundcolor={
-                data.isViewed
+                data.isViewed && !detail
                     ? colors.light_gray3
                     : colors[getAppStateColor(colorIdx)]
             }
@@ -44,7 +45,7 @@ const QfeedFrame = ({ idx, colorIdx, data }: Props) => {
                 <QfeedFrameInner
                     imageurl={imageurl}
                     backgroundcolor={
-                        data.isViewed
+                        data.isViewed && !detail
                             ? colors.light_gray3
                             : colors[getAppStateColor(colorIdx)]
                     }
@@ -77,15 +78,17 @@ const QfeedFrame = ({ idx, colorIdx, data }: Props) => {
                     </CountWrapper>
                 </QfeedFrameInner>
             </div>
-            {data.isViewed ? undefined : (
+            {data.isChoiced ? undefined : (
                 <QFeedWrapper>
-                    {imageurl ? (
+                    {data.isViewed && !detail ? (
+                        <Icon icon="QFeedImage" fill={colors.light_gray3} />
+                    ) : imageurl ? (
                         <Icon
                             icon="QFeedImage"
                             fill={getAppStateColor(colorIdx)}
                         />
                     ) : (
-                        <Icon icon="QFeedImage2" />
+                        <Icon icon="QFeedImage2" fill={colors.light_qblack} />
                     )}
                 </QFeedWrapper>
             )}
