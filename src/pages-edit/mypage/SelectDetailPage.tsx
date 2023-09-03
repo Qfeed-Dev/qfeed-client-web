@@ -15,6 +15,7 @@ import Icon from "src/components/Icon/Icon";
 import Loading from "src/components/common/Loading";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import { useRouter } from "next/navigation";
+import useChatroomMutation from "src/hooks/chatting/useChatroomMutation";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     const { data, isLoading, error, refetch } = useGetQuestionsId({
@@ -31,6 +32,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
         );
     };
     const router = useRouter();
+    const chat = useChatroomMutation();
 
     return (
         <SelectQWrapper direction="column" gap={144}>
@@ -62,11 +64,15 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                     </Person>
                                     <Message
                                         width={73}
-                                        onClick={() =>
+                                        onClick={() => {
+                                            chat.mutate({
+                                                targetUserId: choice.user.id,
+                                                title: data.title
+                                            });
                                             router.push(
                                                 `/chat/${choice.user.id}`
-                                            )
-                                        }
+                                            );
+                                        }}
                                     >
                                         <Icon icon="Chat" />
                                     </Message>

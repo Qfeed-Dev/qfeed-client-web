@@ -8,9 +8,9 @@ const chatAPI = {
         return response.data;
     },
 
-    async postChatroom(body: { targetUserId: number; title: string }) {
+    async postChatroom(data: { targetUserId: number; title: string }) {
         const response = await qFeedAxios
-            .post("/chatrooms", body)
+            .post("/chatrooms", data)
 
             .catch((err) => err.response);
 
