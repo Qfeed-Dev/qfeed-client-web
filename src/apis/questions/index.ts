@@ -11,7 +11,7 @@ export const getQuestions = async (offset: number, limit: number) => {
         })
         .then(({ data }) => data)
         .catch((err) => err.response);
-    return data;
+    return { data: data, idx: offset };
 };
 
 export const postQuestions = async (body: any) =>

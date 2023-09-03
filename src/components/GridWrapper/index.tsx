@@ -5,23 +5,16 @@ import Flex from "src/components/common/Flex";
 
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 import { enterComponentVariants } from "src/constants/animation";
-import { QuestionItem, Questions } from "src/models/questions";
-import { useEffect, useState } from "react";
 
 const QuestionGrid = ({
     questions,
-    detail = false
+    detail = false,
+    colorStart = 1
 }: {
-    questions: Questions;
+    questions: any;
     detail?: boolean;
+    colorStart?: number;
 }) => {
-    const [sortedData, setSortedData] = useState<QuestionItem[] | undefined>(
-        undefined
-    );
-    useEffect(() => {
-        sortedData === undefined && setSortedData(questions.data.reverse());
-    }, []);
-
     return (
         <GridWrapper
             variants={enterComponentVariants}
@@ -29,32 +22,15 @@ const QuestionGrid = ({
             animate="visible"
             exit="exit"
         >
-            <QFeedGridOdd direction="column" gap={12}>
-                {sortedData
-                    ?.filter((data: any, idx: number) => idx % 2 === 0)
-                    .map((data: any, idx: number) => (
-                        <QfeedFrame
-                            key={idx}
-                            idx={data.id}
-                            colorIdx={idx}
-                            data={data}
-                            detail={detail}
-                        />
-                    ))}
-            </QFeedGridOdd>
-            <QFeedGridEven direction="column" gap={12}>
-                {sortedData
-                    ?.filter((data: any, idx: number) => idx % 2 === 1)
-                    .map((data: any, idx: number) => (
-                        <QfeedFrame
-                            key={idx}
-                            idx={data.id}
-                            colorIdx={idx + 4}
-                            data={data}
-                            detail={detail}
-                        />
-                    ))}
-            </QFeedGridEven>
+            {questions.map((data: any, idx: number) => (
+                <QfeedFrame
+                    key={idx}
+                    idx={data.id}
+                    colorIdx={idx + colorStart}
+                    data={data}
+                    detail={detail}
+                />
+            ))}
         </GridWrapper>
     );
 };
@@ -62,16 +38,8 @@ const QuestionGrid = ({
 const GridWrapper = styled(motion.div)`
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 12px;
-    align-items: start;
-`;
-
-const QFeedGridOdd = styled(Flex)`
-    width: 100%;
-`;
-
-const QFeedGridEven = styled(Flex)`
-    width: 100%;
 `;
 
 export default QuestionGrid;
