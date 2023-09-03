@@ -1,5 +1,6 @@
 "use client";
 import styled from "styled-components";
+import { colors } from "styles/theme";
 import { match } from "ts-pattern";
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const Image = ({ src, type = "default", size, height, grayscale }: Props) => {
-    return (
+    return src ? (
         <ImageWrapper
             src={src}
             width={match(type)
@@ -32,6 +33,8 @@ const Image = ({ src, type = "default", size, height, grayscale }: Props) => {
                 .otherwise(() => "0")}
             style={{ filter: `grayscale(${grayscale}%)` }}
         />
+    ) : (
+        <NonImage />
     );
 };
 
@@ -40,12 +43,19 @@ const ImageWrapper = styled.img<{
     radius: any;
 }>`
     margin: auto;
-
     border-radius: 50%;
 
     aspect-ratio: ${({ ratio }) => ratio};
     border-radius: ${({ radius }) => radius};
     object-fit: cover;
+`;
+
+const NonImage = styled.div`
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    border-radius: 50%;
+    background: ${colors.light_gray2};
 `;
 
 export default Image;
