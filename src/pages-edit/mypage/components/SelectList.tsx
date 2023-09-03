@@ -30,7 +30,7 @@ export default function SelectList({ id }: { id: number }) {
         >
             {data?.pages[0].data.length ? (
                 data.pages.map((questions: any, idx: number) => (
-                    <Flex direction="column" gap={16}>
+                    <Flex key={idx} direction="column" gap={16}>
                         {questions.data.map((question: QuestionItem) => (
                             <SelectItem
                                 key={question.id}

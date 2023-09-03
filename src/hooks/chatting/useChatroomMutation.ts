@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import chatAPI from "src/apis/chatting";
 import { chatRoomKeys } from "src/constants/queryKeys/chatKeys";
+import { setChatRoomId } from "src/utils/cookie";
 
 const useChatroomMutation = () => {
     const queryClient = useQueryClient();
@@ -10,6 +11,7 @@ const useChatroomMutation = () => {
         {
             onSuccess: (data: any) => {
                 queryClient.invalidateQueries(chatRoomKeys.all);
+                setChatRoomId(data.id);
             },
             onError: (error: any) => {}
         }

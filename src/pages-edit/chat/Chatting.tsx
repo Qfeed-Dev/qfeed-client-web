@@ -38,7 +38,9 @@ export default function Chatting({
     const router = useRouter();
 
     return (
-        <ChattingWrapper onClick={() => router.push(Route.CHATTING(id))}>
+        <ChattingWrapper
+            onClick={() => router.push(Route.CHATTING(targetUser.id))}
+        >
             <ChattingInner>
                 <ChatIcon>
                     <div style={{ margin: "auto" }}>

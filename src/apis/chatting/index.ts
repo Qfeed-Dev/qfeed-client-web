@@ -25,9 +25,11 @@ const chatAPI = {
         return response.data;
     },
 
-    async postChatroomChats(chatroomId: any, message: string) {
+    async postChatroomChats(data: { chatroomId: any; message: string }) {
         const response = await qFeedAxios
-            .post(`/chatrooms/${chatroomId}/chats`, { message: message })
+            .post(`/chatrooms/${data.chatroomId}/chats`, {
+                message: data.message
+            })
             .catch((err) => err.response);
 
         return response.data;

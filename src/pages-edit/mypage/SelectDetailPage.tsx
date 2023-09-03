@@ -32,7 +32,7 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
         );
     };
     const router = useRouter();
-    const chat = useChatroomMutation();
+    const chatRoom = useChatroomMutation();
 
     return (
         <SelectQWrapper direction="column" gap={144}>
@@ -65,13 +65,11 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                     <Message
                                         width={73}
                                         onClick={() => {
-                                            chat.mutate({
+                                            chatRoom.mutate({
                                                 targetUserId: choice.user.id,
                                                 title: data.title
                                             });
-                                            router.push(
-                                                `/chat/${choice.user.id}`
-                                            );
+                                            router.push("/chat/add");
                                         }}
                                     >
                                         <Icon icon="Chat" />

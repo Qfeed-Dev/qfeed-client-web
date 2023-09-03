@@ -17,7 +17,6 @@ export default function BackTitle({
 
     return (
         <>
-            <Spacing size={60} />
             <TitleWrapper>
                 <TitleInner>
                     <div style={{ display: "flex" }}>
@@ -36,12 +35,12 @@ export default function BackTitle({
                         </Text>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Icon icon="Alarm" />
+                        {/* <Icon icon="Alarm" />
                         <div
                             style={{
                                 width: 24
                             }}
-                        />
+                        /> */}
                         <Icon icon="Dots" />
                     </div>
                 </TitleInner>

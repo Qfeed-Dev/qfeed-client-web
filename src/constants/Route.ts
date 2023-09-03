@@ -7,7 +7,7 @@ export const Route = {
     ALARM: () => "/alarm",
 
     CHAT: () => "/chat",
-    CHATTING: (id: number) => `/chatting/${id}`,
+    CHATTING: (id: number) => `/chat/${id}`,
     ADD_CHATTING: () => "/add-chatting",
 
     CHECK: () => "/check",
