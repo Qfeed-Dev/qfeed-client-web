@@ -63,10 +63,17 @@ export const getQuestionsIdChoices = async (id: number) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const getUserQuestions = async (id: number, qtype: Qtype) => {
+export const getUserQuestions = async (
+    id: number,
+    qtype: Qtype,
+    offset: number,
+    limit: number
+) => {
     const response = await qFeedAxios.get(`/questions/user/${id}`, {
         params: {
-            Qtype: qtype
+            Qtype: qtype,
+            offset: offset,
+            limit: limit
         }
     });
     return response.data;
