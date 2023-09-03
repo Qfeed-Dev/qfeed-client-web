@@ -19,7 +19,7 @@ const QuestionGrid = ({
         undefined
     );
     useEffect(() => {
-        setSortedData(questions.data.reverse());
+        sortedData === undefined && setSortedData(questions.data.reverse());
     }, []);
 
     return (
