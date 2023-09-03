@@ -160,6 +160,11 @@ a:visited {
 
 input,
 select {
+    font-size: 16px;
+}
+
+input,
+select {
     -webkit-appearance: none; /* Safari and Chrome */
     -moz-appearance: none; /* Firefox */
     appearance: none;
