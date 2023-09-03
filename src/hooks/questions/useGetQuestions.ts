@@ -9,10 +9,6 @@ export const useGetQuestions = () => {
         async () => {
             const result = await getQuestions(1, 100);
             return result;
-        },
-        {
-            staleTime: 1000 * 60 * 5,
-            cacheTime: 1000 * 60 * 30
         }
     );
 

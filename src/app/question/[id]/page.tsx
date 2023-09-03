@@ -149,7 +149,8 @@ export default function Page({ params }: { params: { id: number } }) {
 }
 
 const ImageWrapper = styled.div`
-    width: 100%;
+    width: 100vw;
+    max-width: 600px;
     height: 100%;
 
     opacity: 0.3;

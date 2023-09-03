@@ -57,6 +57,7 @@ qFeedAxios.interceptors.response.use(
                     window.location.href = "/account";
                 }
             }
+            case 500:
             case 502:
             case 503:
                 {
