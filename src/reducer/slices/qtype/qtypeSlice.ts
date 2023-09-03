@@ -6,7 +6,7 @@ interface OptionSliceType {
 }
 
 const initialState: OptionSliceType = {
-    qtype: "official"
+    qtype: "personal"
 };
 
 export const QTypeSlice = createSlice({

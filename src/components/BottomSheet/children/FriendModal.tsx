@@ -26,11 +26,7 @@ const FriendModal = ({}: Props) => {
                     <Loading />
                 ) : (
                     <>
-                        <Image
-                            type="default"
-                            src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                            size={60}
-                        />
+                        <Image type="default" src="" size={60} />
                         <Spacing size={10} />
                         <Name>{friend?.name}</Name>
                         <QfeedId>{friend?.nickname}</QfeedId>
