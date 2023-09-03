@@ -9,8 +9,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
+    window.addEventListener("touchmove", preventZoom, { passive: false });
+
     return (
-        <LayoutWrapper onTouchMove={preventZoom}>
+        <LayoutWrapper>
             <LayoutContent>{children}</LayoutContent>
         </LayoutWrapper>
     );
