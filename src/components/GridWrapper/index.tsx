@@ -15,10 +15,10 @@ const QuestionGrid = ({
     questions: Questions;
     detail?: boolean;
 }) => {
-    const [sortedData, setSortedData] = useState(questions.data.reverse());
+    const [sortedData, setSortedData] = useState(questions.data);
     useEffect(() => {
         setSortedData(questions.data.reverse());
-    }, [questions]);
+    }, []);
 
     return (
         <GridWrapper
