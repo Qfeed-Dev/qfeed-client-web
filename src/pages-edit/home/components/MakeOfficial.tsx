@@ -36,7 +36,9 @@ const MakeOfficial = (props: QuestionProps) => {
 
     const getTime = () => {
         const date = new Date();
-        const times = new Date(endTime + 24 * 60 * 60 * 1000 - +date);
+        const times = new Date(
+            endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
+        );
 
         if (+times <= 0) {
             newQSet.mutate();
