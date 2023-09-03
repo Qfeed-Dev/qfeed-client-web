@@ -34,10 +34,10 @@ const Modal = ({
                 exit="exit"
             >
                 <ModalContent height="100%" direction="column" gap={4}>
-                    <Text typo="Headline1b" color="light_qblack">
+                    <Text typo="Headline2b" color="light_qblack">
                         {title}
                     </Text>
-                    <DetailText typo="Subtitle1r" color="light_qblack">
+                    <DetailText typo="Caption1r" color="light_qblack">
                         {detail}
                     </DetailText>
                 </ModalContent>
@@ -60,7 +60,7 @@ const Modal = ({
 };
 
 const ModalWrapper = styled(motion.div)`
-    width: 328px;
+    width: 70%;
     display: flex;
     flex-direction: column;
 
@@ -79,14 +79,14 @@ const DetailText = styled(Text)`
 
 const Line = styled.div`
     width: 1px;
-    height: 61px;
+    height: 57px;
     border: 0.5px solid ${colors.line_black_30};
 `;
 
 const Btn = styled.div`
     width: 100%;
     height: 100%;
-    padding: 18px;
+    padding: 1rem;
 
     border-top: 1px solid ${colors.line_black_30};
     text-align: center;
