@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { colors, media } from "styles/theme";
 
@@ -9,7 +10,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    window.addEventListener("touchmove", preventZoom, { passive: false });
+    useEffect(() => {
+        window.addEventListener("touchmove", preventZoom, { passive: false });
+    }, []);
 
     return (
         <LayoutWrapper>
