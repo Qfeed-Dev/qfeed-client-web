@@ -56,7 +56,6 @@ const HomeTitleWrapper = styled.div`
     width: 100%;
     max-width: 600px;
     height: 50px;
-    padding: 0 16px;
 
     position: fixed;
     top: 0;
