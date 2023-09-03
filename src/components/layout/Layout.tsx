@@ -1,8 +1,19 @@
 "use client";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { colors, media } from "styles/theme";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+    const preventZoom = (event: any) => {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("touchmove", preventZoom, { passive: false });
+    }, []);
+
     return (
         <LayoutWrapper>
             <LayoutContent>{children}</LayoutContent>
