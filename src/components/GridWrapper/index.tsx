@@ -8,6 +8,7 @@ import { enterComponentVariants } from "src/constants/animation";
 import { Questions } from "src/models/questions";
 
 const QuestionGrid = (data: Questions) => {
+    const sortedData = data.data.reverse();
     return (
         <GridWrapper
             variants={enterComponentVariants}
@@ -16,14 +17,14 @@ const QuestionGrid = (data: Questions) => {
             exit="exit"
         >
             <QFeedGridOdd direction="column" gap={12}>
-                {data.data
+                {sortedData
                     ?.filter((data: any, idx: number) => idx % 2 === 0)
                     .map((data: any, idx: number) => (
                         <QfeedFrame key={idx} idx={data.id} data={data} />
                     ))}
             </QFeedGridOdd>
             <QFeedGridEven direction="column" gap={12}>
-                {data.data
+                {sortedData
                     ?.filter((data: any, idx: number) => idx % 2 === 1)
                     .map((data: any, idx: number) => (
                         <QfeedFrame key={idx} idx={data.id} data={data} />
