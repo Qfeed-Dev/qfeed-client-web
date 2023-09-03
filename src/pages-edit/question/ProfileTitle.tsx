@@ -47,7 +47,7 @@ const ProfileTitleInner = styled.div`
     color: ${colors.light_qwhite};
 `;
 
-const Menu = styled.div`
+const Menu = styled(Text)`
     //   width: 40px;
     margin: auto 0;
     text-align: center;
