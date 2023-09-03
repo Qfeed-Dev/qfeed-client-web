@@ -24,6 +24,9 @@ const InputLine = ({ ...props }: InputProps) => {
                     placeholder={props.placeholder}
                     onChange={props.onChange}
                     readOnly={props.readonly}
+                    onFocus={(e) => {
+                        e.preventDefault();
+                    }}
                 />
             </InputWrapper>
             {props.value && (

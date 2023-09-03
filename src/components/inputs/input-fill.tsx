@@ -22,6 +22,9 @@ const InputFill = ({ ...props }: InputProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 readOnly={props.readonly}
+                onFocus={(e) => {
+                    e.preventDefault();
+                }}
             />
             <Icon icon="SearchHeart" />
         </InputWrapper>
