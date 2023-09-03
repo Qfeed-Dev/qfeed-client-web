@@ -23,6 +23,9 @@ export { default as Person } from "./Person";
 export { default as Chat } from "./Chat";
 export { default as RightBracket } from "./RightBracket";
 
+// auth
+export { default as AuthKakao } from "./auth/AuthKakao";
+
 // images
 export { default as AngelImage } from "./images/AngelImage";
 export { default as AngelImage2 } from "./images/AngelImage2";
