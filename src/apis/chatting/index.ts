@@ -1,33 +1,37 @@
 import { qFeedAxios } from "../axios";
 
-export const getChatrooms = async () =>
-    await qFeedAxios
-        .get("/chatrooms")
-        .then(({ data }) => data)
-        .catch((err) => err.response);
+const chatAPI = {
+    async getChatrooms() {
+        const response = await qFeedAxios
+            .get("/chatrooms")
+            .catch((err) => err.response);
+        return response.data;
+    },
 
-export const postChatroom = async (body: {
-    targetUserId: number;
-    title: string;
-}) =>
-    await qFeedAxios
-        .post("/chatrooms", body)
-        .then(({ data }) => data)
-        .catch((err) => err.response);
+    async postChatroom(body: { targetUserId: number; title: string }) {
+        const response = await qFeedAxios
+            .post("/chatrooms", body)
 
-export const getChatroomChats = async (chatroomId: any) =>
-    await qFeedAxios
-        .get(`/chatrooms/${chatroomId}/chats`)
-        .then(({ data }) => data)
-        .catch((err) => err.response);
+            .catch((err) => err.response);
 
-export const postChatroomChats = async (
-    chatroomId: any,
-    body: {
-        message: string;
+        return response.data;
+    },
+
+    async getChatroomChats(chatroomId: number) {
+        const response = await qFeedAxios
+            .get(`/chatrooms/${chatroomId}/chats`)
+            .catch((err) => err.response);
+
+        return response.data;
+    },
+
+    async postChatroomChats(chatroomId: any, message: string) {
+        const response = await qFeedAxios
+            .post(`/chatrooms/${chatroomId}/chats`, { message: message })
+            .catch((err) => err.response);
+
+        return response.data;
     }
-) =>
-    await qFeedAxios
-        .post(`/chatrooms/${chatroomId}/chats`, body)
-        .then(({ data }) => data)
-        .catch((err) => err.response);
+};
+
+export default chatAPI;

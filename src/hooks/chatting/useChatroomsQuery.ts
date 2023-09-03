@@ -1,14 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getChatrooms } from "src/apis/chatting";
+import chatAPI from "src/apis/chatting";
+import { chatRoomKeys } from "src/constants/queryKeys/chatKeys";
 
-export const useGetChatrooms = () => {
+export const useChatroomsQuery = () => {
     const { data, isLoading, error, refetch } = useQuery(
-        [],
-        async () => {
-            const params: any = {};
-            const result = await getChatrooms();
-            return result;
-        },
+        chatRoomKeys.all,
+        chatAPI.getChatrooms,
         {
             staleTime: 1000 * 60 * 5,
             cacheTime: 1000 * 60 * 30

@@ -14,6 +14,7 @@ import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Icon from "src/components/Icon/Icon";
 import Loading from "src/components/common/Loading";
 import { getAppStateColor } from "src/utils/colorGenerate";
+import { useRouter } from "next/navigation";
 
 const SelectDetailPage = ({ params }: { params: { id: number } }) => {
     const { data, isLoading, error, refetch } = useGetQuestionsId({
@@ -29,6 +30,8 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
             })
         );
     };
+    const router = useRouter();
+
     return (
         <SelectQWrapper direction="column" gap={144}>
             <NavigationTopBack
@@ -57,7 +60,14 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                             choice.user.gender +
                                             "자"}
                                     </Person>
-                                    <Message width={73}>
+                                    <Message
+                                        width={73}
+                                        onClick={() =>
+                                            router.push(
+                                                `/chat/${choice.user.id}`
+                                            )
+                                        }
+                                    >
                                         <Icon icon="Chat" />
                                     </Message>
                                     {/* <Hint

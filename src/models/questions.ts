@@ -1,3 +1,5 @@
+import { Friend } from "./account";
+
 export type Qtype = "official" | "personal";
 
 export interface Questions {
@@ -7,15 +9,7 @@ export interface Questions {
 
 export interface QuestionItem {
     id: number;
-    owner: {
-        id: number;
-        name: string;
-        nickname: string;
-        profileImage: string;
-        schoolName: string;
-        grade: string;
-        gender: string;
-    };
+    owner: Friend;
     title: string;
     Qtype: string;
     backgroundImage: string;
@@ -33,15 +27,7 @@ export interface QSet {
 
 export interface QSetCursor {
     id: number;
-    user: {
-        id: number;
-        name: string;
-        nickname: string;
-        profileImage: string;
-        schoolName: string;
-        grade: string;
-        gender: string;
-    };
+    user: Friend;
     currentQ: string;
     cursor: number;
     QsetLength: number;

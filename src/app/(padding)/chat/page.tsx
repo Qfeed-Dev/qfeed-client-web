@@ -3,7 +3,7 @@ import BottomNavigation from "src/components/BottomNavigation";
 import ChatTitle from "src/pages-edit/chat/ChatTitle";
 import styled from "styled-components";
 import Chatting from "src/pages-edit/chat/Chatting";
-import { useGetChatrooms } from "src/hooks/chatting/useGetChatrooms";
+import { useChatsQuery } from "src/hooks/chatting/useChatsQuery";
 import Loading from "src/components/common/Loading";
 import FriendList from "src/pages-edit/chatting/FriendsList";
 import Text from "src/components/common/Text";
@@ -14,7 +14,7 @@ import { useState } from "react";
 import NavigationTop from "src/components/navigations/NavigationTop";
 
 export default function Page() {
-    const { data, isLoading } = useGetChatrooms();
+    const { data, isLoading } = useChatsQuery();
 
     const [showFriendsList, setShowFriendsList] = useState(false);
     const toggleShowFriendsList = () => setShowFriendsList(!showFriendsList);
