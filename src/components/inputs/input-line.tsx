@@ -54,8 +54,11 @@ const InputWrapper = styled.div`
 `;
 
 const Input = styled.input`
-    width: 100%;
+    width: 80vw;
     color: ${colors.light_qwhite};
+
+    transform: scale(0.75);
+    transform-origin: left;
 `;
 
 export default InputLine;

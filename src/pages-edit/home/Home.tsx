@@ -73,7 +73,6 @@ export default function Home() {
                 <Spacing size={20} />
 
                 {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
-
                 {isLoading ? <></> : data && <QuestionGrid questions={data} />}
                 {isLoading ? (
                     <></>
