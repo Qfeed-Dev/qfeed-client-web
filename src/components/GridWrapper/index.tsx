@@ -6,6 +6,7 @@ import Flex from "src/components/common/Flex";
 import QfeedFrame from "src/pages-edit/home/components/QfeedFrame";
 import { enterComponentVariants } from "src/constants/animation";
 import { Questions } from "src/models/questions";
+import { useEffect, useState } from "react";
 
 const QuestionGrid = ({
     questions,
@@ -14,7 +15,11 @@ const QuestionGrid = ({
     questions: Questions;
     detail?: boolean;
 }) => {
-    const sortedData = questions.data.reverse();
+    const [sortedData, setSortedData] = useState(questions.data.reverse());
+    useEffect(() => {
+        setSortedData(questions.data.reverse());
+    }, [questions]);
+
     return (
         <GridWrapper
             variants={enterComponentVariants}
