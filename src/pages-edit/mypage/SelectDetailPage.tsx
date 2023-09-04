@@ -57,9 +57,9 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                                             choice.user.gender +
                                             "자"}
                                     </Person>
-                                    <Message width={73}>
+                                    {/* <Message width={73}>
                                         <Icon icon="Chat" />
-                                    </Message>
+                                    </Message> */}
                                     {/* <Hint
                                         width={73}
                                         onClick={handleClickShowHint}
