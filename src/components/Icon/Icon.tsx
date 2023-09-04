@@ -76,7 +76,7 @@ const IconWrapper = styled.div<{
 
         path {
             stroke: ${({ color }) => (color ? colors[color] : "transparent")};
-            fill: ${({ fill }) => colors[fill]};
+            fill: ${({ fill }) => fill && colors[fill]};
         }
     }
 
