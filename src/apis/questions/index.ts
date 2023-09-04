@@ -1,11 +1,18 @@
 import { QSet, Qtype } from "src/models/questions";
 import { qFeedAxios } from "../axios";
 
-export const getQuestions = async () =>
-    await qFeedAxios
-        .get("/questions")
+export const getQuestions = async (offset: number, limit: number) => {
+    const data = await qFeedAxios
+        .get("/questions", {
+            params: {
+                offset: offset,
+                limit: limit
+            }
+        })
         .then(({ data }) => data)
         .catch((err) => err.response);
+    return { data: data, idx: offset };
+};
 
 export const postQuestions = async (body: any) =>
     await qFeedAxios
@@ -13,9 +20,9 @@ export const postQuestions = async (body: any) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const postQuestionsIdChoices = async (questionId: any, body: any) =>
+export const postQuestionsIdChoices = async (questionId: any, choice: string) =>
     await qFeedAxios
-        .post(`/questions/${questionId}/choices`, body)
+        .post(`/questions/${questionId}/choices`, { value: choice })
         .then(({ data }) => data)
         .catch((err) => err.response);
 
@@ -56,10 +63,17 @@ export const getQuestionsIdChoices = async (id: number) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
-export const getUserQuestions = async (id: number, qtype: Qtype) => {
+export const getUserQuestions = async (
+    id: number,
+    qtype: Qtype,
+    offset: number,
+    limit: number
+) => {
     const response = await qFeedAxios.get(`/questions/user/${id}`, {
         params: {
-            Qtype: qtype
+            Qtype: qtype,
+            offset: offset,
+            limit: limit
         }
     });
     return response.data;

@@ -4,53 +4,76 @@ import { Text } from "src/components/common/Text";
 import Icon from "src/components/Icon";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
+import { QuestionItem } from "src/models/questions";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
-import { colors, repeatBackgroundColor, typo } from "styles/theme";
+import { colors } from "styles/theme";
 
 interface Props {
     idx: number;
-    data: any;
+    colorIdx: number;
+    data: QuestionItem;
+    detail: boolean | undefined;
 }
 
-const QfeedFrame = ({ idx, data }: Props) => {
+const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
     const router = useRouter();
-    const imageUrl = data.backgroundImage;
+    const imageurl = data.backgroundImage;
 
-    const writeDay = new Date(data.createdAt);
+    const writeDay = Date.parse(data.createdAt);
     const today = new Date();
 
-    const pastTime = Math.round(
-        (today.getTime() - writeDay.getTime()) / (1000 * 60 * 60)
-    );
+    const getTime = () => {
+        const pastTime = Math.round(
+            (today.getTime() - writeDay - 9000 * 60 * 60) / (1000 * 60 * 60)
+        );
+        if (pastTime === 0) {
+            const pastMin = Math.round(
+                (today.getTime() - writeDay - 9000 * 60 * 60) / (1000 * 60)
+            );
+            return pastMin ? `${pastMin}분 전` : "방금 전";
+        } else {
+            return `${pastTime}시간 전`;
+        }
+    };
+
+    const time = getTime();
 
     const handleClickFrame = () => {
         // router.push(Route.QUESTION());
-        router.push(`${Route.QUESTION()}/${data.id}`);
+        router.push(`${Route.QUESTION()}/${idx}`);
     };
 
     return (
         <QfeedFrameWrapper
             onClick={handleClickFrame}
-            repeatBackgroundColor={colors[getAppStateColor(idx)]}
+            repeatbackgroundcolor={
+                data.isViewed && !detail
+                    ? colors.light_gray3
+                    : colors[getAppStateColor(colorIdx)]
+            }
         >
             <div style={{ padding: 3, overflow: "hidden" }}>
                 <QfeedFrameInner
-                    imageUrl={imageUrl}
-                    backgroundColor={colors[getAppStateColor(idx)]}
+                    imageurl={imageurl}
+                    backgroundcolor={
+                        data.isViewed && !detail
+                            ? colors.light_gray3
+                            : colors[getAppStateColor(colorIdx)]
+                    }
                 >
                     <Text
                         typo="Headline2b"
-                        color={imageUrl ? "light_qwhite" : "light_qblack"}
+                        color={imageurl ? "light_qwhite" : "light_qblack"}
                     >
                         {data.title}
                     </Text>
                     <Spacing size={4} />
                     <Text
                         typo="Caption1r"
-                        color={imageUrl ? "light_qwhite" : "light_qblack"}
+                        color={imageurl ? "light_qwhite" : "light_qblack"}
                     >
-                        {pastTime}시간 전
+                        {time}
                     </Text>
                     <Spacing size={27} />
                     <CountWrapper>
@@ -58,7 +81,7 @@ const QfeedFrame = ({ idx, data }: Props) => {
                             <Text
                                 typo="Subtitle1b"
                                 color={
-                                    imageUrl ? "line_white_50" : "light_qblack"
+                                    imageurl ? "line_white_50" : "light_qblack"
                                 }
                             >
                                 {data.choiceCount}명 응답
@@ -67,16 +90,17 @@ const QfeedFrame = ({ idx, data }: Props) => {
                     </CountWrapper>
                 </QfeedFrameInner>
             </div>
-            {data.isViewed ? undefined : (
+            {data.isChoiced ? undefined : (
                 <QFeedWrapper>
-                    {imageUrl ? (
+                    {data.isViewed && !detail ? (
+                        <Icon icon="QFeedImage" fill={colors.light_gray3} />
+                    ) : imageurl ? (
                         <Icon
                             icon="QFeedImage"
-                            color={getAppStateColor(idx)}
-                            fill={getAppStateColor(idx)}
+                            fill={getAppStateColor(colorIdx)}
                         />
                     ) : (
-                        <Icon icon="QFeedImage2" />
+                        <Icon icon="QFeedImage2" fill={colors.light_qblack} />
                     )}
                 </QFeedWrapper>
             )}
@@ -84,29 +108,31 @@ const QfeedFrame = ({ idx, data }: Props) => {
     );
 };
 
-const QfeedFrameWrapper = styled.div<{ repeatBackgroundColor: any }>`
-    height: calc(100% + 20px);
+const QfeedFrameWrapper = styled.div<{ repeatbackgroundcolor: any }>`
+    width: 100%;
+    height: fit-content;
     position: relative;
     border-radius: 10px;
-    background-color: ${({ repeatBackgroundColor }) => repeatBackgroundColor};
+    background-color: ${({ repeatbackgroundcolor }) => repeatbackgroundcolor};
 `;
 
-const QfeedFrameInner = styled.div<{ imageUrl: any; backgroundColor: any }>`
+const QfeedFrameInner = styled.div<{ imageurl: any; backgroundcolor: any }>`
     padding: 28px 20px;
     overflow: hidden;
+    text-align: left;
 
     border-radius: 10px;
-    color: ${({ imageUrl }) =>
-        imageUrl ? colors.light_qwhite : colors.light_qblack};
-    background-color: ${({ imageUrl }) =>
-        imageUrl ? colors.light_qblack : null};
+    color: ${({ imageurl }) =>
+        imageurl ? colors.light_qwhite : colors.light_qblack};
+    background-color: ${({ imageurl }) =>
+        imageurl ? colors.light_qblack : null};
 
     &::before {
         content: "";
         border-radius: 10px;
-        background-color: ${({ imageUrl, backgroundColor }) =>
-            imageUrl ? null : backgroundColor};
-        background-image: url(${({ imageUrl }) => imageUrl});
+        background-color: ${({ imageurl, backgroundcolor }) =>
+            imageurl ? null : backgroundcolor};
+        background-image: url(${({ imageurl }) => imageurl});
         background-size: cover;
         background-position: center;
         opacity: 0.5;
@@ -115,6 +141,10 @@ const QfeedFrameInner = styled.div<{ imageUrl: any; backgroundColor: any }>`
         left: 3px;
         right: 3px;
         bottom: 3px;
+        filter: ${({ backgroundcolor }) =>
+            backgroundcolor === colors.light_gray3
+                ? "grayscale(100%)"
+                : "grayscale(0%)"};
     }
 
     div {

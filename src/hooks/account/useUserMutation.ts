@@ -4,7 +4,7 @@ import { qFeedAxios } from "src/apis/axios";
 import { userKeys } from "src/constants/queryKeys/accountKeys";
 import { getCookie } from "src/utils/cookie";
 
-const patchUser = async (user: User) => {
+const patchUser = async (user: Partial<User>) => {
     const response = await qFeedAxios.patch(
         "/account/me",
         { ...user },
@@ -21,7 +21,7 @@ export const useUserMutation = () => {
     const queryClient = useQueryClient();
 
     const userMutation = useMutation(patchUser, {
-        onSuccess: (data: User) => {
+        onSuccess: (data: Partial<User>) => {
             queryClient.invalidateQueries(userKeys.all);
         },
         onError: (error: any) => {}

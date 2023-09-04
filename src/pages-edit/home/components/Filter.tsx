@@ -19,7 +19,7 @@ const Filter = ({ isSort, setIsSort }: any) => {
             </div>
 
             <Menu style={{ padding: "5px 0" }}>
-                <Hr horizonal={true} type="primary" />
+                <Hr horizonal type="primary" />
             </Menu>
 
             <div onClick={() => setIsSort(false)}>

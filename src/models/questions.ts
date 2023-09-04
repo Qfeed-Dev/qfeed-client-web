@@ -1,6 +1,11 @@
 export type Qtype = "official" | "personal";
 
 export interface Questions {
+    count: number;
+    data: QuestionItem[];
+}
+
+export interface QuestionItem {
     id: number;
     owner: {
         id: number;
@@ -43,4 +48,12 @@ export interface QSetCursor {
     isDone: boolean;
     startAt: string;
     endAt: string;
+}
+
+export interface Question {
+    Qtype: Qtype;
+    title: string;
+    choiceList: string[];
+    backgroundImage: string;
+    isBlind: boolean;
 }

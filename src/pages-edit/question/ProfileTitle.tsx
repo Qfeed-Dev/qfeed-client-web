@@ -18,7 +18,7 @@ export default function ProfileTitle({ data }: any) {
                         src={
                             data?.owner?.profileImage
                                 ? data?.owner?.profileImage
-                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
+                                : ""
                         }
                     />
                     <Text typo="Subtitle1b" style={{ marginLeft: 8 }}>
@@ -47,7 +47,7 @@ const ProfileTitleInner = styled.div`
     color: ${colors.light_qwhite};
 `;
 
-const Menu = styled.div`
+const Menu = styled(Text)`
     //   width: 40px;
     margin: auto 0;
     text-align: center;

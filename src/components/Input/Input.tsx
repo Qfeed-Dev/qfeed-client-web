@@ -73,7 +73,7 @@ const Input = ({
                         alignItems: "center"
                     }}
                 >
-                    {type !== "question-friend" && (
+                    {/* {type !== "question-friend" && (
                         <Text
                             typo="Caption2r"
                             color="light_qblack"
@@ -81,16 +81,12 @@ const Input = ({
                         >
                             0/20
                         </Text>
-                    )}
+                    )} */}
                     {type === "question-friend" ? (
                         <Icon icon="Search" />
                     ) : (
                         <div onClick={props.clickTrash}>
-                            <Icon
-                                icon="Trash"
-                                color="light_qblack"
-                                fill="light_qblack"
-                            />
+                            <Icon icon="Trash" fill="light_qblack" />
                         </div>
                     )}
                 </div>

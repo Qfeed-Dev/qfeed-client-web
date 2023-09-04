@@ -22,6 +22,9 @@ const InputFill = ({ ...props }: InputProps) => {
                 placeholder={props.placeholder}
                 onChange={props.onChange}
                 readOnly={props.readonly}
+                onFocus={(e) => {
+                    e.preventDefault();
+                }}
             />
             <Icon icon="SearchHeart" />
         </InputWrapper>
@@ -38,8 +41,11 @@ const InputWrapper = styled(Flex)`
 `;
 
 const Input = styled.input`
-    width: 100%;
+    width: 80vw;
     color: ${colors.light_qwhite};
+
+    transform: scale(0.75);
+    transform-origin: left;
 `;
 
 export default InputFill;

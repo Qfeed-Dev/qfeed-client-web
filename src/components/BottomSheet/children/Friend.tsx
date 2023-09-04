@@ -35,11 +35,7 @@ const Friend = ({}: Props) => {
                 <Loading />
             ) : (
                 <Menu>
-                    <Image
-                        type="default"
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                        size={60}
-                    />
+                    <Image type="default" src="" size={60} />
                     <Spacing size={10} />
                     <Text typo="Subtitle2b">{friend.friend?.name}</Text>
                     <Text typo="Caption1r">{friend.friend?.nickname}</Text>

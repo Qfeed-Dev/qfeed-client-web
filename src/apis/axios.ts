@@ -57,12 +57,11 @@ qFeedAxios.interceptors.response.use(
                     window.location.href = "/account";
                 }
             }
-            case 404: {
-            }
+            case 500:
             case 502:
             case 503:
                 {
-                    // window.location.href = "/";
+                    window.location.href = "/error";
                 }
                 return Promise.reject(error);
         }

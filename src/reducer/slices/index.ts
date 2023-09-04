@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 import bottomSheetSlice from "./bottomSheet/bottomSheetSlice";
 import organizationSlice from "./organization/organizationSlice";
 import userSlice from "./user/userSlice";
+import qtypeSlice from "./qtype/qtypeSlice";
 
 const rootReducer = (state: any, action: PayloadAction<any>) => {
     switch (action.type) {
@@ -16,7 +17,8 @@ const rootReducer = (state: any, action: PayloadAction<any>) => {
             const combineReducer = combineReducers({
                 bottomSheet: bottomSheetSlice,
                 organization: organizationSlice,
-                user: userSlice
+                user: userSlice,
+                qtype: qtypeSlice
             });
             return combineReducer(state, action);
         }

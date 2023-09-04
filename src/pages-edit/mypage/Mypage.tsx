@@ -18,21 +18,21 @@ export default function Mypage() {
             {isLoading ? (
                 <Loading />
             ) : (
-                <>
-                    <Flex direction="column" align="center" gap={8}>
+                <Flex direction="column" gap={40}>
+                    <Flex direction="column" gap={8}>
                         <NavigationTop
                             title="마이페이지"
-                            rightIcon={
-                                <Flex width="auto" gap={16}>
-                                    <Icon icon="Share" />
-                                    <Icon icon="Setting" />
-                                </Flex>
-                            }
+                            // rightIcon={
+                            //     <Flex width="auto" gap={16}>
+                            //         <Icon icon="Share" />
+                            //         <Icon icon="Setting" />
+                            //     </Flex>
+                            // }
                         />
                         {user && <InfoList isMe={true} user={user} />}
                     </Flex>
                     {user?.id !== undefined && <QfeedList id={user.id} />}
-                </>
+                </Flex>
             )}
             <BottomNavigation />
         </Flex>

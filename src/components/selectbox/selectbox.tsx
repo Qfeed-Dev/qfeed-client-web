@@ -12,6 +12,7 @@ import {
 } from "src/reducer/slices/organization/organizationSlice";
 import { motion } from "framer-motion";
 import { dropdown } from "src/constants/animation";
+import Icon from "../Icon/Icon";
 
 export interface SelectBoxProps {
     label: string;
@@ -34,7 +35,11 @@ const SelectBox = (props: SelectBoxProps) => {
             <Select onClick={() => setOpen(!open)}>
                 <Selected justify="space-between">
                     <Text typo="Subtitle1r">{currentValue}</Text>
-                    <div>down</div>
+                    <Icon
+                        icon="Down"
+                        color={colors.light_qwhite}
+                        fill="transparent"
+                    />
                 </Selected>
                 <Options
                     initial="hide"

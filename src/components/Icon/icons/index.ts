@@ -22,6 +22,7 @@ export { default as Heart } from "./Heart";
 export { default as Person } from "./Person";
 export { default as Chat } from "./Chat";
 export { default as RightBracket } from "./RightBracket";
+export { default as Down } from "./Down";
 
 // auth
 export { default as AuthKakao } from "./auth/AuthKakao";

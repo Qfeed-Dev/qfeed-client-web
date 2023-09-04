@@ -1,7 +1,7 @@
 import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 import { colors } from "styles/theme";
 
 export default function NewAlarm() {
@@ -9,11 +9,7 @@ export default function NewAlarm() {
         <>
             <NewAlarmWrapper action={false}>
                 <div style={{ marginRight: 12 }}>
-                    <Image
-                        type="default"
-                        size={40}
-                        src="https://i.ibb.co/0Z6FNN7/60pt.png"
-                    />
+                    <Image type="default" size={40} src="" />
                 </div>
                 <Menu>
                     <Text typo="Subtitle1b" color="light_qwhite">
