@@ -25,7 +25,7 @@ export default function ProfileTitle({ data }: any) {
                         {data?.owner?.nickname}
                     </Text>
                 </div>
-                <Menu>{data?.choices?.length}명 응답</Menu>
+                <Menu typo="Subtitle1r">{data?.choices?.length}명 응답</Menu>
             </ProfileTitleInner>
         </ProfileTitleWrapper>
     );
