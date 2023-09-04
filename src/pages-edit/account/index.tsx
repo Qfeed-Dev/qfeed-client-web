@@ -4,22 +4,8 @@ import Link from "next/link";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import { colors } from "styles/theme";
-import Icon from "src/components/Icon";
-import AppleLogin from "react-apple-login";
-import { useEffect, useState } from "react";
 
 const Login = () => {
-    const [userAgent, setUserAgent] = useState("");
-
-    useEffect(() => {
-        if (typeof window !== undefined) {
-            setUserAgent(navigator.userAgent.toLowerCase());
-        }
-    }, []);
-
-    console.log(process.env.NEXT_PUBLIC_APPLE_CLIENT_ID);
-    console.log(process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI);
-
     return (
         <Background direction="column" justify="center" height="100%">
             <LoginWrapper direction="column" height="100%" gap={34}>
@@ -32,28 +18,15 @@ const Login = () => {
                         href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`}
                         background="#FEE500"
                     >
-                        <Icon icon="AuthKakao" />
+                        <Text typo="Subtitle1b" color="light_qblack">
+                            카카오 로그인
+                        </Text>
                     </LoginButton>
-                    <ButtonWrapper>
-                        {/* {userAgent.indexOf("android") === -1 && ( */}
-                        <AppleLogin
-                            clientId={
-                                process.env.NEXT_PUBLIC_APPLE_CLIENT_ID
-                                    ? process.env.NEXT_PUBLIC_APPLE_CLIENT_ID
-                                    : ""
-                            }
-                            redirectURI={
-                                process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI
-                                    ? process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI
-                                    : ""
-                            }
-                            responseType={"code id_token"}
-                            responseMode={"fragment"}
-                            usePopup={false}
-                            state={"signin"}
-                        />
-                        {/* )} */}
-                    </ButtonWrapper>
+                    <LoginButton href={""} background="white">
+                        <Text typo="Subtitle1b" color="light_qblack">
+                            애플 로그인
+                        </Text>
+                    </LoginButton>
                 </Flex>
             </LoginWrapper>
         </Background>
@@ -79,29 +52,12 @@ const LoginWrapper = styled(Flex)`
 
 const LoginButton = styled(Link)<{ background: string }>`
     width: 100%;
-    max-width: 318px;
-    min-height: 56px;
+    min-height: 52px;
+    padding: 0.88rem 3.75rem;
 
     background: ${(props) => props.background};
     text-align: center;
     border-radius: 11px;
-`;
-
-const ButtonWrapper = styled.div`
-    #appleid-signin {
-        margin-top: 16px;
-        position: relative;
-        svg {
-            display: none;
-        }
-    }
-    #appleid-signin::before {
-        content: url("/assets/authApple.svg");
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
 `;
 
 export default Login;
