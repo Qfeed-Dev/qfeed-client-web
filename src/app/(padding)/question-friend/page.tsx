@@ -27,6 +27,7 @@ import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
+import Link from "next/link";
 
 export default function Page() {
     const { questionCursor, isLoading } = useQsetCursorQuery();
@@ -70,16 +71,22 @@ export default function Page() {
                     </ButtonPaddingWrapper>
                 </Flex> */}
             </Wrapper>
-            <BottomText>
-                <Text typo="Caption1r" color="light_gray2">
+            <BottomText direction="column" align="start" gap={8}>
+                <Link
+                    href={
+                        "https://ash-dirt-3eb.notion.site/7228351001ae4e5385dcad327e4c68a1?pvs=4"
+                    }
+                >
                     <Text
                         typo="Caption1r"
                         color="light_qwhite"
                         style={{ textDecoration: "underline" }}
                     >
-                        AXE 개인정보 처리방침
+                        QFeed 개인정보 처리방침
                     </Text>
-                    AXE에서 사용자의 연락처는 서버로 안전하게 전송되어 친구를
+                </Link>
+                <Text typo="Caption1r" color="light_gray2">
+                    QFeed에서 사용자의 연락처는 서버로 안전하게 전송되어 친구를
                     찾는 데에만 사용되며, 임의로 광고나 스팸 문자를 보내지
                     않습니다.
                 </Text>
@@ -171,7 +178,7 @@ const Wrapper = styled(Flex)`
     top: 100px;
 `;
 
-const BottomText = styled.div`
+const BottomText = styled(Flex)`
     padding: 0 1rem;
     position: fixed;
     bottom: 30px;
