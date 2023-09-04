@@ -27,22 +27,34 @@ const Login = () => {
                     </Flex>
                 </Flex>
                 <UnderText justify="space-around">
-                    <Text
-                        typo="Caption1r"
-                        style={{
-                            textDecoration: "underline"
-                        }}
+                    <Link
+                        href={
+                            "https://ash-dirt-3eb.notion.site/c113fa22230c4e45a62962e333d11448?pvs=4"
+                        }
                     >
-                        이용약관
-                    </Text>
-                    <Text
-                        typo="Caption1r"
-                        style={{
-                            textDecoration: "underline"
-                        }}
+                        <Text
+                            typo="Caption1r"
+                            style={{
+                                textDecoration: "underline"
+                            }}
+                        >
+                            이용약관
+                        </Text>
+                    </Link>
+                    <Link
+                        href={
+                            "https://ash-dirt-3eb.notion.site/7228351001ae4e5385dcad327e4c68a1?pvs=4"
+                        }
                     >
-                        개인정보 처리방침
-                    </Text>
+                        <Text
+                            typo="Caption1r"
+                            style={{
+                                textDecoration: "underline"
+                            }}
+                        >
+                            개인정보 처리방침
+                        </Text>
+                    </Link>
                 </UnderText>
             </LoginWrapper>
         </Background>
@@ -68,6 +80,7 @@ const LoginButton = styled(Link)<{ background: string }>`
     min-height: 52px;
     padding: 0.88rem 1rem;
 
+    color: rgba(0, 0, 0, 0.85);
     background: ${(props) => props.background};
     text-align: center;
     border-radius: 12px;
@@ -79,7 +92,6 @@ const LoginButton = styled(Link)<{ background: string }>`
 
 const LoginText = styled.div`
     width: 100%;
-    padding-right: 1rem;
     font-size: 1rem;
     color: black;
 `;
