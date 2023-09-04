@@ -11,6 +11,10 @@ const accountAPI = {
         });
         return response.data;
     },
+    async getAppleAccessToken({ params }: any) {
+        const response = await defaultAxios.get("/account/apple/login", params);
+        return response.data;
+    },
     async getUser() {
         const response = await qFeedAxios.get("/account/me");
         return response.data;

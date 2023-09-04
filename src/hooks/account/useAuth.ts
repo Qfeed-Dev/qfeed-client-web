@@ -29,7 +29,31 @@ export const useAuth = () => {
         }
     });
 
+    // accountAPI.getAccessToken -> apple access token 으로 바꿔야함
+    const appleMutation = useMutation(accountAPI.getAppleAccessToken, {
+        onSuccess: (data: any) => {
+            setAccessToken(data.accessToken, data.expireTime);
+            qFeedAxios.interceptors.request.use(
+                (config) => {
+                    try {
+                        config.headers.Authorization = `Bearer ${data.accessToken}`;
+                        return config;
+                    } catch (err) {}
+                    return config;
+                },
+                (error) => {
+                    return Promise.reject(error);
+                }
+            );
+            router.push("/auth/default");
+        },
+        onError: (error: any) => {
+            alert(error);
+        }
+    });
+
     return {
-        kakaoMutation
+        kakaoMutation,
+        appleMutation
     };
 };
