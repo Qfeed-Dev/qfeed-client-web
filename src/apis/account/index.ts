@@ -11,6 +11,16 @@ const accountAPI = {
         });
         return response.data;
     },
+    async getAccessTokenApple(id_token: string) {
+        const response = await defaultAxios.get("/account/apple/login", {
+            params: {
+                identityToken: id_token,
+                name: ""
+            }
+        });
+        return response.data;
+    },
+
     async getUser() {
         const response = await qFeedAxios.get("/account/me");
         return response.data;

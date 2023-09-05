@@ -29,7 +29,30 @@ export const useAuth = () => {
         }
     });
 
+    const appleMutation = useMutation(accountAPI.getAccessTokenApple, {
+        onSuccess: (data: any) => {
+            setAccessToken(data.accessToken, data.expireTime);
+            qFeedAxios.interceptors.request.use(
+                (config) => {
+                    try {
+                        config.headers.Authorization = `Bearer ${data.accessToken}`;
+                        return config;
+                    } catch (err) {}
+                    return config;
+                },
+                (error) => {
+                    return Promise.reject(error);
+                }
+            );
+            router.push("/auth/default");
+        },
+        onError: (error: any) => {
+            alert(error);
+        }
+    });
+
     return {
-        kakaoMutation
+        kakaoMutation,
+        appleMutation
     };
 };

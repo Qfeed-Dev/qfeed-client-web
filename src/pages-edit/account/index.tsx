@@ -40,16 +40,18 @@ const Login = () => {
                                 <LoginText>카카오 로그인</LoginText>
                             </LoginButton>
                         </Flex>
-                        {userAgent.indexOf("android") === -1 && (
-                            <AppleLogin
-                                clientId={clientId ? clientId : ""}
-                                redirectURI={redirectURI ? redirectURI : ""}
-                                responseType={"code id_token"}
-                                responseMode={"fragment"}
-                                usePopup={false}
-                                state={"signin"}
-                            />
-                        )}
+                        {/* {userAgent.indexOf("android") === -1 && ( */}
+                        <AppleLogin
+                            clientId={"com.qfeed.login"}
+                            redirectURI={
+                                "https://dev-qfeed-client-web.vercel.app/account/apple/login"
+                            }
+                            responseType={"code id_token"}
+                            responseMode={"fragment"}
+                            usePopup={false}
+                            state={"signin"}
+                        />
+                        {/* )} */}
                     </ButtonWrapper>
                 </Flex>
                 <UnderText justify="space-around">
