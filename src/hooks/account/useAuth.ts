@@ -31,6 +31,7 @@ export const useAuth = () => {
 
     const appleMutation = useMutation(accountAPI.getAccessTokenApple, {
         onSuccess: (data: any) => {
+            console.log(data);
             setAccessToken(data.accessToken, data.expireTime);
             qFeedAxios.interceptors.request.use(
                 (config) => {

@@ -14,8 +14,7 @@ const accountAPI = {
     async getAccessTokenApple(id_token: string) {
         const response = await defaultAxios.get("/account/apple/login", {
             params: {
-                identityToken: id_token,
-                name: ""
+                idToken: id_token
             }
         });
         return response.data;

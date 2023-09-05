@@ -7,6 +7,7 @@ const KakaoLoginCallback = () => {
     const searchParams = useSearchParams();
     const id_token = searchParams.get("id_token");
     const { appleMutation } = useAuth();
+    console.log(searchParams);
 
     useEffect(() => {
         console.log(id_token);
