@@ -8,7 +8,11 @@ const useQChoiceMutation = (questionId: number) => {
         (choice: string) => postQuestionsIdChoices(questionId, choice),
         {
             onSuccess: () => {
-                queryClient.invalidateQueries(questionKeys.detail(questionId));
+                setTimeout(() => {
+                    queryClient.invalidateQueries(
+                        questionKeys.detail(questionId)
+                    );
+                }, 1000);
             },
             onError: (error: any) => {
                 console.log(error);
