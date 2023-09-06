@@ -20,8 +20,6 @@ export default function FriendDetailPage({
     const { friend, isLoading } = useFriendQuery(params.id);
     const router = useRouter();
 
-    console.log(friend);
-
     return (
         <Flex direction="column" align="center" gap={40}>
             {isLoading ? (
@@ -30,15 +28,15 @@ export default function FriendDetailPage({
                 <Flex direction="column" align="center" gap={8}>
                     <NavigationTopBack
                         title={friend?.nickname}
-                        rightIcon={
-                            // <Flex width="auto" gap={24}>
-                            //     <Icon icon="Share" />
-                            <Icon
-                                icon="Ban"
-                                onClick={() => router.push("/friend/ban")}
-                            />
-                            // </Flex>
-                        }
+                        // rightIcon={
+                        // <Flex width="auto" gap={24}>
+                        //     <Icon icon="Share" />
+                        // <Icon
+                        //     icon="Ban"
+                        //     onClick={() => router.push("/friend/ban")}
+                        // />
+                        // </Flex>
+                        // }
                     />
                     <Flex direction="column" gap={32}>
                         {friend && <InfoList user={friend} isMe={false} />}
