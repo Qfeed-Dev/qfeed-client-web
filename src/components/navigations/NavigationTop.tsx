@@ -6,13 +6,21 @@ import { colors } from "styles/theme";
 
 export interface NavProps {
     title: string;
+    leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
 }
 
-const NavigationTop = ({ title, rightIcon }: NavProps) => {
+const NavigationTop = ({ title, leftIcon, rightIcon }: NavProps) => {
     return (
         <NavWrapper justify="space-between">
-            <Text typo="Headline1b">{title}</Text>
+            {leftIcon ? (
+                <Flex width="auto" gap={8}>
+                    {leftIcon}
+                    <Text typo="Headline1b">{title}</Text>
+                </Flex>
+            ) : (
+                <Text typo="Headline1b">{title}</Text>
+            )}
             {rightIcon}
         </NavWrapper>
     );

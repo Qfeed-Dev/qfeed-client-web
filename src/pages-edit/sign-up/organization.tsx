@@ -10,6 +10,7 @@ import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
 
 import { useAppSelector } from "src/hooks/useReduxHooks";
+import Icon from "src/components/Icon/Icon";
 
 const Organization = () => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const Organization = () => {
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
                 title="회원 가입"
             />
             <SelectBox
