@@ -11,6 +11,7 @@ import VoteButton from "src/components/Button/VoteButton";
 import { postQuestionsIdChoices } from "src/apis/questions";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import useQChoiceMutation from "src/hooks/questions/useQChoiceMutation";
+import Loading from "src/components/common/Loading";
 
 export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
@@ -21,37 +22,29 @@ export default function Page({ params }: { params: { id: number } }) {
 
     // choices에 본인이 있는지 확인
     const checkName = (el: any) => {
-        if (el?.user?.name === user?.name) {
+        if (el?.user?.id === user?.id) {
             return true;
         }
     };
-    // 어떤 선택을 했는지
-    const checkSelected = (el: any) => {
-        console.log("A");
-        if (el?.user?.name === user?.name) {
-            console.log(el?.value);
-            return el?.value;
-        } else {
-            return -1;
-        }
-    };
+
     // 어떤 선택지가 최대값
     const checkBest = () => {
-        let b = [];
+        const choices = questionData?.choiceList;
+        let best = [];
         for (let i = 0; i < questionData?.choiceList?.length; i++) {
             const value = questionData?.choices?.filter(
                 (data: any, idx: number) => {
-                    return data?.value == i;
+                    return data?.value == choices[i];
                 }
             );
-            b.push(value.length);
+            best.push(value.length);
         }
-        setBest(b);
+        setBest(best);
     };
 
     const [typeNum, setTypeNum] = useState<any>();
     const [selected, setSelected] = useState<number>(-1);
-    const [best, setBest] = useState<any>([]);
+    const [best, setBest] = useState<number[]>([]);
 
     const clickChoice = (idx: any, choice: string) => {
         mutate(choice);
@@ -59,24 +52,26 @@ export default function Page({ params }: { params: { id: number } }) {
         setTypeNum(1);
         setTimeout(() => {
             setTypeNum(2);
-        }, 3000);
+        }, 2000);
     };
 
     useEffect(() => {
         setTypeNum(
             questionData?.choices.some(checkName) ||
-                questionData?.owner?.name === user?.name
+                questionData?.owner?.id === user?.id
                 ? 2
                 : 0
         );
         const s = questionData?.choices?.filter(
-            (data: any) => data?.user?.name === user?.name
+            (data: any) => data?.user?.id === user?.id
         );
         setSelected(s?.length !== 0 ? Number(s?.[0]?.value) : -1);
         checkBest();
     }, [questionData]);
 
-    return isLoading ? undefined : (
+    return isLoading ? (
+        <Loading />
+    ) : (
         <>
             {questionData?.backgroundImage && (
                 <ImageWrapper>
@@ -104,15 +99,17 @@ export default function Page({ params }: { params: { id: number } }) {
                                     key={idx}
                                     idx={idx}
                                     type={
-                                        questionData?.backgroundImage
+                                        questionData?.backgroundImage !== ""
                                             ? "primary"
                                             : "default"
-                                    } // primary default
-                                    typeNum={typeNum} // 0 1 2
+                                    }
+                                    $typeNum={typeNum} // 0 1 2
                                     action={
                                         typeNum === 2 &&
                                         questionData?.choices?.filter(
-                                            (data2: any) => data2.value == idx
+                                            (data2: any) =>
+                                                data2.value ==
+                                                questionData?.choiceList[idx]
                                         ).length === Math.max(...best) // best
                                             ? 2
                                             : idx === selected
@@ -134,8 +131,6 @@ export default function Page({ params }: { params: { id: number } }) {
                                 >
                                     {choice}
                                 </VoteButton>
-                                // default
-                                // primary, top
                             );
                         }
                     )}
