@@ -5,6 +5,7 @@ import NavigationTop from "src/components/navigations/NavigationTopBack";
 
 import Text from "src/components/common/Text";
 import Flex from "src/components/common/Flex";
+import Icon from "src/components/Icon/Icon";
 
 const Complete = () => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const Complete = () => {
             gap={66}
         >
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
                 title="회원 가입"
             />
             <Flex
