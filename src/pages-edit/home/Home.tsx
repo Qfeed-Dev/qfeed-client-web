@@ -46,6 +46,7 @@ export default function Home() {
     };
 
     const { data, fetchNextPage, hasNextPage, isFetched } = useGetQuestions();
+
     const user = useUserQuery();
     const { ref, inView } = useInView();
 
