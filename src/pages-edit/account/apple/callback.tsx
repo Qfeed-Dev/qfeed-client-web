@@ -10,7 +10,7 @@ const KakaoLoginCallback = () => {
     console.log(searchParams);
 
     useEffect(() => {
-        console.log(id_token);
+        console.log(searchParams.get("code"));
         if (id_token) {
             appleMutation.mutate(id_token);
         }
