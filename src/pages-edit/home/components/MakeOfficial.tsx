@@ -38,7 +38,7 @@ const MakeOfficial = (props: QuestionProps) => {
                 newQSet.mutate();
             }
         }
-    }, [cursor]);
+    }, [cursor.isLoading]);
 
     const getTime = () => {
         const date = new Date();
@@ -59,8 +59,6 @@ const MakeOfficial = (props: QuestionProps) => {
     useEffect(() => {
         if (!isNaN(endTime)) setInterval(getTime, 1000);
     }, [endTime]);
-
-    console.log(cursor.questionCursor);
 
     return cursor.isLoading ? (
         <Loading />
