@@ -8,6 +8,7 @@ import { colors } from "styles/theme";
 
 import KakaoLogo from "src/components/Icon/icons/KakaoLogo";
 import AppleLogin from "react-apple-login";
+import { usePathname } from "next/navigation";
 
 const Login = () => {
     const [userAgent, setUserAgent] = useState("");
