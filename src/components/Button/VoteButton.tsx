@@ -28,6 +28,8 @@ const VoteButton = forwardRef(function Button(
     const black: KeyOfColor = "light_qblack";
     const white: KeyOfColor = "light_qwhite";
 
+    console.log(type, $typeNum, action);
+
     return (
         <VoteButtonWrapper
             onClick={onClick}
@@ -48,10 +50,10 @@ const VoteButton = forwardRef(function Button(
                             ? colors.line_black_50
                             : colors.line_white_70
                         : action === 2
-                        ? repeatQuestionColor[idx % 6]
+                        ? colors.light_qwhite
                         : action === 1
-                        ? colors.line_white_70
-                        : colors.line_black_50
+                        ? repeatQuestionColor[idx % 6]
+                        : colors.line_white_70
                 )
                 .with("default", () =>
                     $typeNum === 0
@@ -61,7 +63,7 @@ const VoteButton = forwardRef(function Button(
                             ? colors.light_gray2
                             : repeatQuestionColor[idx % 6]
                         : action === 2
-                        ? colors.light_qwhite
+                        ? colors.primary_qred
                         : action === 1
                         ? repeatQuestionColor[idx % 6]
                         : colors.light_gray2
