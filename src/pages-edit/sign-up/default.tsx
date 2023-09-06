@@ -18,6 +18,7 @@ import {
     validPhone
 } from "src/hooks/common/useCheckValidation";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
+import Icon from "src/components/Icon/Icon";
 
 const SignIn = () => {
     const router = useRouter();
@@ -62,7 +63,7 @@ const SignIn = () => {
     return (
         <Flex direction="column" justify="start" gap={24}>
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
                 title="회원 가입"
             />
             <Flex direction="column" justify="start" gap={24}>
