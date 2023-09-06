@@ -119,11 +119,7 @@ const InputBox = styled.input<{
     $backgroundColor: any;
 }>`
     width: 100%;
-    margin: 0;
-    padding: 0;
 
-    outline: 0;
-    border: 0;
     color: ${({ color }) => color};
     background-color: ${({ $backgroundColor }) => $backgroundColor};
 
