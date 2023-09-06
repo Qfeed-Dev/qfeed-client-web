@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
@@ -52,7 +52,12 @@ const SignIn = () => {
             validPhone(phone.value)
     };
 
-    const isActive = useIsActive(User);
+    const [isActive, setIsActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        const isActive = useIsActive(User);
+        setIsActive(isActive || false);
+    }, [User]);
 
     return (
         <Flex direction="column" justify="start" gap={24}>
