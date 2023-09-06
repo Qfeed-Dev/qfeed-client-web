@@ -29,8 +29,14 @@ const MakeOfficial = (props: QuestionProps) => {
     const [time, setTime] = useState<Time | undefined>(undefined);
 
     useEffect(() => {
-        if (!cursor.isLoading && cursor.questionCursor) {
-            setEndTime(Date.parse(cursor.questionCursor[0].endAt));
+        if (!cursor.isLoading) {
+            if (cursor.questionCursor?.length) {
+                setEndTime(Date.parse(cursor.questionCursor[0].endAt));
+            }
+            // 처음 접속한 경우
+            else {
+                newQSet.mutate();
+            }
         }
     }, [cursor]);
 
@@ -54,6 +60,8 @@ const MakeOfficial = (props: QuestionProps) => {
         if (!isNaN(endTime)) setInterval(getTime, 1000);
     }, [endTime]);
 
+    console.log(cursor.questionCursor);
+
     return cursor.isLoading ? (
         <Loading />
     ) : (
@@ -61,7 +69,7 @@ const MakeOfficial = (props: QuestionProps) => {
             onClick={props.onClick}
             color={colors.primary_qgreen}
         >
-            {cursor.questionCursor && (
+            {cursor.questionCursor?.length && (
                 <BasicQuestionInner>
                     {cursor.questionCursor[0].isDone ? (
                         <>
