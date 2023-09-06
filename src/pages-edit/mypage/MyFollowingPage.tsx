@@ -1,8 +1,11 @@
 "use client";
 
+import { styled } from "styled-components";
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import useFollowingsQuery from "src/hooks/account/useFollowingsQuery";
 import { useInput } from "src/hooks/common/useInput";
+import { colors } from "styles/theme";
 
 import { Friend } from "src/models/account";
 
@@ -11,6 +14,8 @@ import Flex from "src/components/common/Flex";
 import FriendItem from "../friend/components/FriendItem";
 import InputFill from "src/components/inputs/input-fill";
 import Loading from "src/components/common/Loading";
+
+import { enterComponentVariants } from "src/constants/animation";
 
 export default function MyFollowingPage() {
     const { value, handleChangeInput } = useInput("");
@@ -29,18 +34,32 @@ export default function MyFollowingPage() {
                     value={value}
                     placeholder="친구의 이름을 검색해보세요."
                 />
-                {isLoading ? (
-                    <Loading />
-                ) : (
-                    followings.data.map((following: Friend) => (
-                        <FriendItem
-                            key={following.id}
-                            isFollowing={true}
-                            friend={following}
-                        />
-                    ))
-                )}
+                <FriendWrapper
+                    variants={enterComponentVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                >
+                    {isLoading ? (
+                        <Loading />
+                    ) : (
+                        followings.data.map((following: Friend) => (
+                            <FriendItem
+                                key={following.id}
+                                isFollowing={true}
+                                friend={following}
+                            />
+                        ))
+                    )}
+                </FriendWrapper>
             </Flex>
         </Flex>
     );
 }
+
+const FriendWrapper = styled(motion.div)`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`;
