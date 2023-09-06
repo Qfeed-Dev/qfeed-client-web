@@ -81,7 +81,7 @@ export default function Home() {
                                     key={idx}
                                     questions={question.data.data.filter(
                                         (data: any, idx: number) =>
-                                            idx % 2 === 1
+                                            idx % 2 === 0
                                     )}
                                     colorStart={1}
                                 />
@@ -94,7 +94,7 @@ export default function Home() {
                                     key={idx}
                                     questions={question.data.data.filter(
                                         (data: any, idx: number) =>
-                                            idx % 2 === 0
+                                            idx % 2 === 1
                                     )}
                                     colorStart={4}
                                 />
