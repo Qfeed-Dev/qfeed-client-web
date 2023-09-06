@@ -129,14 +129,10 @@ const InputBox = styled.input<{
 
     &::placeholder {
         color: ${({ placeholderColor }) => placeholderColor};
-        ${css`
-            ${typo.Subtitle1r}
-        `}
     }
 
-    ${css`
-        ${typo.Subtitle1b}
-    `}
+    transform: scale(0.75);
+    transform-origin: left;
 `;
 
 export default Input;
