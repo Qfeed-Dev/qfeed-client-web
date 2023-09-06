@@ -29,7 +29,7 @@ const Login = () => {
                 <UnderText justify="space-around">
                     <Link
                         href={
-                            "https://ash-dirt-3eb.notion.site/c113fa22230c4e45a62962e333d11448?pvs=4"
+                            "https://qfeed.notion.site/c113fa22230c4e45a62962e333d11448"
                         }
                     >
                         <Text
@@ -43,7 +43,7 @@ const Login = () => {
                     </Link>
                     <Link
                         href={
-                            "https://ash-dirt-3eb.notion.site/7228351001ae4e5385dcad327e4c68a1?pvs=4"
+                            "https://qfeed.notion.site/7228351001ae4e5385dcad327e4c68a1"
                         }
                     >
                         <Text
