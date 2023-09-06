@@ -74,7 +74,7 @@ export default function Page() {
             <BottomText direction="column" align="start" gap={8}>
                 <Link
                     href={
-                        "https://ash-dirt-3eb.notion.site/7228351001ae4e5385dcad327e4c68a1?pvs=4"
+                        "https://qfeed.notion.site/7228351001ae4e5385dcad327e4c68a1"
                     }
                 >
                     <Text

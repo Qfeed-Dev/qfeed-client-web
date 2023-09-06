@@ -32,9 +32,7 @@ const MakeOfficial = (props: QuestionProps) => {
         if (!cursor.isLoading) {
             if (cursor.questionCursor?.length) {
                 setEndTime(Date.parse(cursor.questionCursor[0].endAt));
-            }
-            // 처음 접속한 경우
-            else {
+            } else {
                 newQSet.mutate();
             }
         }

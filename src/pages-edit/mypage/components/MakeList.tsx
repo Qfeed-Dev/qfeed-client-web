@@ -25,8 +25,6 @@ export default function MakeList({ id }: { id: number }) {
         }
     }, [inView]);
 
-    console.log(data?.pages);
-
     return !isFetched ? (
         <Loading />
     ) : (
@@ -41,7 +39,7 @@ export default function MakeList({ id }: { id: number }) {
                                         key={idx}
                                         questions={question.data.filter(
                                             (data: any, idx: number) =>
-                                                idx % 2 === 1
+                                                idx % 2 === 0
                                         )}
                                         colorStart={1}
                                         detail
@@ -55,9 +53,9 @@ export default function MakeList({ id }: { id: number }) {
                                         key={idx}
                                         questions={question.data.filter(
                                             (data: any, idx: number) =>
-                                                idx % 2 === 0
+                                                idx % 2 === 1
                                         )}
-                                        colorStart={4}
+                                        colorStart={3}
                                         detail
                                     />
                                 ))}

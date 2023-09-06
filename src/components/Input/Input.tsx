@@ -32,7 +32,7 @@ const Input = ({
             radius={match(type)
                 .with("question-friend", () => 48)
                 .otherwise(() => 10)}
-            backgroundColor={match(type)
+            $backgroundColor={match(type)
                 .with("question-friend", () => colors.light_gray3)
                 .with(
                     "add-question",
@@ -54,10 +54,10 @@ const Input = ({
                     color={match(type)
                         .with("question-friend", () => colors.light_qwhite)
                         .otherwise(() => colors.light_qblack)}
-                    placeholderColor={match(type)
+                    $placeholderColor={match(type)
                         .with("question-friend", () => colors.light_gray2)
                         .otherwise(() => colors.light_qblack)}
-                    backgroundColor={match(type)
+                    $backgroundColor={match(type)
                         .with("question-friend", () => colors.light_gray3)
                         .with(
                             "add-question",
@@ -95,13 +95,13 @@ const Input = ({
     );
 };
 
-const InputWrapper = styled.div<{ radius: number; backgroundColor: any }>`
+const InputWrapper = styled.div<{ radius: number; $backgroundColor: any }>`
     width: 100%;
     height: 48px;
 
     display: flex;
     border-radius: ${({ radius }) => radius}px;
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
 `;
 
 const InputInner = styled.div`
@@ -115,28 +115,20 @@ const InputInner = styled.div`
 
 const InputBox = styled.input<{
     color: any;
-    placeholderColor: any;
-    backgroundColor: any;
+    $placeholderColor: any;
+    $backgroundColor: any;
 }>`
     width: 100%;
-    margin: 0;
-    padding: 0;
 
-    outline: 0;
-    border: 0;
     color: ${({ color }) => color};
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
 
     &::placeholder {
-        color: ${({ placeholderColor }) => placeholderColor};
-        ${css`
-            ${typo.Subtitle1r}
-        `}
+        color: ${({ $placeholderColor }) => $placeholderColor};
     }
 
-    ${css`
-        ${typo.Subtitle1b}
-    `}
+    transform: scale(0.75);
+    transform-origin: left;
 `;
 
 export default Input;

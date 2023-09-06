@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
-import NavigationTop from "src/components/navigations/NavigationTopBack";
+import NavigationTop from "src/components/navigations/NavigationTop";
 import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
 import { birthMsg, emailMsg, nameMsg, phoneMsg } from "src/constants/messages";
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
@@ -18,6 +18,7 @@ import {
     validPhone
 } from "src/hooks/common/useCheckValidation";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
+import Icon from "src/components/Icon/Icon";
 
 const SignIn = () => {
     const router = useRouter();
@@ -52,12 +53,22 @@ const SignIn = () => {
             validPhone(phone.value)
     };
 
-    const isActive = useIsActive(User);
+    const [isActive, setIsActive] = useState<boolean>(false);
+
+    useEffect(() => {
+        const isActive = useIsActive(User);
+        setIsActive(isActive || false);
+    }, [User]);
 
     return (
         <Flex direction="column" justify="start" gap={24}>
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={
+                    <Icon
+                        icon="LeftArrow"
+                        onClick={() => router.push("/account")}
+                    />
+                }
                 title="회원 가입"
             />
             <Flex direction="column" justify="start" gap={24}>
@@ -65,7 +76,7 @@ const SignIn = () => {
                     value={user?.name || name.value}
                     onChange={name.handleChangeInput}
                     label="이름"
-                    placeholder="ex) 황채린"
+                    placeholder="ex) 홍길동"
                     message={nameMsg.RIGHT}
                     readonly={Boolean(user?.name)}
                 />
@@ -77,7 +88,7 @@ const SignIn = () => {
                     value={user?.birthday?.split("T")[0] || birthday.value}
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
-                    placeholder="ex) 1997-04-02"
+                    placeholder="ex) 2005-01-01"
                     message={
                         user?.birthday
                             ? undefined
@@ -92,7 +103,7 @@ const SignIn = () => {
                     value={user?.phone || phone.value}
                     onChange={phone.handleChangeInput}
                     label="휴대폰 번호"
-                    placeholder="ex) 01050165886"
+                    placeholder="ex) 01012345678"
                     message={
                         validPhone(phone.value)
                             ? phoneMsg.RIGHT
@@ -105,7 +116,7 @@ const SignIn = () => {
                     value={user?.email || email.value}
                     onChange={email.handleChangeInput}
                     label="이메일"
-                    placeholder="ex) ghkdcofls42@naver.com"
+                    placeholder="ex) qfeed@naver.com"
                     message={
                         user?.email
                             ? undefined
@@ -121,7 +132,7 @@ const SignIn = () => {
                         value={user?.nickname || nickname.value}
                         onChange={nickname.handleChangeInput}
                         label="닉네임"
-                        placeholder="ex) qwerk11"
+                        placeholder="ex) qfeed"
                         message={
                             user?.nickname
                                 ? undefined
