@@ -26,4 +26,4 @@ jobs:
               run: vercel build --scope=preview --token=${{ secrets.VERCEL_TOKEN }}
 
             - name: Deploy Project Artifacts to Vercel (프로젝트를 배포)
-              run: vercel deploy --prebuilt --prod=false --token=${{ secrets.VERCEL_TOKEN }}
+              run: vercel deploy --prod=false --token=${{ secrets.VERCEL_TOKEN }}
