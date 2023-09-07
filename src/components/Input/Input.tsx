@@ -85,9 +85,10 @@ const Input = ({
                     {type === "question-friend" ? (
                         <Icon icon="Search" />
                     ) : (
-                        <div onClick={props.clickTrash}>
-                            <Icon icon="Trash" fill="light_qblack" />
-                        </div>
+                        // <div onClick={props.clickTrash}>
+                        //     <Icon icon="Trash" fill="light_qblack" />
+                        // </div>
+                        <></>
                     )}
                 </div>
             </InputInner>
