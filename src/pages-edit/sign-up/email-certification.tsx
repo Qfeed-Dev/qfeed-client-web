@@ -5,6 +5,7 @@ import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/NavigationTopBack";
 import { useInput } from "src/hooks/common/useInput";
+import Icon from "src/components/Icon/Icon";
 
 const EmailCertification = () => {
     const router = useRouter();
@@ -13,7 +14,7 @@ const EmailCertification = () => {
     return (
         <Flex direction="column" justify="start" gap={40}>
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
                 title="회원 가입"
             />
             <InputLine

@@ -24,6 +24,10 @@ const accountAPI = {
         const response = await qFeedAxios.get("/account/me");
         return response.data;
     },
+    async deleteMe() {
+        const response = await qFeedAxios.delete("/account/me/hard-delete");
+        return response.data;
+    },
     async getUsers(keyword: string) {
         const response = await qFeedAxios.get("/account/fetch", {
             params: {
