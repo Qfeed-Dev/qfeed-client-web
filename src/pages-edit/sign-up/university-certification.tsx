@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import NavigationTop from "src/components/navigations/NavigationTopBack";
+import Icon from "src/components/Icon/Icon";
 
 const UnivCertification = () => {
     const router = useRouter();
@@ -10,7 +11,7 @@ const UnivCertification = () => {
     return (
         <Flex direction="column" justify="start" gap={40}>
             <NavigationTop
-                leftIcon={<div onClick={router.back}>왼</div>}
+                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
                 title="회원 가입"
             />
             <Flex direction="column" gap={24}>

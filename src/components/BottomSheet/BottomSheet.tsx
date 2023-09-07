@@ -221,8 +221,7 @@ const BottomSheetWrapper = styled.div<{
 const ContentWrapper = styled.div`
     width: 100%;
     padding: 0 16px;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: none;
 `;
 
 export default BottomSheet;

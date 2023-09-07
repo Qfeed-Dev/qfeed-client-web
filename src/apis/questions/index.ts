@@ -63,6 +63,15 @@ export const getQuestionsIdChoices = async (id: number) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
+export const getQuestionChoiceCount = async (qtype: Qtype) => {
+    const response = await qFeedAxios.get("/questions/q-set/choice-count", {
+        params: {
+            Qtype: qtype
+        }
+    });
+    return response.data;
+};
+
 export const getUserQuestions = async (
     id: number,
     qtype: Qtype,
