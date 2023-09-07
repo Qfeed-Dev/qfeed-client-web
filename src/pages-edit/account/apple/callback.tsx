@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAuth } from "src/hooks/account/useAuth";
 
 const AppleLoginCallback = () => {
-    const url = window.location.href;
+    const url = window.location.hash;
     const { appleMutation } = useAuth();
 
     useEffect(() => {
