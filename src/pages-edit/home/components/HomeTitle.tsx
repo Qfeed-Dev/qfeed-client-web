@@ -17,7 +17,6 @@ const HomeTitle = ({}: {}) => {
     };
 
     const handleClickCoin = () => {
-        console.log("A");
         dispatch(
             changeVisibleType({
                 type: "bottomSheet",
