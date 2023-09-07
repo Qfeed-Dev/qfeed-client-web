@@ -32,9 +32,7 @@ const MakeOfficial = (props: QuestionProps) => {
         if (!cursor.isLoading && cursor.questionCursor) {
             const qSetCount = cursor.questionCursor?.length;
             if (qSetCount) {
-                setEndTime(
-                    Date.parse(cursor.questionCursor[qSetCount - 1].endAt)
-                );
+                setEndTime(Date.parse(cursor.questionCursor[0].endAt));
             } else {
                 newQSet.mutate();
             }
