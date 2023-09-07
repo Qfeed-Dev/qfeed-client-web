@@ -37,10 +37,10 @@ export default function Page() {
         setValues([...values, ""]);
     };
 
-    const clickTrash = (idx: number) => {
-        if (values.length === 1) return;
-        setValues(values.filter((_: any, idx2: number) => idx !== idx2));
-    };
+    // const clickTrash = (idx: number) => {
+    //     if (values.length === 1) return;
+    //     setValues(values.filter((_: any, idx2: number) => idx !== idx2));
+    // };
 
     const createPersonalQ = usePersonalQMutation();
 
@@ -174,7 +174,7 @@ export default function Page() {
                                 count={idx + 1}
                                 value={values[idx]}
                                 setValue={(e: any) => handleInput(e, idx)}
-                                onIconPress={() => clickTrash(idx)}
+                                // onIconPress={() => clickTrash(idx)}
                             />
                         );
                     })}
