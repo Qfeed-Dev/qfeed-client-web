@@ -8,10 +8,8 @@ const AppleLoginCallback = () => {
     const { appleMutation } = useAuth();
 
     useEffect(() => {
-        console.log(url);
         if (url) {
             const id_token = url.split("id_token=")?.[1];
-            console.log("id_token" + id_token);
             appleMutation.mutate(id_token);
         }
     }, [url]);

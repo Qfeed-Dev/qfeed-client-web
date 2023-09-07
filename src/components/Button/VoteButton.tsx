@@ -28,8 +28,6 @@ const VoteButton = forwardRef(function Button(
     const black: KeyOfColor = "light_qblack";
     const white: KeyOfColor = "light_qwhite";
 
-    console.log(type, $typeNum, action);
-
     return (
         <VoteButtonWrapper
             onClick={onClick}
