@@ -85,10 +85,9 @@ const Input = ({
                     {type === "question-friend" ? (
                         <Icon icon="Search" />
                     ) : (
-                        // <div onClick={props.clickTrash}>
-                        //     <Icon icon="Trash" fill="light_qblack" />
-                        // </div>
-                        <></>
+                        <div onClick={props.onIconPress}>
+                            <Icon icon="Trash" fill="light_qblack" />
+                        </div>
                     )}
                 </div>
             </InputInner>
@@ -128,7 +127,7 @@ const InputBox = styled.input<{
         color: ${({ $placeholderColor }) => $placeholderColor};
     }
 
-    transform: scale(0.75);
+    transform: scale(0.8);
     transform-origin: left;
 `;
 

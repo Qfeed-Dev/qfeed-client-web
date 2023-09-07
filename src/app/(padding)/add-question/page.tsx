@@ -6,20 +6,22 @@ import Textarea from "src/components/Textarea";
 import Input from "src/components/Input";
 import { colors } from "styles/theme";
 import { Text } from "src/components/common/Text";
+import Flex from "src/components/common/Flex";
 import QuestionImage from "src/components/Icon/icons/images/QuestionImage";
 import Icon from "src/components/Icon";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "src/components/Image";
 import { useRouter } from "next/navigation";
 import { Route } from "src/constants/Route";
 import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
+import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 export default function Page() {
     const router = useRouter();
     const time2 = 0;
     const [image, setImage] = useState("");
     const [question, setQuestion] = useState("");
-    const [values, setValues] = useState<any>([""]);
+    const [values, setValues] = useState<string[]>([""]);
 
     const handleQuestion = (e: any) => {
         setQuestion(e.target.value);
@@ -37,10 +39,12 @@ export default function Page() {
         setValues([...values, ""]);
     };
 
-    // const clickTrash = (idx: number) => {
-    //     if (values.length === 1) return;
-    //     setValues(values.filter((_: any, idx2: number) => idx !== idx2));
-    // };
+    const clickTrash = (del_idx: number) => {
+        if (values.length === 1) return;
+        setValues((values) =>
+            values.filter((value: string, idx: number) => idx !== del_idx)
+        );
+    };
 
     const createPersonalQ = usePersonalQMutation();
 
@@ -135,22 +139,24 @@ export default function Page() {
                     <Image type="background" src={image} />
                 </ImageBackground>
             ) : null}
-            <AddQuestionWrapper>
-                <BackTitle type="default" text="질문 올리기" />
-                <UploadButton onClick={clickUpload}>
-                    <Text
-                        typo="Subtitle1b"
-                        color="light_qblack"
-                        style={{
-                            marginTop: 5,
-                            textAlign: "center"
-                        }}
-                    >
-                        올리기
-                    </Text>
-                </UploadButton>
-
-                <Spacing size={42} />
+            <Flex direction="column" style={{ overflow: "hidden" }}>
+                <NavigationTopBack
+                    title="질문 올리기"
+                    rightIcon={
+                        <UploadButton onClick={clickUpload}>
+                            <Text
+                                typo="Subtitle1b"
+                                color="light_qblack"
+                                style={{
+                                    marginTop: 5,
+                                    textAlign: "center"
+                                }}
+                            >
+                                올리기
+                            </Text>
+                        </UploadButton>
+                    }
+                />
                 <Textarea
                     type={image ? "add-question-image" : "add-question"}
                     placeholder="원하는 질문지를 작성하세요."
@@ -160,7 +166,7 @@ export default function Page() {
                 />
                 <Spacing size={60} />
 
-                <InputWrapper>
+                <Flex direction="column" gap={12}>
                     {values.map((data: any, idx: number) => {
                         return (
                             <Input
@@ -174,7 +180,7 @@ export default function Page() {
                                 count={idx + 1}
                                 value={values[idx]}
                                 setValue={(e: any) => handleInput(e, idx)}
-                                // onIconPress={() => clickTrash(idx)}
+                                onIconPress={() => clickTrash(idx)}
                             />
                         );
                     })}
@@ -191,9 +197,9 @@ export default function Page() {
                             </div>
                         </PlusButton>
                     ) : null}
-                </InputWrapper>
+                </Flex>
                 <Spacing size={92} />
-            </AddQuestionWrapper>
+            </Flex>
 
             {/* <BottomButton timer={time2}>
                 <BottomInner timer={time2}>
@@ -251,17 +257,6 @@ const ImageBackground = styled.div`
 
     opacity: 0.3;
     position: absolute;
-`;
-const AddQuestionWrapper = styled.div`
-    height: 100%;
-    padding: 0 16px;
-    position: relative;
-`;
-
-const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
 `;
 
 const PlusButton = styled.div`
