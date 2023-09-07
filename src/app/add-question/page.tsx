@@ -8,7 +8,7 @@ import { colors } from "styles/theme";
 import { Text } from "src/components/common/Text";
 import QuestionImage from "src/components/Icon/icons/images/QuestionImage";
 import Icon from "src/components/Icon";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "src/components/Image";
 import { useRouter } from "next/navigation";
 import { Route } from "src/constants/Route";
@@ -19,7 +19,7 @@ export default function Page() {
     const time2 = 0;
     const [image, setImage] = useState("");
     const [question, setQuestion] = useState("");
-    const [values, setValues] = useState<any>([""]);
+    const [values, setValues] = useState<string[]>([""]);
 
     const handleQuestion = (e: any) => {
         setQuestion(e.target.value);
@@ -37,10 +37,12 @@ export default function Page() {
         setValues([...values, ""]);
     };
 
-    // const clickTrash = (idx: number) => {
-    //     if (values.length === 1) return;
-    //     setValues(values.filter((_: any, idx2: number) => idx !== idx2));
-    // };
+    const clickTrash = (del_idx: number) => {
+        if (values.length === 1) return;
+        setValues((values) =>
+            values.filter((value: string, idx: number) => idx !== del_idx)
+        );
+    };
 
     const createPersonalQ = usePersonalQMutation();
 
@@ -174,7 +176,7 @@ export default function Page() {
                                 count={idx + 1}
                                 value={values[idx]}
                                 setValue={(e: any) => handleInput(e, idx)}
-                                // onIconPress={() => clickTrash(idx)}
+                                onIconPress={() => clickTrash(idx)}
                             />
                         );
                     })}
