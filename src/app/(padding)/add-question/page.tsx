@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { Route } from "src/constants/Route";
 import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
+import Photo from "src/components/common/Photo";
 
 export default function Page() {
     const router = useRouter();
@@ -134,12 +135,12 @@ export default function Page() {
         </>
     ) : (
         <>
-            {image ? (
-                <ImageBackground>
-                    <Image type="background" src={image} />
-                </ImageBackground>
-            ) : null}
             <Flex direction="column" style={{ overflow: "hidden" }}>
+                {image ? (
+                    <ImageBackground>
+                        <Image type="background" src={image} />
+                    </ImageBackground>
+                ) : null}
                 <NavigationTopBack
                     title="질문 올리기"
                     rightIcon={
@@ -156,6 +157,7 @@ export default function Page() {
                             </Text>
                         </UploadButton>
                     }
+                    transparent={Boolean(image)}
                 />
                 <Textarea
                     type={image ? "add-question-image" : "add-question"}
@@ -201,11 +203,11 @@ export default function Page() {
                 <Spacing size={92} />
             </Flex>
 
-            {/* <BottomButton timer={time2}>
+            <BottomButton timer={time2}>
                 <BottomInner timer={time2}>
-                    <Icon icon="Camera" />
+                    <Photo />
                 </BottomInner>
-            </BottomButton> */}
+            </BottomButton>
         </>
     );
 }
@@ -257,6 +259,11 @@ const ImageBackground = styled.div`
 
     opacity: 0.3;
     position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+    pointer-events: none;
 `;
 
 const PlusButton = styled.div`
