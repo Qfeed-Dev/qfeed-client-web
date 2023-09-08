@@ -61,7 +61,7 @@ export default function Home() {
     return user.isLoading ? (
         <></>
     ) : (
-        <Flex height="100%" direction="column">
+        <Flex direction="column" gap={16}>
             <HomeTitle />
             <>
                 <Flex direction="column" gap={16}>
@@ -73,7 +73,6 @@ export default function Home() {
                     )}
                     <MakeOfficial onClick={handleClickBasicQuestion} />
                 </Flex>
-                <Spacing size={20} />
 
                 {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
                 {data?.pages[0].data.count ? (
@@ -106,7 +105,7 @@ export default function Home() {
                         </Flex>
                     </Flex>
                 ) : (
-                    <Flex height="100%" direction="column" gap={16}>
+                    <Flex height="50vh" direction="column" gap={16}>
                         <Flex direction="column" gap={8}>
                             <Text typo="Subtitle1r" color="line_white_70">
                                 아직 Personal Q가 없으시군요!
