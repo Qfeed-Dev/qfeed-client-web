@@ -22,7 +22,7 @@ import MakeOfficial from "./components/MakeOfficial";
 import CheckOfficial from "./components/CheckOfficial";
 
 import QuestionGrid from "src/components/GridWrapper";
-import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { useAppDispatch } from "src/hooks/common/useReduxHooks";
 import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
 
 export default function Home() {

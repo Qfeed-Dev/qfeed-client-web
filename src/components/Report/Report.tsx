@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import useBottomSheet from "src/hooks/useBottomSheet";
-import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import useBottomSheet from "src/hooks/common/useBottomSheet";
+import { useAppDispatch, useAppSelector } from "src/hooks/common/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
 import { Text } from "../common/Text";

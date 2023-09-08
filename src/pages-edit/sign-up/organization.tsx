@@ -9,7 +9,7 @@ import MidHighSchool from "src/components/sign-up/middle-high-school";
 import University from "src/components/sign-up/university";
 import Graduate from "src/components/sign-up/graduate";
 
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 import Icon from "src/components/Icon/Icon";
 
 const Organization = () => {

@@ -5,8 +5,8 @@ import { Text } from "src/components/common/Text";
 import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import { Route } from "src/constants/Route";
-import useDisplaySize from "src/hooks/useDisplaySize";
-import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import useDisplaySize from "src/hooks/common/useDisplaySize";
+import { useAppDispatch, useAppSelector } from "src/hooks/common/useReduxHooks";
 import styled from "styled-components";
 import { colors, repeatBackgroundColor } from "styles/theme";
 

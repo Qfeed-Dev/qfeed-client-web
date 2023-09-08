@@ -7,7 +7,7 @@ import Textarea from "src/components/Textarea";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
 import { useInput } from "src/hooks/common/useInput";
 import useCreateCharacter from "src/hooks/questions/useQsetChoiceMutation";
-import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "src/hooks/common/useReduxHooks";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
 import { colors, KeyOfColor } from "styles/theme";

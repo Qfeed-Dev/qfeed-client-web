@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useInput } from "src/hooks/common/useInput";
 import { useSelect } from "src/hooks/common/useSelect";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
 
 import InputLine from "../inputs/input-line";

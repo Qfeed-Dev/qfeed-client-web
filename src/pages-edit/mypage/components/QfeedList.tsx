@@ -5,7 +5,7 @@ import ButtonQfeedSelect from "./ButtonQfeedSelect";
 import MakeList from "./MakeList";
 import SelectList from "./SelectList";
 
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 import { Qtype } from "src/models/questions";
 
 export default function QfeedList({ id }: { id: number }) {

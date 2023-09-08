@@ -5,7 +5,7 @@ import Text from "src/components/common/Text";
 import Flex from "src/components/common/Flex";
 import { colors, theme } from "styles/theme";
 
-import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { useAppDispatch } from "src/hooks/common/useReduxHooks";
 import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
 import { Qtype } from "src/models/questions";
 

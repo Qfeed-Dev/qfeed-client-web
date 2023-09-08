@@ -1,7 +1,7 @@
 "use client";
 import { forwardRef } from "react";
-import useBottomSheet from "src/hooks/useBottomSheet";
-import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import useBottomSheet from "src/hooks/common/useBottomSheet";
+import { useAppDispatch, useAppSelector } from "src/hooks/common/useReduxHooks";
 import {
     changeAction,
     changeVisible,

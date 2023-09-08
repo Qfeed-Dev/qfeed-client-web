@@ -7,7 +7,7 @@ import Text from "src/components/common/Text";
 import { colors } from "styles/theme";
 
 import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
-import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { useAppDispatch } from "src/hooks/common/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";

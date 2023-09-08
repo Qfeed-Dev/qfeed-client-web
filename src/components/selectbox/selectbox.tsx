@@ -5,7 +5,7 @@ import { useState } from "react";
 import Flex from "../common/Flex";
 import Text from "../common/Text";
 import { colors } from "styles/theme";
-import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { useAppDispatch } from "src/hooks/common/useReduxHooks";
 import {
     changeGraduate,
     changeOrganization

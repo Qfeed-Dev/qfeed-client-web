@@ -2,7 +2,7 @@ import SelectBox from "../selectbox/selectbox";
 import { GRADUATE_OPTIONS } from "src/constants/options";
 import University from "./university";
 import MidHighSchool from "./middle-high-school";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 
 const Graduate = () => {
     const selected = useAppSelector((state) => state.organization.graduate);

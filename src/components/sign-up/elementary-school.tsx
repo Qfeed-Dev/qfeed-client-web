@@ -6,7 +6,7 @@ import ButtonFillLarge from "../buttons/button-fill-large";
 import { Route } from "src/constants/Route";
 
 import { useUserMutation } from "src/hooks/account/useUserMutation";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 
 const ElementarySchool = () => {
     const router = useRouter();

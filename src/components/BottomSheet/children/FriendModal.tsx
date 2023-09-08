@@ -5,7 +5,7 @@ import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import Textarea from "src/components/Textarea";
 import useFriendQuery from "src/hooks/account/useFriendQuery";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 import styled from "styled-components";
 import { colors, KeyOfColor, repeatBackgroundColor } from "styles/theme";
 

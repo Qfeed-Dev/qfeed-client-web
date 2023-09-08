@@ -22,7 +22,7 @@ import ButtonFillMid from "src/components/buttons/button-fill-mid";
 import ButtonLineMid from "src/components/buttons/button-line-mid";
 import InputFill from "src/components/inputs/input-fill";
 import { Friend } from "src/models/account";
-import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useAppSelector } from "src/hooks/common/useReduxHooks";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 import { getAppStateColor } from "src/utils/colorGenerate";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";

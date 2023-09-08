@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Image from "src/components/Image";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
-import { useAppDispatch } from "src/hooks/useReduxHooks";
+import { useAppDispatch } from "src/hooks/common/useReduxHooks";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
 import Icon from "src/components/Icon";
