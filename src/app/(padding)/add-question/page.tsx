@@ -15,10 +15,13 @@ import { useRouter } from "next/navigation";
 import { Route } from "src/constants/Route";
 import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
+import Photo from "src/components/common/Photo";
+import usePhotoMutation from "src/hooks/file/usePhotoMutation";
 
 export default function Page() {
     const router = useRouter();
     const time2 = 0;
+    const [file, setFile] = useState<File | undefined>();
     const [image, setImage] = useState("");
     const [question, setQuestion] = useState("");
     const [values, setValues] = useState<string[]>([""]);
@@ -47,15 +50,23 @@ export default function Page() {
     };
 
     const createPersonalQ = usePersonalQMutation();
+    const photo = usePhotoMutation();
 
-    const clickUpload = () => {
+    const clickUpload = async () => {
+        const url = file
+            ? await photo.mutateAsync({
+                  appName: "question",
+                  file: file
+              })
+            : "";
         createPersonalQ.mutate({
             Qtype: "personal",
             title: question,
             choiceList: values,
-            backgroundImage: image,
+            backgroundImage: url ? url.presignedUrl : url,
             isBlind: false
         });
+
         router.push(Route.HOME());
     };
 
@@ -134,12 +145,12 @@ export default function Page() {
         </>
     ) : (
         <>
-            {image ? (
-                <ImageBackground>
-                    <Image type="background" src={image} />
-                </ImageBackground>
-            ) : null}
             <Flex direction="column" style={{ overflow: "hidden" }}>
+                {image ? (
+                    <ImageBackground>
+                        <Image type="background" src={image} />
+                    </ImageBackground>
+                ) : null}
                 <NavigationTopBack
                     title="질문 올리기"
                     rightIcon={
@@ -156,6 +167,7 @@ export default function Page() {
                             </Text>
                         </UploadButton>
                     }
+                    transparent={Boolean(image)}
                 />
                 <Textarea
                     type={image ? "add-question-image" : "add-question"}
@@ -201,11 +213,11 @@ export default function Page() {
                 <Spacing size={92} />
             </Flex>
 
-            {/* <BottomButton timer={time2}>
+            <BottomButton timer={time2}>
                 <BottomInner timer={time2}>
-                    <Icon icon="Camera" />
+                    <Photo setFile={setFile} setImage={setImage} />
                 </BottomInner>
-            </BottomButton> */}
+            </BottomButton>
         </>
     );
 }
@@ -257,6 +269,11 @@ const ImageBackground = styled.div`
 
     opacity: 0.3;
     position: absolute;
+    top: 0;
+    left: 0;
+
+    overflow: hidden;
+    pointer-events: none;
 `;
 
 const PlusButton = styled.div`
