@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import useFollowingsQuery from "src/hooks/account/useFollowingsQuery";
 import { useInput } from "src/hooks/common/useInput";
 import { colors } from "styles/theme";
+import Text from "src/components/common/Text";
 
 import { Friend } from "src/models/account";
 
@@ -42,7 +43,7 @@ export default function MyFollowingPage() {
                 >
                     {isLoading ? (
                         <Loading />
-                    ) : (
+                    ) : followings.count ? (
                         followings.data.map((following: Friend) => (
                             <FriendItem
                                 key={following.id}
@@ -50,6 +51,10 @@ export default function MyFollowingPage() {
                                 friend={following}
                             />
                         ))
+                    ) : (
+                        <Text typo="Subtitle1r" style={{ textAlign: "center" }}>
+                            아직 팔로잉하는 친구가 없어요
+                        </Text>
                     )}
                 </FriendWrapper>
             </Flex>

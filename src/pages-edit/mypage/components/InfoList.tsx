@@ -8,8 +8,12 @@ import { colors } from "styles/theme";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import Icon from "src/components/Icon/Icon";
+import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
 import { User } from "src/models/account";
+import { useState } from "react";
+import useFriendMutation from "src/hooks/account/useFriendMutation";
+import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
 
 export default function InfoList({
     user,
@@ -19,12 +23,28 @@ export default function InfoList({
     isMe: boolean;
 }) {
     const router = useRouter();
+    const [follow, setFollow] = useState<boolean>(user.isFollowing || false);
+    const { friendMutation } = useFriendMutation(user.id);
+    const { delFriendMutation } = useDeleteFriendMutation(user.id);
+
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
                 <Profile />
                 <Text typo="Headline1b">{"@" + user.nickname}</Text>
             </Flex>
+            {!isMe && (
+                <ButtonFillXSmall
+                    text={follow ? "팔로잉" : "팔로우"}
+                    onClick={() => {
+                        follow
+                            ? delFriendMutation.mutate()
+                            : friendMutation.mutate();
+                        setFollow((follow) => !follow);
+                    }}
+                    state={follow ? "disabled" : "active"}
+                />
+            )}
             <Flex justify="space-between">
                 <Flex width={"auto"} gap={16}>
                     <Icon icon="Profile" />

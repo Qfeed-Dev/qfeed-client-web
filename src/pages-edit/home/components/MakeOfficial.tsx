@@ -29,8 +29,9 @@ const MakeOfficial = (props: QuestionProps) => {
     const [time, setTime] = useState<Time | undefined>(undefined);
 
     useEffect(() => {
-        if (!cursor.isLoading) {
-            if (cursor.questionCursor?.length) {
+        if (!cursor.isLoading && cursor.questionCursor) {
+            const qSetCount = cursor.questionCursor?.length;
+            if (qSetCount) {
                 setEndTime(Date.parse(cursor.questionCursor[0].endAt));
             } else {
                 newQSet.mutate();
@@ -44,8 +45,13 @@ const MakeOfficial = (props: QuestionProps) => {
             endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
         );
 
-        if (+times <= 0) {
+        if (
+            times.getHours() <= 0 &&
+            times.getMinutes() <= 0 &&
+            times.getSeconds() <= 0
+        ) {
             newQSet.mutate();
+            cursor.refetch();
         }
 
         const hours = String(times.getHours()).padStart(2, "0");

@@ -62,7 +62,7 @@ export default function SelectList({ id }: { id: number }) {
                 ))
             ) : (
                 <Text typo="Subtitle1r" style={{ textAlign: "center" }}>
-                    아직 만든 큐피드가 없어요
+                    아직 선택받은 큐피드가 없어요
                 </Text>
             )}
         </SelectWrapper>
