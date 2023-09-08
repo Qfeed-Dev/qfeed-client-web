@@ -7,8 +7,8 @@ import Text from "src/components/common/Text";
 import { colors } from "styles/theme";
 
 import KakaoLogo from "src/components/Icon/icons/KakaoLogo";
+import AppleLogo from "src/components/Icon/icons/AppleLogo";
 import AppleLogin from "react-apple-login";
-import { usePathname } from "next/navigation";
 
 const Login = () => {
     const [userAgent, setUserAgent] = useState("");
@@ -31,16 +31,14 @@ const Login = () => {
                         <Text typo="Headline0b">LOG IN</Text>
                     </Flex>
 
-                    <ButtonWrapper>
-                        <Flex direction="column" gap={16}>
-                            <LoginButton
-                                href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`}
-                                background="#FEE500"
-                            >
-                                <KakaoLogo />
-                                <LoginText>카카오 로그인</LoginText>
-                            </LoginButton>
-                        </Flex>
+                    <Flex direction="column" gap={16}>
+                        <LoginButton
+                            href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`}
+                            background="#FEE500"
+                        >
+                            <KakaoLogo />
+                            <LoginText>카카오 로그인</LoginText>
+                        </LoginButton>
                         {/* {userAgent.indexOf("android") === -1 && ( */}
                         <AppleLogin
                             clientId={"com.qfeed.dev.login"}
@@ -51,9 +49,18 @@ const Login = () => {
                             responseMode={"fragment"}
                             usePopup={false}
                             state={"signin"}
+                            render={(renderProps) => (
+                                <AppleLoginButton onClick={renderProps.onClick}>
+                                    <AppleLogo />
+                                    <Text color="light_qblack">
+                                        APPLE로 로그인
+                                    </Text>
+                                </AppleLoginButton>
+                            )}
                         />
+
                         {/* )} */}
-                    </ButtonWrapper>
+                    </Flex>
                 </Flex>
                 <UnderText justify="space-around">
                     <Link
@@ -107,7 +114,6 @@ const LoginWrapper = styled(Flex)`
 const LoginButton = styled(Link)<{ background: string }>`
     width: 100%;
     min-height: 52px;
-    padding: 0.88rem 1rem;
 
     color: rgba(0, 0, 0, 0.85);
     background: ${(props) => props.background};
@@ -115,43 +121,34 @@ const LoginButton = styled(Link)<{ background: string }>`
     border-radius: 12px;
 
     display: flex;
-    justify-content: space-between;
+
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
 `;
 
 const LoginText = styled.div`
-    width: 100%;
     font-size: 1rem;
     color: black;
 `;
 
 const UnderText = styled(Flex)``;
 
-const ButtonWrapper = styled.div`
-    position: absolute;
-    bottom: 80px;
+const AppleLoginButton = styled(Flex)`
+    width: 100%;
     min-width: 318px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    cursor: pointer;
+    min-height: 52px;
+    border-radius: 12px;
 
     #appleid-signin {
-        margin-top: 16px;
-        position: relative;
-        svg {
+        img {
             display: none;
         }
     }
-    #appleid-signin::before {
-        content: url("/assets/authApple.svg");
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+
+    background: white;
+
+    cursor: pointer;
 `;
 
 export default Login;
