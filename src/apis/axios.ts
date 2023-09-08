@@ -36,9 +36,15 @@ qFeedAxios.interceptors.response.use(
             response: { status }
         } = error;
 
-        // if (error.isAxiosError) {
-        //     window.location.href = "/error";
-        // }
+        if (error.isAxiosError) {
+            if (retries > 2) {
+                window.location.href = "/error";
+            } else {
+                retries += 1;
+                const originalResponse = await axios.request(config);
+                return originalResponse;
+            }
+        }
 
         switch (status) {
             case 401: {

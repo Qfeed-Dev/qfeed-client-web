@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useInView } from "react-intersection-observer";
 import styled from "styled-components";
 import Flex from "src/components/common/Flex";
+import Text from "src/components/common/Text";
 
 import BottomNavigation from "src/components/BottomNavigation";
 import Filter from "./components/Filter";
@@ -24,6 +25,7 @@ import CheckOfficial from "./components/CheckOfficial";
 import QuestionGrid from "src/components/GridWrapper";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
+import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 
 export default function Home() {
     const router = useRouter();
@@ -59,7 +61,7 @@ export default function Home() {
     return user.isLoading ? (
         <></>
     ) : (
-        <Flex direction="column">
+        <Flex height="100%" direction="column">
             <HomeTitle />
             <>
                 <Flex direction="column" gap={16}>
@@ -74,36 +76,58 @@ export default function Home() {
                 <Spacing size={20} />
 
                 {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
-                <Flex gap={12} align="start">
-                    <Flex direction="column" gap={12} align="start">
-                        {isFetched &&
-                            data?.pages.map((question, idx) => (
-                                <QuestionGrid
-                                    key={idx}
-                                    questions={question.data.data.filter(
-                                        (data: any, idx: number) =>
-                                            idx % 2 === 0
-                                    )}
-                                    colorStart={1}
-                                />
-                            ))}
+                {data?.pages[0].data.count ? (
+                    <Flex gap={12} align="start">
+                        <Flex direction="column" gap={12} align="start">
+                            {isFetched &&
+                                data?.pages.map((question, idx) => (
+                                    <QuestionGrid
+                                        key={idx}
+                                        questions={question.data.data.filter(
+                                            (data: any, idx: number) =>
+                                                idx % 2 === 0
+                                        )}
+                                        colorStart={1}
+                                    />
+                                ))}
+                        </Flex>
+                        <Flex direction="column" gap={12} align="start">
+                            {isFetched &&
+                                data?.pages.map((question, idx) => (
+                                    <QuestionGrid
+                                        key={idx}
+                                        questions={question.data.data.filter(
+                                            (data: any, idx: number) =>
+                                                idx % 2 === 1
+                                        )}
+                                        colorStart={4}
+                                    />
+                                ))}
+                        </Flex>
                     </Flex>
-                    <Flex direction="column" gap={12} align="start">
-                        {isFetched &&
-                            data?.pages.map((question, idx) => (
-                                <QuestionGrid
-                                    key={idx}
-                                    questions={question.data.data.filter(
-                                        (data: any, idx: number) =>
-                                            idx % 2 === 1
-                                    )}
-                                    colorStart={4}
-                                />
-                            ))}
+                ) : (
+                    <Flex height="100%" direction="column" gap={16}>
+                        <Flex direction="column" gap={8}>
+                            <Text typo="Subtitle1r" color="line_white_70">
+                                아직 Personal Q가 없으시군요!
+                            </Text>
+                            <Text
+                                typo="Headline1b"
+                                style={{ textAlign: "center" }}
+                            >
+                                친구를 추가해서
+                                <br />
+                                QFeed를 확인해보세요
+                            </Text>
+                        </Flex>
+                        <ButtonFillXSmall
+                            text="친구 추가하러 가기"
+                            state="active"
+                            onClick={() => router.push("/friend")}
+                        />
                     </Flex>
-                </Flex>
+                )}
                 <div ref={ref} style={{ height: "5px" }}></div>
-                <Spacing size={globalValue.bottomSheetHeight + 12} />
             </>
 
             <PlusButtonWrapper onClick={handleClickPlus}>

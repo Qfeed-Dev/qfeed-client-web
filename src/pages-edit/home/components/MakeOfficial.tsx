@@ -30,8 +30,6 @@ const MakeOfficial = (props: QuestionProps) => {
     const [endTime, setEndTime] = useState<number | typeof NaN>(NaN);
     const [time, setTime] = useState<Time | undefined>(undefined);
 
-    console.log(cursor);
-
     const createNewQSet = () => {
         if (!cursor.isLoading && cursor.questionCursor) {
             const qSetCount = cursor.questionCursor?.length;
