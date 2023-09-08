@@ -41,41 +41,38 @@ qFeedAxios.interceptors.response.use(
         // }
 
         switch (status) {
-            case 401:
-                {
-                    const token = getCookie();
-                    if (token) {
-                        if (retries) {
-                            deleteCookie();
-                            window.location.href = "/account";
-                        } else {
-                            retries += 1;
-                            config.headers.Authorization = `Bearer ${token}`;
-                            const originalResponse = await axios.request(
-                                config
-                            );
-                            return originalResponse;
-                        }
-                    } else {
+            case 401: {
+                const token = getCookie();
+                if (token) {
+                    if (retries) {
+                        deleteCookie();
                         window.location.href = "/account";
+                    } else {
+                        retries += 1;
+                        config.headers.Authorization = `Bearer ${token}`;
+                        const originalResponse = await axios.request(config);
+                        return originalResponse;
+                    }
+                } else {
+                    window.location.href = "/account";
+                }
+            }
+            case 400:
+            case 403:
+            case 404:
+            case 405:
+            case 500:
+            case 502:
+            case 503:
+                {
+                    if (retries > 2) {
+                        window.location.href = "/error";
+                    } else {
+                        retries += 1;
+                        const originalResponse = await axios.request(config);
+                        return originalResponse;
                     }
                 }
-                // case 400:
-                // case 403:
-                // case 404:
-                // case 405:
-                // case 500:
-                // case 502:
-                // case 503:
-                //     {
-                //         if (retries) {
-                //             window.location.href = "/error";
-                //         } else {
-                //             retries += 1;
-                //             const originalResponse = await axios.request(config);
-                //             return originalResponse;
-                //         }
-                //     }
                 return Promise.reject(error);
         }
     }
