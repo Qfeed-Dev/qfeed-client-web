@@ -1,19 +1,21 @@
 import styled, { css } from "styled-components";
 import { ChangeEvent, useEffect, useState } from "react";
-import usePhotoMutation from "src/hooks/file/usePhotoMutation";
+import encodeFileToBase64 from "src/utils/encodeFileToBase64";
 
 import Icon from "../Icon/Icon";
 
-const Photo = () => {
-    const photo = usePhotoMutation();
+interface PhotoProp {
+    setFile: any;
+    setImage: any;
+}
 
+const Photo = ({ setFile, setImage }: PhotoProp) => {
     const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const file = e.target.files[0];
-            photo.mutate({
-                appName: "question",
-                file: file
-            });
+            setFile(file);
+            const data = await encodeFileToBase64(file);
+            setImage(data);
         }
     };
 

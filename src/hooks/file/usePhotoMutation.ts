@@ -5,7 +5,7 @@ import { photoKeys } from "src/constants/queryKeys/fileKeys";
 const usePhotoMutation = () => {
     const queryClient = useQueryClient();
 
-    const { mutate } = useMutation(
+    const { mutateAsync } = useMutation(
         (photo: { appName: string; file: File }) =>
             fileAPI.createPresignedURL({
                 appName: photo.appName,
@@ -20,7 +20,7 @@ const usePhotoMutation = () => {
             onError: () => {}
         }
     );
-    return { mutate };
+    return { mutateAsync };
 };
 
 export default usePhotoMutation;
