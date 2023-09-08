@@ -12,6 +12,7 @@ export interface User {
     birthday?: string;
     profileImage?: string;
     idCardImage?: string;
+    isFollowing?: boolean;
 }
 
 export interface Friend {
