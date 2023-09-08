@@ -19,3 +19,7 @@ export const friendKeys = {
 export const followingKeys = {
     all: ["followings"] as const
 };
+
+export const unFollowingKeys = {
+    all: ["unfollowings"] as const
+};

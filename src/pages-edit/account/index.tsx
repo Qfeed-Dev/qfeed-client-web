@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Flex from "src/components/common/Flex";
@@ -6,8 +7,21 @@ import Text from "src/components/common/Text";
 import { colors } from "styles/theme";
 
 import KakaoLogo from "src/components/Icon/icons/KakaoLogo";
+import AppleLogo from "src/components/Icon/icons/AppleLogo";
+import AppleLogin from "react-apple-login";
 
 const Login = () => {
+    const [userAgent, setUserAgent] = useState("");
+
+    useEffect(() => {
+        if (typeof window !== undefined) {
+            setUserAgent(navigator.userAgent.toLowerCase());
+        }
+    }, []);
+
+    const clientId = process.env.NEXT_PUBLIC_APPLE_CLIENT_ID;
+    const redirectURI = process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI;
+
     return (
         <Background direction="column" justify="center" height="100%">
             <LoginWrapper direction="column" height="100%" gap={32}>
@@ -16,6 +30,7 @@ const Login = () => {
                         <Text typo="Subtitle2r">QUESTION FEED</Text>
                         <Text typo="Headline0b">LOG IN</Text>
                     </Flex>
+
                     <Flex direction="column" gap={16}>
                         <LoginButton
                             href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`}
@@ -24,6 +39,27 @@ const Login = () => {
                             <KakaoLogo />
                             <LoginText>카카오 로그인</LoginText>
                         </LoginButton>
+                        {/* {userAgent.indexOf("android") === -1 && ( */}
+                        <AppleLogin
+                            clientId={"com.qfeed.dev.login"}
+                            redirectURI={
+                                "https://dev-qfeed-client-web.vercel.app/account/apple/login"
+                            }
+                            responseType={"code id_token"}
+                            responseMode={"fragment"}
+                            usePopup={false}
+                            state={"signin"}
+                            render={(renderProps) => (
+                                <AppleLoginButton onClick={renderProps.onClick}>
+                                    <AppleLogo />
+                                    <Text color="light_qblack">
+                                        APPLE로 로그인
+                                    </Text>
+                                </AppleLoginButton>
+                            )}
+                        />
+
+                        {/* )} */}
                     </Flex>
                 </Flex>
                 <UnderText justify="space-around">
@@ -78,7 +114,6 @@ const LoginWrapper = styled(Flex)`
 const LoginButton = styled(Link)<{ background: string }>`
     width: 100%;
     min-height: 52px;
-    padding: 0.88rem 1rem;
 
     color: rgba(0, 0, 0, 0.85);
     background: ${(props) => props.background};
@@ -86,16 +121,34 @@ const LoginButton = styled(Link)<{ background: string }>`
     border-radius: 12px;
 
     display: flex;
-    justify-content: space-between;
+
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
 `;
 
 const LoginText = styled.div`
-    width: 100%;
     font-size: 1rem;
     color: black;
 `;
 
 const UnderText = styled(Flex)``;
+
+const AppleLoginButton = styled(Flex)`
+    width: 100%;
+    min-width: 318px;
+    min-height: 52px;
+    border-radius: 12px;
+
+    #appleid-signin {
+        img {
+            display: none;
+        }
+    }
+
+    background: white;
+
+    cursor: pointer;
+`;
 
 export default Login;
