@@ -11,13 +11,19 @@ export interface NavProps {
     title?: string;
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
+    transparent?: boolean;
 }
 
-const NavigationTopBack = ({ title, leftIcon, rightIcon }: NavProps) => {
+const NavigationTopBack = ({
+    title,
+    leftIcon,
+    rightIcon,
+    transparent = false
+}: NavProps) => {
     const router = useRouter();
 
     return (
-        <NavWrapper justify="space-between">
+        <NavWrapper justify="space-between" $transparent={transparent}>
             <Flex width="auto" gap={8}>
                 <Icon icon="LeftArrow" onClick={() => router.back()} />
                 {title && <Text typo="Headline1b">{title}</Text>}
@@ -27,10 +33,11 @@ const NavigationTopBack = ({ title, leftIcon, rightIcon }: NavProps) => {
     );
 };
 
-const NavWrapper = styled(Flex)`
+const NavWrapper = styled(Flex)<{ $transparent: boolean }>`
     height: 56px;
     padding: 1rem 1rem;
-    background: ${colors.light_qblack};
+    background: ${({ $transparent }) =>
+        $transparent ? "transparent" : colors.light_qblack};
 
     position: fixed;
     top: 0;

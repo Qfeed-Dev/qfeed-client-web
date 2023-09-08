@@ -10,6 +10,7 @@ import Loading from "src/components/common/Loading";
 import useQsetCursorQuery from "src/hooks/questions/useQsetCursorQuery";
 import { useEffect, useState } from "react";
 import useQsetMutation from "src/hooks/questions/useQsetMutation";
+import { useRouter } from "next/navigation";
 
 interface QuestionProps {
     onClick?: () => void;
@@ -22,22 +23,25 @@ interface Time {
 }
 
 const MakeOfficial = (props: QuestionProps) => {
+    const router = useRouter();
     const cursor = useQsetCursorQuery();
     const newQSet = useQsetMutation();
 
     const [endTime, setEndTime] = useState<number | typeof NaN>(NaN);
     const [time, setTime] = useState<Time | undefined>(undefined);
 
-    useEffect(() => {
+    const createNewQSet = () => {
         if (!cursor.isLoading && cursor.questionCursor) {
             const qSetCount = cursor.questionCursor?.length;
             if (qSetCount) {
-                setEndTime(Date.parse(cursor.questionCursor[0].endAt));
+                if (cursor.questionCursor[0].isDone) {
+                    setEndTime(Date.parse(cursor.questionCursor[0].endAt));
+                }
             } else {
                 newQSet.mutate();
             }
         }
-    }, [cursor.isLoading]);
+    };
 
     const getTime = () => {
         const date = new Date();
@@ -45,13 +49,13 @@ const MakeOfficial = (props: QuestionProps) => {
             endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
         );
 
-        if (
-            times.getHours() <= 0 &&
-            times.getMinutes() <= 0 &&
-            times.getSeconds() <= 0
-        ) {
-            newQSet.mutate();
-            cursor.refetch();
+        if (times.getDate() <= 1 || times.getFullYear() < 1970) {
+            if (!cursor.isLoading && cursor.questionCursor) {
+                const qSetCount = cursor.questionCursor?.length;
+                qSetCount < 2 && newQSet.mutate();
+                setEndTime(NaN);
+                return;
+            }
         }
 
         const hours = String(times.getHours()).padStart(2, "0");
@@ -61,8 +65,13 @@ const MakeOfficial = (props: QuestionProps) => {
     };
 
     useEffect(() => {
-        if (!isNaN(endTime)) setInterval(getTime, 1000);
-    }, [endTime]);
+        if (!isNaN(endTime)) {
+            const interval = setInterval(getTime, 1000);
+            return () => clearInterval(interval);
+        } else {
+            createNewQSet();
+        }
+    }, [endTime, cursor.isLoading]);
 
     return cursor.isLoading ? (
         <Loading />

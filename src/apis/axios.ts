@@ -37,7 +37,13 @@ qFeedAxios.interceptors.response.use(
         } = error;
 
         if (error.isAxiosError) {
-            window.location.href = "/error";
+            if (retries > 2) {
+                window.location.href = "/error";
+            } else {
+                retries += 1;
+                const originalResponse = await axios.request(config);
+                return originalResponse;
+            }
         }
 
         switch (status) {
@@ -65,7 +71,7 @@ qFeedAxios.interceptors.response.use(
             case 502:
             case 503:
                 {
-                    if (retries) {
+                    if (retries > 2) {
                         window.location.href = "/error";
                     } else {
                         retries += 1;
