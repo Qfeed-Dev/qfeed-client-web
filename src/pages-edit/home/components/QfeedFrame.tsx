@@ -18,7 +18,7 @@ interface Props {
 
 const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
     const router = useRouter();
-    const imageurl = data.backgroundImage;
+    const imageurl = data.backgroundImage.split("?")[0];
 
     const writeDay = Date.parse(data.createdAt);
     const today = new Date();
