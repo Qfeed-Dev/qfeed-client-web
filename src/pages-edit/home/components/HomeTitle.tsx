@@ -27,7 +27,7 @@ const HomeTitle = ({}: {}) => {
 
     return (
         <HomeTitleWrapper>
-            <Menu>
+            <Menu onClick={() => router.push("/mypage")}>
                 <ImageWrapper>
                     <Image type="default" size={40} src="" />
                 </ImageWrapper>
