@@ -133,7 +133,7 @@ const HintText = styled(Text)`
     width: 100%;
     height: 47px;
 
-    padding: 0.5rem 1rem;
+    padding: 1.1rem 1rem 0.5rem;
 
     background: ${colors.line_white_50};
     border-radius: 0 0 10px 10px;
