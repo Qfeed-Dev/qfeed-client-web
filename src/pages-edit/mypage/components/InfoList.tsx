@@ -14,6 +14,7 @@ import { User } from "src/models/account";
 import { useState } from "react";
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
+import Profile from "./Profile";
 
 export default function InfoList({
     user,
@@ -95,13 +96,6 @@ export default function InfoList({
 }
 
 const InfoListWrapper = styled(Flex)``;
-const Profile = styled.div`
-    width: 72px;
-    height: 72px;
-
-    background: ${colors.light_gray3};
-    border-radius: 50%;
-`;
 
 const Line = styled.hr`
     width: 100%;
