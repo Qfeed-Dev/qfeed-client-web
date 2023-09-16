@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useInput } from "src/hooks/common/useInput";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
+import useGetSchoolQuery from "src/hooks/school/useGetSchoolQuery";
 
 import InputLine from "../inputs/input-line";
 import ButtonFillLarge from "../buttons/button-fill-large";
@@ -12,7 +13,6 @@ import Option from "../selectbox/Options";
 import Flex from "../common/Flex";
 
 import { Route } from "src/constants/Route";
-import useGetSchoolQuery from "src/hooks/school/useGetSchoolQuery";
 
 const MidHighSchool = () => {
     const router = useRouter();
@@ -28,14 +28,18 @@ const MidHighSchool = () => {
     const searchSchool = useCallback(() => {
         const filteredSchoolInfo =
             filteredSchool.data?.schoolInfo && school.value
-                ? filteredSchool.data?.schoolInfo[1].row.map(
-                      (schoolInfo: any) => {
+                ? filteredSchool.data?.schoolInfo[1].row
+                      .filter(
+                          (schoolInfo: any) =>
+                              schoolInfo.SCHUL_KND_SC_NM === "고등학교" ||
+                              schoolInfo.SCHUL_KND_SC_NM === "중학교"
+                      )
+                      .map((schoolInfo: any) => {
                           return {
                               name: schoolInfo.SCHUL_NM,
                               value: schoolInfo.SD_SCHUL_CODE
                           };
-                      }
-                  )
+                      })
                 : null;
 
         return filteredSchoolInfo;
