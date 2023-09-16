@@ -8,7 +8,6 @@ import Text from "src/components/common/Text";
 
 import BottomNavigation from "src/components/BottomNavigation";
 import Filter from "./components/Filter";
-import HomeTitle from "src/pages-edit/home/components/HomeTitle";
 import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
@@ -26,6 +25,8 @@ import QuestionGrid from "src/components/GridWrapper";
 import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
+import NavigationTop from "src/components/navigations/NavigationTop";
+import Profile from "../mypage/components/Profile";
 
 export default function Home() {
     const router = useRouter();
@@ -62,8 +63,8 @@ export default function Home() {
         <></>
     ) : (
         <Flex direction="column" gap={16}>
-            <HomeTitle />
             <>
+                <NavigationTop leftIcon={<Profile width={46} />} />
                 <Flex direction="column" gap={16}>
                     {user.user && (
                         <CheckOfficial

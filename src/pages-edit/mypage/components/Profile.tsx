@@ -7,21 +7,19 @@ import { useUserMutation } from "src/hooks/account/useUserMutation";
 import usePhotoMutation from "src/hooks/file/usePhotoMutation";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 
-const Profile = () => {
+const Profile = ({ width }: { width: number }) => {
     const { userMutation } = useUserMutation();
     const user = useUserQuery();
     const photo = usePhotoMutation();
 
-    const [file, setFile] = useState<File | undefined>();
-
     const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            const file = e.target.files[0];
-            setFile(file);
+            const targetFile = e.target.files[0];
+            imgUpload(targetFile);
         }
     };
 
-    const clickUpload = async () => {
+    const imgUpload = async (file: File) => {
         const url = file
             ? await photo.mutateAsync({
                   appName: "account",
@@ -29,16 +27,12 @@ const Profile = () => {
               })
             : "";
         userMutation.mutate({
-            profileImage: url ? url.presignedUrl : url
+            profileImage: url ? url.imageUrl : url
         });
     };
 
-    useEffect(() => {
-        clickUpload;
-    }, [file]);
-
     return (
-        <ProfileWrapper id="profileImage">
+        <ProfileWrapper id="profileImage" width={width}>
             <input
                 type="file"
                 id="profileImage"
@@ -51,14 +45,16 @@ const Profile = () => {
     );
 };
 
-const ProfileWrapper = styled.label`
-    width: 72px;
-    height: 72px;
+const ProfileWrapper = styled.label<{ width: number }>`
+    width: ${({ width }) => width}px;
+    height: ${({ width }) => width}px;
 
     background: ${colors.light_gray3};
 
+    border: 3px solid ${colors.light_qwhite};
     border-radius: 50%;
     object-fit: cover;
+    overflow: hidden;
 `;
 
 const ProfileImg = styled.img`

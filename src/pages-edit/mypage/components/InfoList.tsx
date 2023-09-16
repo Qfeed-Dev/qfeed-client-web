@@ -31,7 +31,7 @@ export default function InfoList({
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
-                <Profile />
+                <Profile width={72} />
                 <Text typo="Headline1b">{"@" + user.nickname}</Text>
             </Flex>
             {!isMe && (
