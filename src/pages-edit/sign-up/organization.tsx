@@ -19,7 +19,12 @@ const Organization = () => {
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
             <NavigationTop
-                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
+                leftIcon={
+                    <Icon
+                        icon="LeftArrow"
+                        onClick={() => router.push("/auth/default")}
+                    />
+                }
                 title="회원 가입"
             />
             <SelectBox

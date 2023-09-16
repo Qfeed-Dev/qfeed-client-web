@@ -10,7 +10,10 @@ export async function checkSignUp(request: NextRequest) {
         url.pathname = "/";
         return NextResponse.redirect(url);
     } else if (user.name) {
-        if (url.pathname !== "/auth/organization") {
+        if (
+            url.pathname !== "/auth/organization" &&
+            url.pathname !== "/auth/default"
+        ) {
             url.pathname = "/auth/organization";
             return NextResponse.redirect(url);
         } else return NextResponse.next();
