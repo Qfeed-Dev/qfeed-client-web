@@ -57,7 +57,7 @@ const Input = styled.input`
     width: 80vw;
     color: ${colors.light_qwhite};
 
-    transform: scale(0.75);
+    transform: scale(0.85);
     transform-origin: left;
 `;
 
