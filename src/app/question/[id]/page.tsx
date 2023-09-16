@@ -77,7 +77,7 @@ export default function Page({ params }: { params: { id: number } }) {
                 <ImageWrapper>
                     <Image
                         type="background"
-                        src={questionData?.backgroundImage}
+                        src={questionData?.backgroundImage.split("?")[0]}
                     />
                 </ImageWrapper>
             )}

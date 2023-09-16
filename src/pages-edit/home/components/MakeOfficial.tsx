@@ -46,7 +46,7 @@ const MakeOfficial = (props: QuestionProps) => {
     const getTime = () => {
         const date = new Date();
         const times = new Date(
-            endTime + 30 * 1000 + 15 * 60 * 60 * 1000 - +date
+            endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
         );
 
         if (times.getDate() <= 1 || times.getFullYear() < 1970) {
