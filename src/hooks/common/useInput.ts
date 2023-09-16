@@ -16,5 +16,5 @@ export const useInput = (initialState?: string) => {
             setValue(event.target.value);
         }
     };
-    return { value, handleChangeInput, reset };
+    return { value, handleChangeInput, setValue, reset };
 };
