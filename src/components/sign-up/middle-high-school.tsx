@@ -26,14 +26,17 @@ const MidHighSchool = () => {
     }, [school.value]);
 
     const searchSchool = useCallback(() => {
-        const filteredSchoolInfo = filteredSchool.data?.schoolInfo
-            ? filteredSchool.data?.schoolInfo[1].row.map((schoolInfo: any) => {
-                  return {
-                      name: schoolInfo.SCHUL_NM,
-                      value: schoolInfo.SD_SCHUL_CODE
-                  };
-              })
-            : null;
+        const filteredSchoolInfo =
+            filteredSchool.data?.schoolInfo && school.value
+                ? filteredSchool.data?.schoolInfo[1].row.map(
+                      (schoolInfo: any) => {
+                          return {
+                              name: schoolInfo.SCHUL_NM,
+                              value: schoolInfo.SD_SCHUL_CODE
+                          };
+                      }
+                  )
+                : null;
 
         return filteredSchoolInfo;
     }, [filteredSchool]);
