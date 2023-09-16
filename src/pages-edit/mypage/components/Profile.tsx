@@ -7,7 +7,12 @@ import { useUserMutation } from "src/hooks/account/useUserMutation";
 import usePhotoMutation from "src/hooks/file/usePhotoMutation";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 
-const Profile = ({ width }: { width: number }) => {
+interface ProfileProp {
+    width: number;
+    onClick?: any;
+}
+
+const Profile = ({ width, onClick }: ProfileProp) => {
     const { userMutation } = useUserMutation();
     const user = useUserQuery();
     const photo = usePhotoMutation();
@@ -32,14 +37,16 @@ const Profile = ({ width }: { width: number }) => {
     };
 
     return (
-        <ProfileWrapper id="profileImage" width={width}>
-            <input
-                type="file"
-                id="profileImage"
-                style={{ display: "none" }}
-                onChange={handleImageChange}
-                accept="image/x-png, image/gif, image/jpeg"
-            />
+        <ProfileWrapper id="profileImage" width={width} onClick={onClick}>
+            {!onClick && (
+                <input
+                    type="file"
+                    id="profileImage"
+                    style={{ display: "none" }}
+                    onChange={handleImageChange}
+                    accept="image/x-png, image/gif, image/jpeg"
+                />
+            )}
             <ProfileImg src={user.user?.profileImage} />
         </ProfileWrapper>
     );

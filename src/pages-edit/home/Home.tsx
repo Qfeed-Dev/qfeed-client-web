@@ -63,72 +63,74 @@ export default function Home() {
         <></>
     ) : (
         <Flex direction="column" gap={16}>
-            <>
-                <NavigationTop leftIcon={<Profile width={46} />} />
-                <Flex direction="column" gap={16}>
-                    {user.user && (
-                        <CheckOfficial
-                            onClick={handleClickPickMe}
-                            id={user.user.id}
-                        />
-                    )}
-                    <MakeOfficial onClick={handleClickBasicQuestion} />
-                </Flex>
-
-                {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
-                {data?.pages[0].data.count ? (
-                    <Flex gap={12} align="start">
-                        <Flex direction="column" gap={12} align="start">
-                            {isFetched &&
-                                data?.pages.map((question, idx) => (
-                                    <QuestionGrid
-                                        key={idx}
-                                        questions={question.data.data.filter(
-                                            (data: any, idx: number) =>
-                                                idx % 2 === 0
-                                        )}
-                                        colorStart={1}
-                                    />
-                                ))}
-                        </Flex>
-                        <Flex direction="column" gap={12} align="start">
-                            {isFetched &&
-                                data?.pages.map((question, idx) => (
-                                    <QuestionGrid
-                                        key={idx}
-                                        questions={question.data.data.filter(
-                                            (data: any, idx: number) =>
-                                                idx % 2 === 1
-                                        )}
-                                        colorStart={4}
-                                    />
-                                ))}
-                        </Flex>
-                    </Flex>
-                ) : (
-                    <Flex height="50vh" direction="column" gap={16}>
-                        <Flex direction="column" gap={8}>
-                            <Text typo="Subtitle1r" color="line_white_70">
-                                아직 Personal Q가 없으시군요!
-                            </Text>
-                            <Text
-                                typo="Headline1b"
-                                style={{ textAlign: "center" }}
-                            >
-                                친구를 추가해서
-                                <br />
-                                QFeed를 확인해보세요
-                            </Text>
-                        </Flex>
-                        <ButtonFillXSmall
-                            text="친구 추가하러 가기"
-                            state="active"
-                            onClick={() => router.push("/friend")}
-                        />
-                    </Flex>
+            <NavigationTop
+                leftIcon={
+                    <Profile
+                        width={46}
+                        onClick={() => router.push("/mypage")}
+                    />
+                }
+            />
+            <Flex direction="column" gap={16}>
+                {user.user && (
+                    <CheckOfficial
+                        onClick={handleClickPickMe}
+                        id={user.user.id}
+                    />
                 )}
-                <div ref={ref} style={{ height: "5px" }}></div>
-            </>
+                <MakeOfficial onClick={handleClickBasicQuestion} />
+            </Flex>
+
+            {/* <Filter isSort={isSort} setIsSort={setIsSort} /> */}
+            {data?.pages[0].data.count ? (
+                <Flex gap={12} align="start">
+                    <Flex direction="column" gap={12} align="start">
+                        {isFetched &&
+                            data?.pages.map((question, idx) => (
+                                <QuestionGrid
+                                    key={idx}
+                                    questions={question.data.data.filter(
+                                        (data: any, idx: number) =>
+                                            idx % 2 === 0
+                                    )}
+                                    colorStart={1}
+                                />
+                            ))}
+                    </Flex>
+                    <Flex direction="column" gap={12} align="start">
+                        {isFetched &&
+                            data?.pages.map((question, idx) => (
+                                <QuestionGrid
+                                    key={idx}
+                                    questions={question.data.data.filter(
+                                        (data: any, idx: number) =>
+                                            idx % 2 === 1
+                                    )}
+                                    colorStart={4}
+                                />
+                            ))}
+                    </Flex>
+                </Flex>
+            ) : (
+                <Flex height="50vh" direction="column" gap={16}>
+                    <Flex direction="column" gap={8}>
+                        <Text typo="Subtitle1r" color="line_white_70">
+                            아직 Personal Q가 없으시군요!
+                        </Text>
+                        <Text typo="Headline1b" style={{ textAlign: "center" }}>
+                            친구를 추가해서
+                            <br />
+                            QFeed를 확인해보세요
+                        </Text>
+                    </Flex>
+                    <ButtonFillXSmall
+                        text="친구 추가하러 가기"
+                        state="active"
+                        onClick={() => router.push("/friend")}
+                    />
+                </Flex>
+            )}
+            <div ref={ref} style={{ height: "5px" }}></div>
 
             <PlusButtonWrapper onClick={handleClickPlus}>
                 <PlusButton>
