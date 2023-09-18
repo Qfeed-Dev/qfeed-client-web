@@ -5,7 +5,7 @@ import Text from "../common/Text";
 import { colors } from "styles/theme";
 
 export interface NavProps {
-    title: string;
+    title?: string;
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
 }
