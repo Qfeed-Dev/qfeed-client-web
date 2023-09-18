@@ -34,6 +34,7 @@ const Profile = ({ width, onClick }: ProfileProp) => {
         userMutation.mutate({
             profileImage: url ? url.imageUrl : url
         });
+        user.refetch();
     };
 
     return (
@@ -47,7 +48,9 @@ const Profile = ({ width, onClick }: ProfileProp) => {
                     accept="image/x-png, image/gif, image/jpeg"
                 />
             )}
-            <ProfileImg src={user.user?.profileImage} />
+            {user.user?.profileImage && (
+                <ProfileImg src={user.user?.profileImage} />
+            )}
         </ProfileWrapper>
     );
 };
@@ -60,13 +63,14 @@ const ProfileWrapper = styled.label<{ width: number }>`
 
     border: 3px solid ${colors.light_qwhite};
     border-radius: 50%;
-    object-fit: cover;
     overflow: hidden;
 `;
 
 const ProfileImg = styled.img`
     width: 100%;
     height: 100%;
+
+    object-fit: cover;
 `;
 
 export default Profile;

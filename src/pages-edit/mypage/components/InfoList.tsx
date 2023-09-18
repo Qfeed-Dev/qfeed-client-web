@@ -14,7 +14,8 @@ import { User } from "src/models/account";
 import { useState } from "react";
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
-import Profile from "./Profile";
+import Profile from "../../../components/Profile/Profile";
+import FriendProfile from "src/components/Profile/FriendProfile";
 
 export default function InfoList({
     user,
@@ -31,7 +32,15 @@ export default function InfoList({
     return (
         <InfoListWrapper direction="column" gap={16}>
             <Flex direction="column" gap={8}>
-                <Profile width={72} />
+                {isMe ? (
+                    <Profile width={72} />
+                ) : (
+                    <FriendProfile
+                        width={72}
+                        url={user.profileImage}
+                        border={3}
+                    />
+                )}
                 <Text typo="Headline1b">{"@" + user.nickname}</Text>
             </Flex>
             {!isMe && (
