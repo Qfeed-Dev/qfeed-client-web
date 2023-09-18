@@ -34,6 +34,7 @@ const Profile = ({ width, onClick }: ProfileProp) => {
         userMutation.mutate({
             profileImage: url ? url.imageUrl : url
         });
+        user.refetch();
     };
 
     return (
