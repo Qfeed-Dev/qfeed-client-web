@@ -11,7 +11,7 @@ interface ProfileProp {
 const FriendProfile = ({ width, url, grayscale = 0 }: ProfileProp) => {
     return (
         <ProfileWrapper width={width}>
-            <ProfileImg src={url} grayscale={grayscale} />
+            {url && <ProfileImg src={url} grayscale={grayscale} />}
         </ProfileWrapper>
     );
 };
@@ -22,15 +22,14 @@ const ProfileWrapper = styled.div<{ width: number }>`
 
     background: ${colors.light_gray3};
 
-    border: 3px solid ${colors.light_qwhite};
     border-radius: 50%;
-    object-fit: cover;
     overflow: hidden;
 `;
 
 const ProfileImg = styled.img<{ grayscale: number }>`
     width: 100%;
     height: 100%;
+    object-fit: cover;
 
     filter: ${({ grayscale }) => `grayscale(${grayscale}%)`};
 `;
