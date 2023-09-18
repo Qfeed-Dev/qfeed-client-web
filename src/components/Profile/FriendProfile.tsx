@@ -4,7 +4,7 @@ import { colors } from "styles/theme";
 
 interface ProfileProp {
     width: number;
-    url: string;
+    url?: string;
     grayscale?: number;
 }
 

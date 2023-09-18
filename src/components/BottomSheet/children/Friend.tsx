@@ -15,6 +15,8 @@ import {
     changeAction,
     changeVisibleType
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import FriendProfile from "src/components/Profile/FriendProfile";
+import Flex from "src/components/common/Flex";
 
 interface Props {}
 
@@ -35,10 +37,18 @@ const Friend = ({}: Props) => {
                 <Loading />
             ) : (
                 <Menu>
-                    <Image type="default" src="" size={60} />
-                    <Spacing size={10} />
-                    <Text typo="Subtitle2b">{friend.friend?.name}</Text>
-                    <Text typo="Caption1r">{friend.friend?.nickname}</Text>
+                    <Flex direction="column" gap={8}>
+                        <FriendProfile
+                            width={72}
+                            url={friend.friend?.profileImage}
+                        />
+                        <Flex direction="column">
+                            <Text typo="Subtitle2b">{friend.friend?.name}</Text>
+                            <Text typo="Caption1r">
+                                {friend.friend?.nickname}
+                            </Text>
+                        </Flex>
+                    </Flex>
 
                     <Spacing size={20} />
                     <TextareaWrapper>
