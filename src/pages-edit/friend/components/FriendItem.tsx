@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
+import FriendProfile from "src/components/Profile/FriendProfile";
 
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
@@ -26,9 +27,13 @@ export default function FriendItem({
 
     return (
         <FriendWrapper>
-            <Flex gap={16} onClick={() => router.push(`/friend/${friend.id}`)}>
-                <ImgCover></ImgCover>
-                <Flex direction="column" align="start">
+            <Flex
+                justify="start"
+                gap={16}
+                onClick={() => router.push(`/friend/${friend.id}`)}
+            >
+                <FriendProfile width={35} url={friend.profileImage} />
+                <Flex width="auto" direction="column" align="start">
                     <Text typo="Subtitle1b">{friend.name}</Text>
                     <Text typo="Caption1r">@{friend.nickname}</Text>
                 </Flex>
@@ -52,12 +57,4 @@ export default function FriendItem({
 const FriendWrapper = styled(Flex)`
     padding-bottom: 1rem;
     border-bottom: 1px solid ${colors.line_white_5};
-`;
-
-const ImgCover = styled.div`
-    min-width: 35px;
-    min-height: 35px;
-    background: ${colors.light_gray1};
-
-    border-radius: 50%;
 `;
