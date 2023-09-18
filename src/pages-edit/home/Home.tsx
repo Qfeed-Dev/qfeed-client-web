@@ -26,7 +26,7 @@ import { useAppDispatch } from "src/hooks/useReduxHooks";
 import { changeQType } from "src/reducer/slices/qtype/qtypeSlice";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 import NavigationTop from "src/components/navigations/NavigationTop";
-import Profile from "../mypage/components/Profile";
+import Profile from "../../components/Profile/Profile";
 
 export default function Home() {
     const router = useRouter();

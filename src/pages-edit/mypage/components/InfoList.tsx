@@ -14,7 +14,7 @@ import { User } from "src/models/account";
 import { useState } from "react";
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
-import Profile from "./Profile";
+import Profile from "../../../components/Profile/Profile";
 
 export default function InfoList({
     user,

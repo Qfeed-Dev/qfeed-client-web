@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import { Friend } from "src/models/account";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
+import Profile from "../../components/Profile/Profile";
+import FriendProfile from "src/components/Profile/FriendProfile";
+import Flex from "src/components/common/Flex";
 
 export default function FriendItem({
     idx,
@@ -41,35 +44,22 @@ export default function FriendItem({
             onClick={handleClickFriend}
             backgroundColor={bgColor}
         >
-            <FriendInner>
-                <Menu>
-                    <Image
-                        type="default"
-                        size={35}
-                        src={
-                            data?.profileImage
-                                ? data?.profileImage
-                                : "https://i.ibb.co/0Z6FNN7/60pt.png"
-                        }
-                        grayscale={
-                            selectedIdx == null || selectedIdx === data.id
-                                ? 0
-                                : 100
-                        }
-                    />
-                </Menu>
-                <Spacing size={8} />
-
-                <Menu>
+            <FriendInner direction="column" gap={8}>
+                <FriendProfile
+                    width={35}
+                    url={data?.profileImage}
+                    grayscale={
+                        selectedIdx == null || selectedIdx === data.id ? 0 : 100
+                    }
+                />
+                <Flex direction="column">
                     <Text typo="Caption1b" color="light_qblack">
                         {data?.name}
                     </Text>
-                </Menu>
-                <Menu>
                     <Text typo="Caption2r" color="light_qblack">
                         {data?.nickname}
                     </Text>
-                </Menu>
+                </Flex>
             </FriendInner>
         </FriendWrapper>
     );
@@ -83,7 +73,7 @@ const FriendWrapper = styled.div<{ width: number; backgroundColor: any }>`
     background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
-const FriendInner = styled.div`
+const FriendInner = styled(Flex)`
     padding: 8px 20px;
 `;
 
