@@ -17,6 +17,9 @@ import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Photo from "src/components/common/Photo";
 import usePhotoMutation from "src/hooks/file/usePhotoMutation";
+import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
+import { validArray } from "src/hooks/common/useCheckValidation";
+import InputFill from "src/components/inputs/input-fill";
 
 export default function Page() {
     const router = useRouter();
@@ -25,6 +28,7 @@ export default function Page() {
     const [image, setImage] = useState("");
     const [question, setQuestion] = useState("");
     const [values, setValues] = useState<string[]>([""]);
+    const [message, setMessage] = useState<boolean>(false);
 
     const handleQuestion = (e: any) => {
         setQuestion(e.target.value);
@@ -36,6 +40,7 @@ export default function Page() {
             else newValues.push(values[i]);
         }
         setValues(newValues);
+        setMessage(false);
     };
 
     const clickAddValue = () => {
@@ -53,21 +58,26 @@ export default function Page() {
     const photo = usePhotoMutation();
 
     const clickUpload = async () => {
-        const url = file
-            ? await photo.mutateAsync({
-                  appName: "question",
-                  file: file
-              })
-            : "";
-        createPersonalQ.mutate({
-            Qtype: "personal",
-            title: question,
-            choiceList: values,
-            backgroundImage: url ? url.presignedUrl : url,
-            isBlind: false
-        });
+        const isValid = validArray(values);
+        if (isValid) {
+            const url = file
+                ? await photo.mutateAsync({
+                      appName: "question",
+                      file: file
+                  })
+                : "";
+            createPersonalQ.mutate({
+                Qtype: "personal",
+                title: question,
+                choiceList: values,
+                backgroundImage: url ? url.presignedUrl : url,
+                isBlind: false
+            });
 
-        router.push(Route.HOME());
+            router.push(Route.HOME());
+        } else {
+            setMessage(true);
+        }
     };
 
     return time2 ? (
@@ -154,18 +164,11 @@ export default function Page() {
                 <NavigationTopBack
                     title="질문 올리기"
                     rightIcon={
-                        <UploadButton onClick={clickUpload}>
-                            <Text
-                                typo="Subtitle1b"
-                                color="light_qblack"
-                                style={{
-                                    marginTop: 5,
-                                    textAlign: "center"
-                                }}
-                            >
-                                올리기
-                            </Text>
-                        </UploadButton>
+                        <ButtonFillXSmall
+                            text="올리기"
+                            state="default"
+                            onClick={clickUpload}
+                        />
                     }
                     transparent={Boolean(image)}
                 />
@@ -196,6 +199,15 @@ export default function Page() {
                             />
                         );
                     })}
+                    {message && (
+                        <Text
+                            typo="Caption1r"
+                            color="light_qwhite"
+                            style={{ width: "100%" }}
+                        >
+                            모든 선택지를 입력하세요!
+                        </Text>
+                    )}
                     {values.length < 6 ? (
                         <PlusButton onClick={clickAddValue}>
                             <div style={{ margin: "auto", display: "flex" }}>
