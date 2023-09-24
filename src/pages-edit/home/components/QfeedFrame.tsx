@@ -9,19 +9,21 @@ import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
 import { colors } from "styles/theme";
 
-interface Props {
+interface FeedProps {
     idx: number;
     colorIdx: number;
-    data: QuestionItem;
+    feed: QuestionItem;
     detail: boolean | undefined;
 }
 
-const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
+const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
     const router = useRouter();
-    const imageurl = data.backgroundImage.split("?")[0];
+    const imageurl = feed.backgroundImage.split("?")[0];
 
-    const writeDay = Date.parse(data.createdAt);
+    const writeDay = Date.parse(feed.createdAt);
     const today = new Date();
+
+    console.log(feed);
 
     const getTime = () => {
         const pastTime = Math.round(
@@ -48,8 +50,8 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
         <QfeedFrameWrapper
             onClick={handleClickFrame}
             repeatbackgroundcolor={
-                data.isViewed && !detail
-                    ? colors.light_gray3
+                feed.isViewed && !detail
+                    ? colors.light_gray2
                     : colors[getAppStateColor(colorIdx)]
             }
         >
@@ -57,8 +59,8 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
                 <QfeedFrameInner
                     imageurl={imageurl}
                     backgroundcolor={
-                        data.isViewed && !detail
-                            ? colors.light_gray3
+                        feed.isViewed && !detail
+                            ? colors.light_gray2
                             : colors[getAppStateColor(colorIdx)]
                     }
                 >
@@ -66,7 +68,7 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
                         typo="Headline2b"
                         color={imageurl ? "light_qwhite" : "light_qblack"}
                     >
-                        {data.title}
+                        {feed.title}
                     </Text>
                     <Spacing size={4} />
                     <Text
@@ -84,15 +86,15 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
                                     imageurl ? "line_white_50" : "light_qblack"
                                 }
                             >
-                                {data.choiceCount}명 응답
+                                {feed.choiceCount}명 응답
                             </Text>
                         </div>
                     </CountWrapper>
                 </QfeedFrameInner>
             </div>
-            {data.isChoiced ? undefined : (
+            {feed.isChoiced ? undefined : (
                 <QFeedWrapper>
-                    {data.isViewed && !detail ? (
+                    {feed.isViewed && !detail ? (
                         <Icon icon="QFeedImage" fill={colors.light_gray3} />
                     ) : imageurl ? (
                         <Icon
@@ -142,7 +144,7 @@ const QfeedFrameInner = styled.div<{ imageurl: any; backgroundcolor: any }>`
         right: 3px;
         bottom: 3px;
         filter: ${({ backgroundcolor }) =>
-            backgroundcolor === colors.light_gray3
+            backgroundcolor === colors.light_gray2
                 ? "grayscale(100%)"
                 : "grayscale(0%)"};
     }
