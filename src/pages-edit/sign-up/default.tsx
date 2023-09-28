@@ -5,7 +5,7 @@ import ButtonFillLarge from "src/components/buttons/button-fill-large";
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import NavigationTop from "src/components/navigations/NavigationTop";
-import ButtonGenderSelect from "src/components/sign-up/button-gender-select";
+import ButtonGenderSelect from "src/pages-edit/sign-up/components/button-gender-select";
 import { birthMsg, emailMsg, nameMsg, phoneMsg } from "src/constants/messages";
 import { useCheckNicknameQuery } from "src/hooks/account/useCheckNicknameQuery";
 import { useInput } from "src/hooks/common/useInput";
@@ -73,19 +73,18 @@ const SignIn = () => {
             />
             <Flex direction="column" justify="start" gap={24}>
                 <InputLine
-                    value={user?.name || name.value}
+                    value={name.value}
                     onChange={name.handleChangeInput}
                     label="이름"
                     placeholder="ex) 홍길동"
                     message={nameMsg.RIGHT}
-                    readonly={Boolean(user?.name)}
                 />
                 <ButtonGenderSelect
-                    value={user?.gender || gender.value}
+                    value={gender.value}
                     onClick={gender.handleChangeState}
                 />
                 <InputLine
-                    value={user?.birthday?.split("T")[0] || birthday.value}
+                    value={birthday.value}
                     onChange={birthday.handleChangeInput}
                     label="생년월일"
                     placeholder="ex) 2005-01-01"
@@ -97,10 +96,9 @@ const SignIn = () => {
                             : birthMsg.WRONG
                     }
                     isError={!validBirth(birthday.value)}
-                    readonly={Boolean(user?.birthday)}
                 />
                 <InputLine
-                    value={user?.phone || phone.value}
+                    value={phone.value}
                     onChange={phone.handleChangeInput}
                     label="휴대폰 번호"
                     placeholder="ex) 01012345678"
@@ -110,10 +108,9 @@ const SignIn = () => {
                             : phoneMsg.WRONG
                     }
                     isError={!validPhone(phone.value)}
-                    readonly={Boolean(user?.phone)}
                 />
                 <InputLine
-                    value={user?.email || email.value}
+                    value={email.value}
                     onChange={email.handleChangeInput}
                     label="이메일"
                     placeholder="ex) qfeed@naver.com"
@@ -125,11 +122,10 @@ const SignIn = () => {
                             : emailMsg.WRONG
                     }
                     isError={!validEmail(email.value)}
-                    readonly={Boolean(user?.email)}
                 />
                 <Flex align="end" gap={12}>
                     <InputLine
-                        value={user?.nickname || nickname.value}
+                        value={nickname.value}
                         onChange={nickname.handleChangeInput}
                         label="닉네임"
                         placeholder="ex) qfeed"
@@ -139,7 +135,6 @@ const SignIn = () => {
                                 : isDupNickname.data?.message
                         }
                         isError={!isDupNickname.data?.available}
-                        readonly={Boolean(user?.nickname)}
                     />
                 </Flex>
                 <ButtonFillLarge

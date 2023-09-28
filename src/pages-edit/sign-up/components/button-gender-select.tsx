@@ -1,8 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import Text from "../common/Text";
-import Flex from "../common/Flex";
+import Text from "../../../components/common/Text";
+import Flex from "../../../components/common/Flex";
 import { colors, theme } from "styles/theme";
 
 export type ButtonState = "active" | "disabled";
