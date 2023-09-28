@@ -1,4 +1,4 @@
-import SelectBox from "../selectbox/selectbox";
+import SelectBox from "src/components/selectbox/selectbox";
 import { GRADUATE_OPTIONS } from "src/constants/options";
 import University from "./university";
 import MidHighSchool from "./middle-high-school";

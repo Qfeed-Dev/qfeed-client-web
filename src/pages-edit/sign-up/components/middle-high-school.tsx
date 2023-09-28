@@ -1,24 +1,24 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import { useInput } from "src/hooks/common/useInput";
-
-import InputLine from "../inputs/input-line";
-import ButtonFillLarge from "../buttons/button-fill-large";
-import Option from "../selectbox/Options";
-import Flex from "../common/Flex";
-
-import { useUserMutation } from "src/hooks/account/useUserMutation";
 import { useAppSelector } from "src/hooks/useReduxHooks";
+import { useUserMutation } from "src/hooks/account/useUserMutation";
 import useGetSchoolQuery from "src/hooks/school/useGetSchoolQuery";
+
+import InputLine from "src/components/inputs/input-line";
+import ButtonFillLarge from "src/components/buttons/button-fill-large";
+import Option from "src/components/selectbox/Options";
+import Flex from "src/components/common/Flex";
 
 import { Route } from "src/constants/Route";
 
-const ElementarySchool = () => {
+const MidHighSchool = () => {
     const router = useRouter();
     const school = useInput();
     const filteredSchool = useGetSchoolQuery(school.value);
     const selected = useAppSelector((state) => state.organization.selected);
-
     const { userMutation } = useUserMutation();
 
     useEffect(() => {
@@ -31,7 +31,8 @@ const ElementarySchool = () => {
                 ? filteredSchool.data?.schoolInfo[1].row
                       .filter(
                           (schoolInfo: any) =>
-                              schoolInfo.SCHUL_KND_SC_NM === "초등학교"
+                              schoolInfo.SCHUL_KND_SC_NM === "고등학교" ||
+                              schoolInfo.SCHUL_KND_SC_NM === "중학교"
                       )
                       .map((schoolInfo: any) => {
                           return {
@@ -49,6 +50,7 @@ const ElementarySchool = () => {
             schoolType: selected,
             schoolName: school.value
         });
+        // router.push(selected === "졸업생" ? Route.COMPLETE : Route.MIDHIGH);
         router.push(Route.COMPLETE);
     };
 
@@ -59,7 +61,7 @@ const ElementarySchool = () => {
                     label="학교"
                     value={school.value}
                     onChange={school.handleChangeInput}
-                    placeholder="ex) 동덕초등학교"
+                    placeholder="ex) 동덕고등학교"
                 />
                 {filteredSchool.data?.schoolInfo && searchSchool() && (
                     <Option
@@ -77,4 +79,4 @@ const ElementarySchool = () => {
     );
 };
 
-export default ElementarySchool;
+export default MidHighSchool;

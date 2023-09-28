@@ -4,9 +4,9 @@ import { useSelect } from "src/hooks/common/useSelect";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
 
-import InputLine from "../inputs/input-line";
-import SelectBox from "../selectbox/selectbox";
-import ButtonFillLarge from "../buttons/button-fill-large";
+import InputLine from "src/components/inputs/input-line";
+import SelectBox from "src/components/selectbox/selectbox";
+import ButtonFillLarge from "src/components/buttons/button-fill-large";
 
 import { SCHOOL_YEAR_OPTIONS } from "src/constants/options";
 import { Route } from "src/constants/Route";
@@ -27,7 +27,8 @@ const University = () => {
             class: department.value,
             grade: grade.value
         });
-        router.push(selected === "졸업생" ? Route.COMPLETE : Route.UNIVERSITY);
+        // router.push(selected === "졸업생" ? Route.COMPLETE : Route.UNIVERSITY);
+        router.push(Route.COMPLETE);
     };
 
     return (
