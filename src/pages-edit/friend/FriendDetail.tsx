@@ -33,7 +33,9 @@ export default function FriendDetailPage({
                                 {/* <Icon icon="Share" /> */}
                                 <Icon
                                     icon="Ban"
-                                    onClick={() => router.push("/friend/ban")}
+                                    onClick={() =>
+                                        router.push(`/friend/${params.id}/ban`)
+                                    }
                                 />
                             </Flex>
                         }
