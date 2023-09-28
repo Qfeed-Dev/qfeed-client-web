@@ -4,10 +4,10 @@ import NavigationTop from "src/components/navigations/NavigationTopBack";
 import Flex from "src/components/common/Flex";
 import SelectBox from "src/components/selectbox/selectbox";
 import { ORGANIZATION_OPTIONS } from "src/constants/options";
-import ElementarySchool from "src/components/sign-up/elementary-school";
-import MidHighSchool from "src/components/sign-up/middle-high-school";
-import University from "src/components/sign-up/university";
-import Graduate from "src/components/sign-up/graduate";
+import ElementarySchool from "./components/elementary-school";
+import MidHighSchool from "./components/middle-high-school";
+import University from "./components/university";
+import Graduate from "./components/graduate";
 
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import Icon from "src/components/Icon/Icon";
@@ -19,7 +19,12 @@ const Organization = () => {
     return (
         <Flex height="100%" direction="column" justify="start" gap={24}>
             <NavigationTop
-                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
+                leftIcon={
+                    <Icon
+                        icon="LeftArrow"
+                        onClick={() => router.push("/auth/default")}
+                    />
+                }
                 title="회원 가입"
             />
             <SelectBox

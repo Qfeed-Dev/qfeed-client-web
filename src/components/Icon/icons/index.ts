@@ -31,6 +31,7 @@ export { default as QFeedImage } from "./images/QFeedImage";
 export { default as QFeedImage2 } from "./images/QFeedImage2";
 export { default as WaveImage } from "./images/WaveImage";
 export { default as FriendImage } from "./images/FriendImage";
+export { default as CheckImage } from "./images/CheckImage";
 
 // bottom navigation
 export { default as BHome } from "./bottomNavigation/Home";

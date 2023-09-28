@@ -7,13 +7,9 @@ import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 
 import BottomNavigation from "src/components/BottomNavigation";
-import Filter from "./components/Filter";
-import Spacing from "src/components/Spacing";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
 import Icon from "src/components/Icon";
-
-import { globalValue } from "src/constants/globalValue";
 
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import { useGetQuestions } from "src/hooks/questions/useGetQuestions";
@@ -63,14 +59,7 @@ export default function Home() {
         <></>
     ) : (
         <Flex direction="column" gap={16}>
-            <NavigationTop
-                leftIcon={
-                    <Profile
-                        width={46}
-                        onClick={() => router.push("/mypage")}
-                    />
-                }
-            />
+            <NavigationTop />
             <Flex direction="column" gap={16}>
                 {user.user && (
                     <CheckOfficial

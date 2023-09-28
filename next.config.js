@@ -6,6 +6,9 @@ const nextConfig = {
     },
     compiler: {
         styledComponents: true
+    },
+    images: {
+        domains: ["qfeed-s3.s3.ap-northeast-2.amazonaws.com"]
     }
 };
 

@@ -53,7 +53,6 @@ export const repeatBackgroundColor: any = [
     "primary_qorange",
     "primary_qblue",
     "primary_qyellow",
-    "primary_qyellow",
     "primary_qgreen",
     "primary_qred"
 ].sort((a, b) => Math.random() - 0.5);

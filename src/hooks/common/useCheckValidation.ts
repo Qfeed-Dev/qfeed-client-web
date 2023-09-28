@@ -30,3 +30,13 @@ export const validBirth = (birthday: string) => {
     }
     return true;
 };
+
+// 배열 유효성 검사
+export const validArray = (array: Array<string>) => {
+    for (const item of array) {
+        if (!item || item == "") {
+            return false;
+        }
+    }
+    return true;
+};
