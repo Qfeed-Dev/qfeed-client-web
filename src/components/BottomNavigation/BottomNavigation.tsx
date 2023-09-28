@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { colors } from "styles/theme";
 import { Route } from "src/constants/Route";
@@ -15,11 +16,7 @@ const BottomNavigation = ({}: Props) => {
     return (
         <BottomNavigationWrapper>
             <BottomNavigationInner>
-                <NavIconWrapper
-                    onClick={() => {
-                        router.push(Route.HOME());
-                    }}
-                >
+                <NavIconWrapper href={"/"}>
                     <Icon
                         icon="BHome"
                         width={24}
@@ -39,11 +36,7 @@ const BottomNavigation = ({}: Props) => {
                         selected={Boolean(pathname.match("/((chat).*)"))}
                     />
                 </NavIconWrapper> */}
-                <NavIconWrapper
-                    onClick={() => {
-                        router.push(Route.FRIEND());
-                    }}
-                >
+                <NavIconWrapper href={"/friend"}>
                     <Icon
                         icon="BSearch"
                         width={24}
@@ -51,11 +44,7 @@ const BottomNavigation = ({}: Props) => {
                         selected={Boolean(pathname.match("/((friend).*)"))}
                     />
                 </NavIconWrapper>
-                <NavIconWrapper
-                    onClick={() => {
-                        router.push(Route.MYPAGE());
-                    }}
-                >
+                <NavIconWrapper href={"mypage"}>
                     <Icon
                         icon="BMypage"
                         width={24}
@@ -92,6 +81,12 @@ const BottomNavigationInner = styled.div`
     border-top: 1px solid ${colors.light_qwhite};
 `;
 
-const NavIconWrapper = styled(Flex)``;
+const NavIconWrapper = styled(Link)`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 export default BottomNavigation;
