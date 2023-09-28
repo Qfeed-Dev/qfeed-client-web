@@ -14,7 +14,7 @@ import Flex from "src/components/common/Flex";
 
 import { Route } from "src/constants/Route";
 
-const MidHighSchool = () => {
+const MidHighSchool = ({ isGraduate = false }: { isGraduate?: boolean }) => {
     const router = useRouter();
     const school = useInput();
     const filteredSchool = useGetSchoolQuery(school.value);
@@ -31,6 +31,8 @@ const MidHighSchool = () => {
                 ? filteredSchool.data?.schoolInfo[1].row
                       .filter(
                           (schoolInfo: any) =>
+                              (isGraduate &&
+                                  schoolInfo.SCHUL_KND_SC_NM === "초등학교") ||
                               schoolInfo.SCHUL_KND_SC_NM === "고등학교" ||
                               schoolInfo.SCHUL_KND_SC_NM === "중학교"
                       )

@@ -14,7 +14,11 @@ const Graduate = () => {
                 options={GRADUATE_OPTIONS}
                 value={selected}
             />
-            {selected === "대학교" ? <University /> : <MidHighSchool />}
+            {selected === "대학교" ? (
+                <University />
+            ) : (
+                <MidHighSchool isGraduate />
+            )}
         </>
     );
 };
