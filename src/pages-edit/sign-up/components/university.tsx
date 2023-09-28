@@ -5,6 +5,7 @@ import { useSelect } from "src/hooks/common/useSelect";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
 import useGetUnivQuery from "src/hooks/school/useGetUnivQuery";
+import useGetMajorQuery from "src/hooks/school/useGetMajorQuery";
 
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
@@ -24,11 +25,15 @@ const University = () => {
 
     const { userMutation } = useUserMutation();
     const filteredSchool = useGetUnivQuery(school.value);
+    const filteredMajor = useGetMajorQuery(department.value);
 
     useEffect(() => {
         filteredSchool.refetch();
-        console.log(filteredSchool.data);
     }, [school.value]);
+
+    useEffect(() => {
+        filteredMajor.refetch();
+    }, [department.value]);
 
     const searchSchool = useCallback(() => {
         const filteredSchoolInfo =
@@ -37,7 +42,8 @@ const University = () => {
                       (schoolInfo: any) => {
                           return {
                               name: schoolInfo.schoolName,
-                              value: schoolInfo.schoolName
+                              value:
+                                  schoolInfo.schoolName + schoolInfo.campusName
                           };
                       }
                   )
@@ -45,6 +51,22 @@ const University = () => {
 
         return filteredSchoolInfo;
     }, [filteredSchool]);
+
+    const searchMajor = useCallback(() => {
+        const filteredMajorInfo =
+            filteredMajor.data?.dataSearch.content && department.value
+                ? filteredMajor.data?.dataSearch.content.map(
+                      (schoolInfo: any) => {
+                          return {
+                              name: schoolInfo.mClass,
+                              value: schoolInfo.majorSeq
+                          };
+                      }
+                  )
+                : null;
+
+        return filteredMajorInfo;
+    }, [filteredMajor]);
 
     const handleClickNext = () => {
         userMutation.mutate({
@@ -73,12 +95,21 @@ const University = () => {
                     />
                 )}
             </Flex>
-            <InputLine
-                label="학과"
-                value={department.value}
-                onChange={department.handleChangeInput}
-                placeholder="ex) 경영학과"
-            />
+            <Flex direction="column">
+                <InputLine
+                    label="학과"
+                    value={department.value}
+                    onChange={department.handleChangeInput}
+                    placeholder="ex) 경영학과"
+                />
+                {filteredMajor.data?.dataSearch.content && searchMajor() && (
+                    <Option
+                        options={searchMajor()}
+                        setState={department.setValue}
+                    />
+                )}
+            </Flex>
+
             <SelectBox
                 label="학번"
                 value={grade.value}

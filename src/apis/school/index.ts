@@ -31,6 +31,23 @@ const schoolAPI = {
             }
         );
         return response.data;
+    },
+    async getMajorName(word: string) {
+        const response = await axios.get(
+            "https://www.career.go.kr/cnet/openapi/getOpenApi",
+            {
+                params: {
+                    apiKey: process.env.NEXT_PUBLIC_UNIV_API_KEY,
+                    svcType: "api",
+                    svcCode: "MAJOR",
+                    contentType: "json",
+                    gubun: "univ_list",
+                    univSe: "univ",
+                    searchTitle: word
+                }
+            }
+        );
+        return response.data;
     }
 };
 
