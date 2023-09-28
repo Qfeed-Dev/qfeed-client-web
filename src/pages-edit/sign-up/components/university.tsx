@@ -1,12 +1,16 @@
+import { useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useInput } from "src/hooks/common/useInput";
 import { useSelect } from "src/hooks/common/useSelect";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
+import useGetUnivQuery from "src/hooks/school/useGetUnivQuery";
 
+import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
 import SelectBox from "src/components/selectbox/selectbox";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
+import Option from "src/components/selectbox/Options";
 
 import { SCHOOL_YEAR_OPTIONS } from "src/constants/options";
 import { Route } from "src/constants/Route";
@@ -19,6 +23,28 @@ const University = () => {
     const selected = useAppSelector((state) => state.organization.selected);
 
     const { userMutation } = useUserMutation();
+    const filteredSchool = useGetUnivQuery(school.value);
+
+    useEffect(() => {
+        filteredSchool.refetch();
+        console.log(filteredSchool.data);
+    }, [school.value]);
+
+    const searchSchool = useCallback(() => {
+        const filteredSchoolInfo =
+            filteredSchool.data?.dataSearch.content && school.value
+                ? filteredSchool.data?.dataSearch.content.map(
+                      (schoolInfo: any) => {
+                          return {
+                              name: schoolInfo.schoolName,
+                              value: schoolInfo.schoolName
+                          };
+                      }
+                  )
+                : null;
+
+        return filteredSchoolInfo;
+    }, [filteredSchool]);
 
     const handleClickNext = () => {
         userMutation.mutate({
@@ -33,12 +59,20 @@ const University = () => {
 
     return (
         <>
-            <InputLine
-                label="학교"
-                value={school.value}
-                onChange={school.handleChangeInput}
-                placeholder="ex) 동덕고등학교"
-            />
+            <Flex direction="column">
+                <InputLine
+                    label="학교"
+                    value={school.value}
+                    onChange={school.handleChangeInput}
+                    placeholder="ex) 홍익대학교"
+                />
+                {filteredSchool.data?.dataSearch.content && searchSchool() && (
+                    <Option
+                        options={searchSchool()}
+                        setState={school.setValue}
+                    />
+                )}
+            </Flex>
             <InputLine
                 label="학과"
                 value={department.value}
@@ -51,6 +85,7 @@ const University = () => {
                 setState={grade.handleSelect}
                 options={SCHOOL_YEAR_OPTIONS}
             />
+
             <ButtonFillLarge
                 state={
                     school.value && department.value && grade.value

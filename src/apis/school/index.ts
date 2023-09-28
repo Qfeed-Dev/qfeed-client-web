@@ -6,7 +6,7 @@ const schoolAPI = {
             "https://open.neis.go.kr/hub/schoolInfo",
             {
                 params: {
-                    KEY: process.env.SCHOOL_API_KEY,
+                    KEY: process.env.NEXT_PUBLIC_SCHOOL_API_KEY,
                     Type: "json",
                     pIndex: 1,
                     pSize: 20,
@@ -15,15 +15,23 @@ const schoolAPI = {
             }
         );
         return response.data;
+    },
+    async getUnivName(word: string) {
+        const response = await axios.get(
+            "https://www.career.go.kr/cnet/openapi/getOpenApi",
+            {
+                params: {
+                    apiKey: process.env.NEXT_PUBLIC_UNIV_API_KEY,
+                    svcType: "api",
+                    svcCode: "SCHOOL",
+                    contentType: "json",
+                    gubun: "univ_list",
+                    searchSchulNm: word
+                }
+            }
+        );
+        return response.data;
     }
-    // async getUnivName(word: string) {
-    //     const response = await defaultAxios.get("/account/apple/login", {
-    //         params: {
-    //             idToken: id_token
-    //         }
-    //     });
-    //     return response.data;
-    // }
 };
 
 export default schoolAPI;
