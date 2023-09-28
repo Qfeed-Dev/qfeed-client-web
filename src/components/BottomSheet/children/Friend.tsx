@@ -1,7 +1,6 @@
 "use client";
 import Loading from "src/components/common/Loading";
 import Text from "src/components/common/Text";
-import Image from "src/components/Image";
 import Spacing from "src/components/Spacing";
 import Textarea from "src/components/Textarea";
 import useFriendQuery from "src/hooks/account/useFriendQuery";

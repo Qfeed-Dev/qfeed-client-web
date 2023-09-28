@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Text } from "src/components/common/Text";
 import Icon from "src/components/Icon";
@@ -9,19 +10,21 @@ import { getAppStateColor } from "src/utils/colorGenerate";
 import styled from "styled-components";
 import { colors } from "styles/theme";
 
-interface Props {
+interface FeedProps {
     idx: number;
     colorIdx: number;
-    data: QuestionItem;
+    feed: QuestionItem;
     detail: boolean | undefined;
 }
 
-const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
+const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
     const router = useRouter();
-    const imageurl = data.backgroundImage.split("?")[0];
+    const imageurl = feed.backgroundImage.split("?")[0];
 
-    const writeDay = Date.parse(data.createdAt);
+    const writeDay = Date.parse(feed.createdAt);
     const today = new Date();
+
+    console.log(feed);
 
     const getTime = () => {
         const pastTime = Math.round(
@@ -45,54 +48,44 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
     };
 
     return (
-        <QfeedFrameWrapper
-            onClick={handleClickFrame}
-            repeatbackgroundcolor={
-                data.isViewed && !detail
-                    ? colors.light_gray3
-                    : colors[getAppStateColor(colorIdx)]
-            }
-        >
-            <div style={{ padding: 3, overflow: "hidden" }}>
-                <QfeedFrameInner
-                    imageurl={imageurl}
-                    backgroundcolor={
-                        data.isViewed && !detail
-                            ? colors.light_gray3
-                            : colors[getAppStateColor(colorIdx)]
-                    }
+        <QfeedFrameWrapper onClick={handleClickFrame}>
+            <QfeedFrameInner
+                imageurl={Boolean(imageurl)}
+                backgroundcolor={
+                    feed.isViewed && !detail
+                        ? colors.light_gray2
+                        : colors[getAppStateColor(colorIdx)]
+                }
+            >
+                <Text
+                    typo="Headline2b"
+                    color={imageurl ? "light_qwhite" : "light_qblack"}
                 >
-                    <Text
-                        typo="Headline2b"
-                        color={imageurl ? "light_qwhite" : "light_qblack"}
-                    >
-                        {data.title}
-                    </Text>
-                    <Spacing size={4} />
-                    <Text
-                        typo="Caption1r"
-                        color={imageurl ? "light_qwhite" : "light_qblack"}
-                    >
-                        {time}
-                    </Text>
-                    <Spacing size={27} />
-                    <CountWrapper>
-                        <div style={{ margin: "auto 0" }}>
-                            <Text
-                                typo="Subtitle1b"
-                                color={
-                                    imageurl ? "line_white_50" : "light_qblack"
-                                }
-                            >
-                                {data.choiceCount}명 응답
-                            </Text>
-                        </div>
-                    </CountWrapper>
-                </QfeedFrameInner>
-            </div>
-            {data.isChoiced ? undefined : (
+                    {feed.title}
+                </Text>
+                <Spacing size={4} />
+                <Text
+                    typo="Caption1r"
+                    color={imageurl ? "light_qwhite" : "light_qblack"}
+                >
+                    {time}
+                </Text>
+                <Spacing size={27} />
+                <CountWrapper>
+                    <div style={{ margin: "auto 0" }}>
+                        <Text
+                            typo="Subtitle1b"
+                            color={imageurl ? "line_white_50" : "light_qblack"}
+                        >
+                            {feed.choiceCount}명 응답
+                        </Text>
+                    </div>
+                </CountWrapper>
+            </QfeedFrameInner>
+
+            {feed.isChoiced ? undefined : (
                 <QFeedWrapper>
-                    {data.isViewed && !detail ? (
+                    {feed.isViewed && !detail ? (
                         <Icon icon="QFeedImage" fill={colors.light_gray3} />
                     ) : imageurl ? (
                         <Icon
@@ -104,52 +97,47 @@ const QfeedFrame = ({ idx, colorIdx, data, detail }: Props) => {
                     )}
                 </QFeedWrapper>
             )}
+            {imageurl && (
+                <BackgroundImage
+                    src={imageurl}
+                    imageurl={imageurl}
+                    alt="QFeed"
+                    fill={true}
+                    backgroundcolor={
+                        feed.isViewed && !detail
+                            ? colors.light_gray2
+                            : colors[getAppStateColor(colorIdx)]
+                    }
+                />
+            )}
         </QfeedFrameWrapper>
     );
 };
 
-const QfeedFrameWrapper = styled.div<{ repeatbackgroundcolor: any }>`
+const QfeedFrameWrapper = styled.div`
     width: 100%;
     height: fit-content;
     position: relative;
     border-radius: 10px;
-    background-color: ${({ repeatbackgroundcolor }) => repeatbackgroundcolor};
 `;
 
-const QfeedFrameInner = styled.div<{ imageurl: any; backgroundcolor: any }>`
+const QFeedWrapper = styled.div`
+    position: absolute;
+    right: 12px;
+    bottom: 28px;
+`;
+
+const QfeedFrameInner = styled.div<{ imageurl: boolean; backgroundcolor: any }>`
     padding: 28px 20px;
     overflow: hidden;
     text-align: left;
 
     border-radius: 10px;
+    border: 3px solid ${({ backgroundcolor }) => backgroundcolor};
     color: ${({ imageurl }) =>
         imageurl ? colors.light_qwhite : colors.light_qblack};
-    background-color: ${({ imageurl }) =>
-        imageurl ? colors.light_qblack : null};
-
-    &::before {
-        content: "";
-        border-radius: 10px;
-        background-color: ${({ imageurl, backgroundcolor }) =>
-            imageurl ? null : backgroundcolor};
-        background-image: url(${({ imageurl }) => imageurl});
-        background-size: cover;
-        background-position: center;
-        opacity: 0.5;
-        position: absolute;
-        top: 3px;
-        left: 3px;
-        right: 3px;
-        bottom: 3px;
-        filter: ${({ backgroundcolor }) =>
-            backgroundcolor === colors.light_gray3
-                ? "grayscale(100%)"
-                : "grayscale(0%)"};
-    }
-
-    div {
-        position: relative;
-    }
+    background-color: ${({ imageurl, backgroundcolor }) =>
+        imageurl ? colors.line_black_50 : backgroundcolor};
 `;
 
 const CountWrapper = styled.div`
@@ -157,10 +145,20 @@ const CountWrapper = styled.div`
     display: flex;
 `;
 
-const QFeedWrapper = styled.div`
+const BackgroundImage = styled(Image)<{
+    imageurl: string;
+    backgroundcolor: any;
+}>`
+    border-radius: 10px;
+    object-fit: cover;
+
+    filter: ${({ backgroundcolor }) =>
+        backgroundcolor === colors.light_gray2
+            ? "grayscale(100%)"
+            : "grayscale(0%)"};
+
     position: absolute;
-    right: 12px;
-    bottom: 28px;
+    z-index: -1;
 `;
 
 export default QfeedFrame;

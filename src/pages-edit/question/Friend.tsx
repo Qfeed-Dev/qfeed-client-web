@@ -1,14 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Text } from "src/components/common/Text";
-import Image from "src/components/Image";
-import Spacing from "src/components/Spacing";
 import useDisplaySize from "src/hooks/useDisplaySize";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import { Friend } from "src/models/account";
 import { changeVisibleType } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import styled from "styled-components";
-import Profile from "../../components/Profile/Profile";
 import FriendProfile from "src/components/Profile/FriendProfile";
 import Flex from "src/components/common/Flex";
 

@@ -27,7 +27,7 @@ const QuestionGrid = ({
                     key={idx}
                     idx={data.id}
                     colorIdx={idx + colorStart}
-                    data={data}
+                    feed={data}
                     detail={detail}
                 />
             ))}
