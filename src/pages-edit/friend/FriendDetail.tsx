@@ -34,7 +34,13 @@ export default function FriendDetailPage({
                                 <Icon
                                     icon="Ban"
                                     onClick={() =>
-                                        router.push(`/friend/${params.id}/ban`)
+                                        friend?.isBlocking
+                                            ? router.push(
+                                                  `/friend/${params.id}/unblock`
+                                              )
+                                            : router.push(
+                                                  `/friend/${params.id}/block`
+                                              )
                                     }
                                 />
                             </Flex>
