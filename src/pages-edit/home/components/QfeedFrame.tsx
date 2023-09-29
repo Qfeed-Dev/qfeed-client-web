@@ -101,6 +101,8 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
                     imageurl={imageurl}
                     alt="QFeed"
                     fill={true}
+                    placeholder="blur"
+                    blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAQAAADhJE2MAAAAEElEQVR42mMs/c8ABIzYKABcTgXVauTJNQAAAABJRU5ErkJggg=="
                     backgroundcolor={
                         feed.isViewed && !detail
                             ? colors.light_gray2
