@@ -24,8 +24,6 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
     const writeDay = Date.parse(feed.createdAt);
     const today = new Date();
 
-    console.log(feed);
-
     const getTime = () => {
         const pastTime = Math.round(
             (today.getTime() - writeDay - 9000 * 60 * 60) / (1000 * 60 * 60)
@@ -50,7 +48,7 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
     return (
         <QfeedFrameWrapper onClick={handleClickFrame}>
             <QfeedFrameInner
-                imageurl={Boolean(imageurl)}
+                imageurl={imageurl}
                 backgroundcolor={
                     feed.isViewed && !detail
                         ? colors.light_gray2
@@ -103,6 +101,8 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
                     imageurl={imageurl}
                     alt="QFeed"
                     fill={true}
+                    placeholder="blur"
+                    blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAQAAADhJE2MAAAAEElEQVR42mMs/c8ABIzYKABcTgXVauTJNQAAAABJRU5ErkJggg=="
                     backgroundcolor={
                         feed.isViewed && !detail
                             ? colors.light_gray2
@@ -127,7 +127,7 @@ const QFeedWrapper = styled.div`
     bottom: 28px;
 `;
 
-const QfeedFrameInner = styled.div<{ imageurl: boolean; backgroundcolor: any }>`
+const QfeedFrameInner = styled.div<{ imageurl: string; backgroundcolor: any }>`
     padding: 28px 20px;
     overflow: hidden;
     text-align: left;

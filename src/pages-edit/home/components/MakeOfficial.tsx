@@ -27,51 +27,84 @@ const MakeOfficial = (props: QuestionProps) => {
     const QSet = useQsetCursorQuery();
     const newQSet = useQsetMutation();
 
+    console.log(QSet);
+
     const [endTime, setEndTime] = useState<number | typeof NaN>(NaN);
-    // const [time, setTime] = useState<Time | undefined>(undefined);
+    const [time, setTime] = useState<Time | undefined>(undefined);
 
-    // const createNewQSet = async () => {
-    //     const qSetCount = QSet.questionCursor?.length;
-    //     if (
-    //         (qSetCount === 1 &&
-    //             QSet.questionCursor &&
-    //             QSet.questionCursor[0].isDone) ||
-    //         !qSetCount
-    //     ) {
-    //         const nQSet = await newQSet.mutateAsync();
-    //         setEndTime(Date.parse(nQSet.questionCursor[0].endAt));
-    //     }
-    // };
+    const createNewEndTime = async () => {
+        const qSetCount = QSet.questionCursor?.length;
+        const today = new Date();
+        const nine = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            21
+        );
+        const tomorrow = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            24
+        );
 
-    // const getTime = () => {
-    //     const date = new Date();
-    //     const times = new Date(
-    //         endTime + 24 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
-    //     );
+        // 아예 초기진입
+        if (!qSetCount) {
+            newQSet.mutate();
+            setEndTime(NaN);
+        }
+        // 첫번째 질문 set 끝나고 두번째 질문 set 받기
+        else if (
+            qSetCount === 1 &&
+            QSet.questionCursor &&
+            QSet.questionCursor[0].isDone
+        ) {
+            if (+tomorrow - today.getTime() > 3 * 60 * 60 * 1000) {
+                setEndTime(Date.parse(QSet.questionCursor[0].endAt));
+            } else {
+                setEndTime(+nine);
+            }
+        }
+        // 두번째 질문 set 까지 끝남
+        else if (
+            qSetCount === 2 &&
+            QSet.questionCursor &&
+            QSet.questionCursor[0].isDone
+        ) {
+            setEndTime(+nine);
+        }
+        // 질문 대답하는 중
+    };
 
-    //     if (times.getDate() <= 1 || times.getFullYear() < 1970) {
-    //         if (!QSet.isLoading && QSet.questionCursor) {
-    //             const qSetCount = QSet.questionCursor?.length;
-    //             qSetCount < 2 && newQSet.mutate();
-    //             setEndTime(NaN);
-    //             return;
-    //         }
-    //     }
+    const getTime = () => {
+        const date = new Date();
+        const times = new Date(
+            endTime + 3 * 60 * 60 * 1000 + 15 * 60 * 60 * 1000 - +date
+        );
 
-    //     const hours = String(times.getHours()).padStart(2, "0");
-    //     const minutes = String(times.getMinutes()).padStart(2, "0");
-    //     const seconds = String(times.getSeconds()).padStart(2, "0");
-    //     setTime({ hour: hours, min: minutes, sec: seconds });
-    // };
+        if (times.getDate() <= 1 || times.getFullYear() < 1970) {
+            if (!QSet.isLoading && QSet.questionCursor) {
+                const qSetCount = QSet.questionCursor?.length;
+                qSetCount < 2 && newQSet.mutate();
+                setEndTime(NaN);
+                return;
+            }
+        }
 
-    // useEffect(() => {
-    //     if (!isNaN(endTime)) {
-    //         // const interval = setInterval(getTime, 1000);
-    //         // return () => clearInterval(interval);
-    //     } else {
-    //         if (!QSet.isLoading) createNewQSet();
-    //     }
-    // }, [endTime, QSet]);
+        const hours = String(times.getHours()).padStart(2, "0");
+        const minutes = String(times.getMinutes()).padStart(2, "0");
+        const seconds = String(times.getSeconds()).padStart(2, "0");
+        setTime({ hour: hours, min: minutes, sec: seconds });
+    };
+
+    useEffect(() => {
+        if (!isNaN(endTime)) {
+            const interval = setInterval(getTime, 1000);
+            return () => clearInterval(interval);
+        } else {
+            if (!QSet.isLoading) createNewEndTime();
+        }
+    }, [endTime, QSet]);
 
     return QSet.isLoading ? (
         <Loading />
@@ -87,11 +120,11 @@ const MakeOfficial = (props: QuestionProps) => {
                             <Text typo="Caption1r" color="light_qblack">
                                 다음 질문까지
                             </Text>
-                            {/* <Text typo="Headline2b" color="light_qblack">
+                            <Text typo="Headline2b" color="light_qblack">
                                 {time
                                     ? `${time.hour}:${time.min}:${time.sec}`
                                     : "00:00:00"}
-                            </Text> */}
+                            </Text>
                             <ImageWrapper>
                                 <Icon
                                     icon="AngelImage2"

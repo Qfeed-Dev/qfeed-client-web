@@ -8,7 +8,11 @@ const useQsetCursorQuery = () => {
         data: questionCursor,
         isLoading,
         refetch
-    } = useQuery<QSetCursor[]>(QSetCursorKeys.all, getQsetCursor);
+    } = useQuery<QSetCursor[]>(QSetCursorKeys.all, getQsetCursor, {
+        onError: (error: any) => {
+            console.log(error);
+        }
+    });
 
     return { questionCursor, isLoading, refetch };
 };

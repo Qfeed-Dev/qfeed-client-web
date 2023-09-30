@@ -19,7 +19,7 @@ import Photo from "src/components/common/Photo";
 import usePhotoMutation from "src/hooks/file/usePhotoMutation";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 import { validArray } from "src/hooks/common/useCheckValidation";
-import InputFill from "src/components/inputs/input-fill";
+import InputFill from "src/components/inputs/input-fill-search";
 
 export default function Page() {
     const router = useRouter();
