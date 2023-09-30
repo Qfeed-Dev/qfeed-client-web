@@ -27,6 +27,8 @@ const MakeOfficial = (props: QuestionProps) => {
     const QSet = useQsetCursorQuery();
     const newQSet = useQsetMutation();
 
+    console.log(QSet);
+
     const [endTime, setEndTime] = useState<number | typeof NaN>(NaN);
     const [time, setTime] = useState<Time | undefined>(undefined);
 
@@ -39,28 +41,39 @@ const MakeOfficial = (props: QuestionProps) => {
             today.getDate(),
             21
         );
+        const tomorrow = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            today.getDate(),
+            24
+        );
 
         // 아예 초기진입
         if (!qSetCount) {
             newQSet.mutate();
             setEndTime(NaN);
         }
-        // 첫번째 질문 셋이 끝나고 두번째 질문 셋 받기
+        // 첫번째 질문 set 끝나고 두번째 질문 set 받기
         else if (
             qSetCount === 1 &&
             QSet.questionCursor &&
             QSet.questionCursor[0].isDone
         ) {
-            if (24 * 60 * 60 * 1000 - today.getTime() > 3 * 60 * 60 * 1000) {
+            if (+tomorrow - today.getTime() > 3 * 60 * 60 * 1000) {
                 setEndTime(Date.parse(QSet.questionCursor[0].endAt));
             } else {
                 setEndTime(+nine);
             }
         }
-        // 두번째 질문 셋 까지 끝남
-        else {
+        // 두번째 질문 set 까지 끝남
+        else if (
+            qSetCount === 2 &&
+            QSet.questionCursor &&
+            QSet.questionCursor[0].isDone
+        ) {
             setEndTime(+nine);
         }
+        // 질문 대답하는 중
     };
 
     const getTime = () => {
