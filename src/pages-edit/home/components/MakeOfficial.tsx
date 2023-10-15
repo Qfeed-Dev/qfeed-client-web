@@ -142,7 +142,9 @@ const MakeOfficial = (props: QuestionProps) => {
                             <Text typo="Caption1r" color="light_qblack">
                                 <span>아직 </span>
                                 <span>
-                                    {10 - QSet.questionCursor[0].cursor + 1}
+                                    {QSet.questionCursor[0].QsetLength -
+                                        QSet.questionCursor[0].cursor +
+                                        1}
                                     문제 남았어요!
                                 </span>
                             </Text>
