@@ -11,10 +11,10 @@ export async function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("Authorization", `Bearer ${token}`);
 
-    if (pathname.match("/((?!account|auth).*)")) {
-        return await checkSignIn(request);
-    } else if (pathname.match("/((?!account).*)")) {
+    if (pathname.match("/((?!account).*)")) {
         return await checkSignUp(request);
+    } else if (pathname.match("/((?!account|auth).*)")) {
+        return await checkSignIn(request);
     }
 
     return NextResponse.next();
