@@ -10,8 +10,7 @@ const useUnBlockFriendMutation = () => {
 
     return useMutation((id: number) => accountAPI.unBlockFriend({ id }), {
         onSuccess: (data: any, id: number) => {
-            queryClient.invalidateQueries(friendKeys.detail(id));
-            router.back();
+            queryClient.invalidateQueries(friendKeys.all);
         },
         onError: (error: any) => {}
     });

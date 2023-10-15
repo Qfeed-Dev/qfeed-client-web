@@ -31,18 +31,20 @@ export default function FriendDetailPage({
                         rightIcon={
                             <Flex width="auto" gap={24}>
                                 {/* <Icon icon="Share" /> */}
-                                <Icon
-                                    icon="Ban"
-                                    onClick={() =>
-                                        friend?.isBlocking
-                                            ? router.push(
-                                                  `/friend/${params.id}/unblock`
-                                              )
-                                            : router.push(
-                                                  `/friend/${params.id}/block`
-                                              )
-                                    }
-                                />
+                                {!friend?.isBlocking && (
+                                    <Icon
+                                        icon="Ban"
+                                        onClick={() =>
+                                            friend?.isBlocking
+                                                ? router.push(
+                                                      `/friend/${params.id}/unblock`
+                                                  )
+                                                : router.push(
+                                                      `/friend/${params.id}/block`
+                                                  )
+                                        }
+                                    />
+                                )}
                             </Flex>
                         }
                     />

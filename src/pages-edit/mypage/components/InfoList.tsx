@@ -14,6 +14,7 @@ import { User } from "src/models/account";
 import { useState } from "react";
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
+import useUnBlockFriendMutation from "src/hooks/account/useUnBlockFriendMutation";
 import Profile from "../../../components/Profile/Profile";
 import FriendProfile from "src/components/Profile/FriendProfile";
 
@@ -28,6 +29,7 @@ export default function InfoList({
     const [follow, setFollow] = useState<boolean>(user.isFollowing || false);
     const { friendMutation } = useFriendMutation(user.id);
     const { delFriendMutation } = useDeleteFriendMutation(user.id);
+    const unblock = useUnBlockFriendMutation();
 
     return (
         <InfoListWrapper direction="column" gap={16}>
@@ -45,12 +47,24 @@ export default function InfoList({
             </Flex>
             {!isMe && (
                 <ButtonFillXSmall
-                    text={follow ? "팔로잉" : "팔로우"}
+                    text={
+                        user.isBlocking
+                            ? "차단 해제"
+                            : follow
+                            ? "팔로잉"
+                            : "팔로우"
+                    }
                     onClick={() => {
-                        follow
-                            ? delFriendMutation.mutate()
-                            : friendMutation.mutate();
-                        setFollow((follow) => !follow);
+                        if (user.isBlocking) {
+                            unblock.mutate(user.id);
+                        } else {
+                            if (follow) {
+                                delFriendMutation.mutate();
+                            } else {
+                                friendMutation.mutate();
+                            }
+                            setFollow((follow) => !follow);
+                        }
                     }}
                     state={follow ? "disabled" : "active"}
                 />
