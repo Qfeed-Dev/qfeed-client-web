@@ -28,7 +28,6 @@ const ReportBlock = () => {
                             value: { on: false }
                         })
                     );
-                    router.back();
                 }}
             >
                 <Text typo="Subtitle2r">차단하기</Text>
