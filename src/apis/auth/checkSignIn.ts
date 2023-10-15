@@ -8,11 +8,7 @@ export async function checkSignIn(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     if (token) {
-        if (pathname.match("/((?!auth).*)")) {
-            return checkSignUp(request);
-        } else {
-            return NextResponse.next();
-        }
+        return NextResponse.next();
     } else {
         url.pathname = "/account";
         return NextResponse.redirect(url);

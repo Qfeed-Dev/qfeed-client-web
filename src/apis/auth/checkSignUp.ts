@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { checkUser } from "./checkUser";
+import { checkSignIn } from "./checkSignIn";
 
 export async function checkSignUp(request: NextRequest) {
     const user = await checkUser(request);
     const url = request.nextUrl.clone();
+    const { pathname } = request.nextUrl;
+
+    if (pathname.match("/((?!account).*)")) {
+        return await checkSignIn(request);
+    }
 
     if (user.name && user.schoolType) {
         return NextResponse.next();
