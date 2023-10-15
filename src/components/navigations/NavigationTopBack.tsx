@@ -42,7 +42,7 @@ const NavWrapper = styled(Flex)<{ $transparent: boolean }>`
 
     position: fixed;
     top: 0;
-    z-index: 999999;
+    z-index: 997;
 `;
 
 export default NavigationTopBack;

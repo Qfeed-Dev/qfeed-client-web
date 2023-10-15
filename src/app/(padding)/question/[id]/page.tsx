@@ -23,6 +23,8 @@ export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: params.id
     });
+    console.log(questionData);
+
     const { user } = useUserQuery();
     const { mutate } = useQChoiceMutation(params.id);
     const dispatch = useAppDispatch();
@@ -108,7 +110,11 @@ export default function Page({ params }: { params: { id: number } }) {
                                 dispatch(
                                     changeVisibleType({
                                         type: "bottomSheet",
-                                        value: [1, "reportBlock", null]
+                                        value: [
+                                            1,
+                                            "reportBlock",
+                                            questionData?.owner?.id
+                                        ]
                                     })
                                 )
                             }
