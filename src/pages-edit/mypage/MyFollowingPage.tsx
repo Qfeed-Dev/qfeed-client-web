@@ -13,7 +13,7 @@ import { Friend } from "src/models/account";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Flex from "src/components/common/Flex";
 import FriendItem from "../friend/components/FriendItem";
-import InputFill from "src/components/inputs/input-fill";
+import InputFill from "src/components/inputs/input-fill-search";
 import Loading from "src/components/common/Loading";
 
 import { enterComponentVariants } from "src/constants/animation";

@@ -19,6 +19,7 @@ interface Props {
 const COMPONENT_HEIGHT: any = {
     report: 540 + 30,
     reportFriend: 331,
+    reportBlock: 167,
     coin: 324 + 30,
     friend: 394,
     friendModal: 325 + 60,
@@ -164,7 +165,7 @@ const Background = styled.div<{
             : css`
                   opacity: ${visible};
               `}
-    background-color: ${colors.line_black_50};
+    background-color: ${colors.line_black_70};
     z-index: 998;
 `;
 
@@ -183,7 +184,9 @@ const Handle = styled.div<{ selectedIdx: number; backgroundColor: KeyOfColor }>`
     display: flex;
 
     background-color: ${({ selectedIdx, backgroundColor }) =>
-        selectedIdx !== -1 ? colors["light_qwhite"] : colors[backgroundColor]};
+        colors[backgroundColor]};
+
+    border-radius: 2px;
 `;
 
 const BottomSheetWrapper = styled.div<{
@@ -220,6 +223,7 @@ const BottomSheetWrapper = styled.div<{
 
 const ContentWrapper = styled.div`
     width: 100%;
+    height: 100%;
     padding: 0 16px;
     overflow: none;
 `;

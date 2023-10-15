@@ -76,12 +76,19 @@ const accountAPI = {
         const response = await qFeedAxios.delete(`/account/${id}/unfollow`);
         return response.data;
     },
-
     async accountFetch() {
         const response = await qFeedAxios
             .get("/account/fetch")
             .then(({ data }) => data)
             .catch((err) => err.response);
+        return response.data;
+    },
+    async blockFriend({ id }: { id: number }) {
+        const response = await qFeedAxios.post(`/account/${id}/Block`);
+        return response.data;
+    },
+    async unBlockFriend({ id }: { id: number }) {
+        const response = await qFeedAxios.delete(`/account/${id}/unblock`);
         return response.data;
     }
 };

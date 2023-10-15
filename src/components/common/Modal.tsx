@@ -38,7 +38,12 @@ const Modal = ({
                         {title}
                     </Text>
                     <DetailText typo="Caption1r" color="light_qblack">
-                        {detail}
+                        {detail?.split("\\n").map((line: string) => (
+                            <>
+                                {line}
+                                <br />
+                            </>
+                        ))}
                     </DetailText>
                 </ModalContent>
                 <Flex>
@@ -75,6 +80,7 @@ const ModalContent = styled(Flex)`
 const DetailText = styled(Text)`
     width: 70%;
     text-align: center;
+    white-space: pre-wrap;
 `;
 
 const Line = styled.div`

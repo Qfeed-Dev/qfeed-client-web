@@ -8,7 +8,7 @@ import Flex from "src/components/common/Flex";
 import NavigationTop from "src/components/navigations/NavigationTop";
 
 import FriendItem from "./components/FriendItem";
-import InputFill from "src/components/inputs/input-fill";
+import InputFill from "src/components/inputs/input-fill-search";
 import RecommendFriend from "./components/RecommendFriend";
 import Loading from "src/components/common/Loading";
 

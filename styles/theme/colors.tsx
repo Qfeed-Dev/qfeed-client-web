@@ -35,20 +35,6 @@ export const colors: any = {
 
 // 12 개
 export const repeatBackgroundColor: any = [
-    //Partial<KeyOfColor>
-    // colors.primary_qpink,
-    // colors.primary_qorange,
-    // colors.primary_qblue,
-    // colors.primary_qyellow,
-    // colors.primary_qyellow,
-    // colors.primary_qgreen,
-    // colors.primary_qpink,
-    // colors.primary_qred,
-    // colors.primary_qorange,
-    // colors.primary_qblue,
-    // colors.primary_qred,
-    // colors.primary_qgreen
-
     "primary_qpink",
     "primary_qorange",
     "primary_qblue",

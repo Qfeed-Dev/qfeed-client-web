@@ -28,15 +28,25 @@ export default function FriendDetailPage({
                 <Flex direction="column" align="center" gap={8}>
                     <NavigationTopBack
                         title={friend?.nickname}
-                        // rightIcon={
-                        // <Flex width="auto" gap={24}>
-                        //     <Icon icon="Share" />
-                        // <Icon
-                        //     icon="Ban"
-                        //     onClick={() => router.push("/friend/ban")}
-                        // />
-                        // </Flex>
-                        // }
+                        rightIcon={
+                            <Flex width="auto" gap={24}>
+                                {/* <Icon icon="Share" /> */}
+                                {!friend?.isBlocking && (
+                                    <Icon
+                                        icon="Ban"
+                                        onClick={() =>
+                                            friend?.isBlocking
+                                                ? router.push(
+                                                      `/friend/${params.id}/unblock`
+                                                  )
+                                                : router.push(
+                                                      `/friend/${params.id}/block`
+                                                  )
+                                        }
+                                    />
+                                )}
+                            </Flex>
+                        }
                     />
                     <Flex direction="column" gap={32}>
                         {friend && <InfoList user={friend} isMe={false} />}

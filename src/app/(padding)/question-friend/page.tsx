@@ -20,7 +20,7 @@ import Loading from "src/components/common/Loading";
 import Flex from "src/components/common/Flex";
 import ButtonFillMid from "src/components/buttons/button-fill-mid";
 import ButtonLineMid from "src/components/buttons/button-line-mid";
-import InputFill from "src/components/inputs/input-fill";
+import InputFill from "src/components/inputs/input-fill-search";
 import { Friend } from "src/models/account";
 import { useAppSelector } from "src/hooks/useReduxHooks";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";

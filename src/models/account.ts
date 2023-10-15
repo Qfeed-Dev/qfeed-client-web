@@ -13,6 +13,7 @@ export interface User {
     profileImage?: string;
     idCardImage?: string;
     isFollowing?: boolean;
+    isBlocking?: boolean;
 }
 
 export interface Friend {
@@ -24,4 +25,5 @@ export interface Friend {
     grade: string;
     gender: string;
     isFollowing?: boolean;
+    isBlocking?: boolean;
 }
