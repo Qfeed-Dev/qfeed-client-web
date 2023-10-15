@@ -59,14 +59,7 @@ export default function Home() {
         <></>
     ) : (
         <Flex direction="column" gap={16}>
-            <NavigationTop
-                leftIcon={
-                    <Profile
-                        width={46}
-                        onClick={() => router.push("/mypage")}
-                    />
-                }
-            />
+            <NavigationTop />
             <Flex direction="column" gap={16}>
                 {user.user && (
                     <CheckOfficial

@@ -43,7 +43,7 @@ const InputLine = ({ ...props }: InputProps) => {
 
 const InputWrapper = styled.div`
     width: 100%;
-    padding: 1rem 0;
+    padding: 1rem 0 0.5rem;
     margin-bottom: 0.5rem;
 
     display: flex;
@@ -57,7 +57,7 @@ const Input = styled.input`
     width: 80vw;
     color: ${colors.light_qwhite};
 
-    transform: scale(0.75);
+    transform: scale(0.85);
     transform-origin: left;
 `;
 

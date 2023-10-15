@@ -1,4 +1,4 @@
-import SelectBox from "../selectbox/selectbox";
+import SelectBox from "src/components/selectbox/selectbox";
 import { GRADUATE_OPTIONS } from "src/constants/options";
 import University from "./university";
 import MidHighSchool from "./middle-high-school";
@@ -14,7 +14,11 @@ const Graduate = () => {
                 options={GRADUATE_OPTIONS}
                 value={selected}
             />
-            {selected === "대학교" ? <University /> : <MidHighSchool />}
+            {selected === "대학교" ? (
+                <University />
+            ) : (
+                <MidHighSchool isGraduate />
+            )}
         </>
     );
 };
