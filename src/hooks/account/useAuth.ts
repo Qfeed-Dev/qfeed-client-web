@@ -22,7 +22,7 @@ export const useAuth = () => {
                     return Promise.reject(error);
                 }
             );
-            router.push("/auth/default");
+            router.push("/");
         },
         onError: (error: any) => {
             alert(error);
@@ -45,7 +45,7 @@ export const useAuth = () => {
                     return Promise.reject(error);
                 }
             );
-            router.push("/auth/default");
+            router.push("/");
         },
         onError: (error: any) => {
             alert(error);
