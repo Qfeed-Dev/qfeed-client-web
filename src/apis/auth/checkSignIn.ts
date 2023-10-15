@@ -5,9 +5,10 @@ import { checkSignUp } from "./checkSignUp";
 export async function checkSignIn(request: NextRequest) {
     const token = request.cookies.get("accessToken")?.value;
     const url = request.nextUrl.clone();
+    const { pathname } = request.nextUrl;
 
     if (token) {
-        if ("/((?!auth).*)") {
+        if (pathname.match("/((?!auth).*)")) {
             return checkSignUp(request);
         } else {
             return NextResponse.next();
