@@ -57,6 +57,7 @@ export default function InfoList({
                     onClick={() => {
                         if (user.isBlocking) {
                             unblock.mutate(user.id);
+                            setFollow(false);
                         } else {
                             if (follow) {
                                 delFriendMutation.mutate();
@@ -66,7 +67,7 @@ export default function InfoList({
                             setFollow((follow) => !follow);
                         }
                     }}
-                    state={follow ? "disabled" : "active"}
+                    state={follow && !user.isBlocking ? "disabled" : "active"}
                 />
             )}
             <Flex justify="space-between">
