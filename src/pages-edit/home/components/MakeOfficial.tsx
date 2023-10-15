@@ -27,53 +27,54 @@ const MakeOfficial = (props: QuestionProps) => {
     const QSet = useQsetCursorQuery();
     const newQSet = useQsetMutation();
 
-    console.log(QSet);
-
     const [endTime, setEndTime] = useState<number | typeof NaN>(NaN);
     const [time, setTime] = useState<Time | undefined>(undefined);
 
     const createNewEndTime = async () => {
-        const qSetCount = QSet.questionCursor?.length;
-        const today = new Date();
-        const nine = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate(),
-            21
-        );
-        const tomorrow = new Date(
-            today.getFullYear(),
-            today.getMonth(),
-            today.getDate(),
-            24
-        );
+        if (!QSet.isLoading) {
+            const qSetCount = QSet.questionCursor?.length;
 
-        // 아예 초기진입
-        if (!qSetCount) {
-            newQSet.mutate();
-            setEndTime(NaN);
-        }
-        // 첫번째 질문 set 끝나고 두번째 질문 set 받기
-        else if (
-            qSetCount === 1 &&
-            QSet.questionCursor &&
-            QSet.questionCursor[0].isDone
-        ) {
-            if (+tomorrow - today.getTime() > 3 * 60 * 60 * 1000) {
-                setEndTime(Date.parse(QSet.questionCursor[0].endAt));
-            } else {
+            const today = new Date();
+            const nine = new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                today.getDate(),
+                21
+            );
+            const tomorrow = new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                today.getDate(),
+                24
+            );
+
+            // 아예 초기진입
+            if (!qSetCount) {
+                newQSet.mutate();
+                setEndTime(NaN);
+            }
+            // 첫번째 질문 set 끝나고 두번째 질문 set 받기
+            else if (
+                qSetCount === 1 &&
+                QSet.questionCursor &&
+                QSet.questionCursor[0].isDone
+            ) {
+                if (+tomorrow - today.getTime() > 3 * 60 * 60 * 1000) {
+                    setEndTime(Date.parse(QSet.questionCursor[0].endAt));
+                } else {
+                    setEndTime(+nine);
+                }
+            }
+            // 두번째 질문 set 까지 끝남
+            else if (
+                qSetCount === 2 &&
+                QSet.questionCursor &&
+                QSet.questionCursor[0].isDone
+            ) {
                 setEndTime(+nine);
             }
+            // 질문 대답하는 중
         }
-        // 두번째 질문 set 까지 끝남
-        else if (
-            qSetCount === 2 &&
-            QSet.questionCursor &&
-            QSet.questionCursor[0].isDone
-        ) {
-            setEndTime(+nine);
-        }
-        // 질문 대답하는 중
     };
 
     const getTime = () => {
@@ -102,9 +103,9 @@ const MakeOfficial = (props: QuestionProps) => {
             const interval = setInterval(getTime, 1000);
             return () => clearInterval(interval);
         } else {
-            if (!QSet.isLoading) createNewEndTime();
+            createNewEndTime();
         }
-    }, [endTime, QSet]);
+    }, [endTime, QSet.questionCursor]);
 
     return QSet.isLoading ? (
         <Loading />
@@ -113,7 +114,7 @@ const MakeOfficial = (props: QuestionProps) => {
             onClick={props.onClick}
             color={colors.primary_qgreen}
         >
-            {QSet.questionCursor?.length && (
+            {QSet && QSet.questionCursor?.length && (
                 <BasicQuestionInner>
                     {QSet.questionCursor[0].isDone ? (
                         <>

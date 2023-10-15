@@ -11,11 +11,7 @@ const useQsetMutation = () => {
         onSuccess: () => {
             queryClient.invalidateQueries(QSetCursorKeys.all);
         },
-        onError: (error: any) => {
-            if (error === "AxiosError: Request failed with status code 404") {
-                return 0;
-            }
-        }
+        onError: (error: any) => {}
     });
 };
 
