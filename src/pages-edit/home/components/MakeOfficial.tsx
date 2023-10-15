@@ -140,11 +140,11 @@ const MakeOfficial = (props: QuestionProps) => {
                                 {QSet.questionCursor[0].currentQ}
                             </Text>
                             <Text typo="Caption1r" color="light_qblack">
-                                아직
-                                {QSet.questionCursor[0].QsetLength -
-                                    QSet.questionCursor[0].cursor +
-                                    1}
-                                문제 남았어요!
+                                <span>아직 </span>
+                                <span>
+                                    {10 - QSet.questionCursor[0].cursor + 1}
+                                    문제 남았어요!
+                                </span>
                             </Text>
                             <BottomButton>
                                 <Text
