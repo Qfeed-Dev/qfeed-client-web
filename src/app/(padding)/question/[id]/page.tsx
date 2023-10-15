@@ -13,6 +13,7 @@ import VoteButton from "src/components/Button/VoteButton";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import useQChoiceMutation from "src/hooks/questions/useQChoiceMutation";
 import Loading from "src/components/common/Loading";
+import Icon from "src/components/Icon";
 
 export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
@@ -92,9 +93,12 @@ export default function Page({ params }: { params: { id: number } }) {
                     </Flex>
                 }
                 rightIcon={
-                    <Text typo="Subtitle1r">
-                        {questionData?.choices?.length}명 응답
-                    </Text>
+                    <Flex width="auto" gap={16}>
+                        <Text typo="Subtitle1r">
+                            {questionData?.choices?.length}명 응답
+                        </Text>
+                        <Icon icon="DotsHoriz" />
+                    </Flex>
                 }
                 transparent
             />

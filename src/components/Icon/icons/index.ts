@@ -23,6 +23,7 @@ export { default as Person } from "./Person";
 export { default as Chat } from "./Chat";
 export { default as RightBracket } from "./RightBracket";
 export { default as Down } from "./Down";
+export { default as DotsHoriz } from "./DotsHoriz";
 
 // images
 export { default as AngelImage } from "./images/AngelImage";
