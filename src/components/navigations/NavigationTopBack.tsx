@@ -26,6 +26,7 @@ const NavigationTopBack = ({
         <NavWrapper justify="space-between" $transparent={transparent}>
             <Flex width="auto" gap={8}>
                 <Icon icon="LeftArrow" onClick={() => router.back()} />
+                {leftIcon}
                 {title && <Text typo="Headline1b">{title}</Text>}
             </Flex>
             {rightIcon}

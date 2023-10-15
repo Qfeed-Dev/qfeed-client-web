@@ -1,14 +1,15 @@
 "use client";
 import styled from "styled-components";
-import ProfileTitle from "src/pages-edit/question/ProfileTitle";
 import Question from "src/pages-edit/question/Question";
 import Spacing from "src/components/Spacing";
-import BackTitle from "src/components/Title/BackTitle";
+import Flex from "src/components/common/Flex";
+import Text from "src/components/common/Text";
+import NavigationTopBack from "src/components/navigations/NavigationTopBack";
+
 import { useEffect, useState } from "react";
 import Image from "src/components/Image";
 import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
-import { postQuestionsIdChoices } from "src/apis/questions";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import useQChoiceMutation from "src/hooks/questions/useQChoiceMutation";
 import Loading from "src/components/common/Loading";
@@ -72,7 +73,31 @@ export default function Page({ params }: { params: { id: number } }) {
     return isLoading ? (
         <Loading />
     ) : (
-        <>
+        <Flex height="100%" direction="column">
+            <NavigationTopBack
+                leftIcon={
+                    <Flex gap={8}>
+                        <Image
+                            type="default"
+                            size={35}
+                            src={
+                                questionData?.owner?.profileImage
+                                    ? questionData?.owner?.profileImage
+                                    : ""
+                            }
+                        />
+                        <Text typo="Subtitle1b">
+                            {questionData?.owner?.nickname}
+                        </Text>
+                    </Flex>
+                }
+                rightIcon={
+                    <Text typo="Subtitle1r">
+                        {questionData?.choices?.length}명 응답
+                    </Text>
+                }
+                transparent
+            />
             {questionData?.backgroundImage && (
                 <ImageWrapper>
                     <Image
@@ -81,17 +106,12 @@ export default function Page({ params }: { params: { id: number } }) {
                     />
                 </ImageWrapper>
             )}
+            <Flex height="100%" direction="column" justify="space-between">
+                <QuestionWrapper height="100%">
+                    <Question title={questionData?.title} />
+                </QuestionWrapper>
 
-            <QuestionWrapper>
-                <BackTitle type="profile" reportType="report">
-                    <ProfileTitle data={questionData} />
-                </BackTitle>
-                <Spacing size={54} />
-                <Question title={questionData?.title} />
-            </QuestionWrapper>
-
-            <BottomButton>
-                <BottomInner>
+                <BottomButton width="100%" direction="column" gap={12}>
                     {questionData.choiceList?.map(
                         (choice: string, idx: number) => {
                             return (
@@ -134,10 +154,9 @@ export default function Page({ params }: { params: { id: number } }) {
                             );
                         }
                     )}
-                </BottomInner>
-                <Spacing size={52} />
-            </BottomButton>
-        </>
+                </BottomButton>
+            </Flex>
+        </Flex>
     );
 }
 
@@ -147,32 +166,13 @@ const ImageWrapper = styled.div`
     height: 100%;
 
     opacity: 0.3;
-    position: absolute;
+    position: fixed;
     top: 0;
-`;
-
-const QuestionWrapper = styled.div`
-    height: 100%;
-    padding: 0 16px;
-`;
-
-const BottomButton = styled.div`
-    width: 100%;
-
-    position: absolute;
     left: 0;
-    bottom: 0;
-
-    background-color: transparent;
 `;
 
-const BottomInner = styled.div`
-    max-width: 600px;
-    margin-top: 20px;
-    padding: 0 16px;
-    margin: auto;
-
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+const QuestionWrapper = styled(Flex)`
+    padding: 0 1rem;
 `;
+
+const BottomButton = styled(Flex)``;
