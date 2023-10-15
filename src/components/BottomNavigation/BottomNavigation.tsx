@@ -44,7 +44,7 @@ const BottomNavigation = ({}: Props) => {
                         selected={Boolean(pathname.match("/((friend).*)"))}
                     />
                 </NavIconWrapper>
-                <NavIconWrapper href={"mypage"}>
+                <NavIconWrapper href={"/mypage"}>
                     <Icon
                         icon="BMypage"
                         width={24}
