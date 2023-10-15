@@ -1,12 +1,16 @@
 "use client";
 import styled from "styled-components";
 import Question from "src/pages-edit/question/Question";
-import Spacing from "src/components/Spacing";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
+import {
+    changeAction,
+    changeVisibleType
+} from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import Image from "src/components/Image";
 import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
@@ -21,6 +25,7 @@ export default function Page({ params }: { params: { id: number } }) {
     });
     const { user } = useUserQuery();
     const { mutate } = useQChoiceMutation(params.id);
+    const dispatch = useAppDispatch();
 
     // choices에 본인이 있는지 확인
     const checkName = (el: any) => {
@@ -97,7 +102,17 @@ export default function Page({ params }: { params: { id: number } }) {
                         <Text typo="Subtitle1r">
                             {questionData?.choices?.length}명 응답
                         </Text>
-                        <Icon icon="DotsHoriz" />
+                        <Icon
+                            icon="DotsHoriz"
+                            onClick={() =>
+                                dispatch(
+                                    changeVisibleType({
+                                        type: "bottomSheet",
+                                        value: [1, "reportBlock", null]
+                                    })
+                                )
+                            }
+                        />
                     </Flex>
                 }
                 transparent
