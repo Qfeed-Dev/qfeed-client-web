@@ -12,6 +12,7 @@ import FriendProfile from "src/components/Profile/FriendProfile";
 import useFriendMutation from "src/hooks/account/useFriendMutation";
 import useDeleteFriendMutation from "src/hooks/account/useDeleteFriendMutation";
 import { Friend } from "src/models/account";
+import useUnBlockFriendMutation from "src/hooks/account/useUnBlockFriendMutation";
 
 export default function FriendItem({
     isFollowing,
@@ -24,6 +25,7 @@ export default function FriendItem({
     const [follow, setFollow] = useState(isFollowing);
     const { friendMutation } = useFriendMutation(friend.id);
     const { delFriendMutation } = useDeleteFriendMutation(friend.id);
+    const unblock = useUnBlockFriendMutation();
 
     return (
         <FriendWrapper>
@@ -40,14 +42,32 @@ export default function FriendItem({
             </Flex>
             <Flex width="auto" gap={16}>
                 <ButtonFillXSmall
-                    text={follow ? "팔로잉" : "팔로우"}
+                    text={
+                        friend.isBlocking
+                            ? "차단 해제"
+                            : follow
+                            ? "팔로잉"
+                            : "팔로우"
+                    }
                     onClick={() => {
-                        follow
-                            ? delFriendMutation.mutate()
-                            : friendMutation.mutate();
-                        setFollow((follow) => !follow);
+                        if (friend.isBlocking) {
+                            unblock.mutate(friend.id);
+                        } else {
+                            if (follow) {
+                                delFriendMutation.mutate();
+                            } else {
+                                friendMutation.mutate();
+                            }
+                            setFollow((follow) => !follow);
+                        }
                     }}
-                    state={follow ? "disabled" : "active"}
+                    state={
+                        friend.isBlocking
+                            ? "warning"
+                            : follow
+                            ? "disabled"
+                            : "active"
+                    }
                 />
             </Flex>
         </FriendWrapper>
