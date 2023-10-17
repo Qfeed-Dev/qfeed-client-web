@@ -50,7 +50,12 @@ export default function FriendDetailPage({
                     />
                     <Flex direction="column" gap={32}>
                         {friend && <InfoList user={friend} isMe={false} />}
-                        {friend?.id && <QfeedList id={friend.id} />}
+                        {friend && (
+                            <QfeedList
+                                id={friend.id}
+                                isBlocking={friend.isBlocking}
+                            />
+                        )}
                     </Flex>
                 </Flex>
             )}
