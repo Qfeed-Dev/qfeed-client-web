@@ -67,7 +67,13 @@ export default function InfoList({
                             setFollow((follow) => !follow);
                         }
                     }}
-                    state={follow && !user.isBlocking ? "disabled" : "active"}
+                    state={
+                        user.isBlocking
+                            ? "warning"
+                            : follow
+                            ? "disabled"
+                            : "active"
+                    }
                 />
             )}
             <Flex justify="space-between">
