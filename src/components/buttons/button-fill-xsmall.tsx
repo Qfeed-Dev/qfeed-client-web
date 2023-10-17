@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { KeyOfColor, colors } from "styles/theme";
 import { changeXSBtnColor } from "src/constants/animation";
 
-type ButtonState = "active" | "disabled" | "default";
+type ButtonState = "active" | "disabled" | "default" | "warning";
 
 interface ButtonProps {
     text: string | React.ReactNode;
