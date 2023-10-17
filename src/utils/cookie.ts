@@ -17,3 +17,9 @@ export const deleteCookie = () => {
         path: "/"
     });
 };
+
+export const deleteUser = () => {
+    return cookies.remove("user", {
+        path: "/"
+    });
+};
