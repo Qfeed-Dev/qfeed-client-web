@@ -1,5 +1,8 @@
 "use client";
 import styled from "styled-components";
+import Flex from "src/components/common/Flex";
+import Text from "src/components/common/Text";
+import { colors } from "styles/theme";
 
 interface Props {}
 
@@ -18,40 +21,31 @@ const ReportDatas = [
 
 const Report = ({}: Props) => {
     return (
-        <ReportWrapper>
-            <ReportTitle>
-                <Menu>신고하기</Menu>
-            </ReportTitle>
-            {ReportDatas.map((data: string, idx: number) => {
-                return (
-                    <ReportSelection key={idx}>
-                        <Menu>{data}</Menu>
-                    </ReportSelection>
-                );
-            })}
-        </ReportWrapper>
+        <Flex height="100%" direction="column">
+            <Menu>
+                <Text typo="Subtitle2b">신고하기</Text>
+            </Menu>
+            <Flex height="100%" direction="column">
+                {ReportDatas.map((data: string, idx: number) => {
+                    return (
+                        <Menu key={idx} border>
+                            <Text typo="Subtitle2r">{data}</Text>
+                        </Menu>
+                    );
+                })}
+            </Flex>
+        </Flex>
     );
 };
 
-const ReportWrapper = styled.div`
+const Menu = styled.div<{ border?: boolean }>`
     width: 100%;
-`;
+    padding: 1rem 0;
 
-const ReportTitle = styled.div`
-    width: 100%;
-    height: 70px;
     display: flex;
-`;
+    justify-content: center;
 
-const ReportSelection = styled.div`
-    width: 100%;
-    height: 45px;
-    display: flex;
-`;
-
-const Menu = styled.div`
-    margin: auto;
-    display: flex;
+    border-top: ${({ border }) => border && `1px solid ${colors.line_black_5}`};
 `;
 
 export default Report;
