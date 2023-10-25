@@ -2,8 +2,7 @@
 const nextConfig = {
     reactStrictMode: false,
     experimental: {
-        appDir: true,
-        serverActions: true
+        appDir: true
     },
     compiler: {
         styledComponents: true
