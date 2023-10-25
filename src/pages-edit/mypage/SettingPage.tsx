@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Flex from "src/components/common/Flex";
 import Text from "src/components/common/Text";
-import { deleteCookie } from "src/utils/cookie";
+import { deleteCookie, deleteUser } from "src/utils/cookie";
 import useDeleteMeMutation from "src/hooks/account/useDeleteMeMutation";
 
 export default function SettingPage() {
@@ -31,6 +31,7 @@ export default function SettingPage() {
                     onClick={() => {
                         deleteMeMutation.mutate();
                         deleteCookie();
+                        deleteUser();
                         router.push("/account");
                     }}
                 >
