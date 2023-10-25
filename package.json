@@ -21,6 +21,7 @@
         "@types/styled-components": "^5.1.26",
         "autoprefixer": "10.4.15",
         "axios": "^1.5.0",
+        "discord-webhook-node": "^1.1.8",
         "eslint-config-next": "13.4.19",
         "fp-ts": "^2.16.1",
         "framer-motion": "^10.16.2",

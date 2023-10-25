@@ -6,7 +6,10 @@ import { colors } from "styles/theme";
 
 import useBlockFriendMutation from "src/hooks/account/useBlockFriendMutation";
 import { useAppSelector, useAppDispatch } from "src/hooks/useReduxHooks";
-import { changeAction } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
+import {
+    changeAction,
+    changeVisibleType
+} from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import { useRouter } from "next/navigation";
 
 const ReportBlock = () => {
@@ -39,6 +42,16 @@ const ReportBlock = () => {
                             type: "bottomSheet",
                             value: { on: false }
                         })
+                    );
+                    setTimeout(
+                        () =>
+                            dispatch(
+                                changeVisibleType({
+                                    type: "bottomSheet",
+                                    value: [1, "report"]
+                                })
+                            ),
+                        400
                     );
                 }}
             >
