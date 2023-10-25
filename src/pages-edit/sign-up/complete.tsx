@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import ButtonFillLarge from "src/components/buttons/button-fill-large";
-import NavigationTop from "src/components/navigations/NavigationTopBack";
+import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 import Text from "src/components/common/Text";
 import Flex from "src/components/common/Flex";
@@ -18,10 +18,7 @@ const Complete = () => {
         <Loading />
     ) : (
         <Flex height="100%" direction="column">
-            <NavigationTop
-                leftIcon={<Icon icon="LeftArrow" onClick={router.back} />}
-                title="회원 가입"
-            />
+            <NavigationTopBack title="회원 가입" />
             <Flex
                 height="100%"
                 direction="column"

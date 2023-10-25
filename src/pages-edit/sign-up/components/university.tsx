@@ -6,6 +6,7 @@ import { useAppSelector } from "src/hooks/useReduxHooks";
 import { useUserMutation } from "src/hooks/account/useUserMutation";
 import useGetUnivQuery from "src/hooks/school/useGetUnivQuery";
 import useGetMajorQuery from "src/hooks/school/useGetMajorQuery";
+import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 import Flex from "src/components/common/Flex";
 import InputLine from "src/components/inputs/input-line";
@@ -18,8 +19,10 @@ import { Route } from "src/constants/Route";
 
 const University = () => {
     const router = useRouter();
-    const school = useInput();
-    const department = useInput();
+    const { user } = useUserQuery();
+
+    const school = useInput(user?.schoolName);
+    const department = useInput(user?.class);
     const grade = useSelect("23학번");
     const selected = useAppSelector((state) => state.organization.selected);
 
