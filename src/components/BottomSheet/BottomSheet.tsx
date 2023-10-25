@@ -17,7 +17,7 @@ interface Props {
 }
 
 const COMPONENT_HEIGHT: any = {
-    report: 540 + 30,
+    report: 660,
     reportFriend: 331,
     reportBlock: 167,
     coin: 324 + 30,
