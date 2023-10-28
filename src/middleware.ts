@@ -4,11 +4,12 @@ import { checkSignIn } from "./apis/auth/checkSignIn";
 
 export async function middleware(request: NextRequest) {
     const token = request.cookies.get("accessToken")?.value;
-
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set("Authorization", `Bearer ${token}`);
+    const userAgent = request.headers.get("User-Agent");
 
     if (!request.nextUrl.pathname.includes("/account")) {
+        const requestHeaders = new Headers(request.headers);
+        requestHeaders.set("Authorization", `Bearer ${token}`);
+
         return await checkSignIn(request);
     }
 
