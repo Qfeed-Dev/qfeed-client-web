@@ -50,9 +50,16 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
             <QfeedFrameInner
                 imageurl={imageurl}
                 backgroundcolor={
-                    feed.isViewed && !detail
+                    feed.isChoiced && !detail
                         ? colors.light_gray2
                         : colors[getAppStateColor(colorIdx)]
+                }
+                border={
+                    (feed.isChoiced || feed.isViewed) && !detail
+                        ? "0px"
+                        : imageurl
+                        ? `3px solid ${colors[getAppStateColor(colorIdx)]}`
+                        : `3px solid ${colors.light_qwhite}`
                 }
             >
                 <Text
@@ -81,20 +88,16 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
                 </CountWrapper>
             </QfeedFrameInner>
 
-            {feed.isChoiced ? undefined : (
-                <QFeedWrapper>
-                    {feed.isViewed && !detail ? (
-                        <Icon icon="QFeedImage" fill={colors.light_gray3} />
-                    ) : imageurl ? (
-                        <Icon
-                            icon="QFeedImage"
-                            fill={getAppStateColor(colorIdx)}
-                        />
-                    ) : (
-                        <Icon icon="QFeedImage2" fill={colors.light_qblack} />
-                    )}
-                </QFeedWrapper>
-            )}
+            <QFeedWrapper>
+                {feed.isChoiced && !detail ? (
+                    <Icon icon="QFeedImage" fill={colors.light_gray3} />
+                ) : imageurl ? (
+                    <Icon icon="QFeedImage" fill={getAppStateColor(colorIdx)} />
+                ) : (
+                    <Icon icon="QFeedImage2" fill={colors.light_qblack} />
+                )}
+            </QFeedWrapper>
+
             {imageurl && (
                 <BackgroundImage
                     src={imageurl}
@@ -104,7 +107,7 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
                     placeholder="blur"
                     blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAQAAADhJE2MAAAAEElEQVR42mMs/c8ABIzYKABcTgXVauTJNQAAAABJRU5ErkJggg=="
                     backgroundcolor={
-                        feed.isViewed && !detail
+                        feed.isChoiced && !detail
                             ? colors.light_gray2
                             : colors[getAppStateColor(colorIdx)]
                     }
@@ -127,13 +130,17 @@ const QFeedWrapper = styled.div`
     bottom: 28px;
 `;
 
-const QfeedFrameInner = styled.div<{ imageurl: string; backgroundcolor: any }>`
+const QfeedFrameInner = styled.div<{
+    imageurl: string;
+    backgroundcolor: any;
+    border: string;
+}>`
     padding: 28px 20px;
     overflow: hidden;
     text-align: left;
 
     border-radius: 10px;
-    border: 3px solid ${({ backgroundcolor }) => backgroundcolor};
+    border: ${({ border }) => border};
     color: ${({ imageurl }) =>
         imageurl ? colors.light_qwhite : colors.light_qblack};
     background-color: ${({ imageurl, backgroundcolor }) =>
