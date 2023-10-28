@@ -34,7 +34,9 @@ const QfeedFrame = ({ idx, colorIdx, feed, detail }: FeedProps) => {
             );
             return pastMin ? `${pastMin}분 전` : "방금 전";
         } else {
-            return `${pastTime}시간 전`;
+            return pastTime < 24
+                ? `${pastTime}시간 전`
+                : `${Math.floor(pastTime / 24)}일 전`;
         }
     };
 
