@@ -17,10 +17,7 @@ const Login = () => {
         if (typeof window !== undefined) {
             setUserAgent(navigator.userAgent.toLowerCase());
         }
-    }, []);
-
-    const clientId = process.env.NEXT_PUBLIC_APPLE_CLIENT_ID;
-    const redirectURI = process.env.NEXT_PUBLIC_APPLE_REDIRECT_URI;
+    }, [navigator]);
 
     return (
         <Background direction="column" justify="center" height="100%">
@@ -39,27 +36,28 @@ const Login = () => {
                             <KakaoLogo />
                             <LoginText>카카오 로그인</LoginText>
                         </LoginButton>
-                        {/* {userAgent.indexOf("android") === -1 && ( */}
-                        <AppleLogin
-                            clientId={"com.qfeed.dev.login"}
-                            redirectURI={
-                                "https://dev-qfeed-client-web.vercel.app/account/apple/login"
-                            }
-                            responseType={"code id_token"}
-                            responseMode={"fragment"}
-                            usePopup={false}
-                            state={"signin"}
-                            render={(renderProps) => (
-                                <AppleLoginButton onClick={renderProps.onClick}>
-                                    <AppleLogo />
-                                    <Text color="light_qblack">
-                                        APPLE로 로그인
-                                    </Text>
-                                </AppleLoginButton>
-                            )}
-                        />
-
-                        {/* )} */}
+                        {userAgent.indexOf("android") === -1 && (
+                            <AppleLogin
+                                clientId={"com.qfeed.dev.login"}
+                                redirectURI={
+                                    "https://dev-qfeed-client-web.vercel.app/account/apple/login"
+                                }
+                                responseType={"code id_token"}
+                                responseMode={"fragment"}
+                                usePopup={false}
+                                state={"signin"}
+                                render={(renderProps) => (
+                                    <AppleLoginButton
+                                        onClick={renderProps.onClick}
+                                    >
+                                        <AppleLogo />
+                                        <Text color="light_qblack">
+                                            APPLE로 로그인
+                                        </Text>
+                                    </AppleLoginButton>
+                                )}
+                            />
+                        )}
                     </Flex>
                 </Flex>
                 <UnderText justify="space-around">
