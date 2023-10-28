@@ -6,16 +6,19 @@ import Text from "src/components/common/Text";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "src/hooks/useReduxHooks";
 import {
     changeAction,
     changeVisibleType
 } from "src/reducer/slices/bottomSheet/bottomSheetSlice";
 import Image from "src/components/Image";
+
 import { useGetQuestionsId } from "src/hooks/questions/useGetQuestionId";
 import VoteButton from "src/components/Button/VoteButton";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 import useQChoiceMutation from "src/hooks/questions/useQChoiceMutation";
+import useDeleteQuestionMutation from "src/hooks/questions/useDeleteQuestionMutation";
 import Loading from "src/components/common/Loading";
 import Icon from "src/components/Icon";
 
@@ -23,15 +26,17 @@ export default function Page({ params }: { params: { id: number } }) {
     const { data: questionData, isLoading } = useGetQuestionsId({
         questionId: params.id
     });
-    console.log(questionData);
 
-    const { user } = useUserQuery();
+    const user = useUserQuery();
     const { mutate } = useQChoiceMutation(params.id);
+    const { deleteQMutation } = useDeleteQuestionMutation();
     const dispatch = useAppDispatch();
+
+    const router = useRouter();
 
     // choices에 본인이 있는지 확인
     const checkName = (el: any) => {
-        if (el?.user?.id === user?.id) {
+        if (el?.user?.id === user?.user?.id) {
             return true;
         }
     };
@@ -40,13 +45,20 @@ export default function Page({ params }: { params: { id: number } }) {
     const checkBest = () => {
         const choices = questionData?.choiceList;
         let best = [];
-        for (let i = 0; i < questionData?.choiceList?.length; i++) {
+        for (
+            let i = 0;
+            i <
+            (questionData?.choiceList?.length
+                ? questionData?.choiceList?.length
+                : 0);
+            i++
+        ) {
             const value = questionData?.choices?.filter(
                 (data: any, idx: number) => {
-                    return data?.value == choices[i];
+                    return choices && data?.value == choices[i];
                 }
             );
-            best.push(value.length);
+            value && best.push(value.length);
         }
         setBest(best);
     };
@@ -67,18 +79,18 @@ export default function Page({ params }: { params: { id: number } }) {
     useEffect(() => {
         setTypeNum(
             questionData?.choices.some(checkName) ||
-                questionData?.owner?.id === user?.id
+                questionData?.owner?.id === user?.user?.id
                 ? 2
                 : 0
         );
         const s = questionData?.choices?.filter(
-            (data: any) => data?.user?.id === user?.id
+            (data: any) => data?.user?.id === user?.user?.id
         );
         setSelected(s?.length !== 0 ? Number(s?.[0]?.value) : -1);
         checkBest();
     }, [questionData]);
 
-    return isLoading ? (
+    return isLoading || user.isLoading ? (
         <Loading />
     ) : (
         <Flex height="100%" direction="column">
@@ -104,21 +116,32 @@ export default function Page({ params }: { params: { id: number } }) {
                         <Text typo="Subtitle1r">
                             {questionData?.choices?.length}명 응답
                         </Text>
-                        <Icon
-                            icon="DotsHoriz"
-                            onClick={() =>
-                                dispatch(
-                                    changeVisibleType({
-                                        type: "bottomSheet",
-                                        value: [
-                                            1,
-                                            "reportBlock",
-                                            questionData?.owner?.id
-                                        ]
-                                    })
-                                )
-                            }
-                        />
+                        {questionData?.owner?.id === user?.user?.id ? (
+                            <Icon
+                                icon="Trash"
+                                onClick={() => {
+                                    questionData &&
+                                        deleteQMutation.mutate(questionData.id);
+                                    router.back();
+                                }}
+                            />
+                        ) : (
+                            <Icon
+                                icon="DotsHoriz"
+                                onClick={() =>
+                                    dispatch(
+                                        changeVisibleType({
+                                            type: "bottomSheet",
+                                            value: [
+                                                1,
+                                                "reportBlock",
+                                                questionData?.owner?.id
+                                            ]
+                                        })
+                                    )
+                                }
+                            />
+                        )}
                     </Flex>
                 }
                 transparent
@@ -135,51 +158,54 @@ export default function Page({ params }: { params: { id: number } }) {
                 <QuestionWrapper height="100%">
                     <Question title={questionData?.title} />
                 </QuestionWrapper>
-
-                <BottomButton width="100%" direction="column" gap={12}>
-                    {questionData.choiceList?.map(
-                        (choice: string, idx: number) => {
-                            return (
-                                <VoteButton
-                                    key={idx}
-                                    idx={idx}
-                                    type={
-                                        questionData?.backgroundImage !== ""
-                                            ? "primary"
-                                            : "default"
-                                    }
-                                    $typeNum={typeNum} // 0 1 2
-                                    action={
-                                        typeNum === 2 &&
-                                        questionData?.choices?.filter(
-                                            (data2: any) =>
-                                                data2.value ==
-                                                questionData?.choiceList[idx]
-                                        ).length === Math.max(...best) // best
-                                            ? 2
-                                            : idx === selected
-                                            ? 1
-                                            : 0
-                                    } // 0 1 2
-                                    selected={selected}
-                                    onClick={
-                                        typeNum === 2
-                                            ? () => {}
-                                            : () => clickChoice(idx, choice)
-                                    }
-                                    count={
-                                        questionData?.choices?.filter(
-                                            (choiceItem: any) =>
-                                                choiceItem.value == choice
-                                        ).length
-                                    }
-                                >
-                                    {choice}
-                                </VoteButton>
-                            );
-                        }
-                    )}
-                </BottomButton>
+                {questionData && (
+                    <BottomButton width="100%" direction="column" gap={12}>
+                        {questionData.choiceList?.map(
+                            (choice: string, idx: number) => {
+                                return (
+                                    <VoteButton
+                                        key={idx}
+                                        idx={idx}
+                                        type={
+                                            questionData?.backgroundImage !== ""
+                                                ? "primary"
+                                                : "default"
+                                        }
+                                        $typeNum={typeNum} // 0 1 2
+                                        action={
+                                            typeNum === 2 &&
+                                            questionData?.choices?.filter(
+                                                (data2: any) =>
+                                                    data2.value ==
+                                                    questionData?.choiceList[
+                                                        idx
+                                                    ]
+                                            ).length === Math.max(...best) // best
+                                                ? 2
+                                                : idx === selected
+                                                ? 1
+                                                : 0
+                                        } // 0 1 2
+                                        selected={selected}
+                                        onClick={
+                                            typeNum === 2
+                                                ? () => {}
+                                                : () => clickChoice(idx, choice)
+                                        }
+                                        count={
+                                            questionData?.choices?.filter(
+                                                (choiceItem: any) =>
+                                                    choiceItem.value == choice
+                                            ).length
+                                        }
+                                    >
+                                        {choice}
+                                    </VoteButton>
+                                );
+                            }
+                        )}
+                    </BottomButton>
+                )}
             </Flex>
         </Flex>
     );

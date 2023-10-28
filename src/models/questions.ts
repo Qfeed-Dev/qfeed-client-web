@@ -1,3 +1,5 @@
+import { User } from "./account";
+
 export type Qtype = "official" | "personal";
 
 export interface Questions {
@@ -56,4 +58,33 @@ export interface Question {
     choiceList: string[];
     backgroundImage: string;
     isBlind: boolean;
+}
+
+export interface QuestionById {
+    id: number;
+    owner: Partial<User>;
+    title: string;
+    choiceList: string[];
+    backgroundImage: string;
+    Qtype: Qtype;
+    isBlind: boolean;
+    viewHistories: [
+        {
+            id: number;
+            user: Partial<User>;
+            createdAt: string;
+            updatedAt: string;
+        }
+    ];
+    choices: [
+        {
+            id: number;
+            user: Partial<User>;
+            value: string;
+            createdAt: string;
+            updatedAt: string;
+        }
+    ];
+    createdAt: string;
+    updatedAt: string;
 }
