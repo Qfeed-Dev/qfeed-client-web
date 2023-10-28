@@ -43,9 +43,9 @@ const SelectDetailPage = ({ params }: { params: { id: number } }) => {
                 <Loading />
             ) : (
                 <>
-                    <Title typo="Headline1b">{data.title}</Title>
+                    <Title typo="Headline1b">{data?.title}</Title>
                     <Flex direction="column" gap={8}>
-                        {data.choices.map((choice: any) => (
+                        {data?.choices.map((choice: any) => (
                             <HintWrapper key={choice.user.id}>
                                 <HintItem idx={choice.user.id}>
                                     <Person
