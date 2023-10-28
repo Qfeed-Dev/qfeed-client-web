@@ -25,16 +25,18 @@ const Profile = ({ width, onClick }: ProfileProp) => {
     };
 
     const imgUpload = async (file: File) => {
-        const url = file
-            ? await photo.mutateAsync({
-                  appName: "account",
-                  file: file
-              })
-            : "";
-        userMutation.mutate({
-            profileImage: url ? url.imageUrl : url
+        const url = await photo.mutateAsync({
+            appName: "account",
+            file: file
         });
-        user.refetch();
+
+        setTimeout(
+            () =>
+                userMutation.mutate({
+                    profileImage: url.imageUrl
+                }),
+            500
+        );
     };
 
     return (
@@ -48,8 +50,12 @@ const Profile = ({ width, onClick }: ProfileProp) => {
                     accept="image/x-png, image/gif, image/jpeg"
                 />
             )}
-            {user.user?.profileImage && (
-                <ProfileImg src={user.user?.profileImage} />
+            {user.isLoading ? (
+                <></>
+            ) : (
+                user.user?.profileImage && (
+                    <ProfileImg src={user.user?.profileImage} />
+                )
             )}
         </ProfileWrapper>
     );
