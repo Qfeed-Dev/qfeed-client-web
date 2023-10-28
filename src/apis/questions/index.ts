@@ -20,6 +20,11 @@ export const postQuestions = async (body: any) =>
         .then(({ data }) => data)
         .catch((err) => err.response);
 
+export const deleteQuestions = async (questionId: number) => {
+    const response = await qFeedAxios.patch(`/questions/${questionId}`);
+    return response.data;
+};
+
 export const postQuestionsIdChoices = async (questionId: any, choice: string) =>
     await qFeedAxios
         .post(`/questions/${questionId}/choices`, { value: choice })
