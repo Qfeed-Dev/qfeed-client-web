@@ -16,7 +16,7 @@ import { Route } from "src/constants/Route";
 import usePersonalQMutation from "src/hooks/questions/usePersonalQMutation";
 import NavigationTopBack from "src/components/navigations/NavigationTopBack";
 import Photo from "src/components/common/Photo";
-import usePhotoMutation from "src/hooks/file/usePhotoMutation";
+import usePhotoMutation from "src/hooks/file/useCreateURLMutation";
 import ButtonFillXSmall from "src/components/buttons/button-fill-xsmall";
 import { validArray } from "src/hooks/common/useCheckValidation";
 import InputFill from "src/components/inputs/input-fill-search";

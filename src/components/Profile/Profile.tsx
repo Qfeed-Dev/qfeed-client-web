@@ -3,8 +3,8 @@ import { useState, ChangeEvent, useEffect } from "react";
 
 import { colors } from "styles/theme";
 
-import { useUserMutation } from "src/hooks/account/useUserMutation";
-import usePhotoMutation from "src/hooks/file/usePhotoMutation";
+import useCreateURLMutation from "src/hooks/file/useCreateURLMutation";
+import useURLMutation from "src/hooks/file/usePutPreURLMutation";
 import { useUserQuery } from "src/hooks/account/useUserQuery";
 
 interface ProfileProp {
@@ -13,9 +13,9 @@ interface ProfileProp {
 }
 
 const Profile = ({ width, onClick }: ProfileProp) => {
-    const { userMutation } = useUserMutation();
     const user = useUserQuery();
-    const photo = usePhotoMutation();
+    const url = useCreateURLMutation();
+    const validUrl = useURLMutation();
 
     const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -25,18 +25,12 @@ const Profile = ({ width, onClick }: ProfileProp) => {
     };
 
     const imgUpload = async (file: File) => {
-        const url = await photo.mutateAsync({
+        const urls = await url.mutateAsync({
             appName: "account",
             file: file
         });
 
-        setTimeout(
-            () =>
-                userMutation.mutate({
-                    profileImage: url.imageUrl
-                }),
-            500
-        );
+        validUrl.mutate({ url: urls, file: file });
     };
 
     return (

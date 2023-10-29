@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import fileAPI from "src/apis/file";
 import { photoKeys } from "src/constants/queryKeys/fileKeys";
 
-const usePhotoMutation = () => {
+const useCreateURLMutation = () => {
     const queryClient = useQueryClient();
 
     const { mutateAsync } = useMutation(
@@ -13,14 +13,11 @@ const usePhotoMutation = () => {
                 fileType: photo.file.type
             }),
         {
-            onSuccess: (data, photo) => {
-                fileAPI.putPresignedURL(data.presignedUrl, photo.file);
-                queryClient.invalidateQueries(photoKeys.all);
-            },
+            onSuccess: (data, photo) => {},
             onError: () => {}
         }
     );
     return { mutateAsync };
 };
 
-export default usePhotoMutation;
+export default useCreateURLMutation;
